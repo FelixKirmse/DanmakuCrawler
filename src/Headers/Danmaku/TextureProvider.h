@@ -7,16 +7,16 @@
 
 namespace Danmaku
 {
-    using namespace std;
-    using namespace sf;
+using namespace std;
+using namespace sf;
 
-    class TextureProvider
-    {
-        public:
-            static void AddTexture(String const& name, String const& fileName);
-            static Texture const& GetTexture(String const& name);
+class TextureProvider
+{
+public:
+  static void AddTexture(String const& name, String const& fileName);
+  static Texture const& GetTexture(String const& name);
 
-        private:
-            static map<String, Texture> _textures;
-    };
+private:
+  static map<String, Texture> _textures;
+};
 }

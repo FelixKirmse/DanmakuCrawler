@@ -3,9 +3,9 @@
 namespace Danmaku
 {
 DanmakuGame::DanmakuGame()
-: Game("Danmaku",
-      VideoMode(ResolutionWidth, ResolutionHeight),
-      Style::Titlebar | Style::Close)
+  : Game("Danmaku",
+        VideoMode(ResolutionWidth, ResolutionHeight),
+        Style::Titlebar | Style::Close)
 {
 }
 
