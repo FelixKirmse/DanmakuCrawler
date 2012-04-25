@@ -6,30 +6,34 @@
 
 namespace BlackDragonEngine
 {
-    using namespace std;
-    using namespace sf;
+using namespace std;
+using namespace sf;
 
-    class Game
-    {
-        public:
-            Game(String title = "Game", VideoMode windowSize = VideoMode(800,600));
-            virtual ~Game() {}
-            void Run(int ups = 30);
-            void Quit();
-            
-        protected:
-            virtual void LoadContent();
-            virtual void Update();
-            virtual void Draw(float interpolation, RenderTarget& renderTarget);
-            virtual void Initialize();
-            virtual void UnloadContent();
+class Game
+{
+public:
+  Game(String const& title = "Game",
+      VideoMode windowSize = VideoMode(800,600),
+      Uint32 style = Style::Default,
+      ContextSettings const& settings = ContextSettings());
+
+  virtual ~Game() {}
+  void Run(int ups = 30);
+  void Quit();
+
+protected:
+  virtual void LoadContent();
+  virtual void Update();
+  virtual void Draw(float interpolation, RenderTarget& renderTarget);
+  virtual void Initialize();
+  virtual void UnloadContent();
 
 
-        private:
-            int GetTicks();
-            void HandleEvents();
+private:
+  int GetTicks();
+  void HandleEvents();
 
-            RenderWindow _graphics;
-            bool _gameRunning;
-    };
+  RenderWindow _graphics;
+  bool _gameRunning;
+};
 }
