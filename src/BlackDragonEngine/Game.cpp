@@ -2,8 +2,8 @@
 
 namespace BlackDragonEngine
 {
-    Game::Game(String title, VideoMode windowSize)
-        : _graphics(windowSize, title), _gameRunning(false)
+    Game::Game(String const& title, VideoMode windowSize, Uint32 style, ContextSettings const& settings)
+        : _graphics(windowSize, title, style, settings), _gameRunning(false)
     {      
     } 
 

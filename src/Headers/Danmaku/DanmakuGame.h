@@ -21,8 +21,8 @@ namespace Danmaku
             void Draw(float interpolation, RenderTarget& renderTarget);
 
         public:
-            static int const ResolutionWidth = 320;
-            static int const ResolutionHeight = 240;
+            static int const ResolutionWidth = 640;
+            static int const ResolutionHeight = 480;
 
             DanmakuGame();
             void OnLevelLoad();
