@@ -2,32 +2,32 @@
 
 namespace Danmaku
 {
-    TitleScreen::TitleScreen()
-        : _titleSprite(TextureProvider::GetTexture("TitleScreen"))
-    {
-        _titleSprite.setPosition(0.0f, 0.0f);
-    }
+TitleScreen::TitleScreen()
+  : _titleSprite(TextureProvider::GetTexture("TitleScreen"))
+{
+  _titleSprite.setPosition(0.0f, 0.0f);
+}
 
-    bool TitleScreen::DrawCondition()
-    {
-        return UpdateCondition();
-    }
+bool TitleScreen::DrawCondition()
+{
+  return UpdateCondition();
+}
 
-    void TitleScreen::Draw(float, RenderTarget& renderTarget)
-    {
-        renderTarget.draw(_titleSprite);
-    }
+void TitleScreen::Draw(float, RenderTarget& renderTarget)
+{
+  renderTarget.draw(_titleSprite);
+}
 
-    bool TitleScreen::UpdateCondition()
-    {
-        return GameStateManager::GetState() == Titlescreen;
-    }
+bool TitleScreen::UpdateCondition()
+{
+  return GameStateManager::GetState() == States::Titlescreen;
+}
 
-    bool TitleScreen::Update()
-    {
-      if(Input::Action(false))
-             GameStateManager::SetState(Menu);
-        
-        return false;
-    }
+bool TitleScreen::Update()
+{
+  if(Input::Action(false))
+    GameStateManager::SetState(States::Menu);
+
+  return false;
+}
 }

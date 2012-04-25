@@ -5,22 +5,24 @@
 
 namespace Danmaku
 {
-    using namespace BlackDragonEngine;
+using namespace BlackDragonEngine;
 
-    class GameStateManager : public StateManager
-    {
-        private:
-            static States _state;
-            static bool _playerDead;
-            static bool _fastDead;
+typedef States::States State;
 
-        public:
-            GameStateManager();
-            void Initialize();
-            static States GetState();
-            static void SetState(States state);
-            static bool GetPlayerDead();
-            static void SetPlayerDead(bool dead);
-            static bool GetFastDead();
-    };
+class GameStateManager : public StateManager
+{
+private:
+  static State _state;
+  static bool _playerDead;
+  static bool _fastDead;
+
+public:
+  GameStateManager();
+  void Initialize();
+  static State GetState();
+  static void SetState(State state);
+  static bool GetPlayerDead();
+  static void SetPlayerDead(bool dead);
+  static bool GetFastDead();
+};
 }
