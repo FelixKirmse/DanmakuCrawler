@@ -15,7 +15,6 @@ src/Danmaku/DanmakuGame.cpp
 src/Danmaku/GameStates/TitleScreen.cpp
 src/Danmaku/main.cpp
 src/Danmaku/Managers/GameStateManager.cpp
-src/Danmaku/Providers/TextureProvider.cpp
 src/Headers/BlackDragonEngine/Game.h
 src/Headers/BlackDragonEngine/IDrawableGameState.h
 src/Headers/BlackDragonEngine/Input.h
@@ -24,5 +23,15 @@ src/Headers/BlackDragonEngine/StateManager.h
 src/Headers/Danmaku/DanmakuGame.h
 src/Headers/Danmaku/GameStateManager.h
 src/Headers/Danmaku/States.h
-src/Headers/Danmaku/TextureProvider.h
 src/Headers/Danmaku/TitleScreen.h
+src/Headers/BlackDragonEngine/Menu.h
+src/Headers/BlackDragonEngine/MenuItem.h
+src/BlackDragonEngine/Menus/MenuItem.cpp
+src/Headers/BlackDragonEngine/Provider.h
+src/Headers/BlackDragonEngine/MenuLabel.h
+src/BlackDragonEngine/Menus/MenuLabel.cpp
+src/BlackDragonEngine/Menus/Menu.cpp
+src/Headers/Danmaku/MainMenu.h
+src/Danmaku/Menus/MainMenu.cpp
+src/Headers/Danmaku/Menu.h
+src/Danmaku/GameStates/Menu.cpp

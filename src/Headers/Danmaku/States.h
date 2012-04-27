@@ -2,7 +2,7 @@
 
 namespace Danmaku
 {
-namespace States
+namespace GameStates
 {
 
 enum States
@@ -15,5 +15,16 @@ enum States
   GeneratingMap
 };
 
+}
+
+namespace MenuStates
+{
+enum MenuStates
+{
+  NewGame,
+  LoadGame,
+  Main,
+  Ingame
+};
 }
 }

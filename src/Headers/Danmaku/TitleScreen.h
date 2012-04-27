@@ -3,9 +3,10 @@
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "BlackDragonEngine/Input.h"
+#include "BlackDragonEngine/Provider.h"
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/States.h"
-#include "Danmaku/TextureProvider.h"
+
 
 namespace Danmaku
 {

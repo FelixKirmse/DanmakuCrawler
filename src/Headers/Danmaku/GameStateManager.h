@@ -2,12 +2,13 @@
 #include "BlackDragonEngine/StateManager.h"
 #include "Danmaku/States.h"
 #include "Danmaku/TitleScreen.h"
+#include "Danmaku/Menu.h"
 
 namespace Danmaku
 {
 using namespace BlackDragonEngine;
 
-typedef States::States State;
+typedef GameStates::States State;
 
 class GameStateManager : public StateManager
 {

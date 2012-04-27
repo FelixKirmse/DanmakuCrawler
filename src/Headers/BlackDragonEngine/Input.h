@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace BlackDragonEngine
 {
@@ -25,6 +26,9 @@ public:
 
   static void AddNewAction(String name, vector<Key> keys);
   static bool TriggeredAction(String name, bool strict);
+
+  static Vector2f const& GetMousePosition();
+  static bool MouseInsideRectangle(FloatRect const& rect);
 
   static void UpdateStates();
 
@@ -52,6 +56,7 @@ private:
     bool LeftClick;
     bool RightClick;
     map<String, bool> CustomAction;
+    Vector2f MousePosition;
   };
 
   static InputState LastState;

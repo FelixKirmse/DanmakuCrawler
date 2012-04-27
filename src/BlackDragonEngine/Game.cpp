@@ -2,9 +2,11 @@
 
 namespace BlackDragonEngine
 {
-Game::Game(String const& title, VideoMode windowSize, Uint32 style, ContextSettings const& settings)
+Game::Game(String const& title, VideoMode windowSize,
+           Uint32 style, ContextSettings const& settings)
   : _graphics(windowSize, title, style, settings), _gameRunning(false)
 {
+  _currentInstance = this;
 }
 
 int Game::GetTicks()
@@ -67,4 +69,17 @@ void Game::Update() {}
 void Game::Draw(float interpolation, RenderTarget& renderTarget) {}
 void Game::Initialize() {}
 void Game::UnloadContent() {}
+
+Game* Game::_currentInstance;
+
+Vector2f Game::GetScreenCenter()
+{
+  Vector2u size = _currentInstance->_graphics.getSize();
+  return Vector2f(size.x/2.0f, size.y/2.0f);
+}
+
+void Game::Exit()
+{
+  _currentInstance->Quit();
+}
 }
