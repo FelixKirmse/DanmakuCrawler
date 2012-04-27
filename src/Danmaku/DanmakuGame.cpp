@@ -11,7 +11,9 @@ DanmakuGame::DanmakuGame()
 
 void DanmakuGame::LoadContent()
 {
-  TextureProvider::AddTexture("TitleScreen", "content/textures/titlescreen.png");
+  Provider<Texture>::Get("TitleScreen")
+      .loadFromFile("content/textures/titlescreen.png");
+  Provider<Font>::Get("Vera").loadFromFile("content/fonts/vera.ttf");
   _stateManager.Initialize();
 }
 

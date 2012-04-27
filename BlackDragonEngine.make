@@ -26,7 +26,7 @@ ifeq ($(config),debug)
   DEFINES   += -DDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -g -std=c++0x
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system
   LIBS      += 
@@ -48,7 +48,7 @@ ifeq ($(config),release)
   DEFINES   += -DNDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -O2 -std=c++0x
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system
   LIBS      += 
@@ -67,6 +67,9 @@ OBJECTS := \
 	$(OBJDIR)/Game.o \
 	$(OBJDIR)/Input.o \
 	$(OBJDIR)/StateManager.o \
+	$(OBJDIR)/MenuLabel.o \
+	$(OBJDIR)/Menu.o \
+	$(OBJDIR)/MenuItem.o \
 
 RESOURCES := \
 
@@ -134,6 +137,15 @@ $(OBJDIR)/Input.o: src/BlackDragonEngine/Helpers/Input.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/StateManager.o: src/BlackDragonEngine/Managers/StateManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MenuLabel.o: src/BlackDragonEngine/Menus/MenuLabel.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Menu.o: src/BlackDragonEngine/Menus/Menu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MenuItem.o: src/BlackDragonEngine/Menus/MenuItem.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

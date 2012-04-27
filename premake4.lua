@@ -18,7 +18,7 @@ solution "Danmaku"
         language "C++"
         targetdir "lib"
         files { "src/BlackDragonEngine/**.cpp" }
-        buildoptions { "-std=c++0x" }
+        buildoptions { "-std=c++11" }
         linkoptions { SFML_LIBRARIES }
 
     project "Danmaku"
@@ -27,5 +27,5 @@ solution "Danmaku"
         targetdir "build"
         files { "src/Danmaku/**.cpp" }    
         links { "BlackDragonEngine" } 
-        buildoptions { "-std=c++0x" }
+        buildoptions { "-std=c++11" }
         linkoptions { SFML_LIBRARIES }

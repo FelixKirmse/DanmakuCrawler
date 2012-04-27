@@ -26,7 +26,7 @@ ifeq ($(config),debug)
   DEFINES   += -DDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -g -std=c++0x
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -Llib
   LIBS      += -lBlackDragonEngine
@@ -48,7 +48,7 @@ ifeq ($(config),release)
   DEFINES   += -DNDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -O2 -std=c++0x
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -Llib
   LIBS      += -lBlackDragonEngine
@@ -67,8 +67,9 @@ OBJECTS := \
 	$(OBJDIR)/DanmakuGame.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/GameStateManager.o \
-	$(OBJDIR)/TextureProvider.o \
+	$(OBJDIR)/MainMenu.o \
 	$(OBJDIR)/TitleScreen.o \
+	$(OBJDIR)/Menu.o \
 
 RESOURCES := \
 
@@ -138,10 +139,13 @@ $(OBJDIR)/main.o: src/Danmaku/main.cpp
 $(OBJDIR)/GameStateManager.o: src/Danmaku/Managers/GameStateManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/TextureProvider.o: src/Danmaku/Providers/TextureProvider.cpp
+$(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleScreen.o: src/Danmaku/GameStates/TitleScreen.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

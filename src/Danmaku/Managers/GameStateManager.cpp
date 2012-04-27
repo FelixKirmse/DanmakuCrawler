@@ -2,7 +2,7 @@
 
 namespace Danmaku
 {
-State GameStateManager::_state = States::Titlescreen;
+State GameStateManager::_state = GameStates::Titlescreen;
 bool GameStateManager::_playerDead;
 bool GameStateManager::_fastDead;
 
@@ -41,5 +41,9 @@ void GameStateManager::Initialize()
   shared_ptr<TitleScreen> titleScreen(new TitleScreen());
   AddUpdateableState(titleScreen);
   AddDrawableState(titleScreen);
+
+  shared_ptr<Menu> menu(new Menu());
+  AddUpdateableState(menu);
+  AddDrawableState(menu);
 }
 }

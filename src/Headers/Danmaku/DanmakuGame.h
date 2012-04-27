@@ -1,8 +1,8 @@
 #pragma once
 #include "BlackDragonEngine/Input.h"
 #include "BlackDragonEngine/Game.h"
+#include "BlackDragonEngine/Provider.h"
 #include "Danmaku/GameStateManager.h"
-#include "Danmaku/TextureProvider.h"
 
 namespace Danmaku
 {

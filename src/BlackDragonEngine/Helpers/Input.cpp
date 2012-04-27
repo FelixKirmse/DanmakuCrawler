@@ -58,6 +58,16 @@ bool Input::TriggeredAction(String name, bool strict)
   return (strict) ? !LastState.CustomAction[name] && CurrentState.CustomAction[name] : CurrentState.CustomAction[name];
 }
 
+Vector2f const& Input::GetMousePosition()
+{
+  return CurrentState.MousePosition;
+}
+
+bool Input::MouseInsideRectangle(FloatRect const& rect)
+{
+  return rect.contains(CurrentState.MousePosition);
+}
+
 vector<Key> Input::UpKeys;
 vector<Key> Input::DownKeys;
 vector<Key> Input::LeftKeys;
@@ -82,6 +92,8 @@ void Input::UpdateStates()
   CurrentState.Up = CheckKeys(UpKeys);
   CurrentState.LeftClick = Mouse::isButtonPressed(Mouse::Left);
   CurrentState.RightClick = Mouse::isButtonPressed(Mouse::Right);
+  Vector2i pos = Mouse::getPosition();
+  CurrentState.MousePosition = Vector2f(pos.x, pos.y);
 
   for(auto mapIterator = CustomActions.begin(); mapIterator != CustomActions.end(); ++mapIterator)
   {

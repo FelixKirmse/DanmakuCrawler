@@ -3,7 +3,7 @@
 namespace Danmaku
 {
 TitleScreen::TitleScreen()
-  : _titleSprite(TextureProvider::GetTexture("TitleScreen"))
+  : _titleSprite(Provider<Texture>::Get("TitleScreen"))
 {
   _titleSprite.setPosition(0.0f, 0.0f);
 }
@@ -20,13 +20,13 @@ void TitleScreen::Draw(float, RenderTarget& renderTarget)
 
 bool TitleScreen::UpdateCondition()
 {
-  return GameStateManager::GetState() == States::Titlescreen;
+  return GameStateManager::GetState() == GameStates::Titlescreen;
 }
 
 bool TitleScreen::Update()
 {
   if(Input::Action(false))
-    GameStateManager::SetState(States::Menu);
+    GameStateManager::SetState(GameStates::Menu);
 
   return false;
 }

@@ -21,6 +21,9 @@ public:
   void Run(int ups = 30);
   void Quit();
 
+  static Vector2f GetScreenCenter();
+  static void Exit();
+
 protected:
   virtual void LoadContent();
   virtual void Update();
@@ -35,5 +38,7 @@ private:
 
   RenderWindow _graphics;
   bool _gameRunning;
+
+  static Game* _currentInstance;
 };
 }
