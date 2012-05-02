@@ -35,3 +35,13 @@ src/Headers/Danmaku/MainMenu.h
 src/Danmaku/Menus/MainMenu.cpp
 src/Headers/Danmaku/Menu.h
 src/Danmaku/GameStates/Menu.cpp
+src/Headers/BlackDragonEngine/IMap.h
+src/Headers/BlackDragonEngine/SimpleMapSquare.h
+src/Headers/BlackDragonEngine/Map.h
+src/Headers/BlackDragonEngine/Inline/Map.inl
+src/Headers/BlackDragonEngine/Inline/Provider.inl
+src/Headers/BlackDragonEngine/TileMap.h
+src/Headers/BlackDragonEngine/Inline/TileMap.inl
+src/Headers/BlackDragonEngine/Camera.h
+src/BlackDragonEngine/Helpers/Camera.cpp
+src/Headers/BlackDragonEngine/Inline/Camera.inl

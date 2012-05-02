@@ -18,13 +18,6 @@ private:
   static map<String, T> _dataMap;
 };
 
-template<class T>
-map<String, T> Provider<T>::_dataMap;
-
-template<class T>
-T& Provider<T>::Get(String const& name)
-{
-  return _dataMap[name];
-}
+#include "BlackDragonEngine/Inline/Provider.inl"
 
 }

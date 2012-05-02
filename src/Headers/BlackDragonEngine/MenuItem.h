@@ -27,7 +27,8 @@ public:
     bool IsSelected();
     Color const& GetSelectedColor();
     Color const& GetUnSelectedColor();
-    FloatRect GetRectangle();
+    FloatRect GetLocalRectangle();
+    FloatRect GetWorldRectangle();
 
     void SetName(String const& name);
     void SetPosition(Vector2f const& position);

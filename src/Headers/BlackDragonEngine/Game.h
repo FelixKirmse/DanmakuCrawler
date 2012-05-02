@@ -31,7 +31,6 @@ protected:
   virtual void Initialize();
   virtual void UnloadContent();
 
-
 private:
   int GetTicks();
   void HandleEvents();
@@ -39,6 +38,6 @@ private:
   RenderWindow _graphics;
   bool _gameRunning;
 
-  static Game* _currentInstance;
+  static Game* _currentInstance; //For lazy static access
 };
 }
