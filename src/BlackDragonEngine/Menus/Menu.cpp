@@ -71,7 +71,7 @@ void Menu::ResolveMouseSelection()
 {
   for(size_t i = 0; i < MenuItems.size(); ++i)
   {
-    if(Input::MouseInsideRectangle(MenuItems[i].GetRectangle()))
+    if(Input::MouseInsideRectangle(MenuItems[i].GetWorldRectangle()))
     {
       for(size_t j = 0; j < MenuItems.size(); ++j)
         MenuItems[j].SetSelected(false);
@@ -94,7 +94,7 @@ void Menu::SetPositions()
   for(int i = 0; i < (int)MenuItems.size(); ++i)
   {
     Vector2f screenCenter = Game::GetScreenCenter();
-    FloatRect fontBound = MenuItems[i].GetRectangle();
+    FloatRect fontBound = MenuItems[i].GetLocalRectangle();
     Vector2f fontCenter = Vector2f(fontBound.width/2, fontBound.height/2);
     MenuItems[i].SetPosition(screenCenter - fontCenter +
                              Vector2f((i-2)*ItemOffset.x, (i-2)*ItemOffset.y));

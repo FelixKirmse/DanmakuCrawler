@@ -99,9 +99,14 @@ void MenuItem::SetUnSelectedColor(Color const& color)
   _unSelectedColor = color;
 }
 
-FloatRect MenuItem::GetRectangle()
+FloatRect MenuItem::GetLocalRectangle()
 {
   return _text.getLocalBounds();
+}
+
+FloatRect MenuItem::GetWorldRectangle()
+{
+    return _text.getGlobalBounds();
 }
 
 }

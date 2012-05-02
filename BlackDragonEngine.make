@@ -65,6 +65,7 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/Game.o \
+	$(OBJDIR)/Camera.o \
 	$(OBJDIR)/Input.o \
 	$(OBJDIR)/StateManager.o \
 	$(OBJDIR)/MenuLabel.o \
@@ -131,6 +132,9 @@ $(GCH): $(PCH)
 endif
 
 $(OBJDIR)/Game.o: src/BlackDragonEngine/Game.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Camera.o: src/BlackDragonEngine/Helpers/Camera.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Input.o: src/BlackDragonEngine/Helpers/Input.cpp
