@@ -37,7 +37,7 @@ void TileMap<TMap, TCodes>::Draw(RenderTarget& renderTarget)
   int startY = GetCellByPixelY((int) cameraPos.y) - 1;
   int endY = GetCellByPixelY((int) cameraPos.y + Camera::GetViewPortHeight());
 
-  vector<Vector2i, SimpleMapSquare> const& mapData = _map.MapData();
+  unordered_map<Vector2i, SimpleMapSquare> const& mapData = _map.MapData();
   _vMap.clear();
   for(auto it = mapData.begin(); it != mapData.end(); ++it)
   {
@@ -68,7 +68,7 @@ void TileMap<TMap, TCodes>::Draw(RenderTarget& renderTarget)
     i = i + 4;
   }
 
-  renderTarget.draw(_vMap, _tileSheet);
+  renderTarget.draw(_vMap, &_tileSheet);
 }
 
 template<class TMap, class TCodes>
@@ -201,7 +201,7 @@ void TileMap<TMap, TCodes>::SetMapSquareAtCell(Vector2i const& cell,
 }
 
 template<class TMap, class TCodes>
-void TileMap<TMap, TCodes>::SetTileAtCell(Vector2i const& cell, size_t tileIndex)
+void TileMap<TMap, TCodes>::SetTileAtCell(Vector2i const& cell, int tileIndex)
 {
   _map[cell].TileID = tileIndex;
 }
@@ -229,7 +229,7 @@ TileMap<TMap, TCodes>& TileMap<TMap, TCodes>::GetInstance()
 }
 
 template<class TMap, class TCodes>
-IntRect& TileMap<TMap, TCodes>::TileSourceRectangle(size_t tileIndex)
+IntRect& TileMap<TMap, TCodes>::TileSourceRectangle(int tileIndex)
 {
   return _tileSourceRects[tileIndex];
 }

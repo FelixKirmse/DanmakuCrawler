@@ -2,7 +2,6 @@
 #include "BlackDragonEngine/Menu.h"
 #include "BlackDragonEngine/Game.h"
 #include "Danmaku/GameStateManager.h"
-#include "Danmaku/Menu.h"
 #include "Danmaku/States.h"
 
 namespace Danmaku
@@ -10,7 +9,7 @@ namespace Danmaku
 using namespace BlackDragonEngine;
 using namespace sf;
 
-class MainMenu : public Menu
+class MainMenu : public BlackDragonEngine::Menu
 {
 public:
   MainMenu();

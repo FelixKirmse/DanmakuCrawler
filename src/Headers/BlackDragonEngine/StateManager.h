@@ -7,21 +7,23 @@
 
 namespace BlackDragonEngine
 {
-using namespace std;
+typedef std::shared_ptr<IDrawableGameState> DrawablePtr;
+typedef std::shared_ptr<IUpdateableGameState> UpdateablePtr;
+using std::vector;
 
 class StateManager
 {
 private:
-  vector<shared_ptr<IDrawableGameState> > _drawableGameStates;
-  vector<shared_ptr<IUpdateableGameState> > _updateableGameStates;
+  vector<DrawablePtr> _drawableGameStates;
+  vector<UpdateablePtr> _updateableGameStates;
 
 protected:
   StateManager();
 
 public:
   virtual ~StateManager() {}
-  void AddUpdateableState(shared_ptr<IUpdateableGameState> const& state);
-  void AddDrawableState(shared_ptr<IDrawableGameState> const& state);
+  void AddUpdateableState(UpdateablePtr const& state);
+  void AddDrawableState(DrawablePtr const& state);
   void Update();
   void Draw(float interpolation, RenderTarget& renderTarget);
 };

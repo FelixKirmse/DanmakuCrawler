@@ -2,7 +2,7 @@
 namespace Danmaku
 {
 Menu::Menu()
-  : _mainMenu()
+  : _mainMenu(new MainMenu())
 {
   State = MenuStates::Main;
 }
@@ -17,7 +17,7 @@ bool Menu::Update()
   switch(State)
   {
   case MenuStates::Main:
-    _mainMenu.Update();
+    _mainMenu->Update();
     break;
   default:
     break;
@@ -35,7 +35,7 @@ void Menu::Draw(float /*interpolation*/, RenderTarget& renderTarget)
   switch(State)
   {
   case MenuStates::Main:
-    _mainMenu.Draw(renderTarget);
+    _mainMenu->Draw(renderTarget);
     break;
   default:
     break;

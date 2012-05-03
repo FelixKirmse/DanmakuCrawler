@@ -16,7 +16,7 @@ void MainMenu::Update()
 {
   if(Input::Cancel(true))
     Game::Exit();
-  Menu::Update();
+  BlackDragonEngine::Menu::Update();
 }
 void MainMenu::SelectMenuItem()
 {
