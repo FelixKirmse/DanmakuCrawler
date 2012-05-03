@@ -45,5 +45,9 @@ void GameStateManager::Initialize()
   shared_ptr<Menu> menu(new Menu());
   AddUpdateableState(menu);
   AddDrawableState(menu);
+
+  shared_ptr<Ingame> ingame(new Ingame());
+  AddUpdateableState(ingame);
+  AddDrawableState(ingame);
 }
 }

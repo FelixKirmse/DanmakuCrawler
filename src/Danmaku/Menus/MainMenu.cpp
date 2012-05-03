@@ -23,6 +23,8 @@ void MainMenu::SelectMenuItem()
   String const& selectedItem = SelectedItem();
   if(selectedItem == Quit)
     Game::Exit();
+  else if(selectedItem == NewGame)
+    GameStateManager::SetState(GameStates::Ingame);
 }
 
 }

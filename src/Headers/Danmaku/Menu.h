@@ -27,6 +27,7 @@ public:
   void Draw(float /*interpolation*/, RenderTarget& renderTarget);
 
   static void SetState(MenuState state);
+  static MenuState GetState();
 private:
   MainMenu _mainMenu;
   static MenuState State;

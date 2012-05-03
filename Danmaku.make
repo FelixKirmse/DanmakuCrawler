@@ -65,10 +65,12 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/DanmakuGame.o \
+	$(OBJDIR)/TileCode.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/MainMenu.o \
 	$(OBJDIR)/TitleScreen.o \
+	$(OBJDIR)/Ingame.o \
 	$(OBJDIR)/Menu.o \
 
 RESOURCES := \
@@ -133,6 +135,9 @@ endif
 $(OBJDIR)/DanmakuGame.o: src/Danmaku/DanmakuGame.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/TileCode.o: src/Danmaku/TileCode.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/main.o: src/Danmaku/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -143,6 +148,9 @@ $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleScreen.o: src/Danmaku/GameStates/TitleScreen.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Ingame.o: src/Danmaku/GameStates/Ingame.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp

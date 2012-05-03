@@ -11,7 +11,7 @@ map<Vector2i, vector<TCodes> >& Map<TCodes>::Codes()
 }
 
 template<class TCodes>
-map<Vector2i, SimpleMapSquare> Map<TCodes>::MapData()
+map<Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
 {
   return _mapData;
 }

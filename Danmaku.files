@@ -45,3 +45,7 @@ src/Headers/BlackDragonEngine/Inline/TileMap.inl
 src/Headers/BlackDragonEngine/Camera.h
 src/BlackDragonEngine/Helpers/Camera.cpp
 src/Headers/BlackDragonEngine/Inline/Camera.inl
+src/Headers/Danmaku/Ingame.h
+src/Danmaku/GameStates/Ingame.cpp
+src/Headers/Danmaku/TileCode.h
+src/Danmaku/TileCode.cpp

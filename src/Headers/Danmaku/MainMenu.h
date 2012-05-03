@@ -1,6 +1,9 @@
 #pragma once
 #include "BlackDragonEngine/Menu.h"
 #include "BlackDragonEngine/Game.h"
+#include "Danmaku/GameStateManager.h"
+#include "Danmaku/Menu.h"
+#include "Danmaku/States.h"
 
 namespace Danmaku
 {
