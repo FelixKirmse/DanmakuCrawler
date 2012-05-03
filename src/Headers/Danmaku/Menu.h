@@ -1,11 +1,11 @@
 #pragma once
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "Danmaku/MainMenu.h"
 #include "Danmaku/States.h"
-#include "Danmaku/GameStateManager.h"
 
 
 namespace Danmaku
@@ -13,7 +13,10 @@ namespace Danmaku
 using BlackDragonEngine::IDrawableGameState;
 using BlackDragonEngine::IUpdateableGameState;
 using namespace sf;
+using namespace std;
 typedef MenuStates::MenuStates MenuState;
+
+class MainMenu;
 
 class Menu : public IDrawableGameState, public IUpdateableGameState
 {
@@ -29,7 +32,7 @@ public:
   static void SetState(MenuState state);
   static MenuState GetState();
 private:
-  MainMenu _mainMenu;
+  unique_ptr<MainMenu> _mainMenu;
   static MenuState State;
 };
 }

@@ -5,13 +5,13 @@ Map<TCodes>::Map()
 }
 
 template<class TCodes>
-map<Vector2i, vector<TCodes> >& Map<TCodes>::Codes()
+unordered_map<Vector2i, vector<TCodes> >& Map<TCodes>::Codes()
 {
   return _codes;
 }
 
 template<class TCodes>
-map<Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
+unordered_map<Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
 {
   return _mapData;
 }

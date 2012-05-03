@@ -7,12 +7,12 @@ StateManager::StateManager()
 {
 }
 
-void StateManager::AddUpdateableState(shared_ptr<IUpdateableGameState> const& state)
+void StateManager::AddUpdateableState(UpdateablePtr const& state)
 {
   _updateableGameStates.push_back(state);
 }
 
-void StateManager::AddDrawableState(shared_ptr<IDrawableGameState> const& state)
+void StateManager::AddDrawableState(DrawablePtr const& state)
 {
   _drawableGameStates.push_back(state);
 }

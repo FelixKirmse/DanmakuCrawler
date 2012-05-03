@@ -7,13 +7,13 @@ using namespace sf;
 class TileCode
 {
 public:
-  TileCode(TileCodes code, String message = "");
-
   enum TileCodes
   {
     Start,
     Event
   };
+
+  TileCode(TileCodes code, String message = "");
 
   TileCodes Code;
   String Message;
