@@ -14,6 +14,16 @@ void DanmakuGame::LoadContent()
   Provider<Texture>::Get("TitleScreen")
       .loadFromFile("content/textures/titlescreen.png");
   Provider<Font>::Get("Vera").loadFromFile("content/fonts/vera.ttf");
+
+
+
+  Provider<Texture>::Get("TileSheet")
+      .loadFromFile("content/textures/tilesheets/maze.png");
+
+  //TileMap<Map<TileCode>, TileCode> tileMap(64, 64, 0,
+    //                                       Provider<Texture>::Get("TileSheet"));
+
+  //Initialize this last!
   _stateManager.Initialize();
 }
 

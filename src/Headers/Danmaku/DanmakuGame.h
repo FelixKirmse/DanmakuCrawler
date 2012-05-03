@@ -2,7 +2,10 @@
 #include "BlackDragonEngine/Input.h"
 #include "BlackDragonEngine/Game.h"
 #include "BlackDragonEngine/Provider.h"
+#include "BlackDragonEngine/TileMap.h"
+#include "BlackDragonEngine/Map.h"
 #include "Danmaku/GameStateManager.h"
+#include "Danmaku/TileCode.h"
 
 namespace Danmaku
 {

@@ -47,6 +47,11 @@ void Menu::SetState(MenuState state)
   State = state;
 }
 
+MenuState Menu::GetState()
+{
+  return State;
+}
+
 MenuState Menu::State;
 
 }
