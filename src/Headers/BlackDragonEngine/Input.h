@@ -6,14 +6,14 @@
 
 namespace BlackDragonEngine
 {
-using namespace sf;
-using namespace std;
-
-typedef Keyboard::Key Key;
-
 class Input
 {
-public:
+public:  
+  typedef sf::Keyboard::Key Key;
+  typedef std::vector<Key> KeyList;
+  typedef std::map<sf::String, KeyList> StringKeyMap;
+  typedef std::map<sf::String, bool> StringBoolMap;
+
   static bool Up(bool strict);
   static bool Down(bool strict);
   static bool Left(bool strict);
@@ -24,25 +24,25 @@ public:
   static bool LeftClick(bool strict);
   static bool RightClick(bool strict);
 
-  static void AddNewAction(String name, vector<Key> keys);
-  static bool TriggeredAction(String name, bool strict);
+  static void AddNewAction(sf::String name, KeyList keys);
+  static bool TriggeredAction(sf::String name, bool strict);
 
-  static Vector2f const& GetMousePosition();
-  static bool MouseInsideRectangle(FloatRect const& rect);
+  static sf::Vector2f const& GetMousePosition();
+  static bool MouseInsideRectangle(sf::FloatRect const& rect);
 
   static void UpdateStates();
 
-  static vector<Key> UpKeys;
-  static vector<Key> DownKeys;
-  static vector<Key> LeftKeys;
-  static vector<Key> RightKeys;
-  static vector<Key> JumpKeys;
-  static vector<Key> ActionKeys;
-  static vector<Key> CancelKeys;
+  static KeyList UpKeys;
+  static KeyList DownKeys;
+  static KeyList LeftKeys;
+  static KeyList RightKeys;
+  static KeyList JumpKeys;
+  static KeyList ActionKeys;
+  static KeyList CancelKeys;
 
 private:  
-  static bool CheckKeys(vector<Key> keys);
-  static map<String, vector<Key> > CustomActions;
+  static bool CheckKeys(KeyList keys);
+  static StringKeyMap CustomActions;
 
   struct InputState
   {
@@ -55,8 +55,8 @@ private:
     bool Cancel;
     bool LeftClick;
     bool RightClick;
-    map<String, bool> CustomAction;
-    Vector2f MousePosition;
+    StringBoolMap CustomAction;
+    sf::Vector2f MousePosition;
   };
 
   static InputState LastState;

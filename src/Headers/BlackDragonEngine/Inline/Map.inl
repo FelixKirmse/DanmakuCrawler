@@ -5,13 +5,13 @@ Map<TCodes>::Map()
 }
 
 template<class TCodes>
-unordered_map<Vector2i, vector<TCodes> >& Map<TCodes>::Codes()
+boost::unordered_map<sf::Vector2i, std::vector<TCodes> >& Map<TCodes>::Codes()
 {
   return _codes;
 }
 
 template<class TCodes>
-unordered_map<Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
+boost::unordered_map<sf::Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
 {
   return _mapData;
 }
@@ -31,7 +31,7 @@ int Map<TCodes>::MapHeight()
 template<class TCodes>
 int Map<TCodes>::LowestX()
 {
-  int lowestX(numeric_limits<int>::max());
+  int lowestX(std::numeric_limits<int>::max());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
     if(iter->first.x < lowestX)
       lowestX = iter->first.x;
@@ -41,7 +41,7 @@ int Map<TCodes>::LowestX()
 template<class TCodes>
 int Map<TCodes>::HighestX()
 {
-  int highestX(numeric_limits<int>::min());
+  int highestX(std::numeric_limits<int>::min());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
     if(iter->first.x > highestX)
       highestX = iter->first.x;
@@ -51,7 +51,7 @@ int Map<TCodes>::HighestX()
 template<class TCodes>
 int Map<TCodes>::LowestY()
 {
-  int lowestY(numeric_limits<int>::max());
+  int lowestY(std::numeric_limits<int>::max());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
     if(iter->first.y < lowestY)
       lowestY = iter->first.y;
@@ -61,7 +61,7 @@ int Map<TCodes>::LowestY()
 template<class TCodes>
 int Map<TCodes>::HighestY()
 {
-  int highestY(numeric_limits<int>::min());
+  int highestY(std::numeric_limits<int>::min());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
     if(iter->first.y > highestY)
       highestY = iter->first.y;
@@ -69,8 +69,7 @@ int Map<TCodes>::HighestY()
 }
 
 template<class TCodes>
-SimpleMapSquare& Map<TCodes>::operator[](Vector2i const& coords)
+SimpleMapSquare& Map<TCodes>::operator[](sf::Vector2i const& coords)
 {
   return _mapData[coords];
 }
-

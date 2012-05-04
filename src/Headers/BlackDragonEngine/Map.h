@@ -7,33 +7,30 @@
 
 namespace BlackDragonEngine
 {
-using namespace sf;
-using namespace std;
-using namespace boost;
-
-
 template<class TCodes>
 class Map : public IMap<TCodes>
 {
-public:
+public:  
+  typedef boost::unordered_map<sf::Vector2i, std::vector<TCodes> > CodeMap;
+  typedef boost::unordered_map<sf::Vector2i, SimpleMapSquare> TileMap;
+
   Map();
-  unordered_map<Vector2i, vector<TCodes> >& Codes();
-  unordered_map<Vector2i, SimpleMapSquare>& MapData();
+  CodeMap& Codes();
+  TileMap& MapData();
   int MapWidth();
   int MapHeight();
   int LowestX();
   int HighestX();
   int LowestY();
   int HighestY();
-  SimpleMapSquare& operator[](Vector2i const& coords);
+  SimpleMapSquare& operator[](sf::Vector2i const& coords);
 
 private:
-  unordered_map<Vector2i, vector<TCodes> > _codes;
-  unordered_map<Vector2i, SimpleMapSquare> _mapData;
+  CodeMap _codes;
+  TileMap _mapData;
 };
 
 #include "BlackDragonEngine/Inline/Map.inl"
-
 }
 
 

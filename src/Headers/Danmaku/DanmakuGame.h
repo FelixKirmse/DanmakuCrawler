@@ -9,25 +9,27 @@
 
 namespace Danmaku
 {
-using namespace std;
-using namespace BlackDragonEngine;
-
-class DanmakuGame : public Game
+class DanmakuGame : public BlackDragonEngine::Game
 {
-private:
-  GameStateManager _stateManager;
+public:
+  typedef BlackDragonEngine::Provider<sf::Texture> TextureProvider;
+  typedef BlackDragonEngine::Provider<sf::Font> FontProvider;
+  typedef BlackDragonEngine::TileMap<BlackDragonEngine::Map<TileCode>, TileCode>
+  DanmakuMap;
+
+  DanmakuGame();
+  void OnLevelLoad();
+
+  static int const ResolutionWidth = 640;
+  static int const ResolutionHeight = 480;
 
 protected:
   void LoadContent();
   void Initialize();
   void Update();
-  void Draw(float interpolation, RenderTarget& renderTarget);
+  void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
-public:
-  static int const ResolutionWidth = 640;
-  static int const ResolutionHeight = 480;
-
-  DanmakuGame();
-  void OnLevelLoad();
+private:
+  GameStateManager _stateManager;
 };
 }

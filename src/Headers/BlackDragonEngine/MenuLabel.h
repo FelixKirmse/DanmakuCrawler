@@ -5,21 +5,19 @@
 
 namespace BlackDragonEngine
 {
-using namespace sf;
-
 class MenuLabel
 {
 public:
-  MenuLabel(String const& text, String const& fontName);
-  void Draw(RenderTarget& renderTarget);
+  MenuLabel(sf::String const& text, sf::String const& fontName);
+  void Draw(sf::RenderTarget& renderTarget);
 
-  String const& GetText();
-  Vector2f const& GetPosition();
+  sf::String const& GetText();
+  sf::Vector2f const& GetPosition();
 
-  void SetText(String const& text);
-  void SetPosition(Vector2f const& position);
+  void SetText(sf::String const& text);
+  void SetPosition(sf::Vector2f const& position);
 
 private:
-  Text _text;
+  sf::Text _text;
 };
 }

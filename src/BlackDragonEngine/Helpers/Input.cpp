@@ -48,33 +48,33 @@ bool Input::RightClick(bool strict)
 }
 
 
-void Input::AddNewAction(String name, vector<Key> keys)
+void Input::AddNewAction(sf::String name, KeyList keys)
 {
   CustomActions[name] = keys;
 }
 
-bool Input::TriggeredAction(String name, bool strict)
+bool Input::TriggeredAction(sf::String name, bool strict)
 {
   return (strict) ? !LastState.CustomAction[name] && CurrentState.CustomAction[name] : CurrentState.CustomAction[name];
 }
 
-Vector2f const& Input::GetMousePosition()
+sf::Vector2f const& Input::GetMousePosition()
 {
   return CurrentState.MousePosition;
 }
 
-bool Input::MouseInsideRectangle(FloatRect const& rect)
+bool Input::MouseInsideRectangle(sf::FloatRect const& rect)
 {
   return rect.contains(CurrentState.MousePosition);
 }
 
-vector<Key> Input::UpKeys;
-vector<Key> Input::DownKeys;
-vector<Key> Input::LeftKeys;
-vector<Key> Input::RightKeys;
-vector<Key> Input::JumpKeys;
-vector<Key> Input::ActionKeys;
-vector<Key> Input::CancelKeys;
+Input::KeyList Input::UpKeys;
+Input::KeyList Input::DownKeys;
+Input::KeyList Input::LeftKeys;
+Input::KeyList Input::RightKeys;
+Input::KeyList Input::JumpKeys;
+Input::KeyList Input::ActionKeys;
+Input::KeyList Input::CancelKeys;
 
 Input::InputState Input::LastState = {0};
 Input::InputState Input::CurrentState = {0};
@@ -90,29 +90,29 @@ void Input::UpdateStates()
   CurrentState.Left = CheckKeys(LeftKeys);
   CurrentState.Right = CheckKeys(RightKeys);
   CurrentState.Up = CheckKeys(UpKeys);
-  CurrentState.LeftClick = Mouse::isButtonPressed(Mouse::Left);
-  CurrentState.RightClick = Mouse::isButtonPressed(Mouse::Right);
-  Vector2i pos = Mouse::getPosition();
-  CurrentState.MousePosition = Vector2f(pos.x, pos.y);
+  CurrentState.LeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+  CurrentState.RightClick = sf::Mouse::isButtonPressed(sf::Mouse::Right);
+  sf::Vector2i pos = sf::Mouse::getPosition();
+  CurrentState.MousePosition = sf::Vector2f(pos.x, pos.y);
 
-  for(auto mapIterator = CustomActions.begin(); mapIterator != CustomActions.end(); ++mapIterator)
+  for(auto i = CustomActions.begin(); i != CustomActions.end(); ++i)
   {
-    String actionName = mapIterator->first;
-    vector<Key> actionKeys = mapIterator->second;
+    sf::String actionName = i->first;
+    KeyList actionKeys = i->second;
     CurrentState.CustomAction[actionName] = CheckKeys(actionKeys);
   }
 }
 
-bool Input::CheckKeys(vector<Key> keys)
+bool Input::CheckKeys(KeyList keys)
 {
   for(size_t i = 0; i < keys.size(); ++i)
   {
-    if(Keyboard::isKeyPressed(keys[i]))
+    if(sf::Keyboard::isKeyPressed(keys[i]))
       return true;
   }
   return false;
 }
 
-map<String, vector<Key> > Input::CustomActions;
+Input::StringKeyMap Input::CustomActions;
 
 }

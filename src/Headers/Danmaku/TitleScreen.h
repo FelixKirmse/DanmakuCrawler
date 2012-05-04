@@ -10,19 +10,19 @@
 
 namespace Danmaku
 {
-using namespace BlackDragonEngine;
-using namespace sf;
-
-class TitleScreen : public IDrawableGameState, public IUpdateableGameState
+class TitleScreen : public BlackDragonEngine::IDrawableGameState,
+    public BlackDragonEngine::IUpdateableGameState
 {
 public:
+  typedef BlackDragonEngine::Provider<sf::Texture> TextureProvider;
+
   TitleScreen();
   bool DrawCondition();
-  void Draw(float interpolation, RenderTarget& renterTarget);
+  void Draw(float interpolation, sf::RenderTarget& renterTarget);
   bool UpdateCondition();
   bool Update();
 
 private:
-  Sprite _titleSprite;
+  sf::Sprite _titleSprite;
 };
 }

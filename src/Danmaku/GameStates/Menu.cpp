@@ -30,7 +30,7 @@ bool Menu::DrawCondition()
   return GameStateManager::GetState() == GameStates::Menu;
 }
 
-void Menu::Draw(float /*interpolation*/, RenderTarget& renderTarget)
+void Menu::Draw(float /*interpolation*/, sf::RenderTarget& renderTarget)
 {
   switch(State)
   {
