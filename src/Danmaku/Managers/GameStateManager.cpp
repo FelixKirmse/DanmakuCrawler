@@ -38,6 +38,7 @@ bool GameStateManager::GetFastDead()
 
 void GameStateManager::Initialize()
 {
+  using namespace std;
   shared_ptr<TitleScreen> titleScreen(new TitleScreen());
   AddUpdateableState(titleScreen);
   AddDrawableState(titleScreen);

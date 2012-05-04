@@ -4,7 +4,8 @@ namespace BlackDragonEngine
 {
 
 Menu::Menu()
-  : FontName("Vera"), EnableMouseSelection(true), ItemOffset(Vector2f(0, 24))
+  : FontName("Vera"), EnableMouseSelection(true),
+    ItemOffset(sf::Vector2f(0, 24))
 {
 }
 
@@ -27,7 +28,7 @@ void Menu::Update()
     MenuItems[i].Update();
 }
 
-void Menu::Draw(RenderTarget& renderTarget)
+void Menu::Draw(sf::RenderTarget& renderTarget)
 {
   for(size_t i = 0; i < MenuItems.size(); ++i)
     MenuItems[i].Draw(renderTarget);
@@ -81,7 +82,7 @@ void Menu::ResolveMouseSelection()
   }
 }
 
-String const& Menu::SelectedItem()
+sf::String const& Menu::SelectedItem()
 {
   for(size_t i = 0; i < MenuItems.size(); ++i)
     if(MenuItems[i].IsSelected())
@@ -93,11 +94,13 @@ void Menu::SetPositions()
 {
   for(int i = 0; i < (int)MenuItems.size(); ++i)
   {
-    Vector2f screenCenter = Game::GetScreenCenter();
-    FloatRect fontBound = MenuItems[i].GetLocalRectangle();
-    Vector2f fontCenter = Vector2f(fontBound.width/2, fontBound.height/2);
+    sf::Vector2f screenCenter = Game::GetScreenCenter();
+    sf::FloatRect fontBound = MenuItems[i].GetLocalRectangle();
+    sf::Vector2f fontCenter = sf::Vector2f(fontBound.width/2,
+                                           fontBound.height/2);
     MenuItems[i].SetPosition(screenCenter - fontCenter +
-                             Vector2f((i-2)*ItemOffset.x, (i-2)*ItemOffset.y));
+                             sf::Vector2f((i-2)*ItemOffset.x,
+                                          (i-2)*ItemOffset.y));
   }
 }
 

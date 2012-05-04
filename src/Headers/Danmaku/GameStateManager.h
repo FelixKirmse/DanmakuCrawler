@@ -7,13 +7,9 @@
 
 namespace Danmaku
 {
-using namespace BlackDragonEngine;
-
 typedef GameStates::States State;
-using std::shared_ptr;
 
-
-class GameStateManager : public StateManager
+class GameStateManager : public BlackDragonEngine::StateManager
 {
 private:
   static State _state;

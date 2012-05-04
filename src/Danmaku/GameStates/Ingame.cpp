@@ -24,7 +24,7 @@ bool Ingame::DrawCondition()
       (state == GameStates::Menu && Menu::GetState() == MenuStates::Ingame);
 }
 
-void Ingame::Draw(float interpolation, RenderTarget& renderTarget)
+void Ingame::Draw(float interpolation, sf::RenderTarget& renderTarget)
 {
 }
 }

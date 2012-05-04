@@ -7,31 +7,31 @@ static inline float clamp(float x, float a, float b)
   return x < a ? a : (x > b ? b : x);
 }
 
-void Camera::ForcePosition(Vector2f const& position)
+void Camera::ForcePosition(Vector2 const& position)
 {
   _position = position;
 }
 
-void Camera::SetPosition(Vector2f const& position)
+void Camera::SetPosition(Vector2 const& position)
 {
-  _position = Vector2f(
+  _position = Vector2(
         clamp(position.x, _worldRectangle.left,
               _worldRectangle.width - GetViewPortWidth()),
         clamp(position.y, _worldRectangle.top,
               _worldRectangle.height - GetViewPortHeight()));
 }
 
-Vector2f const& Camera::GetPosition()
+Camera::Vector2 const& Camera::GetPosition()
 {
   return _position;
 }
 
-void Camera::SetWorldRectangle(IntRect const& worldRectangle)
+void Camera::SetWorldRectangle(Rectangle const& worldRectangle)
 {
   _worldRectangle = worldRectangle;
 }
 
-IntRect const& Camera::GetWorldRectangle()
+Camera::Rectangle const& Camera::GetWorldRectangle()
 {
   return _worldRectangle;
 }
@@ -56,48 +56,48 @@ int Camera::GetViewPortHeight()
   return (int)_viewPortSize.y;
 }
 
-IntRect Camera::GetViewPort()
+Camera::Rectangle Camera::GetViewPort()
 {
-  return IntRect((int)_position.x, (int)_position.y, GetViewPortWidth(),
+  return Rectangle((int)_position.x, (int)_position.y, GetViewPortWidth(),
                  GetViewPortHeight());
 }
 
-void Camera::Move(Vector2f const& offset)
+void Camera::Move(Vector2 const& offset)
 {
   _position += offset;
 }
 
-bool Camera::ObjectIsVisible(IntRect const& bounds)
+bool Camera::ObjectIsVisible(Rectangle const& bounds)
 {
   return GetViewPort().intersects(bounds);
 }
 
-Vector2f Camera::WorldToScreen(Vector2f const& worldLocation)
+Camera::Vector2 Camera::WorldToScreen(Vector2 const& worldLocation)
 {
   return worldLocation - _position;
 }
 
-IntRect Camera::WorldToScreen(IntRect const& worldRectangle)
+Camera::Rectangle Camera::WorldToScreen(Rectangle const& worldRectangle)
 {
-  return IntRect(worldRectangle.left - (int)_position.x,
+  return Rectangle(worldRectangle.left - (int)_position.x,
                  worldRectangle.top - (int)_position.y,
                  worldRectangle.width, worldRectangle.height);
 }
 
-Vector2f Camera::ScreenToWorld(Vector2f const& screenLocation)
+Camera::Vector2 Camera::ScreenToWorld(Vector2 const& screenLocation)
 {
   return screenLocation + _position;
 }
 
-IntRect Camera::ScreenToWorld(IntRect const& screenRectangle)
+Camera::Rectangle Camera::ScreenToWorld(Rectangle const& screenRectangle)
 {
-  return IntRect(screenRectangle.left + (int)_position.x,
+  return Rectangle(screenRectangle.left + (int)_position.x,
                  screenRectangle.top + (int)_position.y,
                  screenRectangle.width, screenRectangle.height);
 }
 
-Vector2f Camera::_position;
-Vector2f Camera::_viewPortSize;
-IntRect Camera::_worldRectangle;
+Camera::Vector2 Camera::_position;
+Camera::Vector2 Camera::_viewPortSize;
+Camera::Rectangle Camera::_worldRectangle;
 }
 

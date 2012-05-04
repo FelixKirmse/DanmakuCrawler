@@ -2,7 +2,7 @@
 
 namespace Danmaku
 {
-TileCode::TileCode(TileCodes code, String message)
+TileCode::TileCode(TileCodes code, sf::String message)
   : Code(code), Message(message)
 {
 }

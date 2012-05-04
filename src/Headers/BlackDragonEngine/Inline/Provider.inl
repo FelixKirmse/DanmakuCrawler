@@ -1,9 +1,9 @@
 
 template<class T>
-map<String, T> Provider<T>::_dataMap;
+std::map<sf::String, T> Provider<T>::_dataMap;
 
 template<class T>
-T& Provider<T>::Get(String const& name)
+T& Provider<T>::Get(sf::String const& name)
 {
   return _dataMap[name];
 }

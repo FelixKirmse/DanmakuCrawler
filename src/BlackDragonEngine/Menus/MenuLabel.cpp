@@ -2,31 +2,31 @@
 
 namespace BlackDragonEngine
 {
-MenuLabel::MenuLabel(String const& text, String const& fontName)
-  :_text(text, Provider<Font>::Get(fontName), 30)
+MenuLabel::MenuLabel(sf::String const& text, sf::String const& fontName)
+  :_text(text, Provider<sf::Font>::Get(fontName), 30)
 {
 }
 
-void MenuLabel::Draw(RenderTarget& renderTarget)
+void MenuLabel::Draw(sf::RenderTarget& renderTarget)
 {
   renderTarget.draw(_text);
 }
 
-String const& MenuLabel::GetText()
+sf::String const& MenuLabel::GetText()
 {
   return _text.getString();
 }
 
-Vector2f const& MenuLabel::GetPosition()
+sf::Vector2f const& MenuLabel::GetPosition()
 {
   return _text.getPosition();
 }
 
-void MenuLabel::SetText(String const& text)
+void MenuLabel::SetText(sf::String const& text)
 {
   _text.setString(text);
 }
-void MenuLabel::SetPosition(Vector2f const& position)
+void MenuLabel::SetPosition(sf::Vector2f const& position)
 {
   _text.setPosition(position);
 }

@@ -13,18 +13,17 @@
 
 namespace Danmaku
 {
-using namespace BlackDragonEngine;
-using namespace std;
-using namespace sf;
 
-class Ingame : public IUpdateableGameState, public IDrawableGameState
+
+class Ingame : public BlackDragonEngine::IUpdateableGameState,
+    public BlackDragonEngine::IDrawableGameState
 {
 public:
   Ingame();
   bool UpdateCondition();
   bool Update();
   bool DrawCondition();
-  void Draw(float interpolation, RenderTarget& renderTarget);
+  void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
 private:
   //TileMap<Map<TileCode>, TileCode>& _tileMap;

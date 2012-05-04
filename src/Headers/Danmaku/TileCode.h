@@ -3,7 +3,6 @@
 
 namespace Danmaku
 {
-using namespace sf;
 class TileCode
 {
 public:
@@ -13,10 +12,10 @@ public:
     Event
   };
 
-  TileCode(TileCodes code, String message = "");
+  TileCode(TileCodes code, sf::String message = "");
 
   TileCodes Code;
-  String Message;
+  sf::String Message;
 };
 
 bool operator==(TileCode const& lhs, TileCode const& rhs);

@@ -6,9 +6,6 @@
 
 namespace Danmaku
 {
-using namespace BlackDragonEngine;
-using namespace sf;
-
 class MainMenu : public BlackDragonEngine::Menu
 {
 public:
@@ -16,8 +13,8 @@ public:
   void Update();
   void SelectMenuItem();
 private:
-  String const NewGame;
-  String const Resume;
-  String const Quit;
+  sf::String const NewGame;
+  sf::String const Resume;
+  sf::String const Quit;
 };
 }

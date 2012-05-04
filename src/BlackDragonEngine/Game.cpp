@@ -2,8 +2,8 @@
 
 namespace BlackDragonEngine
 {
-Game::Game(String const& title, VideoMode windowSize,
-           Uint32 style, ContextSettings const& settings)
+Game::Game(sf::String const& title, sf::VideoMode windowSize,
+           sf::Uint32 style, sf::ContextSettings const& settings)
   : _graphics(windowSize, title, style, settings), _gameRunning(false)
 {
   _currentInstance = this;
@@ -40,7 +40,8 @@ void Game::Run(int ups)
     }
 
     _graphics.clear();
-    float interpolation = float(GetTicks() + skipTicks - nextGameTick) - float(skipTicks);
+    float interpolation = float(GetTicks() + skipTicks - nextGameTick)
+        - float(skipTicks);
     Draw(interpolation, _graphics);
     _graphics.display();
   }
@@ -50,10 +51,10 @@ void Game::Run(int ups)
 
 void Game::HandleEvents()
 {
-  Event event;
+  sf::Event event;
   while(_graphics.pollEvent(event))
   {
-    if(event.type == Event::Closed)
+    if(event.type == sf::Event::Closed)
       Quit();
   }
 }
@@ -66,16 +67,16 @@ void Game::Quit()
 
 void Game::LoadContent() {}
 void Game::Update() {}
-void Game::Draw(float interpolation, RenderTarget& renderTarget) {}
+void Game::Draw(float interpolation, sf::RenderTarget& renderTarget) {}
 void Game::Initialize() {}
 void Game::UnloadContent() {}
 
 Game* Game::_currentInstance;
 
-Vector2f Game::GetScreenCenter()
+sf::Vector2f Game::GetScreenCenter()
 {
-  Vector2u size = _currentInstance->_graphics.getSize();
-  return Vector2f(size.x/2.0f, size.y/2.0f);
+  sf::Vector2u size = _currentInstance->_graphics.getSize();
+  return sf::Vector2f(size.x/2.0f, size.y/2.0f);
 }
 
 void Game::Exit()

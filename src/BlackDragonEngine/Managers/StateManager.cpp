@@ -2,11 +2,6 @@
 
 namespace BlackDragonEngine
 {
-StateManager::StateManager()
-  : _drawableGameStates(), _updateableGameStates()
-{
-}
-
 void StateManager::AddUpdateableState(UpdateablePtr const& state)
 {
   _updateableGameStates.push_back(state);
@@ -26,7 +21,7 @@ void StateManager::Update()
   }
 }
 
-void StateManager::Draw(float interpolation, RenderTarget& renderTarget)
+void StateManager::Draw(float interpolation, sf::RenderTarget& renderTarget)
 {
   for(size_t i = 0; i < _drawableGameStates.size(); ++i)
   {

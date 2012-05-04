@@ -5,17 +5,16 @@
 
 namespace BlackDragonEngine
 {
-using namespace std;
-using namespace sf;
+
 
 template<class T>
 class Provider
 {
 public:
-  static T& Get(String const& name);
+  static T& Get(sf::String const& name);
 
 private:
-  static map<String, T> _dataMap;
+  static std::map<sf::String, T> _dataMap;
 };
 
 #include "BlackDragonEngine/Inline/Provider.inl"

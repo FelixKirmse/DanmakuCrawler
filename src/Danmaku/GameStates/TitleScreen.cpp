@@ -2,8 +2,10 @@
 
 namespace Danmaku
 {
+using namespace BlackDragonEngine;
+
 TitleScreen::TitleScreen()
-  : _titleSprite(Provider<Texture>::Get("TitleScreen"))
+  : _titleSprite(TextureProvider::Get("TitleScreen"))
 {
   _titleSprite.setPosition(0.0f, 0.0f);
 }
@@ -13,7 +15,7 @@ bool TitleScreen::DrawCondition()
   return UpdateCondition();
 }
 
-void TitleScreen::Draw(float, RenderTarget& renderTarget)
+void TitleScreen::Draw(float, sf::RenderTarget& renderTarget)
 {
   renderTarget.draw(_titleSprite);
 }
