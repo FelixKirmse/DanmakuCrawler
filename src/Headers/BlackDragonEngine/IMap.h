@@ -8,12 +8,12 @@
 
 namespace BlackDragonEngine
 {
-template<class TCodes>
+template<class TCell, class TCodes>
 class IMap
 {
 public:
   typedef boost::unordered_map<sf::Vector2i, std::vector<TCodes> > VecCodeMap;
-  typedef boost::unordered_map<sf::Vector2i, SimpleMapSquare> VecSquareMap;
+  typedef boost::unordered_map<sf::Vector2i, TCell> VecSquareMap;
 
   virtual ~IMap() {}
   virtual VecCodeMap& Codes() = 0;
@@ -24,6 +24,6 @@ public:
   virtual int HighestX() = 0;
   virtual int LowestY() = 0;
   virtual int HighestY() = 0;
-  virtual SimpleMapSquare& operator[](sf::Vector2i const& coords) = 0;
+  virtual TCell& operator[](sf::Vector2i const& coords) = 0;
 };
 }

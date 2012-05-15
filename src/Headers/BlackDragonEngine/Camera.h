@@ -3,7 +3,7 @@
 
 namespace BlackDragonEngine
 {
-template<class TMap, class TCodes>
+template<class TMap, class TCell, class TCodes>
 class TileMap;
 
 class Camera
@@ -19,7 +19,7 @@ public:
   static Rectangle const& GetWorldRectangle();
   static void SetViewPortWidth(float width);
   static int GetViewPortWidth();
-  static void SetViewPortheight(float height);
+  static void SetViewPortHeight(float height);
   static int GetViewPortHeight();
   static Rectangle GetViewPort();
 
@@ -31,8 +31,8 @@ public:
   static Vector2 ScreenToWorld(Vector2 const& screenLocation);
   static Rectangle ScreenToWorld(Rectangle const& screenRectangle);
 
-  template<class TMap, class TCodes>
-  static void UpdateWorldRectangle(TileMap<TMap, TCodes> const& tileMap);
+  template<class TMap, class TCell, class TCodes>
+  static void UpdateWorldRectangle(TileMap<TMap, TCell, TCodes>& tileMap);
 
 private:
   static Vector2 _position;

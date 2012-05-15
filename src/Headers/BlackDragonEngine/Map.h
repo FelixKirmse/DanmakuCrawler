@@ -7,12 +7,12 @@
 
 namespace BlackDragonEngine
 {
-template<class TCodes>
-class Map : public IMap<TCodes>
+template<class TCell, class TCodes>
+class Map : public IMap<TCell, TCodes>
 {
 public:  
   typedef boost::unordered_map<sf::Vector2i, std::vector<TCodes> > CodeMap;
-  typedef boost::unordered_map<sf::Vector2i, SimpleMapSquare> TileMap;
+  typedef boost::unordered_map<sf::Vector2i, TCell> TileMap;
 
   Map();
   CodeMap& Codes();
@@ -23,7 +23,7 @@ public:
   int HighestX();
   int LowestY();
   int HighestY();
-  SimpleMapSquare& operator[](sf::Vector2i const& coords);
+  TCell& operator[](sf::Vector2i const& coords);
 
 private:
   CodeMap _codes;

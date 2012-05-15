@@ -1,8 +1,10 @@
 #pragma once
+#include <string>
 #include <sys/timeb.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "BlackDragonEngine/Input.h"
+
 
 namespace BlackDragonEngine
 {
@@ -32,8 +34,9 @@ private:
   int GetTicks();
   void HandleEvents();
 
+
   sf::RenderWindow _graphics;
-  bool _gameRunning;
+  bool _gameRunning;  
 
   static Game* _currentInstance; //For lazy static access
 };

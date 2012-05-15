@@ -7,6 +7,8 @@ Game::Game(sf::String const& title, sf::VideoMode windowSize,
   : _graphics(windowSize, title, style, settings), _gameRunning(false)
 {
   _currentInstance = this;
+  _graphics.setVerticalSyncEnabled(false);
+  _graphics.setFramerateLimit(9000000);
 }
 
 int Game::GetTicks()
@@ -28,6 +30,14 @@ void Game::Run(int ups)
   Initialize();
   LoadContent();
 
+  int drawCounter = 0;
+  int updateCounter = 0;
+  sf::Clock clock;
+  sf::Text fpsText;
+  fpsText.setFont(sf::Font::getDefaultFont());
+  fpsText.setColor(sf::Color::Red);
+  fpsText.setCharacterSize(30);
+  fpsText.setPosition(sf::Vector2f(10,0));
   while(_gameRunning)
   {
     HandleEvents();
@@ -37,13 +47,23 @@ void Game::Run(int ups)
       Input::UpdateStates();
       Update();
       nextGameTick += skipTicks;
+      ++updateCounter;
     }
 
     _graphics.clear();
     float interpolation = float(GetTicks() + skipTicks - nextGameTick)
         - float(skipTicks);
     Draw(interpolation, _graphics);
+    _graphics.draw(fpsText);
+    if(clock.getElapsedTime().asMilliseconds() > 1000)
+    {
+      fpsText.setString("UpdateRate: " + std::to_string(updateCounter) + "\nDrawRate: " + std::to_string(drawCounter));
+      drawCounter = 0;
+      updateCounter = 0;
+      clock.restart();
+    }
     _graphics.display();
+    ++drawCounter;
   }
 
   UnloadContent();
@@ -83,4 +103,7 @@ void Game::Exit()
 {
   _currentInstance->Quit();
 }
+
+
+
 }

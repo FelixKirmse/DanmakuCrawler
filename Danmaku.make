@@ -69,9 +69,11 @@ OBJECTS := \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/MainMenu.o \
+	$(OBJDIR)/MapCell.o \
 	$(OBJDIR)/TitleScreen.o \
 	$(OBJDIR)/Ingame.o \
 	$(OBJDIR)/Menu.o \
+	$(OBJDIR)/OverworldPlayer.o \
 
 RESOURCES := \
 
@@ -147,6 +149,9 @@ $(OBJDIR)/GameStateManager.o: src/Danmaku/Managers/GameStateManager.cpp
 $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MapCell.o: src/Danmaku/TileMap/MapCell.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/TitleScreen.o: src/Danmaku/GameStates/TitleScreen.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -154,6 +159,9 @@ $(OBJDIR)/Ingame.o: src/Danmaku/GameStates/Ingame.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/OverworldPlayer.o: src/Danmaku/Entities/OverworldPlayer.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
