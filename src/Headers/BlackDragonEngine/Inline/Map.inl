@@ -1,35 +1,35 @@
-template<class TCodes>
-Map<TCodes>::Map()
+template<class TCell, class TCodes>
+Map<TCell, TCodes>::Map()
   :_codes(), _mapData()
 {
 }
 
-template<class TCodes>
-boost::unordered_map<sf::Vector2i, std::vector<TCodes> >& Map<TCodes>::Codes()
+template<class TCell, class TCodes>
+boost::unordered_map<sf::Vector2i, std::vector<TCodes> >& Map<TCell, TCodes>::Codes()
 {
   return _codes;
 }
 
-template<class TCodes>
-boost::unordered_map<sf::Vector2i, SimpleMapSquare>& Map<TCodes>::MapData()
+template<class TCell, class TCodes>
+boost::unordered_map<sf::Vector2i, TCell>& Map<TCell, TCodes>::MapData()
 {
   return _mapData;
 }
 
-template<class TCodes>
-int Map<TCodes>::MapWidth()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::MapWidth()
 {
   return HighestX() - LowestY();
 }
 
-template<class TCodes>
-int Map<TCodes>::MapHeight()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::MapHeight()
 {
   return HighestY() - LowestY();
 }
 
-template<class TCodes>
-int Map<TCodes>::LowestX()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::LowestX()
 {
   int lowestX(std::numeric_limits<int>::max());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
@@ -38,8 +38,8 @@ int Map<TCodes>::LowestX()
   return lowestX;
 }
 
-template<class TCodes>
-int Map<TCodes>::HighestX()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::HighestX()
 {
   int highestX(std::numeric_limits<int>::min());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
@@ -48,8 +48,8 @@ int Map<TCodes>::HighestX()
   return highestX;
 }
 
-template<class TCodes>
-int Map<TCodes>::LowestY()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::LowestY()
 {
   int lowestY(std::numeric_limits<int>::max());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
@@ -58,8 +58,8 @@ int Map<TCodes>::LowestY()
   return lowestY;
 }
 
-template<class TCodes>
-int Map<TCodes>::HighestY()
+template<class TCell, class TCodes>
+int Map<TCell, TCodes>::HighestY()
 {
   int highestY(std::numeric_limits<int>::min());
   for(auto iter = _mapData.begin(); iter != _mapData.end(); ++iter)
@@ -68,8 +68,8 @@ int Map<TCodes>::HighestY()
   return highestY;
 }
 
-template<class TCodes>
-SimpleMapSquare& Map<TCodes>::operator[](sf::Vector2i const& coords)
+template<class TCell, class TCodes>
+TCell& Map<TCell, TCodes>::operator[](sf::Vector2i const& coords)
 {
   return _mapData[coords];
 }

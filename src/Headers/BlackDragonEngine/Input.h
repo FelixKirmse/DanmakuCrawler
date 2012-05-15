@@ -14,18 +14,18 @@ public:
   typedef std::map<sf::String, KeyList> StringKeyMap;
   typedef std::map<sf::String, bool> StringBoolMap;
 
-  static bool Up(bool strict);
-  static bool Down(bool strict);
-  static bool Left(bool strict);
-  static bool Right(bool strict);
-  static bool Jump(bool strict);
-  static bool Action(bool strict);
-  static bool Cancel(bool strict);
-  static bool LeftClick(bool strict);
-  static bool RightClick(bool strict);
+  static bool Up(bool strict = false);
+  static bool Down(bool strict = false);
+  static bool Left(bool strict = false);
+  static bool Right(bool strict = false);
+  static bool Jump(bool strict = false);
+  static bool Action(bool strict = false);
+  static bool Cancel(bool strict = false);
+  static bool LeftClick(bool strict= false);
+  static bool RightClick(bool strict = false);
 
   static void AddNewAction(sf::String name, KeyList keys);
-  static bool TriggeredAction(sf::String name, bool strict);
+  static bool TriggeredAction(sf::String name, bool strict = false);
 
   static sf::Vector2f const& GetMousePosition();
   static bool MouseInsideRectangle(sf::FloatRect const& rect);

@@ -20,7 +20,24 @@ void DanmakuGame::LoadContent()
   TextureProvider::Get("TileSheet")
       .loadFromFile("content/textures/tilesheets/maze.png");
 
-  DanmakuMap tileMap(64, 64, 0, TextureProvider::Get("TileSheet"));
+  TextureProvider::Get("OverworldPlayer")
+      .loadFromFile("content/textures/entities/overworldplayer.png");
+
+  int const tileWidth = 64;
+  int const tileHeight = 64;
+  int const tileOffset = 0;
+  int const tileStepX = tileWidth;
+  int const tileStepY = tileHeight;
+  int const oddRowXOffset = 0;
+
+  _tileMap = MapPtr(new DanmakuMap(tileWidth, tileHeight, tileOffset, tileStepX,
+                                   tileStepY, oddRowXOffset,
+                                   TextureProvider::Get("TileSheet"),
+                                   sf::Vector2i(ResolutionWidth,
+                                                ResolutionHeight)));
+
+  BlackDragonEngine::Camera::SetViewPortWidth(ResolutionWidth);
+  BlackDragonEngine::Camera::SetViewPortHeight(ResolutionHeight);
 
   //Initialize this last!
   _stateManager.Initialize();

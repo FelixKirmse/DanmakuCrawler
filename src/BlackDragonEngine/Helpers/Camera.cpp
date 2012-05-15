@@ -46,7 +46,7 @@ int Camera::GetViewPortWidth()
   return (int)_viewPortSize.x;
 }
 
-void Camera::SetViewPortheight(float height)
+void Camera::SetViewPortHeight(float height)
 {
   _viewPortSize.y = height;
 }
