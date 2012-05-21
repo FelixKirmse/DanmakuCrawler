@@ -10,9 +10,7 @@ enum States
   Titlescreen,
   Menu,
   Ingame,
-  Tutorial,
-  Editor,
-  GeneratingMap
+  Battle
 };
 
 }

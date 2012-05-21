@@ -11,8 +11,9 @@ template<class TCell, class TCodes>
 class Map : public IMap<TCell, TCodes>
 {
 public:  
-  typedef boost::unordered_map<sf::Vector2i, std::vector<TCodes> > CodeMap;
-  typedef boost::unordered_map<sf::Vector2i, TCell> TileMap;
+  typedef boost::unordered::unordered_map<sf::Vector2i, std::vector<TCodes> >
+  CodeMap;
+  typedef boost::unordered::unordered_map<sf::Vector2i, TCell> TileMap;
 
   Map();
   CodeMap& Codes();

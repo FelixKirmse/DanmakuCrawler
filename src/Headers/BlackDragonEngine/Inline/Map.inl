@@ -5,13 +5,15 @@ Map<TCell, TCodes>::Map()
 }
 
 template<class TCell, class TCodes>
-boost::unordered_map<sf::Vector2i, std::vector<TCodes> >& Map<TCell, TCodes>::Codes()
+boost::unordered::unordered_map<sf::Vector2i, std::vector<TCodes> >&
+Map<TCell, TCodes>::Codes()
 {
   return _codes;
 }
 
 template<class TCell, class TCodes>
-boost::unordered_map<sf::Vector2i, TCell>& Map<TCell, TCodes>::MapData()
+boost::unordered::unordered_map<sf::Vector2i, TCell>&
+Map<TCell, TCodes>::MapData()
 {
   return _mapData;
 }

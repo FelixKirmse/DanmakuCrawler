@@ -55,3 +55,9 @@ src/Danmaku/Entities/OverworldPlayer.cpp
 src/Headers/Danmaku/TileList.h
 src/Headers/Danmaku/MapCell.h
 src/Danmaku/TileMap/MapCell.cpp
+src/Headers/Danmaku/MapGen.h
+src/Danmaku/TileMap/MapGen.cpp
+src/Headers/Danmaku/IngameMenu.h
+src/Danmaku/Menus/IngameMenu.cpp
+src/Headers/Danmaku/EncounterRate.h
+src/Danmaku/Helpers/EncounterRate.cpp
