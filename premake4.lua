@@ -2,7 +2,7 @@ local SFML_LIBRARIES = "-lsfml-graphics -lsfml-window -lsfml-system"
 
 solution "Danmaku"
     configurations { "Debug", "Release" }
-    flags { "ExtraWarnings", "FatalWarnings", "FloatFast" }
+    flags { "ExtraWarnings","FloatFast" }
     includedirs { "src/Headers" } 
 
     configuration "Debug"

@@ -5,6 +5,7 @@
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "Danmaku/MainMenu.h"
+#include "Danmaku/IngameMenu.h"
 #include "Danmaku/States.h"
 
 
@@ -13,12 +14,14 @@ namespace Danmaku
 typedef MenuStates::MenuStates MenuState;
 
 class MainMenu;
+class IngameMenu;
 
 class Menu : public BlackDragonEngine::IDrawableGameState,
     public BlackDragonEngine::IUpdateableGameState
 {
 public:
   typedef std::unique_ptr<MainMenu> MainMenuPtr;
+  typedef std::unique_ptr<IngameMenu> IngameMenuPtr;
 
   Menu();
 
@@ -32,6 +35,7 @@ public:
   static MenuState GetState();
 private:
   MainMenuPtr _mainMenu;
+  IngameMenuPtr _ingameMenu;
   static MenuState State;
 };
 }

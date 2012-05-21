@@ -1,6 +1,4 @@
 #pragma once
-#include <map>
-#include <boost/unordered_map.hpp>
 #include <SFML/Graphics.hpp>
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "BlackDragonEngine/IDrawableGameState.h"
@@ -32,8 +30,13 @@ public:
   bool DrawCondition();
   void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
+  static void NewGame();
 private:
+  void Reset();
+
   DanmakuMap& _tileMap;
   OverworldPlayer _player;
+
+  static Ingame* _instance;
 };
 }

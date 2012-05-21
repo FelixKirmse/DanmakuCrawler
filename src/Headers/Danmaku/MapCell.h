@@ -1,5 +1,4 @@
 #pragma once
-#include "BlackDragonEngine/SimpleMapSquare.h"
 #include "Danmaku/TileList.h"
 
 namespace Danmaku
@@ -13,19 +12,20 @@ public:
 
   enum Direction
   {
-    Horizontal,
-    Vertical
+    Up,
+    Down,
+    Left,
+    Right
   };
 
-  bool IsConnected(MapCell const& other, Direction direction) const;
+  bool IsTraversible(MapCell const& other, Direction direction) const;
 
   int TileID;
   bool InvalidCell;
 
-private:
-  bool _leftConnector;
-  bool _rightConnector;
-  bool _topConnector;
-  bool _bottomConnector;
+  bool LeftConnector;
+  bool RightConnector;
+  bool TopConnector;
+  bool BottomConnector;
 };
 }

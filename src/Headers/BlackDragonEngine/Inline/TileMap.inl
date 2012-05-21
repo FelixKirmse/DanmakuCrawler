@@ -8,8 +8,8 @@ TileMap<TMap, TCell, TCodes>::TileMap(int tileWidth, int tileHeight, int tileOff
     _oddRowXOffset(oddRowXOffset),
     _tileSheet(tileSheet),
     _tilesPerRow(tileSheet.getSize().x/(tileWidth + tileOffset)),
-    _vMap(sf::Quads, (resolution.x/tileWidth + 1) * (resolution.y/tileHeight +1)
-          * 4)
+    _vMap(sf::Quads, (resolution.x/tileWidth + 10) *
+          (resolution.y/tileHeight + 10) * 4)
 {
   if(_instance != 0)
     throw "An instance of this class was already created elsewhere, use GetInstance to get it!";

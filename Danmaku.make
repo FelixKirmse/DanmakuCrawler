@@ -26,7 +26,7 @@ ifeq ($(config),debug)
   DEFINES   += -DDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -g -std=c++11
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -Llib
   LIBS      += -lBlackDragonEngine
@@ -48,7 +48,7 @@ ifeq ($(config),release)
   DEFINES   += -DNDEBUG
   INCLUDES  += -Isrc/Headers
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Werror -ffast-math -O2 -std=c++11
+  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -Llib
   LIBS      += -lBlackDragonEngine
@@ -67,8 +67,11 @@ OBJECTS := \
 	$(OBJDIR)/DanmakuGame.o \
 	$(OBJDIR)/TileCode.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/EncounterRate.o \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/MainMenu.o \
+	$(OBJDIR)/IngameMenu.o \
+	$(OBJDIR)/MapGen.o \
 	$(OBJDIR)/MapCell.o \
 	$(OBJDIR)/TitleScreen.o \
 	$(OBJDIR)/Ingame.o \
@@ -143,10 +146,19 @@ $(OBJDIR)/TileCode.o: src/Danmaku/TileCode.cpp
 $(OBJDIR)/main.o: src/Danmaku/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/EncounterRate.o: src/Danmaku/Helpers/EncounterRate.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GameStateManager.o: src/Danmaku/Managers/GameStateManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/IngameMenu.o: src/Danmaku/Menus/IngameMenu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/MapGen.o: src/Danmaku/TileMap/MapGen.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MapCell.o: src/Danmaku/TileMap/MapCell.cpp

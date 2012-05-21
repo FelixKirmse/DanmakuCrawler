@@ -26,7 +26,10 @@ void MainMenu::SelectMenuItem()
   if(selectedItem == Quit)
     Game::Exit();
   else if(selectedItem == NewGame)
+  {
     GameStateManager::SetState(GameStates::Ingame);
+    Ingame::NewGame();
+  }
 }
 
 }

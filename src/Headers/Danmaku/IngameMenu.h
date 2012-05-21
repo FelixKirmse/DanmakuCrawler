@@ -1,21 +1,21 @@
 #pragma once
 #include "BlackDragonEngine/Menu.h"
 #include "BlackDragonEngine/Game.h"
-#include "Danmaku/Ingame.h"
+#include "BlackDragonEngine/Input.h"
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/States.h"
+#include "Danmaku/Menu.h"
 
 namespace Danmaku
 {
-class MainMenu : public BlackDragonEngine::Menu
+class IngameMenu : public BlackDragonEngine::Menu
 {
 public:
-  MainMenu();
+  IngameMenu();
   void Update();
   void SelectMenuItem();
 private:
-  sf::String const NewGame;
   sf::String const Resume;
-  sf::String const Quit;
+  sf::String const BackToMenu;
 };
 }

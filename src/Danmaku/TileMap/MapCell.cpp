@@ -3,37 +3,37 @@
 namespace Danmaku
 {
 MapCell::MapCell()
-  : TileID(0), InvalidCell(true), _leftConnector(false), _rightConnector(false),
-    _topConnector(false), _bottomConnector(false)
+  : TileID(0), InvalidCell(true), LeftConnector(false), RightConnector(false),
+    TopConnector(false), BottomConnector(false)
 {
 }
 
 MapCell::MapCell(MapCell const& source)
   : TileID(source.TileID), InvalidCell(source.InvalidCell),
-    _leftConnector(source._leftConnector),
-    _rightConnector(source._rightConnector),
-    _topConnector(source._topConnector),
-    _bottomConnector(source._bottomConnector)
+    LeftConnector(source.LeftConnector),
+    RightConnector(source.RightConnector),
+    TopConnector(source.TopConnector),
+    BottomConnector(source.BottomConnector)
 {
 }
 
 MapCell::MapCell(int tileID)
   : TileID(tileID), InvalidCell(false),
-    _leftConnector(tileID == TileList::Intersection ||
+    LeftConnector(tileID == TileList::Intersection ||
                    tileID == TileList::SVLeft || tileID == TileList::SH ||
                    tileID == TileList::SHUp || tileID == TileList::SHDown ||
                    tileID == TileList::CLeftDown ||
                    tileID == TileList::CLeftUp),
-    _rightConnector(tileID == TileList::Intersection ||
+    RightConnector(tileID == TileList::Intersection ||
                     tileID == TileList::SVRight || tileID == TileList::SH ||
                     tileID == TileList::SHUp || tileID == TileList::SHDown ||
                     tileID == TileList::CDownRight ||
                     tileID == TileList::CUpRight),
-    _topConnector(tileID == TileList::Intersection ||
+    TopConnector(tileID == TileList::Intersection ||
                   tileID == TileList::SVRight || tileID == TileList::SV ||
                   tileID == TileList::SHUp || tileID == TileList::SVLeft ||
                   tileID == TileList::CLeftUp || tileID == TileList::CUpRight),
-    _bottomConnector(tileID == TileList::Intersection ||
+    BottomConnector(tileID == TileList::Intersection ||
                      tileID == TileList::SVRight || tileID == TileList::SV ||
                      tileID == TileList::SVLeft || tileID == TileList::SHDown ||
                      tileID == TileList::CDownRight ||
@@ -41,12 +41,16 @@ MapCell::MapCell(int tileID)
 {
 }
 
-bool MapCell::IsConnected(MapCell const& other, Direction direction) const
+bool MapCell::IsTraversible(MapCell const& other, Direction direction) const
 {
-  return (direction == Horizontal) ?
-        ((_leftConnector && other._rightConnector) ||
-         (_rightConnector && other._leftConnector)) :
-        ((_topConnector && other._bottomConnector) ||
-         (_bottomConnector && other._topConnector));
+  return (direction == Up) ?
+        TopConnector && other.BottomConnector :
+        (direction == Down) ?
+          BottomConnector && other.TopConnector :
+          (direction == Left) ?
+            LeftConnector && other.RightConnector :
+            (direction == Right) ?
+              RightConnector && other.LeftConnector :
+              false;
 }
 }
