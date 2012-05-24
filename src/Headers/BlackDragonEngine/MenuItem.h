@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "BlackDragonEngine/Provider.h"
 
 namespace BlackDragonEngine
 {

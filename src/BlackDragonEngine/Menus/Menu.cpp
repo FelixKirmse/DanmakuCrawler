@@ -1,3 +1,5 @@
+#include "BlackDragonEngine/Input.h"
+#include "BlackDragonEngine/Game.h"
 #include "BlackDragonEngine/Menu.h"
 
 namespace BlackDragonEngine

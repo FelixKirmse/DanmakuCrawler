@@ -4,8 +4,6 @@
 #include <vector>
 #include "BlackDragonEngine/MenuItem.h"
 #include "BlackDragonEngine/MenuLabel.h"
-#include "BlackDragonEngine/Input.h"
-#include "BlackDragonEngine/Game.h"
 
 namespace BlackDragonEngine
 {

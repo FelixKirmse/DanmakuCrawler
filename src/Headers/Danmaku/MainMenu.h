@@ -1,9 +1,6 @@
 #pragma once
+#include <SFML/System.hpp>
 #include "BlackDragonEngine/Menu.h"
-#include "BlackDragonEngine/Game.h"
-#include "Danmaku/Ingame.h"
-#include "Danmaku/GameStateManager.h"
-#include "Danmaku/States.h"
 
 namespace Danmaku
 {

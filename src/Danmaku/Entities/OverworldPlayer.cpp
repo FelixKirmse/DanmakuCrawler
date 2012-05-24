@@ -1,7 +1,14 @@
+#include "BlackDragonEngine/Input.h"
+#include "BlackDragonEngine/Camera.h"
+#include "BlackDragonEngine/Provider.h"
+#include "Danmaku/TileList.h"
 #include "Danmaku/OverworldPlayer.h"
 
 namespace Danmaku
 {
+typedef BlackDragonEngine::TileMap<BlackDragonEngine::Map<MapCell, TileCode>,
+MapCell, TileCode> DanmakuMap;
+
 OverworldPlayer::OverworldPlayer(sf::Texture& texture)
   : _currentTile(0,0), _moveVector(0,0), _position(0,0), _moveState(Idle),
     _sprite(texture), _stepsTaken(0), _drawOffset(texture.getSize().x/2.f,

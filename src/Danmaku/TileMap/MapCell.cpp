@@ -1,3 +1,4 @@
+#include "Danmaku/TileList.h"
 #include "Danmaku/MapCell.h"
 
 namespace Danmaku

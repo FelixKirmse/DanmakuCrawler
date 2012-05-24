@@ -1,11 +1,9 @@
 #pragma once
-#include <ctime>
 #include <vector>
 #include <boost/random.hpp>
 #include <SFML/Graphics.hpp>
 #include "BlackDragonEngine/TileMap.h"
 #include "BlackDragonEngine/Map.h"
-#include "BlackDragonEngine/Camera.h"
 #include "Danmaku/MapCell.h"
 #include "Danmaku/TileCode.h"
 #include "Danmaku/TileList.h"
@@ -20,6 +18,7 @@ public:
   typedef boost::unordered::unordered_map<sf::Vector2i, MapCell> MapData;
   typedef boost::random::uniform_int_distribution<> IntGenerator;
   typedef boost::random::mt19937 RandomSeed;
+  typedef std::vector<TileList::TileList> TileVec;
 
   MapGen(DanmakuMap& tileMap);
   void GenerateStep(sf::Vector2i const& currentTile);
@@ -35,8 +34,8 @@ private:
   RandomSeed _rng;
   IntGenerator _selectTileType;
   std::vector<MapCell::Direction> _possibleDirections;
-  std::vector<TileList::TileList> _straightTiles;
-  std::vector<TileList::TileList> _cornerTiles;
-  std::vector<TileList::TileList> _branchTiles;  
+  TileVec _straightTiles;
+  TileVec _cornerTiles;
+  TileVec _branchTiles;
 };
 }

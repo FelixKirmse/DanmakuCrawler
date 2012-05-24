@@ -1,3 +1,5 @@
+#include <ctime>
+#include "BlackDragonEngine/Camera.h"
 #include "Danmaku/MapGen.h"
 
 namespace Danmaku

@@ -1,3 +1,5 @@
+#include <ctime>
+#include <string>
 #include "Danmaku/EncounterRate.h"
 
 namespace Danmaku

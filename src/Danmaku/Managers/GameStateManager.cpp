@@ -1,3 +1,6 @@
+#include "Danmaku/TitleScreen.h"
+#include "Danmaku/Menu.h"
+#include "Danmaku/Ingame.h"
 #include "Danmaku/GameStateManager.h"
 
 namespace Danmaku

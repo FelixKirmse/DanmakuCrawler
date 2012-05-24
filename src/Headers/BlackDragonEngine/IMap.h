@@ -1,10 +1,8 @@
 #pragma once
 #include <vector>
-#include <SFML/System.hpp>
-#include "BlackDragonEngine/SimpleMapSquare.h"
-#include "BlackDragonEngine/Vector2Hash.h"
 #include <boost/unordered_map.hpp>
-
+#include <SFML/System.hpp>
+#include "BlackDragonEngine/Vector2Hash.h"
 
 namespace BlackDragonEngine
 {

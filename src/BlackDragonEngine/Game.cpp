@@ -1,3 +1,6 @@
+#include <sys/timeb.h>
+#include <string>
+#include "BlackDragonEngine/Input.h"
 #include "BlackDragonEngine/Game.h"
 
 namespace BlackDragonEngine

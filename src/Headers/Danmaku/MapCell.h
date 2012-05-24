@@ -1,6 +1,4 @@
 #pragma once
-#include "Danmaku/TileList.h"
-
 namespace Danmaku
 {
 class MapCell

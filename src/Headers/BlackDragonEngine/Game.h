@@ -1,10 +1,6 @@
 #pragma once
-#include <string>
-#include <sys/timeb.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "BlackDragonEngine/Input.h"
-
 
 namespace BlackDragonEngine
 {

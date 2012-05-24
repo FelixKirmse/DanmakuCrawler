@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <vector>
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace BlackDragonEngine

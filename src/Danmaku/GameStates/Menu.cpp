@@ -1,8 +1,10 @@
+#include "Danmaku/GameStateManager.h"
 #include "Danmaku/Menu.h"
+
 namespace Danmaku
 {
 Menu::Menu()
-  : _mainMenu(new MainMenu()), _ingameMenu(new IngameMenu())
+  : _mainMenu(), _ingameMenu()
 {
   State = MenuStates::Main;
 }
@@ -17,10 +19,10 @@ bool Menu::Update()
   switch(State)
   {
   case MenuStates::Main:
-    _mainMenu->Update();
+    _mainMenu.Update();
     break;
   case MenuStates::Ingame:
-    _ingameMenu->Update();
+    _ingameMenu.Update();
     break;
   default:
     break;
@@ -38,10 +40,10 @@ void Menu::Draw(float /*interpolation*/, sf::RenderTarget& renderTarget)
   switch(State)
   {
   case MenuStates::Main:
-    _mainMenu->Draw(renderTarget);
+    _mainMenu.Draw(renderTarget);
     break;
   case MenuStates::Ingame:
-    _ingameMenu->Draw(renderTarget);
+    _ingameMenu.Draw(renderTarget);
     break;
   default:
     break;
