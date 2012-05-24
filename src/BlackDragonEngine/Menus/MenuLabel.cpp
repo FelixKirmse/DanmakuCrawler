@@ -1,3 +1,4 @@
+#include "BlackDragonEngine/Provider.h"
 #include "BlackDragonEngine/MenuLabel.h"
 
 namespace BlackDragonEngine

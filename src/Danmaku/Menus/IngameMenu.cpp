@@ -1,3 +1,8 @@
+#include "BlackDragonEngine/Game.h"
+#include "BlackDragonEngine/Input.h"
+#include "Danmaku/GameStateManager.h"
+#include "Danmaku/States.h"
+#include "Danmaku/Menu.h"
 #include "Danmaku/IngameMenu.h"
 
 namespace Danmaku

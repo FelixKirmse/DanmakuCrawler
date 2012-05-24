@@ -1,3 +1,5 @@
+#include <limits>
+
 template<class TCell, class TCodes>
 Map<TCell, TCodes>::Map()
   :_codes(), _mapData()

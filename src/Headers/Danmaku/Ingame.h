@@ -4,15 +4,8 @@
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "BlackDragonEngine/TileMap.h"
 #include "BlackDragonEngine/Map.h"
-#include "BlackDragonEngine/Camera.h"
-#include "BlackDragonEngine/Input.h"
-#include "BlackDragonEngine/Provider.h"
-#include "Danmaku/GameStateManager.h"
-#include "Danmaku/States.h"
-#include "Danmaku/Menu.h"
 #include "Danmaku/TileCode.h"
 #include "Danmaku/OverworldPlayer.h"
-#include "Danmaku/TileList.h"
 #include "Danmaku/MapCell.h"
 
 namespace Danmaku

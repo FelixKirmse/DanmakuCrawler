@@ -2,11 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "BlackDragonEngine/TileMap.h"
 #include "BlackDragonEngine/Map.h"
-#include "BlackDragonEngine/Input.h"
-#include "BlackDragonEngine/Camera.h"
-#include "BlackDragonEngine/Provider.h"
 #include "Danmaku/TileCode.h"
-#include "Danmaku/TileList.h"
 #include "Danmaku/MapCell.h"
 #include "Danmaku/MapGen.h"
 #include "Danmaku/EncounterRate.h"
@@ -16,9 +12,6 @@ namespace Danmaku
 class OverworldPlayer
 {
 public:
-  typedef BlackDragonEngine::TileMap<BlackDragonEngine::Map<MapCell, TileCode>,
-  MapCell, TileCode> DanmakuMap;
-
   OverworldPlayer(sf::Texture& texture);
   void Update();
   void Draw(sf::RenderTarget& renderTarget);

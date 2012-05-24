@@ -1,4 +1,10 @@
+#include "BlackDragonEngine/Input.h"
+#include "BlackDragonEngine/Provider.h"
+#include "Danmaku/GameStateManager.h"
+#include "Danmaku/States.h"
 #include "Danmaku/TitleScreen.h"
+
+typedef BlackDragonEngine::Provider<sf::Texture> TextureProvider;
 
 namespace Danmaku
 {

@@ -1,10 +1,9 @@
 #pragma once
-#include <stdexcept>
 #include <vector>
+#include <boost/unordered_map.hpp>
 #include <SFML/Graphics.hpp>
 #include "BlackDragonEngine/IMap.h"
 #include "BlackDragonEngine/Camera.h"
-
 
 namespace BlackDragonEngine
 {
@@ -80,51 +79,4 @@ private:
 };
 
 #include "BlackDragonEngine/Inline/TileMap.inl"
-
-template<class TMap, class TCell, class TCodes>
-void TileMap<TMap, TCell, TCodes>::SaveToFile(sf::String const& path)
-{ /*
-  using namespace sf;
-  RenderTexture texture;
-  Context context;
-  int mapWidth(GetMapWidth());
-  int mapHeight(GetMapHeight());
-
-  texture.create(mapWidth * _tileWidth, mapHeight * _tileHeight);
-  texture.clear(Color::Black);
-  sf::VertexArray vMap(Quads, mapWidth * mapHeight * 4);
-  for(int i = 0; i < mapWidth * mapHeight * 4; ++i)
-    vMap[i] = Vertex();
-  MapData const& mapData = _map.MapData();
-  int i = 0;
-  for(auto it = mapData.begin(); it != mapData.end(); ++it)
-  {
-    Coords const cell = it->first;
-    int const tileID = _map[cell].TileID;
-    Rectangle const sourceRect = TileSourceRectangle(tileID);
-    Rectangle const worldRect = CellWorldRectangle(cell);
-    vMap[i + 0].position = Vector2(worldRect.left,
-                                    worldRect.top);
-    vMap[i + 1].position = Vector2(worldRect.left,
-                                    worldRect.top + worldRect.height);
-    vMap[i + 2].position = Vector2(worldRect.left + worldRect.width,
-                                    worldRect.top + worldRect.height);
-    vMap[i + 3].position = Vector2(worldRect.left + worldRect.width,
-                                    worldRect.top);
-
-    vMap[i + 0].texCoords = Vector2(sourceRect.left,
-                                     sourceRect.top);
-    vMap[i + 1].texCoords = Vector2(sourceRect.left,
-                                     sourceRect.top + sourceRect.height);
-    vMap[i + 2].texCoords = Vector2(sourceRect.left + sourceRect.width,
-                                     sourceRect.top + sourceRect.height);
-    vMap[i + 3].texCoords = Vector2(sourceRect.left + sourceRect.width,
-                                     sourceRect.top);
-    i = i + 4;
-  }
-  texture.draw(vMap, &_tileSheet);
-  texture.display();
-  texture.getTexture().copyToImage().saveToFile(path);  
-  */
-}
 }

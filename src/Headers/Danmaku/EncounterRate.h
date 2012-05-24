@@ -1,6 +1,4 @@
 #pragma once
-#include <ctime>
-#include <string>
 #include <boost/random.hpp>
 #include <SFML/Graphics.hpp>
 

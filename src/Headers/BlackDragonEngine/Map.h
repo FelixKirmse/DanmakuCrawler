@@ -1,5 +1,4 @@
 #pragma once
-#include <limits>
 #include <vector>
 #include <boost/unordered_map.hpp>
 #include "BlackDragonEngine/IMap.h"

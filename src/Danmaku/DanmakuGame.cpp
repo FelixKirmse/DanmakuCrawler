@@ -1,4 +1,10 @@
+#include "BlackDragonEngine/Input.h"
+#include "BlackDragonEngine/Camera.h"
+#include "BlackDragonEngine/Provider.h"
 #include "Danmaku/DanmakuGame.h"
+
+typedef BlackDragonEngine::Provider<sf::Texture> TextureProvider;
+typedef BlackDragonEngine::Provider<sf::Font> FontProvider;
 
 namespace Danmaku
 {

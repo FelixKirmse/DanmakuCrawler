@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "BlackDragonEngine/IDrawableGameState.h"
@@ -8,21 +7,14 @@
 #include "Danmaku/IngameMenu.h"
 #include "Danmaku/States.h"
 
-
 namespace Danmaku
 {
 typedef MenuStates::MenuStates MenuState;
-
-class MainMenu;
-class IngameMenu;
 
 class Menu : public BlackDragonEngine::IDrawableGameState,
     public BlackDragonEngine::IUpdateableGameState
 {
 public:
-  typedef std::unique_ptr<MainMenu> MainMenuPtr;
-  typedef std::unique_ptr<IngameMenu> IngameMenuPtr;
-
   Menu();
 
   bool UpdateCondition();
@@ -34,8 +26,8 @@ public:
   static void SetState(MenuState state);
   static MenuState GetState();
 private:
-  MainMenuPtr _mainMenu;
-  IngameMenuPtr _ingameMenu;
+  MainMenu _mainMenu;
+  IngameMenu _ingameMenu;
   static MenuState State;
 };
 }

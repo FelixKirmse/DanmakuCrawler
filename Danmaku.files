@@ -61,3 +61,9 @@ src/Headers/Danmaku/IngameMenu.h
 src/Danmaku/Menus/IngameMenu.cpp
 src/Headers/Danmaku/EncounterRate.h
 src/Danmaku/Helpers/EncounterRate.cpp
+src/Headers/Danmaku/Battle.h
+src/Danmaku/GameStates/Battle.cpp
+src/Headers/Danmaku/Character.h
+src/Headers/Danmaku/Stats.h
+src/Danmaku/Entities/Character.cpp
+src/Danmaku/Entities/Stats.cpp

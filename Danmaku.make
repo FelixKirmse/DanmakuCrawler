@@ -76,7 +76,10 @@ OBJECTS := \
 	$(OBJDIR)/TitleScreen.o \
 	$(OBJDIR)/Ingame.o \
 	$(OBJDIR)/Menu.o \
+	$(OBJDIR)/Battle.o \
+	$(OBJDIR)/Character.o \
 	$(OBJDIR)/OverworldPlayer.o \
+	$(OBJDIR)/Stats.o \
 
 RESOURCES := \
 
@@ -173,7 +176,16 @@ $(OBJDIR)/Ingame.o: src/Danmaku/GameStates/Ingame.cpp
 $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Battle.o: src/Danmaku/GameStates/Battle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Character.o: src/Danmaku/Entities/Character.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/OverworldPlayer.o: src/Danmaku/Entities/OverworldPlayer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Stats.o: src/Danmaku/Entities/Stats.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

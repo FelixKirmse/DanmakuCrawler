@@ -1,12 +1,9 @@
 #pragma once
 #include <map>
 #include "SFML/System.hpp"
-#include "SFML/Graphics.hpp"
 
 namespace BlackDragonEngine
 {
-
-
 template<class T>
 class Provider
 {
