@@ -2,6 +2,7 @@
 #include "Danmaku/Menu.h"
 #include "Danmaku/Ingame.h"
 #include "Danmaku/GameStateManager.h"
+#include "Danmaku/Battle.h"
 
 namespace Danmaku
 {
@@ -53,5 +54,9 @@ void GameStateManager::Initialize()
   shared_ptr<Ingame> ingame(new Ingame());
   AddUpdateableState(ingame);
   AddDrawableState(ingame);
+
+  shared_ptr<Battle> battle(new Battle());
+  AddUpdateableState(battle);
+  AddDrawableState(battle);
 }
 }

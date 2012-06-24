@@ -27,7 +27,8 @@ public:
 
   MapGen& operator=(MapGen const&);
 private:
-  bool CellAvailable(sf::Vector2i const& cell);
+  bool TileAtCell(sf::Vector2i const& cell);
+  bool MakesSense(MapCell const& newCell, sf::Vector2i pos, int &emergencyCount);
 
   DanmakuMap& _tileMap;
   MapData& _mapData;

@@ -1,6 +1,7 @@
 #include <ctime>
 #include <string>
 #include "Danmaku/EncounterRate.h"
+#include "Danmaku/Battle.h"
 
 namespace Danmaku
 {
@@ -23,6 +24,8 @@ void EncounterRate::Step()
     _currentChance = 0.f;
     _rateDisplay.setString("EncounterRate: " +
                            std::to_string(_currentChance) + "%");
+    // TODO actual level logic
+    Battle::StartBattle(1);
     return;
   }
   _currentChance += _increaseChance(_rng);

@@ -57,10 +57,11 @@ void Game::Run(int ups)
     float interpolation = float(GetTicks() + skipTicks - nextGameTick)
         - float(skipTicks);
     Draw(interpolation, _graphics);
-    _graphics.draw(fpsText);
+    //_graphics.draw(fpsText);
     if(clock.getElapsedTime().asMilliseconds() > 1000)
     {
-      fpsText.setString("UpdateRate: " + std::to_string(updateCounter) + "\nDrawRate: " + std::to_string(drawCounter));
+      fpsText.setString("UpdateRate: " + std::to_string(updateCounter)
+                        + "\nDrawRate: " + std::to_string(drawCounter));
       drawCounter = 0;
       updateCounter = 0;
       clock.restart();
