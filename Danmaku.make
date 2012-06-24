@@ -29,7 +29,7 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -Llib
-  LIBS      += -lBlackDragonEngine
+  LIBS      += lib/libBlackDragonEngine.a
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -51,7 +51,7 @@ ifeq ($(config),release)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -Llib
-  LIBS      += -lBlackDragonEngine
+  LIBS      += lib/libBlackDragonEngine.a
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -68,7 +68,10 @@ OBJECTS := \
 	$(OBJDIR)/TileCode.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/EncounterRate.o \
+	$(OBJDIR)/Spells.o \
+	$(OBJDIR)/PlaceHolderSpell.o \
 	$(OBJDIR)/GameStateManager.o \
+	$(OBJDIR)/Party.o \
 	$(OBJDIR)/MainMenu.o \
 	$(OBJDIR)/IngameMenu.o \
 	$(OBJDIR)/MapGen.o \
@@ -152,7 +155,16 @@ $(OBJDIR)/main.o: src/Danmaku/main.cpp
 $(OBJDIR)/EncounterRate.o: src/Danmaku/Helpers/EncounterRate.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Spells.o: src/Danmaku/Spells/Spells.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/PlaceHolderSpell.o: src/Danmaku/Spells/PlaceHolderSpell.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GameStateManager.o: src/Danmaku/Managers/GameStateManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/Party.o: src/Danmaku/Managers/Party.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp

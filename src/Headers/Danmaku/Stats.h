@@ -3,7 +3,7 @@
 namespace Danmaku
 {
 /*
- * Each stat in the struct has 5 fields.
+ * Each stat in the struct has 7 fields.
  * Stat[0] contains the base value of a stat
  * Stat[1] - Stat[3] contain modifiers from items in the respective slot
  * Stat[4] contains temporary battle modifiers (buffs/debuffs)
@@ -14,38 +14,38 @@ namespace Danmaku
 struct Stats
 {
   // Base Stats
-  float HP[6];    // Health Points
-  float MP[6];    // Magic Points
-  float AD[6];    // Attack Damage
-  float MD[6];    // Magic Damage
-  float DEF[6];   // Defense
-  float MR[6];    // Magic Resist
-  float EVA[6];   // Evasion Stat
+  float HP[7];    // Health Points
+  float MP[7];    // Magic Points
+  float AD[7];    // Attack Damage
+  float MD[7];    // Magic Damage
+  float DEF[7];   // Defense
+  float MR[7];    // Magic Resist
+  float EVA[7];   // Evasion Stat
   enum
   {
     Dodge,
     Block
   } EVAType;      // Type of Evasion Stat
-  float SPD[6];   // Speed
+  float SPD[7];   // Speed
 
   //Elemental Masteries (increase damage done, decrease damage taken)
-  float FIR[6];   // Fire
-  float WAT[6];   // Water
-  float ICE[6];   // Ice
-  float ARC[6];   // Arcane
-  float WND[6];   // Wind
-  float HOL[6];   // Holy
-  float DRK[6];   // Dark
-  float GRN[6];   // Ground
-  float LGT[6];
+  float FIR[7];   // Fire
+  float WAT[7];   // Water
+  float ICE[7];   // Ice
+  float ARC[7];   // Arcane
+  float WND[7];   // Wind
+  float HOL[7];   // Holy
+  float DRK[7];   // Dark
+  float GRN[7];   // Ground
+  float LGT[7];   // Lightning
 
   //Debuff Resistances
-  float PSN[6];   // Poison
-  float PAR[6];   // Paralyze
-  float SLW[6];   // Slow
-  float STD[6];   // Statdrop
-  float DTH[6];   // Instant-Death
-  float SIL[6];   // Silence
+  float PSN[7];   // Poison
+  float PAR[7];   // Paralyze
+  float SLW[7];   // Slow
+  float STD[7];   // Statdrop
+  float DTH[7];   // Instant-Death
+  float SIL[7];   // Silence
 
   float GetTotalHP();
   float GetTotalMP();

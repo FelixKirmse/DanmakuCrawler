@@ -4,6 +4,8 @@
 #include "Danmaku/TileList.h"
 #include "Danmaku/OverworldPlayer.h"
 
+#include <string>
+
 namespace Danmaku
 {
 typedef BlackDragonEngine::TileMap<BlackDragonEngine::Map<MapCell, TileCode>,
@@ -62,7 +64,7 @@ void OverworldPlayer::Update()
       _moveState = Idle;
       _stepsTaken = 0;
       _mapGen.GenerateStep(targetTile);
-      _encounterRate.Step();
+      //_encounterRate.Step();
       Update(); //For smooth movement
     }
     break;
@@ -92,6 +94,10 @@ void OverworldPlayer::Draw(sf::RenderTarget& renderTarget)
   renderTarget.draw(_sprite);
   _sprite.setPosition(position);
   _encounterRate.Draw(renderTarget);
+  sf::Text gridPos("Pos: (" + std::to_string(_currentTile.x) + "|"
+                   + std::to_string(_currentTile.y) + ")");
+  gridPos.setColor(sf::Color::Black);
+  renderTarget.draw(gridPos);
 }
 
 void OverworldPlayer::SetPlayerAtCell(sf::Vector2i const& cell)

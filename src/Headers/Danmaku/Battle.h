@@ -19,7 +19,15 @@ public:
   bool DrawCondition();
   void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
+  static void StartBattle(int level, int bossID = 0);
+
 private:
+  void IdleUpdate();
+  void ConsequenceUpdate();
+
+  void IdleDraw(sf::RenderTarget& renderTarget);
+  void ConsequenceDraw(sf::RenderTarget& renderTarget);
+
   enum BattleStates
   {
     Idle,
@@ -31,7 +39,17 @@ private:
   } _battleState;
 
   CharVec _enemies;
-  CharVec _playerRow;
-  CharVec _playerBattleParty;
+  CharVec& _playerRow;
+  CharVec& _playerBattleParty;
+  Character* _currentAttacker;
+
+  TargetInfo _targetInfo;
+
+  size_t _enemyLeftOff;
+  size_t _playerLeftOff;
+  int _frameCounter;
+  bool _enemyTurn;
+
+  static Battle* _currentInstance;
 };
 }

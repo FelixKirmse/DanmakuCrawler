@@ -132,5 +132,10 @@ float Stats::GetTotalSIL()
 void Stats::LvlUp()
 {
   HP[0] += HP[5];
+  MP[0] += MP[5];
+  AD[0] += AD[5];
+  MD[0] += MD[5];
+  DEF[0] += DEF[5];
+  MR[0] += MR[5];
 }
 }

@@ -29,6 +29,9 @@ void DanmakuGame::LoadContent()
   TextureProvider::Get("OverworldPlayer")
       .loadFromFile("content/textures/entities/overworldplayer.png");
 
+  TextureProvider::Get("PlaceHolderPortrait")
+      .loadFromFile("content/textures/charportraits/placeholder.png");
+
   int const tileWidth = 64;
   int const tileHeight = 64;
   int const tileOffset = 0;

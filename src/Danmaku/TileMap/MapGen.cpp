@@ -19,9 +19,9 @@ MapGen::MapGen(DanmakuMap& tileMap)
   GenerateInitialMap(Vector2i(0,0), 0, 10);
 }
 
-bool MapGen::CellAvailable(sf::Vector2i const& cell)
+bool MapGen::TileAtCell(sf::Vector2i const& cell)
 {
-  return !_mapData.count(cell);
+  return _mapData.count(cell);
 }
 
 void MapGen::GenerateStep(sf::Vector2i const& current)
@@ -29,26 +29,27 @@ void MapGen::GenerateStep(sf::Vector2i const& current)
   using namespace sf;
   using namespace TileList;
 
-  if(CellAvailable(current))
+  if(!TileAtCell(current))
     return;
 
-  _possibleDirections.clear();  
+  _possibleDirections.clear();
   MapCell& currentCell = _mapData[current];
 
-  if(currentCell.TopConnector && CellAvailable(Vector2i(current.x,
-                                                        current.y - 1)))
+  if(currentCell.TopConnector && !TileAtCell(Vector2i(current.x,
+                                                      current.y - 1)))
     _possibleDirections.push_back(MapCell::Up);
-  if(currentCell.BottomConnector && CellAvailable(Vector2i(current.x,
-                                                           current.y + 1)))
+  if(currentCell.BottomConnector && !TileAtCell(Vector2i(current.x,
+                                                         current.y + 1)))
     _possibleDirections.push_back(MapCell::Down);
-  if(currentCell.LeftConnector && CellAvailable(Vector2i(current.x - 1,
-                                                         current.y)))
+  if(currentCell.LeftConnector && !TileAtCell(Vector2i(current.x - 1,
+                                                       current.y)))
     _possibleDirections.push_back(MapCell::Left);
-  if(currentCell.RightConnector && CellAvailable(Vector2i(current.x + 1,
-                                                          current.y)))
+  if(currentCell.RightConnector && !TileAtCell(Vector2i(current.x + 1,
+                                                        current.y)))
     _possibleDirections.push_back(MapCell::Right);
   if(_possibleDirections.size() == 0)
     return;
+  int superEmergency(0);
   for(size_t i = 0; i < _possibleDirections.size(); ++i)
   {
     MapCell newCell;
@@ -62,13 +63,6 @@ void MapGen::GenerateStep(sf::Vector2i const& current)
         (tileType < 50) ? _straightTiles :
                           (tileType < 75) ? _cornerTiles : _branchTiles ;
     IntGenerator selectTile(0, possibleTiles.size() - 1);
-    do
-    {
-      int tile;
-      tile = possibleTiles[selectTile(_rng)];
-      newCell = MapCell(tile);
-    }
-    while(!currentCell.IsTraversible(newCell, direction));
     Vector2i newTile(current);
     newTile.x += (direction == MapCell::Left) ? -1 :
                                                 (direction == MapCell::Right) ?
@@ -76,9 +70,68 @@ void MapGen::GenerateStep(sf::Vector2i const& current)
     newTile.y += (direction == MapCell::Up) ? -1 :
                                               (direction == MapCell::Down) ?
                                                 1 : 0;
+    int emergency(0);
+    do
+    {
+      int tile = possibleTiles[selectTile(_rng)];
+      newCell = MapCell(tile);
+      ++emergency;
+      ++superEmergency;
+      if(emergency == 10)
+      {
+        --i;
+        break;
+      }
+      if(superEmergency == 50)
+      {
+        possibleTiles = _straightTiles;
+        selectTile = IntGenerator(0, possibleTiles.size() - 1);
+      }
+    }
+    while(!currentCell.IsTraversible(newCell, direction) ||
+          !MakesSense(newCell, newTile, superEmergency));
+
     _mapData[newTile] = newCell;
   }
   BlackDragonEngine::Camera::UpdateWorldRectangle(_tileMap);
+}
+
+bool MapGen::MakesSense(MapCell const& newCell, sf::Vector2i pos,
+                        int& emergencyCount)
+{
+  using namespace sf;
+  if( emergencyCount >= 50 &&
+      (newCell.TileID == TileList::SH || newCell.TileID == TileList::SV))
+  {
+    emergencyCount = 0;
+    return true;
+  }
+
+  Vector2i up(Vector2i(pos.x, pos.y - 1));
+  Vector2i down(Vector2i(pos.x, pos.y + 1));
+  Vector2i left(Vector2i(pos.x - 1, pos.y));
+  Vector2i right(Vector2i(pos.x + 1, pos.y));
+  if(TileAtCell(up) &&
+     ((newCell.TopConnector && !_mapData[up].BottomConnector) ||
+     (!newCell.TopConnector && _mapData[up].BottomConnector)))
+    return false;
+
+  if(TileAtCell(down) &&
+     ((newCell.BottomConnector && !_mapData[down].TopConnector) ||
+     (!newCell.BottomConnector && _mapData[down].TopConnector)))
+    return false;
+
+  if(TileAtCell(left) &&
+     ((newCell.LeftConnector && !_mapData[left].RightConnector) ||
+     (!newCell.LeftConnector && _mapData[left].RightConnector)))
+    return false;
+
+  if(TileAtCell(right) &&
+     ((newCell.RightConnector && !_mapData[right].LeftConnector) ||
+     (!newCell.RightConnector && _mapData[right].LeftConnector)))
+    return false;
+
+  return true;
 }
 
 void MapGen::GenerateInitialMap(sf::Vector2i const& current,
