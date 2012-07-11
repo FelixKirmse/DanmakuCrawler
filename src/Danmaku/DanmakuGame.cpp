@@ -1,3 +1,4 @@
+#include <boost/filesystem.hpp>
 #include "BlackDragonEngine/Input.h"
 #include "BlackDragonEngine/Camera.h"
 #include "BlackDragonEngine/Provider.h"
@@ -31,6 +32,17 @@ void DanmakuGame::LoadContent()
 
   TextureProvider::Get("PlaceHolderPortrait")
       .loadFromFile("content/textures/charportraits/placeholder.png");
+
+  using namespace boost::filesystem3;
+  path p("content/textures/charportraits");
+  directory_iterator end_iter;
+  for(directory_iterator i(p); i != end_iter; ++i)
+  {
+    if(is_directory(i->path()))
+      continue;
+    TextureProvider::Get(i->path().stem().native())
+        .loadFromFile(i->path().native());
+  }
 
   int const tileWidth = 64;
   int const tileHeight = 64;
@@ -72,7 +84,7 @@ void DanmakuGame::Initialize()
   using namespace BlackDragonEngine;
 
   Input::ActionKeys = { Keyboard::Return, Keyboard::E };
-  Input::CancelKeys = { Keyboard::Escape, Keyboard::Back };
+  Input::CancelKeys = { Keyboard::Escape, Keyboard::BackSpace };
   Input::DownKeys = { Keyboard::Down, Keyboard::S };
   Input::UpKeys = { Keyboard::Up, Keyboard::W };
   Input::LeftKeys = { Keyboard::Left, Keyboard::A };

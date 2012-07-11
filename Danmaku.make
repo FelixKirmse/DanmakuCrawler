@@ -28,7 +28,7 @@ ifeq ($(config),debug)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -Llib
+  LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -lboost_system -lboost_filesystem -Llib
   LIBS      += lib/libBlackDragonEngine.a
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
@@ -50,7 +50,7 @@ ifeq ($(config),release)
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
-  LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -Llib
+  LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -lboost_system -lboost_filesystem -Llib
   LIBS      += lib/libBlackDragonEngine.a
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
@@ -73,6 +73,7 @@ OBJECTS := \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/Party.o \
 	$(OBJDIR)/MainMenu.o \
+	$(OBJDIR)/BattleMenu.o \
 	$(OBJDIR)/IngameMenu.o \
 	$(OBJDIR)/MapGen.o \
 	$(OBJDIR)/MapCell.o \
@@ -80,6 +81,7 @@ OBJECTS := \
 	$(OBJDIR)/Ingame.o \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/Battle.o \
+	$(OBJDIR)/CharFrame.o \
 	$(OBJDIR)/Character.o \
 	$(OBJDIR)/OverworldPlayer.o \
 	$(OBJDIR)/Stats.o \
@@ -170,6 +172,9 @@ $(OBJDIR)/Party.o: src/Danmaku/Managers/Party.cpp
 $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BattleMenu.o: src/Danmaku/Menus/BattleMenu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/IngameMenu.o: src/Danmaku/Menus/IngameMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -189,6 +194,9 @@ $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Battle.o: src/Danmaku/GameStates/Battle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/CharFrame.o: src/Danmaku/Entities/CharFrame.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Character.o: src/Danmaku/Entities/Character.cpp

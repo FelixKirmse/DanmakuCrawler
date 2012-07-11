@@ -48,6 +48,11 @@ float Stats::GetTotalSPD()
       * SPD[4];
 }
 
+float Stats::GetTotalCHA()
+{
+  return CHA[0] + CHA[1] + CHA[2] + CHA[3] + CHA[6];
+}
+
 // Elemental Masteries
 // General formular is base + items + bonus
 

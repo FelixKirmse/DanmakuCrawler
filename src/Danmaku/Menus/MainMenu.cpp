@@ -14,7 +14,7 @@ MainMenu::MainMenu()
   MenuItems.push_back(MenuItem(Resume, FontName, false));
   MenuItems.push_back(MenuItem(NewGame, FontName, true));
   MenuItems.push_back(MenuItem(Quit, FontName, false));
-  EnableMouseSelection = true;
+  EnableMouseSelection = false;
   SetPositions();
 }
 void MainMenu::Update()

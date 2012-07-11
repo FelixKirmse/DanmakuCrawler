@@ -1,5 +1,4 @@
 #include "BlackDragonEngine/Input.h"
-#include "BlackDragonEngine/Game.h"
 #include "BlackDragonEngine/Menu.h"
 
 namespace BlackDragonEngine
@@ -92,15 +91,16 @@ sf::String const& Menu::SelectedItem()
   return MenuItems[0].GetName();
 }
 
-void Menu::SetPositions()
+
+void Menu::SetPositions(sf::Vector2f positionCenter, bool centered)
 {
   for(int i = 0; i < (int)MenuItems.size(); ++i)
   {
-    sf::Vector2f screenCenter = Game::GetScreenCenter();
     sf::FloatRect fontBound = MenuItems[i].GetLocalRectangle();
-    sf::Vector2f fontCenter = sf::Vector2f(fontBound.width/2,
-                                           fontBound.height/2);
-    MenuItems[i].SetPosition(screenCenter - fontCenter +
+    sf::Vector2f fontCenter = (centered) ? sf::Vector2f(fontBound.width/2,
+                                                        fontBound.height/2) :
+                                           sf::Vector2f(0.f, 0.f);
+    MenuItems[i].SetPosition(positionCenter - fontCenter +
                              sf::Vector2f((i-2)*ItemOffset.x,
                                           (i-2)*ItemOffset.y));
   }

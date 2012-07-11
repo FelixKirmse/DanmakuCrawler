@@ -13,7 +13,8 @@ Battle* Battle::_currentInstance;
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
-    _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false)
+    _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
+    _battleMenu(*this)
 {
   _currentInstance = this;
 }
@@ -31,6 +32,7 @@ bool Battle::Update()
     IdleUpdate();
     break;
   case BattleMenu:
+    _battleMenu.Update();
     break;
   case Action:
     break;
@@ -57,7 +59,8 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
   case Idle:
     IdleDraw(renderTarget);
     break;
-  case BattleMenu:
+  case BattleMenu:   
+    IdleDraw(renderTarget);
     break;
   case Action:
     break;
@@ -77,9 +80,13 @@ void Battle::StartBattle(int level, int bossID)
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
   _currentInstance->_playerRow.clear();
-  _currentInstance->_enemies.push_back(Character("Enemy"));
-  _currentInstance->_playerRow.push_back(Character("Player"));
+  _currentInstance->_enemies.push_back(Character("Nitori"));
+  _currentInstance->_playerRow.push_back(Character("Cirno"));
   _currentInstance->_playerRow[0].GetStats().SPD[0] = 125.f;
+  _currentInstance->_playerRow[0].InitializeCharFrame();
+  _currentInstance->_playerRow[0]._charFrame.Reposition(sf::Vector2f(200.f, 370.f));
+  _currentInstance->_playerRow[0]._charFrame.UpdateHP();
+  _currentInstance->_playerRow[0]._charFrame.UpdateMP();
 }
 
 void Battle::IdleUpdate()
@@ -103,15 +110,11 @@ void Battle::IdleUpdate()
   _enemyLeftOff = 0;
 
   for(size_t i = _playerLeftOff; i < _playerRow.size(); ++i)
-  {
+  {    
     if(_playerRow[i].UpdateTurnCounter())
     {
-      //TODO delete following 2 lines after testing
-      _targetInfo = _playerRow[i].AIBattleMenu(_enemies);
-      _battleState = Consequences;
-
-      //_battleState = BattleMenu;
-      _playerLeftOff = 0;
+      _battleState = BattleMenu;
+      _playerLeftOff = i;
       _currentAttacker = &_playerRow[i];
       return;
     }
@@ -179,39 +182,13 @@ void Battle::ConsequenceUpdate()
 
 void Battle::IdleDraw(sf::RenderTarget& renderTarget)
 {
-  using namespace sf;
-  using namespace boost;
-
-  Character& enemy = _enemies[0];
-  Character& player = _playerRow[0];
-
-  /*Text enemyText(str(format("%1%\nHP: %2%/%3%\nSPD: %4%/%5%")
-                     % enemy._name % (int)enemy._currentHP
-                     % (int)enemy._stats.GetTotalHP()
-                     % enemy._turnCounter % enemy.TimeToAction));
-  Text playerText(str(format("%1%\nHP: %2%/%3%\nSPD: %4%/%5%")
-                      % player._name % (int)player._currentHP
-                      % (int)player._stats.GetTotalHP()
-                      % player._turnCounter % player.TimeToAction));*/
-
-  Text enemyText(enemy._name + "\nHP: "
-                 + std::to_string((int)enemy._currentHP) + "/"
-                 + std::to_string((int)enemy._stats.GetTotalHP()) + "\nSPD: "
-                 + std::to_string(enemy._turnCounter) + "/"
-                 + std::to_string(enemy.TimeToAction));
-  Text playerText(player._name + "\nHP: "
-                 + std::to_string((int)player._currentHP) + "/"
-                 + std::to_string((int)player._stats.GetTotalHP()) + "\nSPD: "
-                 + std::to_string(player._turnCounter) + "/"
-                 + std::to_string(player.TimeToAction));
-  enemyText.setPosition(Vector2f(50, 200));
-  playerText.setPosition(Vector2f(300, 200));
-  renderTarget.draw(enemyText);
-  renderTarget.draw(playerText);
-  Text state((_battleState == Idle ? "Idle\n" : "Consequences\n")
-             + std::to_string(_frameCounter));
-  state.setPosition(Vector2f(50, 100));
-  renderTarget.draw(state);
+  _playerRow[0]._charFrame.Draw(renderTarget);
+  float val1(_playerRow[0]._charFrame._spdBar.getSize().x);
+  float val2((float)_playerRow[0]._turnCounter / _playerRow[0].TimeToAction);
+  sf::Text debug(std::to_string(val1) + " \n " + std::to_string(val2));
+  debug.setPosition(20,10);
+  renderTarget.draw(debug);
+  _battleMenu.Draw(renderTarget);
 }
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
