@@ -2,6 +2,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "BlackDragonEngine/Game.h"
 #include "BlackDragonEngine/MenuItem.h"
 #include "BlackDragonEngine/MenuLabel.h"
 
@@ -25,7 +26,8 @@ public:
 
 protected:
   sf::String const& SelectedItem();
-  void SetPositions();
+  void SetPositions(sf::Vector2f positionCenter = Game::GetScreenCenter(),
+                    bool centered = true);
 
   sf::String const FontName;
   MenuItemList MenuItems;

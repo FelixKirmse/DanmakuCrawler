@@ -4,12 +4,14 @@
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "Danmaku/Character.h"
+#include "Danmaku/BattleMenu.h"
 
 namespace Danmaku
 {
 class Battle : public BlackDragonEngine::IUpdateableGameState,
     public BlackDragonEngine::IDrawableGameState
 {
+  friend class Danmaku::BattleMenu;
 public:
   typedef std::vector<Character> CharVec;
 
@@ -49,6 +51,8 @@ private:
   size_t _playerLeftOff;
   int _frameCounter;
   bool _enemyTurn;
+
+  Danmaku::BattleMenu _battleMenu;
 
   static Battle* _currentInstance;
 };

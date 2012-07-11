@@ -12,18 +12,22 @@ Character::Character()
 }
 
 Character::Character(sf::String name)
-  : _name(name),
-    _charPortrait(Provider<sf::Texture>::Get("PlaceHolderPortrait")),
-    _charBattleSprite(Provider<sf::Texture>::Get("PlaceHolderPortrait")),
-    _stats(), _turnCounter(0), _spellList(), _currentHP(0)
+  : _name(name), _stats(), _turnCounter(0), _spellList(), _currentHP(0)
 {
   // TODO Stat Generation
   _stats.HP[0] = 5000.f;
   _currentHP = _stats.HP[0];
+  _currentMP = 147;
+  _stats.MP[0] = 250;
   _stats.SPD[0] = 100.f;
   _spellList.push_back(&Spells::PlaceHolder);
 }
 
+
+void Character::InitializeCharFrame()
+{
+  _charFrame = CharFrame(sf::Vector2f(0.f, 0.f), _name, this);
+}
 
 bool Character::UpdateTurnCounter()
 {
@@ -32,6 +36,7 @@ bool Character::UpdateTurnCounter()
   {
     _turnCounter = 0.f;    
   }
+  _charFrame.UpdateSPD();
 
   return _turnCounter == 0.f;
 }
@@ -39,6 +44,11 @@ bool Character::UpdateTurnCounter()
 float& Character::GetCurrentHP()
 {
   return _currentHP;
+}
+
+float& Character::GetCurrentMP()
+{
+  return _currentMP;
 }
 
 Stats& Character::GetStats()

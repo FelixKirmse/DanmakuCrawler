@@ -1,4 +1,5 @@
 local SFML_LIBRARIES = "-lsfml-graphics -lsfml-window -lsfml-system" 
+local BOOST_LIBRARIES = "-lboost_system -lboost_filesystem"
 
 solution "Danmaku"
     configurations { "Debug", "Release" }
@@ -19,7 +20,7 @@ solution "Danmaku"
         targetdir "lib"
         files { "src/BlackDragonEngine/**.cpp" }
         buildoptions { "-std=c++11" }
-        linkoptions { SFML_LIBRARIES }
+        linkoptions { SFML_LIBRARIES, BOOST_LIBRARIES }
 
     project "Danmaku"
         kind "WindowedApp"
@@ -28,4 +29,4 @@ solution "Danmaku"
         files { "src/Danmaku/**.cpp" }    
         links { "BlackDragonEngine" } 
         buildoptions { "-std=c++11" }
-        linkoptions { SFML_LIBRARIES }
+        linkoptions { SFML_LIBRARIES, BOOST_LIBRARIES }

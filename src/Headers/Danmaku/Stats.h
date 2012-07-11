@@ -27,6 +27,7 @@ struct Stats
     Block
   } EVAType;      // Type of Evasion Stat
   float SPD[7];   // Speed
+  float CHA[7];   // Charisma
 
   //Elemental Masteries (increase damage done, decrease damage taken)
   float FIR[7];   // Fire
@@ -55,6 +56,7 @@ struct Stats
   float GetTotalMR();
   float GetTotalEVA();
   float GetTotalSPD();
+  float GetTotalCHA();
 
   float GetTotalFIR();
   float GetTotalWAT();

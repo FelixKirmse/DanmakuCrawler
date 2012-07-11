@@ -4,6 +4,7 @@
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
 #include "Danmaku/Stats.h"
+#include "Danmaku/CharFrame.h"
 
 namespace Danmaku
 {
@@ -26,6 +27,7 @@ struct TargetInfo
 class Character
 {
 public:
+  friend class CharFrame;
   friend class Battle;
   typedef std::vector<ISpell*> SpellList;
   typedef std::vector<Character> CharVec;
@@ -33,20 +35,22 @@ public:
   Character();
   Character(sf::String name);
 
+  void InitializeCharFrame();
   bool UpdateTurnCounter();
   float& GetCurrentHP();
-  Stats& GetStats(); 
+  float& GetCurrentMP();
+  Stats& GetStats();
 
-  TargetInfo AIBattleMenu(CharVec &targetRow);
+  TargetInfo AIBattleMenu(CharVec& targetRow);
 
 private:
-  sf::String _name;
-  sf::Texture _charPortrait;
-  sf::Texture _charBattleSprite;
+  sf::String _name;  
   Stats _stats;
   int _turnCounter;
   SpellList _spellList;
-  float _currentHP; 
+  float _currentHP;
+  float _currentMP;
+  CharFrame _charFrame;
 
   int const TimeToAction = 300;
 };
