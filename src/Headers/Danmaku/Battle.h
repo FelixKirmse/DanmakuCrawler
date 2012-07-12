@@ -30,6 +30,8 @@ private:
   void IdleDraw(sf::RenderTarget& renderTarget);
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
 
+  void ArrangeCharFrames();
+
   enum BattleStates
   {
     Idle,
@@ -53,6 +55,9 @@ private:
   bool _enemyTurn;
 
   Danmaku::BattleMenu _battleMenu;
+
+  sf::Vector2f const FrameContainerStart = sf::Vector2f(200.f, 370.f);
+  size_t FrameContainerOffset = 110;
 
   static Battle* _currentInstance;
 };

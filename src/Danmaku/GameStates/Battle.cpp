@@ -81,12 +81,31 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_enemies.clear();
   _currentInstance->_playerRow.clear();
   _currentInstance->_enemies.push_back(Character("Nitori"));
-  _currentInstance->_playerRow.push_back(Character("Cirno"));
+  _currentInstance->_playerRow.push_back(Character("Youmu"));
+  _currentInstance->_playerRow.push_back(Character("Reimu"));
+  _currentInstance->_playerRow.push_back(Character("Flandre"));
+  _currentInstance->_playerRow.push_back(Character("Marisa"));
   _currentInstance->_playerRow[0].GetStats().SPD[0] = 125.f;
   _currentInstance->_playerRow[0].InitializeCharFrame();
-  _currentInstance->_playerRow[0]._charFrame.Reposition(sf::Vector2f(200.f, 370.f));
   _currentInstance->_playerRow[0]._charFrame.UpdateHP();
   _currentInstance->_playerRow[0]._charFrame.UpdateMP();
+
+  _currentInstance->_playerRow[1].GetStats().SPD[0] = 105.f;
+  _currentInstance->_playerRow[1].InitializeCharFrame();
+  _currentInstance->_playerRow[1]._charFrame.UpdateHP();
+  _currentInstance->_playerRow[1]._charFrame.UpdateMP();
+
+  _currentInstance->_playerRow[2].GetStats().SPD[0] = 130.f;
+  _currentInstance->_playerRow[2].InitializeCharFrame();
+  _currentInstance->_playerRow[2]._charFrame.UpdateHP();
+  _currentInstance->_playerRow[2]._charFrame.UpdateMP();
+
+  _currentInstance->_playerRow[3].GetStats().SPD[0] = 115.f;
+  _currentInstance->_playerRow[3].InitializeCharFrame();
+  _currentInstance->_playerRow[3]._charFrame.UpdateHP();
+  _currentInstance->_playerRow[3]._charFrame.UpdateMP();
+
+  _currentInstance->ArrangeCharFrames();
 }
 
 void Battle::IdleUpdate()
@@ -182,17 +201,26 @@ void Battle::ConsequenceUpdate()
 
 void Battle::IdleDraw(sf::RenderTarget& renderTarget)
 {
-  _playerRow[0]._charFrame.Draw(renderTarget);
-  float val1(_playerRow[0]._charFrame._spdBar.getSize().x);
-  float val2((float)_playerRow[0]._turnCounter / _playerRow[0].TimeToAction);
-  sf::Text debug(std::to_string(val1) + " \n " + std::to_string(val2));
-  debug.setPosition(20,10);
-  renderTarget.draw(debug);
+  for(size_t i = 0; i < _playerRow.size(); ++i)
+  {
+    _playerRow[i]._charFrame.Draw(renderTarget);
+  }
+
   _battleMenu.Draw(renderTarget);
 }
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
 {
   IdleDraw(renderTarget);
+}
+
+void Battle::ArrangeCharFrames()
+{
+  for(size_t i = 0; i < _playerRow.size(); ++i)
+  {
+    _playerRow[i]._charFrame.Reposition(FrameContainerStart.x
+                                        + i * FrameContainerOffset,
+                                        FrameContainerStart.y);
+  }
 }
 }
