@@ -18,6 +18,7 @@ public:
 
   void Draw(sf::RenderTarget& rTarget);
   void Reposition(sf::Vector2f newOffset);
+  void Reposition(float x, float y);
 
 private:
   Character* _owner;
@@ -34,5 +35,8 @@ private:
   sf::Text _mp;
   sf::Text _hpValue;
   sf::Text _mpValue;
+
+  static sf::Color const FullSPDBar;
+  static sf::Color const NormalSPDBar;
 };
 }

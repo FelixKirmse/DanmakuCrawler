@@ -64,6 +64,9 @@ void BattleMenu::Draw(sf::RenderTarget& renderTarget)
 
 void BattleMenu::SelectMenuItem()
 {
+  sf::String const& selectedItem = SelectedItem();
+  if(selectedItem == Attack)
+    _battle._battleState = Battle::Idle;
 }
 
 }

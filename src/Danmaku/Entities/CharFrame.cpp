@@ -14,9 +14,12 @@ CharFrame::CharFrame()
 {
 }
 
+sf::Color const CharFrame::FullSPDBar(255u, 0u, 0u);
+sf::Color const CharFrame::NormalSPDBar(255u, 119u, 0u);
+
 CharFrame::CharFrame(sf::Vector2f offset, sf::String charName, Character* owner)
   : _owner(owner), _offset(0.f, 0.f), _frame(sf::Vector2f(100.f,100.f)),
-    _spdBackgrnd(sf::Vector2f(50.f,8.f)), _spdBar(sf::Vector2f(50.f,8.f)),
+    _spdBackgrnd(sf::Vector2f(70.f,6.f)), _spdBar(sf::Vector2f(70.f,6.f)),
     _hpBackgrnd(sf::Vector2f(90.f,10.f)), _hpBar(sf::Vector2f(90.f,10.f)),
     _mpBackgrnd(sf::Vector2f(90.f,10.f)), _mpBar(sf::Vector2f(90.f,10.f)),
     _hp("HP", FontProvider::Get("Vera"), 8u),
@@ -59,8 +62,8 @@ CharFrame::CharFrame(sf::Vector2f offset, sf::String charName, Character* owner)
 
   _frame.setPosition(0.f, 0.f);
 
-  _spdBar.setPosition(44.f, 61.f);
-  _spdBackgrnd.setPosition(44.f, 61.f);
+  _spdBar.setPosition(24.f, 61.f);
+  _spdBackgrnd.setPosition(24.f, 61.f);
 
   _hpBar.setPosition(4.f, 73.f);
   _hpBackgrnd.setPosition(4.f, 73.f);
@@ -80,6 +83,11 @@ CharFrame::CharFrame(sf::Vector2f offset, sf::String charName, Character* owner)
   _mpValue.setColor(Color::Black);
 
   Reposition(offset);
+}
+
+void CharFrame::Reposition(float x, float y)
+{
+  Reposition(sf::Vector2f(x,y));
 }
 
 void CharFrame::Reposition(sf::Vector2f newOffset)
@@ -147,6 +155,7 @@ void CharFrame::UpdateSPD()
     scaleFactor = 1.f;
   sf::Vector2f size(_spdBackgrnd.getSize().x * scaleFactor, _spdBar.getSize().y);
   _spdBar.setSize(size);
+  _spdBar.setFillColor((scaleFactor == 1.f) ? FullSPDBar : NormalSPDBar);
 }
 
 }
