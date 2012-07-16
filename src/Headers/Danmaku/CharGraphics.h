@@ -6,13 +6,12 @@ namespace Danmaku
 class Character;
 
 class CharGraphics
-{
-  friend class Battle; // Delete this
+{  
 public:
   CharGraphics();
   CharGraphics(sf::Vector2f offset, sf::String charName, Character* owner);
 
-  void UpdateSPD();
+  void UpdateSPD(bool myTurn);
   void UpdateHP();
   void UpdateMP();
   void SetBattleSpritePosition(sf::Vector2f const& pos);

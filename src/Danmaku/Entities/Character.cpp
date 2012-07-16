@@ -32,14 +32,16 @@ void Character::InitializeCharFrame()
 
 bool Character::UpdateTurnCounter()
 {
+  bool result(false);
   _turnCounter += _stats.SPD[0] / 30.f;
   if(_turnCounter >= TimeToAction)
   {
-    _turnCounter = 0.f;    
+    _turnCounter -= TimeToAction;
+    result = true;
   }
-  _charFrame.UpdateSPD();
+  _charFrame.UpdateSPD(result);
 
-  return _turnCounter == 0.f;
+  return result;
 }
 
 float& Character::GetCurrentHP()
