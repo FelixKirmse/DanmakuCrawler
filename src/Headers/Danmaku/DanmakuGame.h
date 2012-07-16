@@ -29,6 +29,8 @@ protected:
   void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
 private:
+  void LoadTexturesFromDir(sf::String const& dir, sf::String const& suffix);
+
   GameStateManager _stateManager;
   MapPtr _tileMap;
 };

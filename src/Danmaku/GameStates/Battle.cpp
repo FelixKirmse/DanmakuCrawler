@@ -14,9 +14,17 @@ Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
-    _battleMenu(*this)
+    _battleMenu(*this), _threeLayout(), _fourLayout()
 {
   _currentInstance = this;
+  _threeLayout.push_back(sf::Vector2f(260.f, 305.f));
+  _threeLayout.push_back(sf::Vector2f(450.f, 255.f));
+  _threeLayout.push_back(sf::Vector2f(625.f, 310.f));
+
+  _fourLayout.push_back(sf::Vector2f(260.f, 305.f));
+  _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
+  _fourLayout.push_back(sf::Vector2f(530.f, 275.f));
+  _fourLayout.push_back(sf::Vector2f(625.f, 310.f));
 }
 
 bool Battle::UpdateCondition()
@@ -80,10 +88,18 @@ void Battle::StartBattle(int level, int bossID)
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
   _currentInstance->_playerRow.clear();
-  _currentInstance->_enemies.push_back(Character("Nitori"));
+  _currentInstance->_enemies.push_back(Character("Enemy1"));
+  _currentInstance->_enemies.push_back(Character("Enemy2"));
+  _currentInstance->_enemies.push_back(Character("Enemy3"));
+  _currentInstance->_enemies.push_back(Character("Enemy8"));
+  _currentInstance->_enemies[0].InitializeCharFrame();
+  _currentInstance->_enemies[1].InitializeCharFrame();
+  _currentInstance->_enemies[2].InitializeCharFrame();
+  _currentInstance->_enemies[3].InitializeCharFrame();
+
   _currentInstance->_playerRow.push_back(Character("Youmu"));
-  _currentInstance->_playerRow.push_back(Character("Reimu"));
-  _currentInstance->_playerRow.push_back(Character("Flandre"));
+  _currentInstance->_playerRow.push_back(Character("Enemy5"));
+  _currentInstance->_playerRow.push_back(Character("Minoriko"));
   _currentInstance->_playerRow.push_back(Character("Marisa"));
   _currentInstance->_playerRow[0].GetStats().SPD[0] = 125.f;
   _currentInstance->_playerRow[0].InitializeCharFrame();
@@ -201,6 +217,19 @@ void Battle::ConsequenceUpdate()
 
 void Battle::IdleDraw(sf::RenderTarget& renderTarget)
 {
+  // Draw backwards for nice layering
+  for(size_t i = _enemies.size() - 1; i != static_cast<size_t>(-1); --i)
+  {
+    _enemies[i]._charFrame.DrawBattleSprite(renderTarget);
+  }
+
+  // CharSprite infront of enemies, but behind CharFrames
+  for(size_t i = 0; i < _playerRow.size(); ++i)
+  {
+    _playerRow[i]._charFrame.DrawCharSprite(renderTarget);
+  }
+
+  // CharFrames ontop
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _playerRow[i]._charFrame.Draw(renderTarget);
@@ -214,13 +243,26 @@ void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
   IdleDraw(renderTarget);
 }
 
-void Battle::ArrangeCharFrames()
+
+void Battle::ArrangeCharFrames(int bossID)
 {
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _playerRow[i]._charFrame.Reposition(FrameContainerStart.x
                                         + i * FrameContainerOffset,
                                         FrameContainerStart.y);
+  }
+
+  if(bossID != 0)
+  {
+    // TODO Boss Arrangement
+    return;
+  }
+
+  VecVec& positions = (_enemies.size() == 3) ? _threeLayout : _fourLayout;
+  for(size_t i = 0; i < _enemies.size(); ++i)
+  {
+    _enemies[i]._charFrame.SetBattleSpritePosition(positions[i]);
   }
 }
 }

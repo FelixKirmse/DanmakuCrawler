@@ -53,7 +53,7 @@ void Game::Run(int ups)
       ++updateCounter;
     }
 
-    _graphics.clear(sf::Color::Cyan);
+    _graphics.clear(sf::Color::Black);
     float interpolation = float(GetTicks() + skipTicks - nextGameTick)
         - float(skipTicks);
     Draw(interpolation, _graphics);

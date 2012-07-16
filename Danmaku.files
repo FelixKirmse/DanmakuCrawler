@@ -76,5 +76,5 @@ src/Danmaku/Managers/Party.cpp
 src/Danmaku/Spells/Spells.cpp
 src/Headers/Danmaku/BattleMenu.h
 src/Danmaku/Menus/BattleMenu.cpp
-src/Headers/Danmaku/CharFrame.h
-src/Danmaku/Entities/CharFrame.cpp
+src/Headers/Danmaku/CharGraphics.h
+src/Danmaku/Entities/CharGraphics.cpp

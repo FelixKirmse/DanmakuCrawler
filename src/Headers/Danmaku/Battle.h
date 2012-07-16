@@ -14,6 +14,7 @@ class Battle : public BlackDragonEngine::IUpdateableGameState,
   friend class Danmaku::BattleMenu;
 public:
   typedef std::vector<Character> CharVec;
+  typedef std::vector<sf::Vector2f> VecVec;
 
   Battle();
   bool UpdateCondition();
@@ -30,7 +31,7 @@ private:
   void IdleDraw(sf::RenderTarget& renderTarget);
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
 
-  void ArrangeCharFrames();
+  void ArrangeCharFrames(int bossID);
 
   enum BattleStates
   {
@@ -58,6 +59,9 @@ private:
 
   sf::Vector2f const FrameContainerStart = sf::Vector2f(200.f, 370.f);
   size_t FrameContainerOffset = 110;
+
+  VecVec _threeLayout;
+  VecVec _fourLayout;
 
   static Battle* _currentInstance;
 };
