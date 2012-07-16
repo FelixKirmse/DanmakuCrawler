@@ -7,12 +7,13 @@ namespace Danmaku
 
 using namespace BlackDragonEngine;
 Character::Character()
-  : Character("Default")
+  : Character("Reimu")
 {
 }
 
 Character::Character(sf::String name)
-  : _name(name), _stats(), _turnCounter(0), _spellList(), _currentHP(0)
+  : _name(name), _stats(), _turnCounter(0), _spellList(), _currentHP(0),
+    _currentMP(0), _charFrame()
 {
   // TODO Stat Generation
   _stats.HP[0] = 5000.f;
@@ -26,7 +27,7 @@ Character::Character(sf::String name)
 
 void Character::InitializeCharFrame()
 {
-  _charFrame = CharFrame(sf::Vector2f(0.f, 0.f), _name, this);
+  _charFrame = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
 }
 
 bool Character::UpdateTurnCounter()

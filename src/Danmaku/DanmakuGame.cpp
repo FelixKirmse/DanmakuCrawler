@@ -30,19 +30,9 @@ void DanmakuGame::LoadContent()
   TextureProvider::Get("OverworldPlayer")
       .loadFromFile("content/textures/entities/overworldplayer.png");
 
-  TextureProvider::Get("PlaceHolderPortrait")
-      .loadFromFile("content/textures/charportraits/placeholder.png");
-
-  using namespace boost::filesystem3;
-  path p("content/textures/charportraits");
-  directory_iterator end_iter;
-  for(directory_iterator i(p); i != end_iter; ++i)
-  {
-    if(is_directory(i->path()))
-      continue;
-    TextureProvider::Get(i->path().stem().native())
-        .loadFromFile(i->path().native());
-  }
+  LoadTexturesFromDir("content/textures/charportraits", "Portrait");
+  LoadTexturesFromDir("content/textures/charsprites", "CharSprite");
+  LoadTexturesFromDir("content/textures/battlesprites", "BattleSprite");
 
   int const tileWidth = 64;
   int const tileHeight = 64;
@@ -91,4 +81,20 @@ void DanmakuGame::Initialize()
   Input::RightKeys = { Keyboard::Right, Keyboard::D };
   Input::JumpKeys = { Keyboard::Space };
 }
+
+void DanmakuGame::LoadTexturesFromDir(sf::String const& dir,
+                                      sf::String const& suffix)
+{
+  using namespace boost::filesystem3;
+  path texturePath(dir);
+  directory_iterator end_iter;
+  for(directory_iterator i(texturePath); i != end_iter; ++i)
+  {
+    if(is_directory(i->path()))
+      continue;
+    TextureProvider::Get(i->path().stem().native() + suffix)
+        .loadFromFile(i->path().native());
+  }
+}
+
 }

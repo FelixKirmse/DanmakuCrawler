@@ -4,7 +4,7 @@
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
 #include "Danmaku/Stats.h"
-#include "Danmaku/CharFrame.h"
+#include "Danmaku/CharGraphics.h"
 
 namespace Danmaku
 {
@@ -27,7 +27,7 @@ struct TargetInfo
 class Character
 {
 public:
-  friend class CharFrame;
+  friend class CharGraphics;
   friend class Battle;
   typedef std::vector<ISpell*> SpellList;
   typedef std::vector<Character> CharVec;
@@ -50,7 +50,7 @@ private:
   SpellList _spellList;
   float _currentHP;
   float _currentMP;
-  CharFrame _charFrame;
+  CharGraphics _charFrame;
 
   int const TimeToAction = 300;
 };

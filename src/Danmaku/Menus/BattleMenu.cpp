@@ -15,7 +15,7 @@ BattleMenu::BattleMenu(Battle& battle)
   MenuItems.push_back(MenuItem(Switch));
   MenuItems.push_back(MenuItem(Convince));
   EnableMouseSelection = false;
-  SetPositions(sf::Vector2f(10.f, 400.f), false);
+  SetPositions(sf::Vector2f(10.f, 408.f), false);
 }
 
 void BattleMenu::Update()
