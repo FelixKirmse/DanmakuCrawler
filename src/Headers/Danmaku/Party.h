@@ -9,13 +9,17 @@ class Party
 public:
   typedef std::vector<Character> CharVec;
 
+  Party();
+
   static CharVec& GetFrontRow();
   static CharVec& GetBackSeat();
   static CharVec& GetAvailableCharacters();
 
 private:
-  static CharVec _frontRow;
-  static CharVec _battleBackSeat;
-  static CharVec _availableCharacters;
+  CharVec _frontRow;
+  CharVec _battleBackSeat;
+  CharVec _availableCharacters;
+
+  static Party* _instance;
 };
 }

@@ -2,22 +2,27 @@
 
 namespace Danmaku
 {
-Party::CharVec Party::_frontRow;
-Party::CharVec Party::_battleBackSeat;
-Party::CharVec Party::_availableCharacters;
+
+Party* Party::_instance;
+
+Party::Party()
+  : _frontRow(), _battleBackSeat(), _availableCharacters()
+{
+  _instance = this;
+}
 
 Party::CharVec& Party::GetFrontRow()
 {
-  return _frontRow;
+  return _instance->_frontRow;
 }
 
 Party::CharVec& Party::GetBackSeat()
 {
-  return _battleBackSeat;
+  return _instance->_battleBackSeat;
 }
 
 Party::CharVec& Party::GetAvailableCharacters()
 {
-  return _availableCharacters;
+  return _instance->_availableCharacters;
 }
 }
