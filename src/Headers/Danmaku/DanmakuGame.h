@@ -6,6 +6,7 @@
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/TileCode.h"
 #include "Danmaku/MapCell.h"
+#include "Danmaku/Party.h"
 
 namespace Danmaku
 {
@@ -33,5 +34,6 @@ private:
 
   GameStateManager _stateManager;
   MapPtr _tileMap;
+  Party _party;
 };
 }

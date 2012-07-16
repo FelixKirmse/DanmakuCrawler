@@ -12,7 +12,8 @@ namespace Danmaku
 DanmakuGame::DanmakuGame()
   : Game("Danmaku",
          sf::VideoMode(ResolutionWidth, ResolutionHeight),
-         sf::Style::Titlebar | sf::Style::Close)
+         sf::Style::Titlebar | sf::Style::Close),
+    _party()
 {
 }
 

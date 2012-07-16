@@ -69,6 +69,7 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
     break;
   case BattleMenu:   
     Draw(renderTarget);
+    _battleMenu.Draw(renderTarget);
     break;
   case Action:
     break;
@@ -259,9 +260,7 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _playerRow[i]._charFrame.Draw(renderTarget);
-  }
-
-  _battleMenu.Draw(renderTarget);
+  }  
 }
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
