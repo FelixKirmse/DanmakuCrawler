@@ -1,5 +1,6 @@
 #include "Danmaku/BattleMenu.h"
 #include "Danmaku/Battle.h"
+#include "Danmaku/GameStateManager.h"
 
 namespace Danmaku
 {
@@ -67,6 +68,12 @@ void BattleMenu::SelectMenuItem()
   sf::String const& selectedItem = SelectedItem();
   if(selectedItem == Attack)
     _battle._battleState = Battle::Idle;
+
+  if(selectedItem == Convince)
+  {
+    _battle._battleState = Battle::Idle;
+    GameStateManager::SetState(GameStates::Ingame);
+  }
 }
 
 }

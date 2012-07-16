@@ -28,10 +28,11 @@ private:
   void IdleUpdate();
   void ConsequenceUpdate();
 
-  void IdleDraw(sf::RenderTarget& renderTarget);
+  void Draw(sf::RenderTarget& renderTarget);
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
 
   void ArrangeCharFrames(int bossID);
+  void SetInitialSPD(CharVec& vec);
 
   enum BattleStates
   {

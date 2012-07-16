@@ -21,10 +21,10 @@ Battle::Battle()
   _threeLayout.push_back(sf::Vector2f(450.f, 255.f));
   _threeLayout.push_back(sf::Vector2f(625.f, 310.f));
 
-  _fourLayout.push_back(sf::Vector2f(260.f, 305.f));
+  _fourLayout.push_back(sf::Vector2f(230.f, 305.f));
   _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
-  _fourLayout.push_back(sf::Vector2f(530.f, 275.f));
-  _fourLayout.push_back(sf::Vector2f(625.f, 310.f));
+  _fourLayout.push_back(sf::Vector2f(480.f, 275.f));
+  _fourLayout.push_back(sf::Vector2f(650.f, 350.f));
 }
 
 bool Battle::UpdateCondition()
@@ -65,10 +65,10 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
   switch(_battleState)
   {
   case Idle:
-    IdleDraw(renderTarget);
+    Draw(renderTarget);
     break;
   case BattleMenu:   
-    IdleDraw(renderTarget);
+    Draw(renderTarget);
     break;
   case Action:
     break;
@@ -88,25 +88,40 @@ void Battle::StartBattle(int level, int bossID)
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
   _currentInstance->_playerRow.clear();
+  _currentInstance->_enemies.push_back(Character("Enemy0"));
   _currentInstance->_enemies.push_back(Character("Enemy1"));
-  _currentInstance->_enemies.push_back(Character("Enemy2"));
-  _currentInstance->_enemies.push_back(Character("Enemy3"));
-  _currentInstance->_enemies.push_back(Character("Enemy8"));
+  _currentInstance->_enemies.push_back(Character("Enemy6"));
+  _currentInstance->_enemies.push_back(Character("Enemy7"));
+  _currentInstance->_enemies[0].GetStats().SPD[0] = 118.f;
   _currentInstance->_enemies[0].InitializeCharFrame();
+  _currentInstance->_enemies[0]._charFrame.UpdateHP();
+  _currentInstance->_enemies[0]._charFrame.UpdateMP();
+
+  _currentInstance->_enemies[1].GetStats().SPD[0] = 108.f;
   _currentInstance->_enemies[1].InitializeCharFrame();
+  _currentInstance->_enemies[1]._charFrame.UpdateHP();
+  _currentInstance->_enemies[1]._charFrame.UpdateMP();
+
+  _currentInstance->_enemies[2].GetStats().SPD[0] = 120.f;
   _currentInstance->_enemies[2].InitializeCharFrame();
+  _currentInstance->_enemies[2]._charFrame.UpdateHP();
+  _currentInstance->_enemies[2]._charFrame.UpdateMP();
+
+  _currentInstance->_enemies[3].GetStats().SPD[0] = 115.f;
   _currentInstance->_enemies[3].InitializeCharFrame();
+  _currentInstance->_enemies[3]._charFrame.UpdateHP();
+  _currentInstance->_enemies[3]._charFrame.UpdateMP();
 
   _currentInstance->_playerRow.push_back(Character("Youmu"));
-  _currentInstance->_playerRow.push_back(Character("Enemy5"));
-  _currentInstance->_playerRow.push_back(Character("Minoriko"));
-  _currentInstance->_playerRow.push_back(Character("Marisa"));
-  _currentInstance->_playerRow[0].GetStats().SPD[0] = 125.f;
+  _currentInstance->_playerRow.push_back(Character("Mokou"));
+  _currentInstance->_playerRow.push_back(Character("Mystia"));
+  _currentInstance->_playerRow.push_back(Character("Alice"));
+  _currentInstance->_playerRow[0].GetStats().SPD[0] = 100.f;
   _currentInstance->_playerRow[0].InitializeCharFrame();
   _currentInstance->_playerRow[0]._charFrame.UpdateHP();
   _currentInstance->_playerRow[0]._charFrame.UpdateMP();
 
-  _currentInstance->_playerRow[1].GetStats().SPD[0] = 105.f;
+  _currentInstance->_playerRow[1].GetStats().SPD[0] = 122.f;
   _currentInstance->_playerRow[1].InitializeCharFrame();
   _currentInstance->_playerRow[1]._charFrame.UpdateHP();
   _currentInstance->_playerRow[1]._charFrame.UpdateMP();
@@ -121,11 +136,27 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_playerRow[3]._charFrame.UpdateHP();
   _currentInstance->_playerRow[3]._charFrame.UpdateMP();
 
-  _currentInstance->ArrangeCharFrames();
+  _currentInstance->SetInitialSPD(_currentInstance->_enemies);
+  _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
+  _currentInstance->ArrangeCharFrames(bossID);
 }
 
 void Battle::IdleUpdate()
 {
+  for(size_t i = _playerLeftOff; i < _playerRow.size(); ++i)
+  {
+    if(_playerRow[i].UpdateTurnCounter())
+    {
+      _battleState = BattleMenu;
+      _playerLeftOff = i;
+      _currentAttacker = &_playerRow[i];
+      return;
+    }
+  }
+
+  _playerLeftOff = 0;
+
+
   for(size_t i = _enemyLeftOff; i < _enemies.size(); ++i)
   {
     if(_enemies[i].UpdateTurnCounter())
@@ -142,20 +173,7 @@ void Battle::IdleUpdate()
     }
   }
 
-  _enemyLeftOff = 0;
-
-  for(size_t i = _playerLeftOff; i < _playerRow.size(); ++i)
-  {    
-    if(_playerRow[i].UpdateTurnCounter())
-    {
-      _battleState = BattleMenu;
-      _playerLeftOff = i;
-      _currentAttacker = &_playerRow[i];
-      return;
-    }
-  }
-
-  _playerLeftOff = 0;
+  _enemyLeftOff = 0;  
 }
 
 
@@ -215,12 +233,20 @@ void Battle::ConsequenceUpdate()
 }
 
 
-void Battle::IdleDraw(sf::RenderTarget& renderTarget)
+void Battle::Draw(sf::RenderTarget& renderTarget)
 {
-  // Draw backwards for nice layering
-  for(size_t i = _enemies.size() - 1; i != static_cast<size_t>(-1); --i)
+  if(_enemies.size() == 4)
   {
-    _enemies[i]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[2]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[0]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[1]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[3]._charFrame.DrawBattleSprite(renderTarget);
+  }
+  else
+  {
+    _enemies[1]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[0]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[3]._charFrame.DrawBattleSprite(renderTarget);
   }
 
   // CharSprite infront of enemies, but behind CharFrames
@@ -240,7 +266,7 @@ void Battle::IdleDraw(sf::RenderTarget& renderTarget)
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
 {
-  IdleDraw(renderTarget);
+  Draw(renderTarget);
 }
 
 
@@ -265,4 +291,13 @@ void Battle::ArrangeCharFrames(int bossID)
     _enemies[i]._charFrame.SetBattleSpritePosition(positions[i]);
   }
 }
+
+void Battle::SetInitialSPD(CharVec& vec)
+{
+  for(size_t i = 0; i < vec.size(); ++i)
+  {
+    vec[i]._turnCounter = vec[i].GetStats().SPD[0];
+  }
+}
+
 }

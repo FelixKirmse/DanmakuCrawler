@@ -172,13 +172,13 @@ void CharGraphics::Draw(sf::RenderTarget& rTarget)
   rTarget.draw(_mpValue);  
 }
 
-void CharGraphics::UpdateSPD()
+void CharGraphics::UpdateSPD(bool myTurn)
 {
   float scaleFactor = (float)_owner->_turnCounter/_owner->TimeToAction;
-  if(scaleFactor == 0.f)
+  if(myTurn)
     scaleFactor = 1.f;
 
-  _myTurn = scaleFactor == 1.f;
+  _myTurn = myTurn;
   sf::Vector2f size(_spdBackgrnd.getSize().x * scaleFactor, _spdBar.getSize().y);
   _spdBar.setSize(size);
   _spdBar.setFillColor((_myTurn) ? FullSPDBar : NormalSPDBar);
