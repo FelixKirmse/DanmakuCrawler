@@ -14,7 +14,8 @@ Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
-    _battleMenu(*this), _threeLayout(), _fourLayout()
+    _battleMenu(*this), _threeLayout(), _fourLayout(), _charHPStep(),
+    _charHPShouldHave()
 {
   _currentInstance = this;
   _threeLayout.push_back(sf::Vector2f(260.f, 305.f));
@@ -67,7 +68,7 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
   case Idle:
     Draw(renderTarget);
     break;
-  case BattleMenu:   
+  case BattleMenu:
     Draw(renderTarget);
     _battleMenu.Draw(renderTarget);
     break;
@@ -103,7 +104,7 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_enemies[1].Graphics().UpdateHP();
   _currentInstance->_enemies[1].Graphics().UpdateMP();
 
-  _currentInstance->_enemies[2].GetStats().SPD[0] = 120.f;
+  _currentInstance->_enemies[2].GetStats().SPD[0] = 290.f;
   _currentInstance->_enemies[2].InitializeCharFrame();
   _currentInstance->_enemies[2].Graphics().UpdateHP();
   _currentInstance->_enemies[2].Graphics().UpdateMP();
@@ -174,7 +175,7 @@ void Battle::IdleUpdate()
     }
   }
 
-  _enemyLeftOff = 0;  
+  _enemyLeftOff = 0;
 }
 
 
@@ -192,10 +193,30 @@ void Battle::ConsequenceUpdate()
       _battleState = Idle;
       GameStateManager::SetState(GameStates::Ingame);
     }
+
+    for(size_t i = 0; i < _playerRow.size(); ++i)
+    {
+      _playerRow[i].CurrentHP() = _charHPShouldHave[i];
+      _playerRow[i].Graphics().UpdateHP();
+    }
     return;
   }
+
   if(_frameCounter > 1)
+  {
+    for(size_t i = 0; i < _playerRow.size(); ++i)
+    {
+      _playerRow[i].CurrentHP() -= _charHPStep[i];
+      _playerRow[i].Graphics().UpdateHP();
+    }
     return;
+  }
+
+  float charHPBefore[4];
+  for(size_t i = 0; i < _playerRow.size(); ++i)
+  {
+    charHPBefore[i] = _playerRow[i].CurrentHP();
+  }
 
   if(_targetInfo.TargetType == TargetInfo::Single)
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
@@ -231,6 +252,17 @@ void Battle::ConsequenceUpdate()
                                            affectedParty[i], mod);
     }
   }
+
+  _charHPStep.clear();
+  _charHPShouldHave.clear();
+  for(size_t i = 0; i < _playerRow.size(); ++i)
+  {
+    _charHPShouldHave.push_back(_playerRow[i].CurrentHP());
+    _charHPStep.push_back((charHPBefore[i] - _playerRow[i].CurrentHP()) / 45.f);
+    _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
+    _playerRow[i].Graphics().UpdateHP();
+    _playerRow[i].Graphics().UpdateMP();
+  }
 }
 
 
@@ -260,7 +292,7 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _playerRow[i].Graphics().Draw(renderTarget);
-  }  
+  }
 }
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)

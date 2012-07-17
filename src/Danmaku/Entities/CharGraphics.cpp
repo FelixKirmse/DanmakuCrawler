@@ -66,7 +66,8 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
   _hpBackgrnd.setOutlineColor(Color(190u, 190u, 190u));
   _hpBackgrnd.setOutlineThickness(1.f);
 
-  _hpBar.setFillColor(Color(181u, 212u, 149u));
+  //_hpBar.setFillColor(Color(181u, 212u, 149u));
+  _hpBar.setFillColor(Color(0u, 255u, 0u));
   _hpBar.setOutlineColor(Color(148u, 177u, 117u));
   _hpBar.setOutlineThickness(1.f);
 
@@ -137,6 +138,14 @@ void CharGraphics::UpdateHP()
   sf::Vector2f size(_hpBackgrnd.getSize().x * scaleFactor, _hpBar.getSize().y);
   _hpBar.setSize(size);
 
+  sf::Color hpColor = _hpBar.getFillColor();
+  // Wenn über 50% increase red, wenn unter 50% decrease blue
+  unsigned int red = (scaleFactor > .5f) ? 255u - (scaleFactor * 2 * 255u) :
+                                           255u;
+  unsigned int green = (scaleFactor < .5f) ? 255u * scaleFactor * 2 : 255u;
+  hpColor.r = red;
+  hpColor.g = green;
+  _hpBar.setFillColor(hpColor);
 }
 
 void CharGraphics::UpdateMP()
