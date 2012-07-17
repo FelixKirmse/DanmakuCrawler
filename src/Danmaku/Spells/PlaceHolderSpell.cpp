@@ -14,6 +14,6 @@ void PlaceHolderSpell::DamageCalculation(Character& player,
                                          Character& enemy,
                                          float specialModifier)
 {
-  enemy.GetCurrentHP() -= 500.f;
+  enemy.CurrentHP() -= 500.f;
 }
 }

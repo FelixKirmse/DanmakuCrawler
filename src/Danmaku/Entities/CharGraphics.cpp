@@ -25,10 +25,10 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _mpBackgrnd(sf::Vector2f(90.f,10.f)), _mpBar(sf::Vector2f(90.f,10.f)),
     _hp("HP", FontProvider::Get("Vera"), 8u),
     _mp("MP", FontProvider::Get("Vera"), 8u),
-    _hpValue(to_string((int)owner->_currentHP) + " / "
+    _hpValue(to_string((int)owner->CurrentHP()) + " / "
              + to_string((int)owner->GetStats().GetTotalHP()),
              FontProvider::Get("Vera"), 8u),
-    _mpValue(to_string((int)owner->_currentMP) + " / "
+    _mpValue(to_string((int)owner->CurrentMP()) + " / "
              + to_string((int)owner->GetStats().GetTotalMP()),
              FontProvider::Get("Vera"), 8u),
     _charSprite(TextureProvider::Get(charName + "CharSprite")),
@@ -128,7 +128,7 @@ void CharGraphics::Reposition(sf::Vector2f newOffset)
 
 void CharGraphics::UpdateHP()
 {
-  int currentHP = (int)_owner->_currentHP;
+  int currentHP = (int)_owner->CurrentHP();
   int maxHP = (int)_owner->GetStats().GetTotalHP();
 
   _hpValue.setString(to_string(currentHP) + " / " + to_string(maxHP));
@@ -141,7 +141,7 @@ void CharGraphics::UpdateHP()
 
 void CharGraphics::UpdateMP()
 {
-  int currentMP = (int)_owner->_currentMP;
+  int currentMP = (int)_owner->CurrentMP();
   int maxMP = (int)_owner->GetStats().GetTotalMP();
 
   _mpValue.setString(to_string(currentMP) + " / " + to_string(maxMP));
@@ -174,7 +174,7 @@ void CharGraphics::Draw(sf::RenderTarget& rTarget)
 
 void CharGraphics::UpdateSPD(bool myTurn)
 {
-  float scaleFactor = (float)_owner->_turnCounter/_owner->TimeToAction;
+  float scaleFactor = (float)_owner->TurnCounter()/_owner->TimeToAction;
   if(myTurn)
     scaleFactor = 1.f;
 

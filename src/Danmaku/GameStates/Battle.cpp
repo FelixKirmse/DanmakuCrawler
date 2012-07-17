@@ -95,23 +95,23 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_enemies.push_back(Character("Enemy7"));
   _currentInstance->_enemies[0].GetStats().SPD[0] = 118.f;
   _currentInstance->_enemies[0].InitializeCharFrame();
-  _currentInstance->_enemies[0]._charFrame.UpdateHP();
-  _currentInstance->_enemies[0]._charFrame.UpdateMP();
+  _currentInstance->_enemies[0].Graphics().UpdateHP();
+  _currentInstance->_enemies[0].Graphics().UpdateMP();
 
   _currentInstance->_enemies[1].GetStats().SPD[0] = 108.f;
   _currentInstance->_enemies[1].InitializeCharFrame();
-  _currentInstance->_enemies[1]._charFrame.UpdateHP();
-  _currentInstance->_enemies[1]._charFrame.UpdateMP();
+  _currentInstance->_enemies[1].Graphics().UpdateHP();
+  _currentInstance->_enemies[1].Graphics().UpdateMP();
 
   _currentInstance->_enemies[2].GetStats().SPD[0] = 120.f;
   _currentInstance->_enemies[2].InitializeCharFrame();
-  _currentInstance->_enemies[2]._charFrame.UpdateHP();
-  _currentInstance->_enemies[2]._charFrame.UpdateMP();
+  _currentInstance->_enemies[2].Graphics().UpdateHP();
+  _currentInstance->_enemies[2].Graphics().UpdateMP();
 
   _currentInstance->_enemies[3].GetStats().SPD[0] = 115.f;
   _currentInstance->_enemies[3].InitializeCharFrame();
-  _currentInstance->_enemies[3]._charFrame.UpdateHP();
-  _currentInstance->_enemies[3]._charFrame.UpdateMP();
+  _currentInstance->_enemies[3].Graphics().UpdateHP();
+  _currentInstance->_enemies[3].Graphics().UpdateMP();
 
   _currentInstance->_playerRow.push_back(Character("Youmu"));
   _currentInstance->_playerRow.push_back(Character("Mokou"));
@@ -119,23 +119,23 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_playerRow.push_back(Character("Alice"));
   _currentInstance->_playerRow[0].GetStats().SPD[0] = 100.f;
   _currentInstance->_playerRow[0].InitializeCharFrame();
-  _currentInstance->_playerRow[0]._charFrame.UpdateHP();
-  _currentInstance->_playerRow[0]._charFrame.UpdateMP();
+  _currentInstance->_playerRow[0].Graphics().UpdateHP();
+  _currentInstance->_playerRow[0].Graphics().UpdateMP();
 
   _currentInstance->_playerRow[1].GetStats().SPD[0] = 122.f;
   _currentInstance->_playerRow[1].InitializeCharFrame();
-  _currentInstance->_playerRow[1]._charFrame.UpdateHP();
-  _currentInstance->_playerRow[1]._charFrame.UpdateMP();
+  _currentInstance->_playerRow[1].Graphics().UpdateHP();
+  _currentInstance->_playerRow[1].Graphics().UpdateMP();
 
   _currentInstance->_playerRow[2].GetStats().SPD[0] = 130.f;
   _currentInstance->_playerRow[2].InitializeCharFrame();
-  _currentInstance->_playerRow[2]._charFrame.UpdateHP();
-  _currentInstance->_playerRow[2]._charFrame.UpdateMP();
+  _currentInstance->_playerRow[2].Graphics().UpdateHP();
+  _currentInstance->_playerRow[2].Graphics().UpdateMP();
 
   _currentInstance->_playerRow[3].GetStats().SPD[0] = 115.f;
   _currentInstance->_playerRow[3].InitializeCharFrame();
-  _currentInstance->_playerRow[3]._charFrame.UpdateHP();
-  _currentInstance->_playerRow[3]._charFrame.UpdateMP();
+  _currentInstance->_playerRow[3].Graphics().UpdateHP();
+  _currentInstance->_playerRow[3].Graphics().UpdateMP();
 
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
@@ -187,7 +187,7 @@ void Battle::ConsequenceUpdate()
     _frameCounter = 0;
 
     // TODO Remove if after testing
-    if(_enemies[0]._currentHP <= 0.f)
+    if(_enemies[0].CurrentHP() <= 0.f)
     {
       _battleState = Idle;
       GameStateManager::SetState(GameStates::Ingame);
@@ -238,28 +238,28 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
 {
   if(_enemies.size() == 4)
   {
-    _enemies[2]._charFrame.DrawBattleSprite(renderTarget);
-    _enemies[0]._charFrame.DrawBattleSprite(renderTarget);
-    _enemies[1]._charFrame.DrawBattleSprite(renderTarget);
-    _enemies[3]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[2].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[0].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[1].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[3].Graphics().DrawBattleSprite(renderTarget);
   }
   else
   {
-    _enemies[1]._charFrame.DrawBattleSprite(renderTarget);
-    _enemies[0]._charFrame.DrawBattleSprite(renderTarget);
-    _enemies[3]._charFrame.DrawBattleSprite(renderTarget);
+    _enemies[1].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[0].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[3].Graphics().DrawBattleSprite(renderTarget);
   }
 
   // CharSprite infront of enemies, but behind CharFrames
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
-    _playerRow[i]._charFrame.DrawCharSprite(renderTarget);
+    _playerRow[i].Graphics().DrawCharSprite(renderTarget);
   }
 
   // CharFrames ontop
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
-    _playerRow[i]._charFrame.Draw(renderTarget);
+    _playerRow[i].Graphics().Draw(renderTarget);
   }  
 }
 
@@ -273,7 +273,7 @@ void Battle::ArrangeCharFrames(int bossID)
 {
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
-    _playerRow[i]._charFrame.Reposition(FrameContainerStart.x
+    _playerRow[i].Graphics().Reposition(FrameContainerStart.x
                                         + i * FrameContainerOffset,
                                         FrameContainerStart.y);
   }
@@ -287,7 +287,7 @@ void Battle::ArrangeCharFrames(int bossID)
   VecVec& positions = (_enemies.size() == 3) ? _threeLayout : _fourLayout;
   for(size_t i = 0; i < _enemies.size(); ++i)
   {
-    _enemies[i]._charFrame.SetBattleSpritePosition(positions[i]);
+    _enemies[i].Graphics().SetBattleSpritePosition(positions[i]);
   }
 }
 
@@ -295,7 +295,7 @@ void Battle::SetInitialSPD(CharVec& vec)
 {
   for(size_t i = 0; i < vec.size(); ++i)
   {
-    vec[i]._turnCounter = vec[i].GetStats().SPD[0];
+    vec[i].TurnCounter() = vec[i].GetStats().SPD[0];
   }
 }
 
