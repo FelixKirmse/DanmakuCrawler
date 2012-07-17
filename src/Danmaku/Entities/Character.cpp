@@ -1,12 +1,13 @@
 #include <ctime>
 #include <limits>
-#include <boost/random.hpp>
 #include "Danmaku/Character.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
 
 namespace Danmaku
 {
+
+Character::RandomSeed Character::_rng(time(0));
 
 using namespace BlackDragonEngine;
 Character::Character()
@@ -19,7 +20,7 @@ Character::Character(sf::String name)
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
                    GetRandomName() : name),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
-    _currentMP(0), _charFrame()
+    _currentMP(0), _charFrame(), _dead(false)
 {
   // TODO Stat Generation
   _stats.HP[0] = 5000.f;
@@ -80,27 +81,50 @@ sf::String const& Character::GetDisplayName()
   return _displayName;
 }
 
+bool Character::IsDead()
+{
+  return _dead;
+}
+
 TargetInfo Character::AIBattleMenu(CharVec& targetRow)
 {
-  // TODO Actual AI code
   TargetInfo targetInfo;
-  targetInfo.TargetType = TargetInfo::Single;
-  targetInfo.Target = &targetRow[0];
+
+  // TODO Actual Spell Selection code
   targetInfo.Spell = _spellList[0];
+  targetInfo.TargetType = targetInfo.Spell->GetTargetType();
+  targetInfo.Target = NULL;
+
+  if(targetInfo.TargetType == TargetInfo::All)
+    return targetInfo;
+
+  typedef boost::random::uniform_int_distribution<> IntGenerator;
+  IntGenerator targetSelect(0,99);
+
+  do
+  {
+    int target = targetSelect(_rng);
+    /* 60% to attack main tank
+     * 30% to attack secondary tank
+     * 5% each to attack back row
+     */
+    targetInfo.Target = &targetRow[(target < 60) ?
+          0 : (target < 90) ?
+            1 : (target < 95) ?
+              2 : 3];
+  }while(targetInfo.Target->IsDead());
+
   return targetInfo;
 }
 
 sf::String Character::GetRandomName()
 {
   typedef boost::random::uniform_int_distribution<> IntGenerator;
-  typedef boost::random::mt19937 RandomSeed;
   using namespace std;
-
-  RandomSeed rng(time(0));
   IntGenerator generator(1,16953);
 
   fstream nameFile("content/etc/CatNames.txt");
-  GoToLine(nameFile, generator(rng));
+  GoToLine(nameFile, generator(_rng));
 
   string stdName;
   nameFile >> stdName;

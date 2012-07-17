@@ -11,5 +11,6 @@ public:
   void DamageCalculation(Character& attacker,
                          Character& defender,
                          float specialModifier = 0.f);
+  TargetInfo::TargetTypes GetTargetType();
 };
 }

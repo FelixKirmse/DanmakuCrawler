@@ -15,6 +15,7 @@ class Battle : public BlackDragonEngine::IUpdateableGameState,
 public:
   typedef std::vector<Character> CharVec;
   typedef std::vector<sf::Vector2f> VecVec;
+  typedef std::vector<float> FloatVec;
 
   Battle();
   bool UpdateCondition();
@@ -63,6 +64,9 @@ private:
 
   VecVec _threeLayout;
   VecVec _fourLayout;
+
+  FloatVec _charHPStep;
+  FloatVec _charHPShouldHave;
 
   static Battle* _currentInstance;
 };

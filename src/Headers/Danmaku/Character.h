@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <memory>
+#include <boost/random.hpp>
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
 #include "Danmaku/Stats.h"
@@ -15,7 +16,7 @@ class Battle;
 
 struct TargetInfo
 {
-  enum TargetType
+  enum TargetTypes
   {
     Single,
     All,
@@ -30,6 +31,7 @@ class Character
 public:  
   typedef std::vector<ISpell*> SpellList;
   typedef std::vector<Character> CharVec;
+  typedef boost::random::mt19937 RandomSeed;
 
   Character();
   Character(sf::String name);
@@ -42,6 +44,7 @@ public:
   CharGraphics& Graphics();
   int& TurnCounter();
   sf::String const& GetDisplayName();
+  bool IsDead();
 
   TargetInfo AIBattleMenu(CharVec& targetRow);
 
@@ -59,5 +62,8 @@ private:
   float _currentHP;
   float _currentMP;
   CharGraphics _charFrame;
+  bool _dead;
+
+  static RandomSeed _rng;
 };
 }
