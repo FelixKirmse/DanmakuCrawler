@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include <vector>
 #include <memory>
 #include "SFML/System.hpp"
@@ -26,9 +27,7 @@ struct TargetInfo
 
 class Character
 {
-public:
-  friend class CharGraphics;
-  friend class Battle;
+public:  
   typedef std::vector<ISpell*> SpellList;
   typedef std::vector<Character> CharVec;
 
@@ -37,21 +36,28 @@ public:
 
   void InitializeCharFrame();
   bool UpdateTurnCounter();
-  float& GetCurrentHP();
-  float& GetCurrentMP();
+  float& CurrentHP();
+  float& CurrentMP();
   Stats& GetStats();
+  CharGraphics& Graphics();
+  int& TurnCounter();
+  sf::String const& GetDisplayName();
 
   TargetInfo AIBattleMenu(CharVec& targetRow);
 
+  int const TimeToAction = 300;
+
 private:
-  sf::String _name;  
+  sf::String GetRandomName();
+  void GoToLine(std::fstream& file, size_t num);
+
+  sf::String _name;
+  sf::String _displayName;
   Stats _stats;
   int _turnCounter;
   SpellList _spellList;
   float _currentHP;
   float _currentMP;
   CharGraphics _charFrame;
-
-  int const TimeToAction = 300;
 };
 }
