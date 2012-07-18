@@ -12,14 +12,14 @@ void PlaceHolderSpell::CastUpdate()
 
 void PlaceHolderSpell::DamageCalculation(Character& attacker,
                                          Character& defender,
-                                         float specialModifier)
+                                         float mod)
 {
-  defender.CurrentHP() -= 2500.f;
+  defender.CurrentHP() -= 1000.f * 1/mod;
 }
 
 TargetInfo::TargetTypes PlaceHolderSpell::GetTargetType()
 {
-  return TargetInfo::Single;
+  return TargetInfo::All;
 }
 
 }

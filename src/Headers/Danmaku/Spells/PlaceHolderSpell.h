@@ -10,7 +10,7 @@ public:
   void CastUpdate();
   void DamageCalculation(Character& attacker,
                          Character& defender,
-                         float specialModifier = 0.f);
+                         float mod = 1.f);
   TargetInfo::TargetTypes GetTargetType();
 };
 }

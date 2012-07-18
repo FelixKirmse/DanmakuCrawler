@@ -104,7 +104,7 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_enemies[1].Graphics().UpdateHP();
   _currentInstance->_enemies[1].Graphics().UpdateMP();
 
-  _currentInstance->_enemies[2].GetStats().SPD[0] = 290.f;
+  _currentInstance->_enemies[2].GetStats().SPD[0] = 160.f;
   _currentInstance->_enemies[2].InitializeCharFrame();
   _currentInstance->_enemies[2].Graphics().UpdateHP();
   _currentInstance->_enemies[2].Graphics().UpdateMP();
@@ -171,6 +171,7 @@ void Battle::IdleUpdate()
       //_battleState = Action;
       _enemyLeftOff = i;
       _currentAttacker = &_enemies[i];
+      _enemyTurn = true;
       return;
     }
   }
@@ -238,19 +239,21 @@ void Battle::ConsequenceUpdate()
     for(;attackerIndex < affectedParty.size() &&
         &affectedParty[attackerIndex] != _targetInfo.Target;
         ++attackerIndex); //This loop has no body intentionally!!!!
-    for(int i = attackerIndex - 1, mod = 1; attackerIndex >= 0; --i, ++mod)
+    for(int i = attackerIndex - 1, mod = 2; i >= 0; --i, ++mod)
     {
       _targetInfo.Spell->DamageCalculation(*_currentAttacker,
                                            affectedParty[i], mod);
     }
 
-    for(int i = attackerIndex + 1, mod = 1;
-        attackerIndex < affectedParty.size();
+    for(int i = attackerIndex + 1, mod = 2;
+        i < affectedParty.size();
         ++i, ++mod)
     {
       _targetInfo.Spell->DamageCalculation(*_currentAttacker,
                                            affectedParty[i], mod);
     }
+
+    _enemyTurn = false;
   }
 
   _charHPStep.clear();

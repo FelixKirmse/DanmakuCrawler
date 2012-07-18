@@ -11,7 +11,7 @@ public:
   virtual void CastUpdate() = 0;
   virtual void DamageCalculation(Character& attacker,
                                  Character& defender,
-                                 float specialModifier = 0.f) = 0;
+                                 float specialModifier = 1.f) = 0;
   virtual TargetInfo::TargetTypes GetTargetType() = 0;
 };
 }
