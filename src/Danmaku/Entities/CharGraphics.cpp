@@ -138,8 +138,8 @@ void CharGraphics::UpdateHP()
   sf::Vector2f size(_hpBackgrnd.getSize().x * scaleFactor, _hpBar.getSize().y);
   _hpBar.setSize(size);
 
+  // Smooth going from green to red
   sf::Color hpColor = _hpBar.getFillColor();
-  // Wenn über 50% increase red, wenn unter 50% decrease blue
   unsigned int red = (scaleFactor > .5f) ? 255u - (scaleFactor * 2 * 255u) :
                                            255u;
   unsigned int green = (scaleFactor < .5f) ? 255u * scaleFactor * 2 : 255u;

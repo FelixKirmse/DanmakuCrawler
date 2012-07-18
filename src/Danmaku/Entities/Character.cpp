@@ -23,7 +23,7 @@ Character::Character(sf::String name)
     _currentMP(0), _charFrame(), _dead(false)
 {
   // TODO Stat Generation
-  _stats.HP[0] = 5000.f;
+  _stats.HP[0] = 10000.f;
   _currentHP = _stats.HP[0];
   _currentMP = 147;
   _stats.MP[0] = 250;
