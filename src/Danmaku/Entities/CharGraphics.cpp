@@ -2,6 +2,7 @@
 #include <string>
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Character.h"
+#include "Danmaku/Stats.h"
 
 
 namespace Danmaku
@@ -26,10 +27,10 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _hp("HP", FontProvider::Get("Vera"), 8u),
     _mp("MP", FontProvider::Get("Vera"), 8u),
     _hpValue(to_string((int)owner->CurrentHP()) + " / "
-             + to_string((int)owner->GetStats().GetTotalHP()),
+             + to_string((int)owner->GetStats().GetTotalBaseStat(HP)),
              FontProvider::Get("Vera"), 8u),
     _mpValue(to_string((int)owner->CurrentMP()) + " / "
-             + to_string((int)owner->GetStats().GetTotalMP()),
+             + to_string((int)owner->GetStats().GetTotalBaseStat(MP)),
              FontProvider::Get("Vera"), 8u),
     _charSprite(TextureProvider::Get(charName + "CharSprite")),
     _battleSprite(TextureProvider::Get(charName + "BattleSprite")),
@@ -130,7 +131,7 @@ void CharGraphics::Reposition(sf::Vector2f newOffset)
 void CharGraphics::UpdateHP()
 {
   int currentHP = (int)_owner->CurrentHP();
-  int maxHP = (int)_owner->GetStats().GetTotalHP();
+  int maxHP = (int)_owner->GetStats().GetTotalBaseStat(HP);
 
   _hpValue.setString(to_string(currentHP) + " / " + to_string(maxHP));
 
@@ -151,7 +152,7 @@ void CharGraphics::UpdateHP()
 void CharGraphics::UpdateMP()
 {
   int currentMP = (int)_owner->CurrentMP();
-  int maxMP = (int)_owner->GetStats().GetTotalMP();
+  int maxMP = (int)_owner->GetStats().GetTotalBaseStat(MP);
 
   _mpValue.setString(to_string(currentMP) + " / " + to_string(maxMP));
 

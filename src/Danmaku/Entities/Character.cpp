@@ -23,11 +23,11 @@ Character::Character(sf::String name)
     _currentMP(0), _charFrame(), _dead(false)
 {
   // TODO Stat Generation
-  _stats.HP[0] = 10000.f;
-  _currentHP = _stats.HP[0];
+  _stats.BaseStats[HP][0] = 10000.f;
+  _currentHP = _stats.BaseStats[HP][0];
   _currentMP = 147;
-  _stats.MP[0] = 250;
-  _stats.SPD[0] = 100.f;
+  _stats.BaseStats[MP][0] = 250;
+  _stats.BaseStats[SPD][0] = 100.f;
   _spellList.push_back(&Spells::PlaceHolder);
 }
 
@@ -40,7 +40,7 @@ void Character::InitializeCharFrame()
 bool Character::UpdateTurnCounter()
 {
   bool result(false);
-  _turnCounter += _stats.SPD[0] / 30.f;
+  _turnCounter += _stats.BaseStats[SPD][0] / 30.f;
   if(_turnCounter >= TimeToAction)
   {
     _turnCounter -= TimeToAction;

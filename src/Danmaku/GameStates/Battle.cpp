@@ -5,6 +5,7 @@
 #include "Danmaku/Party.h"
 #include "Danmaku/Spells/ISpell.h"
 #include "boost/format.hpp"
+#include "Danmaku/Stats.h"
 
 namespace Danmaku
 {
@@ -94,22 +95,22 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_enemies.push_back(Character("Enemy1"));
   _currentInstance->_enemies.push_back(Character("Enemy6"));
   _currentInstance->_enemies.push_back(Character("Enemy7"));
-  _currentInstance->_enemies[0].GetStats().SPD[0] = 118.f;
+  _currentInstance->_enemies[0].GetStats().BaseStats[SPD][0] = 118.f;
   _currentInstance->_enemies[0].InitializeCharFrame();
   _currentInstance->_enemies[0].Graphics().UpdateHP();
   _currentInstance->_enemies[0].Graphics().UpdateMP();
 
-  _currentInstance->_enemies[1].GetStats().SPD[0] = 108.f;
+  _currentInstance->_enemies[1].GetStats().BaseStats[SPD][0] = 108.f;
   _currentInstance->_enemies[1].InitializeCharFrame();
   _currentInstance->_enemies[1].Graphics().UpdateHP();
   _currentInstance->_enemies[1].Graphics().UpdateMP();
 
-  _currentInstance->_enemies[2].GetStats().SPD[0] = 160.f;
+  _currentInstance->_enemies[2].GetStats().BaseStats[SPD][0] = 160.f;
   _currentInstance->_enemies[2].InitializeCharFrame();
   _currentInstance->_enemies[2].Graphics().UpdateHP();
   _currentInstance->_enemies[2].Graphics().UpdateMP();
 
-  _currentInstance->_enemies[3].GetStats().SPD[0] = 115.f;
+  _currentInstance->_enemies[3].GetStats().BaseStats[SPD][0] = 115.f;
   _currentInstance->_enemies[3].InitializeCharFrame();
   _currentInstance->_enemies[3].Graphics().UpdateHP();
   _currentInstance->_enemies[3].Graphics().UpdateMP();
@@ -118,22 +119,22 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->_playerRow.push_back(Character("Mokou"));
   _currentInstance->_playerRow.push_back(Character("Mystia"));
   _currentInstance->_playerRow.push_back(Character("Alice"));
-  _currentInstance->_playerRow[0].GetStats().SPD[0] = 100.f;
+  _currentInstance->_playerRow[0].GetStats().BaseStats[SPD][0] = 100.f;
   _currentInstance->_playerRow[0].InitializeCharFrame();
   _currentInstance->_playerRow[0].Graphics().UpdateHP();
   _currentInstance->_playerRow[0].Graphics().UpdateMP();
 
-  _currentInstance->_playerRow[1].GetStats().SPD[0] = 122.f;
+  _currentInstance->_playerRow[1].GetStats().BaseStats[SPD][0] = 122.f;
   _currentInstance->_playerRow[1].InitializeCharFrame();
   _currentInstance->_playerRow[1].Graphics().UpdateHP();
   _currentInstance->_playerRow[1].Graphics().UpdateMP();
 
-  _currentInstance->_playerRow[2].GetStats().SPD[0] = 130.f;
+  _currentInstance->_playerRow[2].GetStats().BaseStats[SPD][0] = 130.f;
   _currentInstance->_playerRow[2].InitializeCharFrame();
   _currentInstance->_playerRow[2].Graphics().UpdateHP();
   _currentInstance->_playerRow[2].Graphics().UpdateMP();
 
-  _currentInstance->_playerRow[3].GetStats().SPD[0] = 115.f;
+  _currentInstance->_playerRow[3].GetStats().BaseStats[SPD][0] = 115.f;
   _currentInstance->_playerRow[3].InitializeCharFrame();
   _currentInstance->_playerRow[3].Graphics().UpdateHP();
   _currentInstance->_playerRow[3].Graphics().UpdateMP();
@@ -245,7 +246,7 @@ void Battle::ConsequenceUpdate()
                                            affectedParty[i], mod);
     }
 
-    for(int i = attackerIndex + 1, mod = 2;
+    for(size_t i = attackerIndex + 1, mod = 2;
         i < affectedParty.size();
         ++i, ++mod)
     {
@@ -330,7 +331,7 @@ void Battle::SetInitialSPD(CharVec& vec)
 {
   for(size_t i = 0; i < vec.size(); ++i)
   {
-    vec[i].TurnCounter() = vec[i].GetStats().SPD[0];
+    vec[i].TurnCounter() = vec[i].GetStats().BaseStats[SPD][0];
   }
 }
 
