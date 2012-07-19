@@ -17,10 +17,12 @@ CharGraphics::CharGraphics()
 
 sf::Color const CharGraphics::FullSPDBar(255u, 0u, 0u);
 sf::Color const CharGraphics::NormalSPDBar(255u, 119u, 0u);
+sf::Texture* CharGraphics::DeadFrame = NULL;
 
 CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
                            Character* owner)
-  : _owner(owner), _offset(0.f, 0.f), _frame(sf::Vector2f(100.f,100.f)),
+  : _owner(owner), _offset(0.f, 0.f),
+    _portrait(TextureProvider::Get(charName + "Portrait")),
     _spdBackgrnd(sf::Vector2f(70.f,6.f)), _spdBar(sf::Vector2f(70.f,6.f)),
     _hpBackgrnd(sf::Vector2f(90.f,10.f)), _hpBar(sf::Vector2f(90.f,10.f)),
     _mpBackgrnd(sf::Vector2f(90.f,10.f)), _mpBar(sf::Vector2f(90.f,10.f)),
@@ -39,13 +41,15 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _myTurn(false)
 {
   using namespace sf;
+  if(DeadFrame == NULL)
+    DeadFrame = &TextureProvider::Get("DeadPortrait");
+
   _charSprite.setPosition(0.f, 0.f);
   _battleSprite.setOrigin(_battleSprite.getLocalBounds().width,
                           _battleSprite.getLocalBounds().height);
 
-  _frame.setTexture(&TextureProvider::Get(charName + "Portrait"));
-  _frame.setOutlineColor(Color::Black);
-  _frame.setOutlineThickness(1.f);
+  _portrait.setTexture(TextureProvider::Get(charName + "Portrait"));
+  _portrait.setPosition(sf::Vector2f(100.f,100.f));
 
   _spdBackgrnd.setFillColor(Color(207u, 207u, 207u));
   _spdBackgrnd.setOutlineColor(Color(190u, 190u, 190u));
@@ -80,7 +84,7 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
   _mpBar.setOutlineColor(Color(0u, 90u, 255u));
   _mpBar.setOutlineThickness(1.f);
 
-  _frame.setPosition(0.f, 0.f);
+  _portrait.setPosition(0.f, 0.f);
 
   _spdBar.setPosition(24.f, 61.f);
   _spdBackgrnd.setPosition(24.f, 61.f);
@@ -113,7 +117,7 @@ void CharGraphics::Reposition(float x, float y)
 void CharGraphics::Reposition(sf::Vector2f newOffset)
 {
   // Revert to base position, then move to new one.
-  _frame.move(-_offset + newOffset);
+  _portrait.move(-_offset + newOffset);
   _spdBar.move(-_offset + newOffset);
   _spdBackgrnd.move(-_offset + newOffset);
   _hpBar.move(-_offset + newOffset);
@@ -147,6 +151,14 @@ void CharGraphics::UpdateHP()
   hpColor.r = red;
   hpColor.g = green;
   _hpBar.setFillColor(hpColor);
+
+  if(currentHP > 0)
+    return;
+
+  _owner->IsDead() = true;
+  _owner->CurrentHP() = 0.f;
+  _portrait.setTexture(*DeadFrame);
+  _battleSprite.setTexture(*DeadFrame);
 }
 
 void CharGraphics::UpdateMP()
@@ -169,7 +181,11 @@ void CharGraphics::DrawCharSprite(sf::RenderTarget& rTarget)
 
 void CharGraphics::Draw(sf::RenderTarget& rTarget)
 {    
-  rTarget.draw(_frame);
+  rTarget.draw(_portrait);
+
+  if(_owner->IsDead())
+    return;
+
   rTarget.draw(_spdBackgrnd);
   rTarget.draw(_spdBar);
   rTarget.draw(_hpBackgrnd);
@@ -208,6 +224,9 @@ void CharGraphics::SetBattleSpritePosition(sf::Vector2f const& pos)
 
 void CharGraphics::DrawBattleSprite(sf::RenderTarget& rTarget)
 {
+  if(_owner->IsDead())
+    return;
+
   rTarget.draw(_battleSprite);
   rTarget.draw(_enemySpdBackgrnd);
   rTarget.draw(_enemySpdBar);

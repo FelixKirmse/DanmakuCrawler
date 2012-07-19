@@ -21,6 +21,7 @@ public:
   virtual void NextMenuItem();
   virtual void PreviousMenuItem();
   virtual void ResolveMouseSelection();
+  virtual void ResetMenu();
 
   virtual void SelectMenuItem() = 0;
 

@@ -19,7 +19,7 @@ void PlaceHolderSpell::DamageCalculation(Character& attacker,
 
 TargetInfo::TargetTypes PlaceHolderSpell::GetTargetType()
 {
-  return TargetInfo::All;
+  return TargetInfo::Decaying;
 }
 
 }

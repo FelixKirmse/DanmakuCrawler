@@ -26,7 +26,7 @@ private:
   Character* _owner;
   sf::Vector2f _offset;
 
-  sf::RectangleShape _frame;
+  sf::Sprite _portrait;
   sf::RectangleShape _spdBackgrnd;
   sf::RectangleShape _spdBar;
   sf::RectangleShape _hpBackgrnd;
@@ -48,5 +48,6 @@ private:
 
   static sf::Color const FullSPDBar;
   static sf::Color const NormalSPDBar;
+  static sf::Texture* DeadFrame;
 };
 }
