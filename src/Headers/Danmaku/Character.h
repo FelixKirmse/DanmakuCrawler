@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <array>
 #include <vector>
 #include <memory>
 #include <boost/random.hpp>
@@ -30,13 +31,13 @@ class Character
 {
 public:  
   typedef std::vector<ISpell*> SpellList;
-  typedef std::vector<Character> CharVec;
+  typedef std::array<Character, 4> FrontRow;
   typedef boost::random::mt19937 RandomSeed;
 
   Character();
   Character(sf::String name);
 
-  void InitializeCharFrame();
+  void InitializeCharGraphics();
   bool UpdateTurnCounter();
   float& CurrentHP();
   float& CurrentMP();
@@ -46,7 +47,9 @@ public:
   sf::String const& GetDisplayName();
   bool& IsDead();
 
-  TargetInfo AIBattleMenu(CharVec& targetRow);
+  TargetInfo AIBattleMenu(FrontRow& targetRow);
+
+  Character& operator=(Character const& source);
 
   int const TimeToAction = 300;
 
@@ -61,8 +64,9 @@ private:
   SpellList _spellList;
   float _currentHP;
   float _currentMP;
-  CharGraphics _charFrame;
+  CharGraphics _charGraphics;
   bool _dead;
+  size_t _level;
 
   static RandomSeed _rng;
 };

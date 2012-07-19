@@ -5,7 +5,9 @@
 #include "Danmaku/States.h"
 #include "Danmaku/Menu.h"
 #include "Danmaku/TileList.h"
+#include "Danmaku/Party.h"
 #include "Danmaku/Ingame.h"
+#include "Danmaku/Character.h"
 
 namespace Danmaku
 {
@@ -54,6 +56,7 @@ Ingame* Ingame::_instance;
 
 void Ingame::NewGame()
 {
+  Party::Reset();
   _instance->Reset();
 }
 

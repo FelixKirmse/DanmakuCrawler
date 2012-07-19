@@ -1,10 +1,12 @@
 #pragma once
+#include <array>
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "BlackDragonEngine/IUpdateableGameState.h"
 #include "BlackDragonEngine/IDrawableGameState.h"
 #include "Danmaku/Character.h"
 #include "Danmaku/BattleMenu.h"
+#include "Danmaku/Party.h"
 
 namespace Danmaku
 {
@@ -15,7 +17,7 @@ class Battle : public BlackDragonEngine::IUpdateableGameState,
 public:
   typedef std::vector<Character> CharVec;
   typedef std::vector<sf::Vector2f> VecVec;
-  typedef std::vector<float> FloatVec;
+  typedef std::array<float, 4> FloatVec;
 
   Battle();
   bool UpdateCondition();
@@ -33,7 +35,9 @@ private:
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
 
   void ArrangeCharFrames(int bossID);
-  void SetInitialSPD(CharVec& vec);
+
+  template<class T>
+  void SetInitialSPD(T& vec);
 
   enum BattleStates
   {
@@ -46,8 +50,8 @@ private:
   } _battleState;
 
   CharVec _enemies;
-  CharVec& _playerRow;
-  CharVec& _playerBattleParty;
+  Party::FrontRow& _playerRow;
+  Party::BackSeat& _playerBattleParty;
   Character* _currentAttacker;
 
   TargetInfo _targetInfo;
@@ -70,4 +74,6 @@ private:
 
   static Battle* _currentInstance;
 };
+
+#include "Danmaku/Inline/Battle.inl"
 }
