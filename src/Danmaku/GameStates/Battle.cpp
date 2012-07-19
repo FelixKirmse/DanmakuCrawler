@@ -2,7 +2,6 @@
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/States.h"
 #include "Danmaku/Battle.h"
-#include "Danmaku/Party.h"
 #include "Danmaku/Spells/ISpell.h"
 #include "boost/format.hpp"
 #include "Danmaku/Stats.h"
@@ -90,55 +89,6 @@ void Battle::StartBattle(int level, int bossID)
   GameStateManager::SetState(GameStates::Battle);
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
-  _currentInstance->_playerRow.clear();
-  _currentInstance->_enemies.push_back(Character("Enemy0"));
-  _currentInstance->_enemies.push_back(Character("Enemy1"));
-  _currentInstance->_enemies.push_back(Character("Enemy6"));
-  _currentInstance->_enemies.push_back(Character("Enemy7"));
-  _currentInstance->_enemies[0].GetStats().BaseStats[SPD][0] = 118.f;
-  _currentInstance->_enemies[0].InitializeCharFrame();
-  _currentInstance->_enemies[0].Graphics().UpdateHP();
-  _currentInstance->_enemies[0].Graphics().UpdateMP();
-
-  _currentInstance->_enemies[1].GetStats().BaseStats[SPD][0] = 108.f;
-  _currentInstance->_enemies[1].InitializeCharFrame();
-  _currentInstance->_enemies[1].Graphics().UpdateHP();
-  _currentInstance->_enemies[1].Graphics().UpdateMP();
-
-  _currentInstance->_enemies[2].GetStats().BaseStats[SPD][0] = 160.f;
-  _currentInstance->_enemies[2].InitializeCharFrame();
-  _currentInstance->_enemies[2].Graphics().UpdateHP();
-  _currentInstance->_enemies[2].Graphics().UpdateMP();
-
-  _currentInstance->_enemies[3].GetStats().BaseStats[SPD][0] = 115.f;
-  _currentInstance->_enemies[3].InitializeCharFrame();
-  _currentInstance->_enemies[3].Graphics().UpdateHP();
-  _currentInstance->_enemies[3].Graphics().UpdateMP();
-
-  _currentInstance->_playerRow.push_back(Character("Youmu"));
-  _currentInstance->_playerRow.push_back(Character("Mokou"));
-  _currentInstance->_playerRow.push_back(Character("Mystia"));
-  _currentInstance->_playerRow.push_back(Character("Alice"));
-  _currentInstance->_playerRow[0].GetStats().BaseStats[SPD][0] = 100.f;
-  _currentInstance->_playerRow[0].InitializeCharFrame();
-  _currentInstance->_playerRow[0].Graphics().UpdateHP();
-  _currentInstance->_playerRow[0].Graphics().UpdateMP();
-
-  _currentInstance->_playerRow[1].GetStats().BaseStats[SPD][0] = 122.f;
-  _currentInstance->_playerRow[1].InitializeCharFrame();
-  _currentInstance->_playerRow[1].Graphics().UpdateHP();
-  _currentInstance->_playerRow[1].Graphics().UpdateMP();
-
-  _currentInstance->_playerRow[2].GetStats().BaseStats[SPD][0] = 130.f;
-  _currentInstance->_playerRow[2].InitializeCharFrame();
-  _currentInstance->_playerRow[2].Graphics().UpdateHP();
-  _currentInstance->_playerRow[2].Graphics().UpdateMP();
-
-  _currentInstance->_playerRow[3].GetStats().BaseStats[SPD][0] = 115.f;
-  _currentInstance->_playerRow[3].InitializeCharFrame();
-  _currentInstance->_playerRow[3].Graphics().UpdateHP();
-  _currentInstance->_playerRow[3].Graphics().UpdateMP();
-
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
   _currentInstance->ArrangeCharFrames(bossID);
@@ -244,13 +194,14 @@ void Battle::ConsequenceUpdate()
   if(_targetInfo.TargetType == TargetInfo::Single)
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
 
-  CharVec& affectedParty = (_enemyTurn ? _playerRow : _enemies);
-
   if(_targetInfo.TargetType == TargetInfo::All)
   {
-    for(size_t i = 0; i < affectedParty.size(); ++i)
+    for(size_t i = 0; i < (_enemyTurn ? _playerRow.size() : _enemies.size());
+        ++i)
     {
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker, affectedParty[i]);
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                           (_enemyTurn ?
+                                              _playerRow[i] : _enemies[i]));
     }
   }
 
@@ -258,32 +209,36 @@ void Battle::ConsequenceUpdate()
   {
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
     size_t attackerIndex = 0;
-    for(;attackerIndex < affectedParty.size() &&
-        &affectedParty[attackerIndex] != _targetInfo.Target;
+    for(;attackerIndex < (_enemyTurn ? _playerRow.size() : _enemies.size()) &&
+        (_enemyTurn ?
+         &_playerRow[attackerIndex] :
+         &_enemies[attackerIndex]) != _targetInfo.Target;
         ++attackerIndex); //This loop has no body intentionally!!!!
     for(int i = attackerIndex - 1, mod = 2; i >= 0; --i, ++mod)
     {
       _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           affectedParty[i], mod);
+                                           (_enemyTurn ?
+                                              _playerRow[i] : _enemies[i]),
+                                           mod);
     }
 
     for(size_t i = attackerIndex + 1, mod = 2;
-        i < affectedParty.size();
+        i < (_enemyTurn ? _playerRow.size() : _enemies.size());
         ++i, ++mod)
     {
       _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           affectedParty[i], mod);
+                                           (_enemyTurn ?
+                                              _playerRow[i] : _enemies[i]),
+                                           mod);
     }
 
     _enemyTurn = false;
   }
 
-  _charHPStep.clear();
-  _charHPShouldHave.clear();
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
-    _charHPShouldHave.push_back(_playerRow[i].CurrentHP());
-    _charHPStep.push_back((charHPBefore[i] - _playerRow[i].CurrentHP()) / 45.f);
+    _charHPShouldHave[i] = _playerRow[i].CurrentHP();
+    _charHPStep[i] = charHPBefore[i] - _playerRow[i].CurrentHP() / 45.f;
     _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
@@ -347,13 +302,4 @@ void Battle::ArrangeCharFrames(int bossID)
     _enemies[i].Graphics().SetBattleSpritePosition(positions[i]);
   }
 }
-
-void Battle::SetInitialSPD(CharVec& vec)
-{
-  for(size_t i = 0; i < vec.size(); ++i)
-  {
-    vec[i].TurnCounter() = vec[i].GetStats().BaseStats[SPD][0];
-  }
-}
-
 }

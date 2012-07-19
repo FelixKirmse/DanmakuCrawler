@@ -11,8 +11,9 @@ Character::RandomSeed Character::_rng(time(0));
 
 using namespace BlackDragonEngine;
 Character::Character()
-  : Character("Reimu")
+  : Character("Dead")
 {
+  _dead = true;
 }
 
 Character::Character(sf::String name)
@@ -20,21 +21,21 @@ Character::Character(sf::String name)
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
                    _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
-    _currentMP(0), _charFrame(), _dead(false)
+    _currentMP(0), _charGraphics(), _dead(false), _level(1)
 {
   // TODO Stat Generation
   _stats.BaseStats[HP][0] = 10000.f;
   _currentHP = _stats.BaseStats[HP][0];
-  _currentMP = 147;
+  _currentMP = 250;
   _stats.BaseStats[MP][0] = 250;
   _stats.BaseStats[SPD][0] = 100.f;
   _spellList.push_back(&Spells::PlaceHolder);
 }
 
 
-void Character::InitializeCharFrame()
+void Character::InitializeCharGraphics()
 {
-  _charFrame = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
+  _charGraphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
 }
 
 bool Character::UpdateTurnCounter()
@@ -49,7 +50,7 @@ bool Character::UpdateTurnCounter()
     _turnCounter -= TimeToAction;
     result = true;
   }
-  _charFrame.UpdateSPD(result);
+  _charGraphics.UpdateSPD(result);
 
   return result;
 }
@@ -71,7 +72,7 @@ Stats& Character::GetStats()
 
 CharGraphics& Character::Graphics()
 {
-  return _charFrame;
+  return _charGraphics;
 }
 
 int& Character::TurnCounter()
@@ -89,7 +90,7 @@ bool& Character::IsDead()
   return _dead;
 }
 
-TargetInfo Character::AIBattleMenu(CharVec& targetRow)
+TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 {
   TargetInfo targetInfo;
 
@@ -141,6 +142,21 @@ void Character::GoToLine(std::fstream& file, size_t num)
   {
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
+}
+
+Character& Character::operator=(Character const& source)
+{
+  _name = source._name;
+  _displayName = source._displayName;
+  _stats = source._stats;
+  _turnCounter = source._turnCounter;
+  _spellList = source._spellList;
+  _currentHP = source._currentHP;
+  _currentMP = source._currentMP;
+  _dead = source._dead;
+  _level = source._level;
+  _charGraphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
+  return *this;
 }
 
 }
