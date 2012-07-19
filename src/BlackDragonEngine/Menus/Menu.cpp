@@ -106,5 +106,13 @@ void Menu::SetPositions(sf::Vector2f positionCenter, bool centered)
   }
 }
 
+void Menu::ResetMenu()
+{
+  for(size_t i = 0; i < MenuItems.size(); ++i)
+    if(MenuItems[i].IsSelected())
+      MenuItems[i].SetSelected(false);
+  MenuItems[0].SetSelected(true);
+}
+
 }
 

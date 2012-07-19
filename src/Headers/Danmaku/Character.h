@@ -44,7 +44,7 @@ public:
   CharGraphics& Graphics();
   int& TurnCounter();
   sf::String const& GetDisplayName();
-  bool IsDead();
+  bool& IsDead();
 
   TargetInfo AIBattleMenu(CharVec& targetRow);
 

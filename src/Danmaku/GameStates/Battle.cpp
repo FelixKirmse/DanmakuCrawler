@@ -189,11 +189,32 @@ void Battle::ConsequenceUpdate()
     _battleState = Idle;
     _frameCounter = 0;
 
-    // TODO Remove if after testing
-    if(_enemies[0].CurrentHP() <= 0.f)
+    bool someoneAlive(false); // Pretend every player is dead...
+    for(size_t i = 0; i < _playerRow.size(); ++i)
     {
+      someoneAlive |= !_playerRow[i].IsDead(); // ...until we find someone alive!
+    }
+
+    if(!someoneAlive) // whoops, everyone is dead, Game Over!
+    {
+      // TODO Actual Game Over Code
       _battleState = Idle;
       GameStateManager::SetState(GameStates::Ingame);
+      _battleMenu.ResetMenu();
+    }
+
+    bool enemyAlive(false); // Pretend every enemy is dead...
+    for(size_t i = 0; i < _enemies.size(); ++i)
+    {
+      enemyAlive |= !_enemies[i].IsDead(); // ...until proven otherwise.
+    }
+
+    if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!
+    {
+      // TODO Actual winning code
+      _battleState = Idle;
+      GameStateManager::SetState(GameStates::Ingame);
+      _battleMenu.ResetMenu();
     }
 
     for(size_t i = 0; i < _playerRow.size(); ++i)

@@ -18,7 +18,7 @@ Character::Character()
 Character::Character(sf::String name)
   : _name(name),
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
-                   GetRandomName() : name),
+                   _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
     _currentMP(0), _charFrame(), _dead(false)
 {
@@ -39,6 +39,9 @@ void Character::InitializeCharFrame()
 
 bool Character::UpdateTurnCounter()
 {
+  if(_dead)
+    return false;
+
   bool result(false);
   _turnCounter += _stats.BaseStats[SPD][0] / 30.f;
   if(_turnCounter >= TimeToAction)
@@ -81,7 +84,7 @@ sf::String const& Character::GetDisplayName()
   return _displayName;
 }
 
-bool Character::IsDead()
+bool& Character::IsDead()
 {
   return _dead;
 }
