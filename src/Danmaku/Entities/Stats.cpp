@@ -41,4 +41,10 @@ void Stats::LvlUp()
   BaseStats[MR][0] += BaseStats[MR][5];
 }
 
+
+Stats::StatsMap Stats::StatMap;
+void Stats::LoadStatMap()
+{
+
+}
 }

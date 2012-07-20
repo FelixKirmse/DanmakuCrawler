@@ -4,6 +4,14 @@
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
 
+#include <fstream>
+#include "Danmaku/SerializeUnorderedMap.h"
+#include <boost/serialization/array.hpp>
+
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+
 namespace Danmaku
 {
 
@@ -30,6 +38,7 @@ Character::Character(sf::String name)
   _stats.BaseStats[MP][0] = 250;
   _stats.BaseStats[SPD][0] = 100.f;
   _spellList.push_back(&Spells::PlaceHolder);
+  //SetBaseStats();
 }
 
 
@@ -157,6 +166,45 @@ Character& Character::operator=(Character const& source)
   _level = source._level;
   _charGraphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
   return *this;
+}
+
+void Character::SetBaseStats()
+{
+  Stats example;
+  example.EVAType = Stats::Block;
+  example.BaseStats[HP] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[MP] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[AD] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[MD] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[DEF] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[MR] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[EVA] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[SPD] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.BaseStats[CHA] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+
+  example.Masteries[FIR] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[WAT] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[ICE] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[ARC] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[WND] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[HOL] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[DRK] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[GRN] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Masteries[LGT] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+
+  example.Resistances[PSN] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Resistances[PAR] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Resistances[SLW] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Resistances[STD] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Resistances[DTH] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+  example.Resistances[SIL] = { {0.f,1.f,2.f,3.f,4.f,5.f,6.f} };
+
+  boost::unordered::unordered_map<std::string, Stats> nameStatMap;
+  nameStatMap["Reimu"] = example;
+
+  std::ofstream ofs("test.txt");
+  boost::archive::xml_oarchive oa(ofs);
+  oa << BOOST_SERIALIZATION_NVP(nameStatMap);
 }
 
 }

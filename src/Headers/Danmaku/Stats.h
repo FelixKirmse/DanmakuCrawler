@@ -1,6 +1,16 @@
 #pragma once
-#include <array>
+#include <boost/array.hpp>
 #include <boost/unordered_map.hpp>
+#include <SFML/System.hpp>
+
+
+#include <fstream>
+#include "Danmaku/SerializeUnorderedMap.h"
+#include <boost/serialization/array.hpp>
+
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
 
 namespace Danmaku
 {
@@ -51,10 +61,11 @@ enum DebuffResistance
 
 struct Stats
 {
-  typedef std::array<float, 7> SingleStat;
+  typedef boost::array<float, 7> SingleStat;
   typedef boost::unordered::unordered_map<BaseStat, SingleStat> BaseStatMap;
   typedef boost::unordered::unordered_map<EleMastery, SingleStat> MasteryMap;
   typedef boost::unordered::unordered_map<DebuffResistance, SingleStat> ResiMap;
+  typedef boost::unordered::unordered_map<sf::String, Stats> StatsMap;
 
   enum
   {
@@ -71,5 +82,14 @@ struct Stats
   float GetTotalResistance(DebuffResistance resistance);
 
   void LvlUp();
+
+  static StatsMap StatMap;
+
+  static void LoadStatMap();
+
+  template<class Archive>
+  void serialize(Archive& ar, unsigned int const version);
 };
+
+#include "Danmaku/Inline/Stats.inl"
 }

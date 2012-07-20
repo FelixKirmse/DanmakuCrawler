@@ -80,3 +80,6 @@ src/Headers/Danmaku/CharGraphics.h
 src/Danmaku/Entities/CharGraphics.cpp
 build/content/etc/CatNames.txt
 src/Headers/Danmaku/Inline/Battle.inl
+src/Danmaku/Entities/Includes/Character.include
+src/Headers/Danmaku/Inline/Stats.inl
+src/Headers/Danmaku/SerializeUnorderedMap.h
