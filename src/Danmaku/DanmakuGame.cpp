@@ -86,7 +86,7 @@ void DanmakuGame::Initialize()
 void DanmakuGame::LoadTexturesFromDir(sf::String const& dir,
                                       sf::String const& suffix)
 {
-  using namespace boost::filesystem3;
+  using namespace boost::filesystem;
   path texturePath(dir);
   directory_iterator end_iter;
   for(directory_iterator i(texturePath); i != end_iter; ++i)
