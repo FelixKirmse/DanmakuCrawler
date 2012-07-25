@@ -1,4 +1,6 @@
 #include <string>
+#include <ctime>
+#include <limits>
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/States.h"
 #include "Danmaku/Battle.h"
@@ -9,13 +11,16 @@
 namespace Danmaku
 {
 Battle* Battle::_currentInstance;
+size_t Battle::MaxEnemyID;
+float const Battle::EnemyHPMod = 2.f;
+float const Battle::EnemyBaseMod = .75f;
 
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
     _battleMenu(*this), _threeLayout(), _fourLayout(), _charHPStep(),
-    _charHPShouldHave()
+    _charHPShouldHave(), _rng(time(0))
 {
   _currentInstance = this;
   _threeLayout.push_back(sf::Vector2f(260.f, 305.f));
@@ -89,6 +94,9 @@ void Battle::StartBattle(int level, int bossID)
   GameStateManager::SetState(GameStates::Battle);
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
+
+  _currentInstance->GenerateEnemies(level, bossID);
+
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
   _currentInstance->ArrangeCharFrames(bossID);
@@ -238,7 +246,7 @@ void Battle::ConsequenceUpdate()
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _charHPShouldHave[i] = _playerRow[i].CurrentHP();
-    _charHPStep[i] = charHPBefore[i] - _playerRow[i].CurrentHP() / 45.f;
+    _charHPStep[i] = (charHPBefore[i] - _playerRow[i].CurrentHP()) / 45.f;
     _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
@@ -259,7 +267,7 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
   {
     _enemies[1].Graphics().DrawBattleSprite(renderTarget);
     _enemies[0].Graphics().DrawBattleSprite(renderTarget);
-    _enemies[3].Graphics().DrawBattleSprite(renderTarget);
+    _enemies[2].Graphics().DrawBattleSprite(renderTarget);
   }
 
   // CharSprite infront of enemies, but behind CharFrames
@@ -299,7 +307,49 @@ void Battle::ArrangeCharFrames(int bossID)
   VecVec& positions = (_enemies.size() == 3) ? _threeLayout : _fourLayout;
   for(size_t i = 0; i < _enemies.size(); ++i)
   {
+    _enemies[i].InitializeCharGraphics();
     _enemies[i].Graphics().SetBattleSpritePosition(positions[i]);
   }
+}
+
+void Battle::GenerateEnemies(int level, int bossID)
+{
+  typedef boost::random::uniform_int_distribution<> IntGenerator;
+  if(bossID != 0)
+  {
+    SetupBossBattle(level, bossID);
+    return;
+  }
+
+  IntGenerator selectEnemyCount(3, 4);
+  int enemyCount(selectEnemyCount(_rng));
+  IntGenerator selectEnemy(0, MaxEnemyID);
+  for(int i = 0; i < enemyCount; ++i)
+  {
+    sf::String enemyName("Enemy" + std::to_string(selectEnemy(_rng)));
+    _enemies.push_back(Character());
+    _enemies[i] = Character(enemyName);
+    Character& enemy = _enemies[i];
+    /* TODO Actual enemy stat generation,
+     * taking Sakuya for now since she's pretty balanced */
+    enemy.GetStats() = Stats::_baseStats["Sakuya"];
+
+    // Lets boost the base stats, since enemy should be STRONK!
+    enemy.CurrentMP() = std::numeric_limits<float>::max();
+    Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
+    bs[HP][0] *= EnemyHPMod;
+    for(int j = 1; j < 9; ++j)
+      bs[(BaseStat)j][0] *= EnemyBaseMod;
+    enemy.GetStats().LvlUp(0, 100); // TODO DELETE
+    enemy.CurrentHP() = enemy.GetStats().GetTotalBaseStat(HP);
+    enemy.InitializeCharGraphics();
+    enemy.Graphics().UpdateHP();
+    enemy.Graphics().UpdateMP();
+  }
+}
+
+void Battle::SetupBossBattle(int level, int bossID)
+{
+  // TODO Boss Stat Generation
 }
 }

@@ -54,8 +54,6 @@ public:
   int const TimeToAction = 300;
 
 private:
-  void SetBaseStats();
-
   sf::String GetRandomName();
   void GoToLine(std::fstream& file, size_t num);
 

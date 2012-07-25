@@ -14,12 +14,13 @@ void PlaceHolderSpell::DamageCalculation(Character& attacker,
                                          Character& defender,
                                          float mod)
 {
-  defender.CurrentHP() -= 1000.f * 1/mod;
+  float damage = 2.f * attacker.GetStats().GetTotalBaseStat(AD) - defender.GetStats().GetTotalBaseStat(DEF);
+  defender.CurrentHP() -= (damage > 0) ? damage : 1;
 }
 
 TargetInfo::TargetTypes PlaceHolderSpell::GetTargetType()
 {
-  return TargetInfo::Decaying;
+  return TargetInfo::Single;
 }
 
 }
