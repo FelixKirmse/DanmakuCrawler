@@ -3,6 +3,13 @@
 #include "BlackDragonEngine/Camera.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/DanmakuGame.h"
+#include "Danmaku/Battle.h"
+
+#include <fstream>
+#include "Danmaku/SerializeUnorderedMap.h"
+#include <boost/serialization/array.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
 
 typedef BlackDragonEngine::Provider<sf::Texture> TextureProvider;
 typedef BlackDragonEngine::Provider<sf::Font> FontProvider;
@@ -51,6 +58,10 @@ void DanmakuGame::LoadContent()
   BlackDragonEngine::Camera::SetViewPortWidth(ResolutionWidth);
   BlackDragonEngine::Camera::SetViewPortHeight(ResolutionHeight);
 
+  std::ifstream ifs("content/etc/BaseStats.xml");
+  boost::archive::xml_iarchive ia(ifs);
+  ia >> BOOST_SERIALIZATION_NVP(Stats::_baseStats);
+
   //Initialize this last!
   _stateManager.Initialize();
 }
@@ -89,13 +100,17 @@ void DanmakuGame::LoadTexturesFromDir(sf::String const& dir,
   using namespace boost::filesystem;
   path texturePath(dir);
   directory_iterator end_iter;
+  int eCount = -1;
   for(directory_iterator i(texturePath); i != end_iter; ++i)
   {
     if(is_directory(i->path()))
       continue;
+    if(sf::String(i->path().stem().native()).find("Enemy") != sf::String::InvalidPos )
+      ++eCount;
     TextureProvider::Get(i->path().stem().native() + suffix)
         .loadFromFile(i->path().native());
   }
+  Battle::MaxEnemyID = eCount;
 }
 
 }

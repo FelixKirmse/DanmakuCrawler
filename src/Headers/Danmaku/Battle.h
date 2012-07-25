@@ -7,6 +7,7 @@
 #include "Danmaku/Character.h"
 #include "Danmaku/BattleMenu.h"
 #include "Danmaku/Party.h"
+#include <boost/random.hpp>
 
 namespace Danmaku
 {
@@ -18,6 +19,7 @@ public:
   typedef std::vector<Character> CharVec;
   typedef std::vector<sf::Vector2f> VecVec;
   typedef std::array<float, 4> FloatVec;
+  typedef boost::random::mt19937 RandomSeed;
 
   Battle();
   bool UpdateCondition();
@@ -26,6 +28,7 @@ public:
   void Draw(float interpolation, sf::RenderTarget& renderTarget);
 
   static void StartBattle(int level, int bossID = 0);
+  static size_t MaxEnemyID;
 
 private:
   void IdleUpdate();
@@ -35,6 +38,9 @@ private:
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
 
   void ArrangeCharFrames(int bossID);
+
+  void GenerateEnemies(int level, int bossID);
+  void SetupBossBattle(int level, int bossID);
 
   template<class T>
   void SetInitialSPD(T& vec);
@@ -72,7 +78,12 @@ private:
   FloatVec _charHPStep;
   FloatVec _charHPShouldHave;
 
-  static Battle* _currentInstance;
+  RandomSeed _rng;
+
+  static float const EnemyHPMod;
+  static float const EnemyBaseMod;
+
+  static Battle* _currentInstance;  
 };
 
 #include "Danmaku/Inline/Battle.inl"
