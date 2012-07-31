@@ -4,6 +4,7 @@
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/DanmakuGame.h"
 #include "Danmaku/Battle.h"
+#include "Danmaku/Spells/Spells.h"
 
 #include <fstream>
 #include "Danmaku/SerializeUnorderedMap.h"
@@ -61,6 +62,8 @@ void DanmakuGame::LoadContent()
   std::ifstream ifs("content/etc/BaseStats.xml");
   boost::archive::xml_iarchive ia(ifs);
   ia >> BOOST_SERIALIZATION_NVP(Stats::_baseStats);
+
+  Spells::InitializeSpells();
 
   //Initialize this last!
   _stateManager.Initialize();

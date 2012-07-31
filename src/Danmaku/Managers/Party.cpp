@@ -37,6 +37,8 @@ void Party::ResetInternal()
   _battleBackSeat.fill(Character());
   _availableCharacters.clear();
 
+
+  // TODO Delete all the test stuff
   _frontRow[0] = Character("Yuugi");
   _frontRow[1] = Character("Remilia");
   _frontRow[2] = Character("Mokou");

@@ -68,8 +68,8 @@ OBJECTS := \
 	$(OBJDIR)/TileCode.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/EncounterRate.o \
+	$(OBJDIR)/Spell.o \
 	$(OBJDIR)/Spells.o \
-	$(OBJDIR)/PlaceHolderSpell.o \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/Party.o \
 	$(OBJDIR)/MainMenu.o \
@@ -157,10 +157,10 @@ $(OBJDIR)/main.o: src/Danmaku/main.cpp
 $(OBJDIR)/EncounterRate.o: src/Danmaku/Helpers/EncounterRate.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/Spells.o: src/Danmaku/Spells/Spells.cpp
+$(OBJDIR)/Spell.o: src/Danmaku/Spells/Spell.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-$(OBJDIR)/PlaceHolderSpell.o: src/Danmaku/Spells/PlaceHolderSpell.cpp
+$(OBJDIR)/Spells.o: src/Danmaku/Spells/Spells.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GameStateManager.o: src/Danmaku/Managers/GameStateManager.cpp

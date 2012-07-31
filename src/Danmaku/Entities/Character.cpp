@@ -29,7 +29,10 @@ Character::Character(sf::String name)
   _currentMP = 250;
   _stats.BaseStats[MP][0] = 250;
   _stats.BaseStats[SPD][0] = 100.f;
-  _spellList.push_back(&Spells::PlaceHolder);
+  _spellList.push_back(Spells::GetSpell(0));
+  _spellList.push_back(Spells::GetSpell(1));
+  _spellList.push_back(Spells::GetSpell(2));
+  _spellList.push_back(Spells::GetSpell(3));
 
   if(_displayName == _name)
     _stats = Stats::_baseStats[_name.toAnsiString()];
@@ -97,19 +100,19 @@ bool& Character::IsDead()
 
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 {
+  typedef boost::random::uniform_int_distribution<> IntGenerator;
   TargetInfo targetInfo;
 
-  // TODO Actual Spell Selection code
-  targetInfo.Spell = _spellList[0];
+  IntGenerator spellSelect(0, _spellList.size() - 1);
+  targetInfo.Spell = _spellList[spellSelect(_rng)];
   targetInfo.TargetType = targetInfo.Spell->GetTargetType();
   targetInfo.Target = NULL;
 
   if(targetInfo.TargetType == TargetInfo::All)
     return targetInfo;
 
-  typedef boost::random::uniform_int_distribution<> IntGenerator;
-  IntGenerator targetSelect(0,99);
 
+  IntGenerator targetSelect(0,99);
   do
   {
     int target = targetSelect(_rng);
