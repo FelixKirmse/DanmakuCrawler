@@ -69,8 +69,6 @@ src/Danmaku/Entities/Character.cpp
 src/Danmaku/Entities/Stats.cpp
 src/Headers/Danmaku/Spells/ISpell.h
 src/Headers/Danmaku/Spells/Spells.h
-src/Headers/Danmaku/Spells/PlaceHolderSpell.h
-src/Danmaku/Spells/PlaceHolderSpell.cpp
 src/Headers/Danmaku/Party.h
 src/Danmaku/Managers/Party.cpp
 src/Danmaku/Spells/Spells.cpp
@@ -80,6 +78,8 @@ src/Headers/Danmaku/CharGraphics.h
 src/Danmaku/Entities/CharGraphics.cpp
 build/content/etc/CatNames.txt
 src/Headers/Danmaku/Inline/Battle.inl
-src/Danmaku/Entities/Includes/Character.include
 src/Headers/Danmaku/Inline/Stats.inl
 src/Headers/Danmaku/SerializeUnorderedMap.h
+src/Headers/Danmaku/Spells/Spell.h
+src/Danmaku/Spells/Spell.cpp
+src/Danmaku/Spells/Spells.inc
