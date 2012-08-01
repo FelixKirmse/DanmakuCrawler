@@ -83,3 +83,5 @@ src/Headers/Danmaku/SerializeUnorderedMap.h
 src/Headers/Danmaku/Spells/Spell.h
 src/Danmaku/Spells/Spell.cpp
 src/Danmaku/Spells/Spells.inc
+src/Headers/Danmaku/TargetSelectMenu.h
+src/Danmaku/Menus/TargetSelectMenu.cpp

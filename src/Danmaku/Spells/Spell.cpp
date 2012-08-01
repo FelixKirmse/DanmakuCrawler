@@ -3,7 +3,7 @@
 namespace Danmaku
 {
 Spell::Spell(sf::String const& name, sf::String const& description,
-             TargetInfo::TargetTypes targetType,
+             TargetInfo::TargetType targetType,
              Spell::DamageFuncType damageCalculation, float mpCost)
   : _name(name), _description(description), _targetType(targetType),
     _damageCalculation(damageCalculation), _mpCost(mpCost)
@@ -16,7 +16,7 @@ void Spell::DamageCalculation(Character& attacker, Character& defender,
   _damageCalculation(attacker, defender, mod);
 }
 
-TargetInfo::TargetTypes Spell::GetTargetType()
+TargetInfo::TargetType Spell::GetTargetType()
 {
   return _targetType;
 }

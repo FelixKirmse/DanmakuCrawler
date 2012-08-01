@@ -14,7 +14,7 @@ public:
   void UpdateSPD(bool myTurn);
   void UpdateHP();
   void UpdateMP();
-  void SetBattleSpritePosition(sf::Vector2f const& pos);
+  void SetBattleSpritePosition(sf::Vector2f pos);
 
   void DrawBattleSprite(sf::RenderTarget& rTarget);
   void DrawCharSprite(sf::RenderTarget& rTarget);
@@ -43,6 +43,8 @@ private:
 
   sf::RectangleShape _enemySpdBar;
   sf::RectangleShape _enemySpdBackgrnd;
+
+  sf::Text _enemyName;
 
   bool _myTurn;
 

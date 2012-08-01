@@ -73,6 +73,7 @@ OBJECTS := \
 	$(OBJDIR)/GameStateManager.o \
 	$(OBJDIR)/Party.o \
 	$(OBJDIR)/MainMenu.o \
+	$(OBJDIR)/TargetSelectMenu.o \
 	$(OBJDIR)/BattleMenu.o \
 	$(OBJDIR)/IngameMenu.o \
 	$(OBJDIR)/MapGen.o \
@@ -170,6 +171,9 @@ $(OBJDIR)/Party.o: src/Danmaku/Managers/Party.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MainMenu.o: src/Danmaku/Menus/MainMenu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/TargetSelectMenu.o: src/Danmaku/Menus/TargetSelectMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/BattleMenu.o: src/Danmaku/Menus/BattleMenu.cpp

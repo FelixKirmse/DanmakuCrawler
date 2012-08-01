@@ -30,7 +30,7 @@ Battle::Battle()
   _fourLayout.push_back(sf::Vector2f(230.f, 305.f));
   _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
   _fourLayout.push_back(sf::Vector2f(480.f, 275.f));
-  _fourLayout.push_back(sf::Vector2f(650.f, 350.f));
+  _fourLayout.push_back(sf::Vector2f(650.f, 340.f));
 }
 
 bool Battle::UpdateCondition()
@@ -89,6 +89,26 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
   }
 }
 
+void Battle::SetTargetInfo(TargetInfo targetInfo)
+{
+  _targetInfo = targetInfo;
+}
+
+void Battle::SetBattleState(Battle::BattleState battleState)
+{
+  _battleState = battleState;
+}
+
+Battle::CharVec &Battle::GetEnemies()
+{
+  return _enemies;
+}
+
+Party::FrontRow& Battle::GetFrontRow()
+{
+  return _playerRow;
+}
+
 void Battle::StartBattle(int level, int bossID)
 {
   GameStateManager::SetState(GameStates::Battle);
@@ -111,6 +131,7 @@ void Battle::IdleUpdate()
       _battleState = BattleMenu;
       _playerLeftOff = i;
       _currentAttacker = &_playerRow[i];
+      _battleMenu.SetCurrentAttacker(_currentAttacker);
       return;
     }
   }
@@ -144,6 +165,7 @@ void Battle::ConsequenceUpdate()
   ++_frameCounter;
   if(_frameCounter == 45)
   {
+    _battleMenu.ResetMenu();
     _battleState = Idle;
     _frameCounter = 0;
 
@@ -199,10 +221,10 @@ void Battle::ConsequenceUpdate()
     charHPBefore[i] = _playerRow[i].CurrentHP();
   }
 
-  if(_targetInfo.TargetType == TargetInfo::Single)
+  if(_targetInfo.Spell->GetTargetType() == TargetInfo::Single)
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
 
-  if(_targetInfo.TargetType == TargetInfo::All)
+  if(_targetInfo.Spell->GetTargetType() == TargetInfo::All)
   {
     for(size_t i = 0; i < (_enemyTurn ? _playerRow.size() : _enemies.size());
         ++i)
@@ -213,7 +235,7 @@ void Battle::ConsequenceUpdate()
     }
   }
 
-  if(_targetInfo.TargetType == TargetInfo::Decaying)
+  if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
   {
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
     size_t attackerIndex = 0;
@@ -271,7 +293,8 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
   }
 
   // CharSprite infront of enemies, but behind CharFrames
-  for(size_t i = 0; i < _playerRow.size(); ++i)
+  for(size_t i = 0; i < _playerRow.size() && _battleState == BattleMenu
+      && _battleMenu.GetMenuState() != BattleMenu::TargetSelection; ++i)
   {
     _playerRow[i].Graphics().DrawCharSprite(renderTarget);
   }

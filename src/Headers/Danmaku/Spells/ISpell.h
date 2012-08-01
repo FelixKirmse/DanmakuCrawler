@@ -11,7 +11,7 @@ public:
   virtual void DamageCalculation(Character& attacker,
                                  Character& defender,
                                  float specialModifier = 1.f) = 0;
-  virtual TargetInfo::TargetTypes GetTargetType() = 0;
+  virtual TargetInfo::TargetType GetTargetType() = 0;
   virtual sf::String const& GetName() = 0;
   virtual sf::String const& GetDescription() = 0;
 };

@@ -15,6 +15,9 @@ public:
 
   void SetText(sf::String const& text);
   void SetPosition(sf::Vector2f const& position);
+  void SetPosition(float x, float y);
+  void SetFontSize(unsigned int newSize);
+  void SetColor(sf::Color newColor);
 
 private:
   sf::Text _text;

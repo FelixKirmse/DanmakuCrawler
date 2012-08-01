@@ -13,19 +13,32 @@ namespace Danmaku
 {
 class Battle : public BlackDragonEngine::IUpdateableGameState,
     public BlackDragonEngine::IDrawableGameState
-{
-  friend class Danmaku::BattleMenu;
+{  
 public:
   typedef std::vector<Character> CharVec;
   typedef std::vector<sf::Vector2f> VecVec;
   typedef std::array<float, 4> FloatVec;
   typedef boost::random::mt19937 RandomSeed;
 
+  enum BattleState
+  {
+    Idle,
+    BattleMenu,
+    Action,
+    Consequences,
+    GameOver,
+    BattleWon
+  };
+
   Battle();
   bool UpdateCondition();
   bool Update();
   bool DrawCondition();
   void Draw(float interpolation, sf::RenderTarget& renderTarget);
+  void SetTargetInfo(TargetInfo targetInfo);
+  void SetBattleState(BattleState battleState);
+  CharVec& GetEnemies();
+  Party::FrontRow& GetFrontRow();
 
   static void StartBattle(int level, int bossID = 0);
   static size_t MaxEnemyID;
@@ -45,15 +58,7 @@ private:
   template<class T>
   void SetInitialSPD(T& vec);
 
-  enum BattleStates
-  {
-    Idle,
-    BattleMenu,
-    Action,
-    Consequences,
-    GameOver,
-    BattleWon
-  } _battleState;
+  BattleState _battleState;
 
   CharVec _enemies;
   Party::FrontRow& _playerRow;
