@@ -32,9 +32,11 @@ public:
 
     void SetName(sf::String const& name);
     void SetPosition(sf::Vector2f const& position);
+    void SetPosition(float x, float y);
     void SetSelected(bool selected);
     void SetSelectedColor(sf::Color const& color);
     void SetUnSelectedColor(sf::Color const& color);
+    void SetFontSize(unsigned int newSize);
 
 private:
     sf::Text _text;

@@ -37,7 +37,8 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _charSprite(TextureProvider::Get(charName + "CharSprite")),
     _battleSprite(TextureProvider::Get(charName + "BattleSprite")),
     _enemySpdBar(sf::Vector2f(70.f,6.f)),
-    _enemySpdBackgrnd(sf::Vector2f(70.f,6.f)),    
+    _enemySpdBackgrnd(sf::Vector2f(70.f,6.f)),
+    _enemyName(owner->GetDisplayName(), FontProvider::Get("Vera"), 10u),
     _myTurn(false)
 {
   using namespace sf;
@@ -45,9 +46,9 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     DeadFrame = &TextureProvider::Get("DeadPortrait");
 
   _charSprite.setPosition(0.f, 0.f);
-  _battleSprite.setOrigin(_battleSprite.getLocalBounds().width,
+  /*_battleSprite.setOrigin(_battleSprite.getLocalBounds().width,
                           _battleSprite.getLocalBounds().height);
-
+*/
   _portrait.setTexture(TextureProvider::Get(charName + "Portrait"));
   _portrait.setPosition(sf::Vector2f(100.f,100.f));
 
@@ -145,18 +146,18 @@ void CharGraphics::UpdateHP()
 
   // Smooth going from green to red
   sf::Color hpColor = _hpBar.getFillColor();
-  unsigned int red = (scaleFactor > .5f) ? 255u - (scaleFactor * 2 * 255u) :
+  unsigned int red = (scaleFactor >= .5f) ? 255u - (scaleFactor * 2 * 255u) :
                                            255u;
-  unsigned int green = (scaleFactor < .5f) ? 255u * scaleFactor * 2 : 255u;
+  unsigned int green = (scaleFactor <= .5f) ? 255u * scaleFactor * 2 : 255u;
   hpColor.r = red;
   hpColor.g = green;
   _hpBar.setFillColor(hpColor);
 
-  if(currentHP > 0)
+  if(currentHP != 0)
     return;
 
+
   _owner->IsDead() = true;
-  _owner->CurrentHP() = 0.f;
   _portrait.setTexture(*DeadFrame);
   _battleSprite.setTexture(*DeadFrame);
 }
@@ -213,13 +214,25 @@ void CharGraphics::UpdateSPD(bool myTurn)
   _enemySpdBar.setFillColor((_myTurn) ? FullSPDBar : NormalSPDBar);
 }
 
-void CharGraphics::SetBattleSpritePosition(sf::Vector2f const& pos)
+void CharGraphics::SetBattleSpritePosition(sf::Vector2f pos)
 {
+  pos.x -= _battleSprite.getLocalBounds().width;
+  pos.y -= _battleSprite.getLocalBounds().height;
   _battleSprite.setPosition(pos);
-  float posx = pos.x - _battleSprite.getLocalBounds().width / 2.f
+  float posx = pos.x +_battleSprite.getLocalBounds().width
+      - _battleSprite.getLocalBounds().width / 2.f
       - _enemySpdBackgrnd.getSize().x / 2.f;
-  _enemySpdBackgrnd.setPosition(posx, pos.y + 5.f);
+  _enemySpdBackgrnd.setPosition(posx, pos.y
+                                + _battleSprite.getLocalBounds().height+ 5.f);
   _enemySpdBar.setPosition(_enemySpdBackgrnd.getPosition());
+  _enemyName.setPosition(_enemySpdBar.getPosition());
+  sf::Vector2f namePos = _enemyName.getPosition();
+  namePos.y += 7.f;
+  namePos.x += _enemySpdBar.getLocalBounds().width / 2.f;
+  namePos.x -= _enemyName.getLocalBounds().width / 2.f;
+  namePos.x = (int)namePos.x;
+  namePos.y = (int)namePos.y;
+  _enemyName.setPosition(namePos);
 }
 
 void CharGraphics::DrawBattleSprite(sf::RenderTarget& rTarget)
@@ -230,6 +243,7 @@ void CharGraphics::DrawBattleSprite(sf::RenderTarget& rTarget)
   rTarget.draw(_battleSprite);
   rTarget.draw(_enemySpdBackgrnd);
   rTarget.draw(_enemySpdBar);
+  rTarget.draw(_enemyName);
 }
 
 }

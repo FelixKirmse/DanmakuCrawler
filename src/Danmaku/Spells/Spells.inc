@@ -6,7 +6,21 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     float damage = a.GetStats().GetTotalBaseStat(AD) - d.GetStats().GetTotalBaseStat(DEF);
-    d.CurrentHP() -= (damage > 0.f) ? damage : 0.f;
+    d.TakeDamage(damage);
+  },
+  0.f
+),
+Spell
+(
+  "Defend",
+  "Aquire a defensive stance, increasing DEF & MR by 20% and recovering 20% of MP",
+  TargetInfo::Single,
+  [] (Character& a, Character& d, int mod)
+  {
+    Stats& as = a.GetStats();
+    as.BuffBaseStat(DEF, 0.2f);
+    as.BuffBaseStat(MR, 0.2f);
+    a.UseMP(-(a.GetStats().GetTotalBaseStat(MP) * 0.2f));
   },
   0.f
 ),
@@ -18,7 +32,7 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     float damage = 2.f * a.GetStats().GetTotalBaseStat(AD) - d.GetStats().GetTotalBaseStat(DEF);
-    d.CurrentHP() -= (damage > 0.f) ? damage : 0.f;
+    d.TakeDamage(damage);
   },
   20.f
 ),
@@ -30,7 +44,7 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     float damage = 3.f * a.GetStats().GetTotalBaseStat(AD) - 1.5f * d.GetStats().GetTotalBaseStat(DEF);
-    d.CurrentHP() -= (damage > 0.f) ? damage : 0.f;
+    d.TakeDamage(damage);
   },
   120.f
 ),
@@ -51,7 +65,7 @@ Spell
 
     // Yes many braces are not needed, I included them to make the formula more clear
     float damage = ((6.66f * aMD * (aDRK/100.f) - 2.5f* dMR) * (100.f/dDRK)) / mod;
-    d.CurrentHP() -= (damage > 0.f) ? damage : 0.f;
+    d.TakeDamage(damage);
   },
   666.f
 )

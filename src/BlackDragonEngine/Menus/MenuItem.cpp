@@ -86,7 +86,12 @@ void MenuItem::SetName(sf::String const& name)
 void MenuItem::SetPosition(sf::Vector2f const& position)
 {
   _text.setPosition(sf::Vector2f(static_cast<int>(position.x),
-                             static_cast<int>(position.y)));
+                                 static_cast<int>(position.y)));
+}
+
+void MenuItem::SetPosition(float x, float y)
+{
+  SetPosition(sf::Vector2f(x,y));
 }
 
 void MenuItem::SetSelected(bool selected)
@@ -102,6 +107,11 @@ void MenuItem::SetSelectedColor(sf::Color const& color)
 void MenuItem::SetUnSelectedColor(sf::Color const& color)
 {
   _unSelectedColor = color;
+}
+
+void MenuItem::SetFontSize(unsigned int newSize)
+{
+  _text.setCharacterSize(newSize);
 }
 
 sf::FloatRect MenuItem::GetLocalRectangle()

@@ -56,4 +56,31 @@ void Stats::LvlUp(int currentLevel, int amount)
     BaseStats[SPD][0] = 100.f + BaseStats[SPD][6] * newLevel * BaseStats[SPD][5];
   }
 }
+
+void Stats::BuffBaseStat(BaseStat baseStat, float amount)
+{
+  SingleStat& stat = BaseStats[baseStat];
+  stat[4] += amount;
+  stat[4] = (stat[4] > 2.f) ? 2.f : stat[4] < 0.5f ? 0.5f : stat[4];
+}
+
+void Stats::ReduceBuffEffectiveness()
+{
+  for(int i = 0; i < 8; ++i)
+  {
+    float& stat = BaseStats[(BaseStat)i][4];
+    if(stat < 1.f)
+    {
+      stat += .1f;
+      stat = stat > 1.f ? 1.f : stat;
+    }
+    if(stat > 1.f)
+    {
+      stat -= .1f;
+      stat = stat < 1.f ? 1.f : stat;
+    }
+  }
+}
+
+
 }

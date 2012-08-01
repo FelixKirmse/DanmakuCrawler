@@ -83,6 +83,8 @@ struct Stats
   float GetTotalResistance(DebuffResistance resistance);
 
   void LvlUp(int currentLevel, int amount);
+  void BuffBaseStat(BaseStat baseStat, float amount);
+  void ReduceBuffEffectiveness();
 
   static StatsMap _baseStats;
 

@@ -17,12 +17,13 @@ class Battle;
 
 struct TargetInfo
 {
-  enum TargetTypes
+  enum TargetType
   {
     Single,
     All,
     Decaying
-  } TargetType;
+  };
+
   Character* Target;
   ISpell* Spell;
 };
@@ -44,8 +45,12 @@ public:
   Stats& GetStats();
   CharGraphics& Graphics();
   int& TurnCounter();
-  sf::String const& GetDisplayName();
+  sf::String const& GetDisplayName() const;
   bool& IsDead();
+  void TakeDamage(float value);
+  void UseMP(float value);
+  void Heal(float value);
+  SpellList& GetSpells();
 
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 

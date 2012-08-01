@@ -31,5 +31,20 @@ void MenuLabel::SetPosition(sf::Vector2f const& position)
 {
   _text.setPosition(position);
 }
+
+void MenuLabel::SetPosition(float x, float y)
+{
+  SetPosition(sf::Vector2f(x,y));
+}
+
+void MenuLabel::SetFontSize(unsigned int newSize)
+{
+  _text.setCharacterSize(newSize);
+}
+
+void MenuLabel::SetColor(sf::Color newColor)
+{
+  _text.setColor(newColor);
+}
 }
 
