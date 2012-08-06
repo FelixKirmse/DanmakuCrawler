@@ -22,10 +22,13 @@ Character::Character(sf::String name)
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
                    _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
-    _currentMP(0), _charGraphics(), _dead(false), _level(1)
+    _currentMP(0), _graphics(), _dead(false), _level(1)
 {
   _spellList.push_back(Spells::GetSpell("Attack"));
   _spellList.push_back(Spells::GetSpell("Defend"));
+  _spellList.push_back(Spells::GetSpell("Devil's Nuke"));
+  _spellList.push_back(Spells::GetSpell("Strong Punch"));
+  _spellList.push_back(Spells::GetSpell("Roundhouse Kick"));
 
   if(_displayName == _name)
     _stats = Stats::_baseStats[_name.toAnsiString()];
@@ -36,7 +39,7 @@ Character::Character(sf::String name)
 
 void Character::InitializeCharGraphics()
 {
-  _charGraphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
+  _graphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
 }
 
 bool Character::UpdateTurnCounter()
@@ -52,7 +55,7 @@ bool Character::UpdateTurnCounter()
     result = true;
     _stats.ReduceBuffEffectiveness();
   }
-  _charGraphics.UpdateSPD(result);
+  _graphics.UpdateSPD(result);
 
   return result;
 }
@@ -74,7 +77,7 @@ Stats& Character::GetStats()
 
 CharGraphics& Character::Graphics()
 {
-  return _charGraphics;
+  return _graphics;
 }
 
 int& Character::TurnCounter()
@@ -96,6 +99,9 @@ void Character::TakeDamage(float value)
 {
   _currentHP -= (value > 0.f) ? value : 0.f;
   _currentHP = (_currentHP < 0.f) ? 0.f : _currentHP;
+  if(_currentHP >= 0.f)
+    return;
+  _graphics.UpdateHP();
 }
 
 void Character::UseMP(float value)
@@ -116,6 +122,15 @@ void Character::Heal(float value)
 Character::SpellList& Character::GetSpells()
 {
   return _spellList;
+}
+
+void Character::CheckIfDead()
+{
+  if((int)_currentHP > 0)
+    return;
+
+  _dead = true;
+  _graphics.SetDeadSprites();
 }
 
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
@@ -181,7 +196,7 @@ Character& Character::operator=(Character const& source)
   _currentMP = source._currentMP;
   _dead = source._dead;
   _level = source._level;
-  _charGraphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
+  _graphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
   return *this;
 }
 }

@@ -23,6 +23,11 @@ sf::Vector2f const& MenuLabel::GetPosition()
   return _text.getPosition();
 }
 
+sf::FloatRect MenuLabel::GetLocalRectangle()
+{
+  return _text.getLocalBounds();
+}
+
 void MenuLabel::SetText(sf::String const& text)
 {
   _text.setString(text);

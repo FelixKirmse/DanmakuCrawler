@@ -27,7 +27,7 @@ Spell
 Spell
 (
   "Strong Punch",
-  "A low-cost physical attack that is stronger than a normal attack.",
+  "A low-cost physical attack that is stronger\nthan a normal attack.",
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
@@ -39,7 +39,7 @@ Spell
 Spell
 (
   "Roundhouse Kick",
-  "You unleash a potent Roundhouse Kick that causes moderate physical damage to all enemies",
+  "You unleash a potent Roundhouse Kick that causes\nmoderate physical damage to all enemies",
   TargetInfo::All,
   [] (Character& a, Character& d, int mod)
   {
@@ -51,7 +51,7 @@ Spell
 Spell
 (
   "Devil's Nuke",
-  "Deals extreme DRK damage to one target and causes all nearby targets to receive fallout damage depending on proximity",
+  "Deals extreme DRK damage to one target and causes all\nnearby targets to receive fallout damage\ndepending on proximity",
   TargetInfo::Decaying,
   [] (Character& a, Character& d, int mod)
   {
@@ -64,7 +64,7 @@ Spell
     float dDRK = ds.GetTotalMastery(DRK);
 
     // Yes many braces are not needed, I included them to make the formula more clear
-    float damage = ((6.66f * aMD * (aDRK/100.f) - 2.5f* dMR) * (100.f/dDRK)) / mod;
+    float damage = ((6.66f * aMD * (aDRK/100.f) - 2.f* dMR) * (100.f/dDRK)) / mod;
     d.TakeDamage(damage);
   },
   666.f

@@ -33,6 +33,7 @@ private:
 
   sf::RenderWindow _graphics;
   bool _gameRunning;  
+  bool _hasFocus;
 
   static Game* _currentInstance; //For lazy static access
 };

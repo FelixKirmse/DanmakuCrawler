@@ -2,6 +2,7 @@
 #include "Danmaku/Battle.h"
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/Character.h"
+#include "Danmaku/Spells/ISpell.h"
 
 namespace Danmaku
 {
@@ -9,7 +10,7 @@ namespace Danmaku
 BattleMenu::BattleMenu(Battle& battle)
   : Attack("Attack"), Spell("Spell"), Defend("Defend"), Switch("Switch"),
     Convince("Convince"), _menuState(ActionSelect), _battle(battle),
-    _targetSelectMenu(battle, *this)
+    _targetSelectMenu(battle, *this), _spellSelectMenu(*this)
 {
   using namespace BlackDragonEngine;
   MenuItems.push_back(MenuItem(Attack, FontName, true));
@@ -34,6 +35,7 @@ void BattleMenu::Update()
     break;
 
    case SpellSelect:
+    _spellSelectMenu.Update();
     break;
 
   case SelectCharToSwitch:
@@ -57,6 +59,8 @@ void BattleMenu::Draw(sf::RenderTarget& renderTarget)
     break;
 
    case SpellSelect:
+    BlackDragonEngine::Menu::Draw(renderTarget);
+    _spellSelectMenu.Draw(renderTarget);
     break;
 
   case SelectCharToSwitch:
@@ -77,12 +81,18 @@ void BattleMenu::SelectMenuItem()
     _targetInfo.Spell = _currentAttacker->GetSpells()[0];
   }
 
+  if(selectedItem == Spell)
+  {
+    _menuState = SpellSelect;
+    _spellSelectMenu.ResetMenu(_currentAttacker);
+  }
+
   if(selectedItem == Defend)
   {
     _targetInfo.Spell = _currentAttacker->GetSpells()[1];
     _targetInfo.Target = _currentAttacker;
     _battle.SetTargetInfo(_targetInfo);
-    _battle.SetBattleState(Battle::Consequences);
+    _battle.SetBattleState(Battle::Action);
   }
 
   if(selectedItem == Convince)
@@ -97,11 +107,31 @@ void BattleMenu::SetCurrentAttacker(Character* currentAttacker)
   _currentAttacker = currentAttacker;
 }
 
+Character* BattleMenu::GetCurrentAttacker()
+{
+  return _currentAttacker;
+}
+
 void BattleMenu::SetTarget(Character* target)
 {
   _targetInfo.Target = target;
-  _battle.SetBattleState(Battle::Consequences);
+  _battle.SetBattleState(Battle::Action);
   _battle.SetTargetInfo(_targetInfo);
+}
+
+void BattleMenu::SetSpell(ISpell* spell)
+{
+  _targetInfo.Spell = spell;
+  if(spell->GetTargetType() == TargetInfo::All)
+  {
+    _battle.SetTargetInfo(_targetInfo);
+    _battle.SetBattleState(Battle::Action);
+  }
+  else
+  {
+    _menuState = TargetSelection;
+    _targetSelectMenu.ResetMenu();
+  }
 }
 
 BattleMenu::BMenuState BattleMenu::GetMenuState()

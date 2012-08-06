@@ -5,7 +5,7 @@ namespace BlackDragonEngine
 {
 
 Menu::Menu()
-  : FontName("Vera"), EnableMouseSelection(true),
+  : FontName("Vera"), EnableMouseSelection(false),
     ItemOffset(sf::Vector2f(0, 24))
 {
 }
@@ -92,7 +92,8 @@ sf::String const& Menu::SelectedItem()
 }
 
 
-void Menu::SetPositions(sf::Vector2f positionCenter, bool centered)
+void Menu::SetPositions(sf::Vector2f position, bool centered,
+                        int offset)
 {
   for(int i = 0; i < (int)MenuItems.size(); ++i)
   {
@@ -100,9 +101,29 @@ void Menu::SetPositions(sf::Vector2f positionCenter, bool centered)
     sf::Vector2f fontCenter = (centered) ? sf::Vector2f(fontBound.width/2,
                                                         fontBound.height/2) :
                                            sf::Vector2f(0.f, 0.f);
-    MenuItems[i].SetPosition(positionCenter - fontCenter +
-                             sf::Vector2f((i-2)*ItemOffset.x,
-                                          (i-2)*ItemOffset.y));
+    MenuItems[i].SetPosition(position - fontCenter +
+                             sf::Vector2f((i + offset)*ItemOffset.x,
+                                          (i + offset)*ItemOffset.y));
+  }
+}
+
+void Menu::SetLabelPositions(sf::Vector2f position, bool centered,
+                        int offset, bool originBottomRight)
+{
+  for(int i = 0; i < (int)MenuLabels.size(); ++i)
+  {
+    sf::FloatRect fontBound = MenuLabels[i].GetLocalRectangle();
+    sf::Vector2f fontCenter = (centered) ? sf::Vector2f(fontBound.width/2,
+                                                        fontBound.height/2) :
+                                           sf::Vector2f(0.f, 0.f);
+    MenuLabels[i].SetPosition(position - fontCenter -
+                              (originBottomRight ?
+                                 sf::Vector2f(MenuLabels[i].GetLocalRectangle()
+                                              .width, MenuLabels[i]
+                                              .GetLocalRectangle().height) :
+                                 sf::Vector2f(0.f,0.f)) +
+                             sf::Vector2f((i + offset)*ItemOffset.x,
+                                          (i + offset)*ItemOffset.y));
   }
 }
 

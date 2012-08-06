@@ -51,6 +51,7 @@ public:
   void UseMP(float value);
   void Heal(float value);
   SpellList& GetSpells();
+  void CheckIfDead();
 
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 
@@ -69,7 +70,7 @@ private:
   SpellList _spellList;
   float _currentHP;
   float _currentMP;
-  CharGraphics _charGraphics;
+  CharGraphics _graphics;
   bool _dead;
   size_t _level;
 

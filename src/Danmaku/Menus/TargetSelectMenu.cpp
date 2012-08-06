@@ -16,8 +16,8 @@ TargetSelectMenu::TargetSelectMenu(Battle& battle, BattleMenu& battleMenu)
   MenuLabels.push_back(MenuLabel(Party, FontName));
   MenuLabels[0].SetPosition(25.f, 370.f);
   MenuLabels[1].SetPosition(25.f, 425.f);
-  MenuLabels[0].SetColor(sf::Color(sf::Color::White));
-  MenuLabels[1].SetColor(sf::Color(sf::Color::White));
+  MenuLabels[0].SetColor(sf::Color::White);
+  MenuLabels[1].SetColor(sf::Color::White);
   MenuLabels[0].SetFontSize(13u);
   MenuLabels[1].SetFontSize(13u);
 }
@@ -36,52 +36,67 @@ void TargetSelectMenu::ResetMenu()
   Battle::CharVec& enemies = _battle.GetEnemies();
   Party::FrontRow& players = _battle.GetFrontRow();
 
-  for(size_t i = 0; i < 2; ++i)
+  int ic(0);
+  for(size_t i = 0; i < 2u; ++i)
   {
+    if(enemies[i].IsDead())
+      continue;
     MenuItem newItem(enemies[i].GetDisplayName());
     newItem.SetFontSize(13u);
     MenuItems.push_back(newItem);
     _nameCharMap[enemies[i].GetDisplayName().toAnsiString()] = &enemies[i];
+
+    if(i == 0)
+      MenuItems[ic++].SetPosition(12.f, 388.f);
+    else
+      MenuItems[ic++].SetPosition(12.f, 407.f);
   }
-  int ic(0);
 
-  MenuItems[ic].SetSelected(true);
-  MenuItems[ic++].SetPosition(12.f, 388.f);
-  MenuItems[ic++].SetPosition(12.f, 407.f);
-
-  for(size_t i = 0; i < 2; ++i)
+  for(size_t i = 0; i < 2u; ++i)
   {
+    if(players[i].IsDead())
+      continue;
     MenuItem newItem(players[i].GetDisplayName());
     newItem.SetFontSize(13u);
     MenuItems.push_back(newItem);
     _nameCharMap[players[i].GetDisplayName().toAnsiString()] = &players[i];
-  }
 
-  MenuItems[ic++].SetPosition(12.f, 440.f);
-  MenuItems[ic++].SetPosition(12.f, 459.f);
+    if(i == 0)
+      MenuItems[ic++].SetPosition(12.f, 440.f);
+    else
+      MenuItems[ic++].SetPosition(12.f, 459.f);
+  }
 
   for(size_t i = 2; i < enemies.size(); ++i)
   {
+    if(enemies[i].IsDead())
+      continue;
     MenuItem newItem(enemies[i].GetDisplayName());
     newItem.SetFontSize(13u);
     MenuItems.push_back(newItem);
     _nameCharMap[enemies[i].GetDisplayName().toAnsiString()] = &enemies[i];
-  }
 
-  MenuItems[ic++].SetPosition(113.f, 388.f);
-  if(enemies.size() == 4)
-    MenuItems[ic++].SetPosition(113.f, 407.f);
+    if(i == 2u)
+      MenuItems[ic++].SetPosition(113.f, 388.f);
+    else
+      MenuItems[ic++].SetPosition(113.f, 407.f);
+  }
 
   for(size_t i = 2; i < players.size(); ++i)
   {
+    if(players[i].IsDead())
+      continue;
     MenuItem newItem(players[i].GetDisplayName());
     newItem.SetFontSize(13u);
     MenuItems.push_back(newItem);
     _nameCharMap[players[i].GetDisplayName().toAnsiString()] = &players[i];
-  }
 
-  MenuItems[ic++].SetPosition(113.f, 440.f);
-  MenuItems[ic++].SetPosition(113.f, 459.f);
+    if(i == 2)
+      MenuItems[ic++].SetPosition(113.f, 440.f);
+    else
+      MenuItems[ic++].SetPosition(113.f, 459.f);
+  }
+  MenuItems[0].SetSelected(true);
 }
 
 void TargetSelectMenu::Update()
@@ -91,23 +106,35 @@ void TargetSelectMenu::Update()
   if(Input::Cancel(true))
     _battleMenu.SetMenuState(BattleMenu::ActionSelect);
   if(Input::Left(true))
-    SelectMenuItemHorizontal(-4);
+    SelectMenuItemHorizontal(Left);
   if(Input::Right(true))
-    SelectMenuItemHorizontal(4);
+    SelectMenuItemHorizontal(Right);
 }
 
-void TargetSelectMenu::SelectMenuItemHorizontal(int offset)
+void TargetSelectMenu::SelectMenuItemHorizontal(Direction direction)
 {
-  for(size_t i = 0; i < MenuItems.size(); ++i)
+  bool phaseTwo(false);
+  sf::Vector2f pos;
+  int oldSelect(0);
+  for(int i = 0; i < MenuItems.size(); ++i)
   {
-    if(!MenuItems[i].IsSelected())
+    if(!MenuItems[i].IsSelected() && !phaseTwo)
       continue;
 
-    MenuItems[i].SetSelected(false);
-    MenuItems[(i + offset < 0 ||
-               i + offset > MenuItems.size()) ?
-          i : i + offset].SetSelected(true);
-    break;
+    if(phaseTwo && MenuItems[i].GetPosition().y == pos.y &&
+       ((direction == Left && MenuItems[i].GetPosition().x < pos.x) ||
+        (direction == Right && MenuItems[i].GetPosition().x > pos.x)))
+    {
+      MenuItems[oldSelect].SetSelected(false);
+      MenuItems[i].SetSelected(true);
+      return;
+    }
+    if(phaseTwo)
+      continue;
+    phaseTwo = true;
+    pos = MenuItems[i].GetPosition();
+    oldSelect = i;
+    i = -1;
   }
 }
 
