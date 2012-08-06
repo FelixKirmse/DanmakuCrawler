@@ -12,6 +12,7 @@ public:
 
   sf::String const& GetText();
   sf::Vector2f const& GetPosition();
+  sf::FloatRect GetLocalRectangle();
 
   void SetText(sf::String const& text);
   void SetPosition(sf::Vector2f const& position);

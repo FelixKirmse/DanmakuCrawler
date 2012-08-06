@@ -85,3 +85,5 @@ src/Danmaku/Spells/Spell.cpp
 src/Danmaku/Spells/Spells.inc
 src/Headers/Danmaku/TargetSelectMenu.h
 src/Danmaku/Menus/TargetSelectMenu.cpp
+src/Headers/Danmaku/SpellSelectMenu.h
+src/Danmaku/Menus/SpellSelectMenu.cpp

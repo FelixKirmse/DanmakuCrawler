@@ -7,7 +7,8 @@ namespace BlackDragonEngine
 {
 Game::Game(sf::String const& title, sf::VideoMode windowSize,
            sf::Uint32 style, sf::ContextSettings const& settings)
-  : _graphics(windowSize, title, style, settings), _gameRunning(false)
+  : _graphics(windowSize, title, style, settings), _gameRunning(false),
+    _hasFocus(true)
 {
   _currentInstance = this;
   _graphics.setVerticalSyncEnabled(false);
@@ -47,7 +48,8 @@ void Game::Run(int ups)
 
     for(int loops = 0; GetTicks() > nextGameTick && loops < maxFrameSkip; ++loops)
     {
-      Input::UpdateStates();
+      if(_hasFocus)
+        Input::UpdateStates();
       Update();
       nextGameTick += skipTicks;
       ++updateCounter;
@@ -80,6 +82,10 @@ void Game::HandleEvents()
   {
     if(event.type == sf::Event::Closed)
       Quit();
+    if(event.type == sf::Event::LostFocus)
+      _hasFocus = false;
+    if(event.type == sf::Event::GainedFocus)
+      _hasFocus = true;
   }
 }
 

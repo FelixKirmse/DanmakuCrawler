@@ -8,6 +8,7 @@
 #include "Danmaku/BattleMenu.h"
 #include "Danmaku/Party.h"
 #include <boost/random.hpp>
+#include <boost/unordered_map.hpp>
 
 namespace Danmaku
 {
@@ -43,7 +44,7 @@ public:
   static void StartBattle(int level, int bossID = 0);
   static size_t MaxEnemyID;
 
-private:
+private:  
   void IdleUpdate();
   void ConsequenceUpdate();
 
@@ -54,6 +55,8 @@ private:
 
   void GenerateEnemies(int level, int bossID);
   void SetupBossBattle(int level, int bossID);
+
+  bool TargetIsEnemy();
 
   template<class T>
   void SetInitialSPD(T& vec);
@@ -83,8 +86,9 @@ private:
   FloatVec _charHPStep;
   FloatVec _charHPShouldHave;
 
-  RandomSeed _rng;
+  RandomSeed _rng; 
 
+  static int const ConsequenceFrames;
   static float const EnemyHPMod;
   static float const EnemyBaseMod;
 

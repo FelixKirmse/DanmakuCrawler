@@ -14,13 +14,16 @@ public:
   void UpdateSPD(bool myTurn);
   void UpdateHP();
   void UpdateMP();
+  void SetDamageDone(int damage);
   void SetBattleSpritePosition(sf::Vector2f pos);
 
   void DrawBattleSprite(sf::RenderTarget& rTarget);
   void DrawCharSprite(sf::RenderTarget& rTarget);
   void Draw(sf::RenderTarget& rTarget);
+  void DrawDamageDone(sf::RenderTarget& rTarget);
   void Reposition(sf::Vector2f newOffset);
   void Reposition(float x, float y);
+  void SetDeadSprites();
 
 private:
   Character* _owner;
@@ -45,6 +48,7 @@ private:
   sf::RectangleShape _enemySpdBackgrnd;
 
   sf::Text _enemyName;
+  sf::Text _damageDone;
 
   bool _myTurn;
 

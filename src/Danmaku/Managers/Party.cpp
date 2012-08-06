@@ -39,9 +39,9 @@ void Party::ResetInternal()
 
 
   // TODO Delete all the test stuff
-  _frontRow[0] = Character("Yuugi");
-  _frontRow[1] = Character("Remilia");
-  _frontRow[2] = Character("Mokou");
+  _frontRow[0] = Character("Remilia");
+  _frontRow[1] = Character("Komachi");
+  _frontRow[2] = Character("Yuugi");
   _frontRow[3] = Character("Alice");
 
   for(auto& c : _frontRow)

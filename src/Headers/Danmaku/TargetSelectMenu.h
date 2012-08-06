@@ -20,7 +20,13 @@ public:
   void Update();
 
 private:
-  void SelectMenuItemHorizontal(int offset);
+  enum Direction
+  {
+    Left,
+    Right
+  };
+
+  void SelectMenuItemHorizontal(Direction direction);
 
   sf::String const Enemies;
   sf::String const Party;

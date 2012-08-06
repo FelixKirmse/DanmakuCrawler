@@ -14,6 +14,7 @@ Battle* Battle::_currentInstance;
 size_t Battle::MaxEnemyID;
 float const Battle::EnemyHPMod = 2.f;
 float const Battle::EnemyBaseMod = .75f;
+int const Battle::ConsequenceFrames = 90;
 
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
@@ -48,7 +49,7 @@ bool Battle::Update()
   case BattleMenu:
     _battleMenu.Update();
     break;
-  case Action:
+  case Action:    
     break;
   case Consequences:
     ConsequenceUpdate();
@@ -97,9 +98,11 @@ void Battle::SetTargetInfo(TargetInfo targetInfo)
 void Battle::SetBattleState(Battle::BattleState battleState)
 {
   _battleState = battleState;
+  if(_battleState == Action)
+    _battleState = Consequences;
 }
 
-Battle::CharVec &Battle::GetEnemies()
+Battle::CharVec& Battle::GetEnemies()
 {
   return _enemies;
 }
@@ -132,6 +135,7 @@ void Battle::IdleUpdate()
       _playerLeftOff = i;
       _currentAttacker = &_playerRow[i];
       _battleMenu.SetCurrentAttacker(_currentAttacker);
+      _enemyTurn = false;
       return;
     }
   }
@@ -163,16 +167,23 @@ void Battle::IdleUpdate()
 void Battle::ConsequenceUpdate()
 {
   ++_frameCounter;
-  if(_frameCounter == 45)
+  if(_frameCounter == ConsequenceFrames)
   {
     _battleMenu.ResetMenu();
     _battleState = Idle;
-    _frameCounter = 0;
+    _frameCounter = 0;    
 
-    bool someoneAlive(false); // Pretend every player is dead...
     for(size_t i = 0; i < _playerRow.size(); ++i)
     {
-      someoneAlive |= !_playerRow[i].IsDead(); // ...until we find someone alive!
+      _playerRow[i].CurrentHP() = _charHPShouldHave[i];
+      _playerRow[i].Graphics().UpdateHP();
+      _playerRow[i].CheckIfDead();
+    }
+
+    bool someoneAlive(false); // Pretend every player is dead...
+    for(auto& player : _playerRow)
+    {
+      someoneAlive |= !player.IsDead(); // ...until we find someone alive!
     }
 
     if(!someoneAlive) // whoops, everyone is dead, Game Over!
@@ -184,9 +195,10 @@ void Battle::ConsequenceUpdate()
     }
 
     bool enemyAlive(false); // Pretend every enemy is dead...
-    for(size_t i = 0; i < _enemies.size(); ++i)
+    for(auto& enemy : _enemies)
     {
-      enemyAlive |= !_enemies[i].IsDead(); // ...until proven otherwise.
+      enemy.CheckIfDead();
+      enemyAlive |= !enemy.IsDead(); // ...until proven otherwise.
     }
 
     if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!
@@ -195,13 +207,7 @@ void Battle::ConsequenceUpdate()
       _battleState = Idle;
       GameStateManager::SetState(GameStates::Ingame);
       _battleMenu.ResetMenu();
-    }
-
-    for(size_t i = 0; i < _playerRow.size(); ++i)
-    {
-      _playerRow[i].CurrentHP() = _charHPShouldHave[i];
-      _playerRow[i].Graphics().UpdateHP();
-    }
+    }    
     return;
   }
 
@@ -214,61 +220,74 @@ void Battle::ConsequenceUpdate()
     }
     return;
   }
+  _currentAttacker->UseMP(_targetInfo.Spell->GetMPCost());
 
   float charHPBefore[4];
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     charHPBefore[i] = _playerRow[i].CurrentHP();
-  }
+  }  
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::Single)
-    _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
+  {
+    int hpBefore = _targetInfo.Target->CurrentHP();
+    Character* target = _targetInfo.Target;
+    _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target);
+    target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
+  }
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::All)
   {
     for(size_t i = 0; i < (_enemyTurn ? _playerRow.size() : _enemies.size());
         ++i)
     {
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           (_enemyTurn ?
-                                              _playerRow[i] : _enemies[i]));
+      Character* target = (_enemyTurn ? &_playerRow[i] : &_enemies[i]);
+      int hpBefore = target->CurrentHP();
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target);
+      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
     }
   }
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
   {
+    int currentHP(_targetInfo.Target->CurrentHP());
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
+    _targetInfo.Target->Graphics().SetDamageDone(_targetInfo.Target->CurrentHP()
+                                                 - currentHP);
     size_t attackerIndex = 0;
-    for(;attackerIndex < (_enemyTurn ? _playerRow.size() : _enemies.size()) &&
+    for(;attackerIndex < (TargetIsEnemy() ? _enemies.size() : _playerRow.size()) &&
         (_enemyTurn ?
          &_playerRow[attackerIndex] :
          &_enemies[attackerIndex]) != _targetInfo.Target;
         ++attackerIndex); //This loop has no body intentionally!!!!
     for(int i = attackerIndex - 1, mod = 2; i >= 0; --i, ++mod)
     {
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           (_enemyTurn ?
-                                              _playerRow[i] : _enemies[i]),
-                                           mod);
+      Character* target = (TargetIsEnemy() ? &_enemies[i] : &_playerRow[i]);
+      int hpBefore = target->CurrentHP();
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target, mod);
+      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
     }
 
     for(size_t i = attackerIndex + 1, mod = 2;
-        i < (_enemyTurn ? _playerRow.size() : _enemies.size());
+        i < (TargetIsEnemy() ? _enemies.size() : _playerRow.size());
         ++i, ++mod)
     {
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           (_enemyTurn ?
-                                              _playerRow[i] : _enemies[i]),
-                                           mod);
+      Character* target = (TargetIsEnemy() ? &_enemies[i] : &_playerRow[i]);
+      int hpBefore = target->CurrentHP();
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target, mod);
+      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
     }
-
-    _enemyTurn = false;
   }
+  _enemyTurn = false;
+  if(TargetIsEnemy())
+    for(auto& enemy : _enemies)
+      enemy.Graphics().UpdateHP();
 
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _charHPShouldHave[i] = _playerRow[i].CurrentHP();
-    _charHPStep[i] = (charHPBefore[i] - _playerRow[i].CurrentHP()) / 45.f;
+    _charHPStep[i] = (charHPBefore[i] - _playerRow[i].CurrentHP())
+        / ConsequenceFrames;
     _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
@@ -309,6 +328,19 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
 {
   Draw(renderTarget);
+  bool targetIsEnemy(TargetIsEnemy());
+  TargetInfo::TargetType targetType(_targetInfo.Spell->GetTargetType());
+  if(targetIsEnemy && targetType == TargetInfo::Single)
+  {
+    _targetInfo.Target->Graphics().DrawDamageDone(renderTarget);
+  }
+  else if(targetIsEnemy || targetType == TargetInfo::All)
+  {
+    for(auto& enemy : _enemies)
+    {
+      enemy.Graphics().DrawDamageDone(renderTarget);
+    }
+  }
 }
 
 
@@ -374,5 +406,15 @@ void Battle::GenerateEnemies(int level, int bossID)
 void Battle::SetupBossBattle(int level, int bossID)
 {
   // TODO Boss Stat Generation
+}
+
+bool Battle::TargetIsEnemy()
+{
+  for(auto& enemy : _enemies)
+  {
+    if(&enemy == _targetInfo.Target)
+      return true;
+  }
+  return false;
 }
 }
