@@ -44,10 +44,10 @@ void Menu::NextMenuItem()
     if(MenuItems[i].IsSelected())
     {
       MenuItems[i].SetSelected(false);
-      if(i == MenuItems.size() - 1)
-        MenuItems[0].SetSelected(true);
-      else
-        MenuItems[i + 1].SetSelected(true);
+      int nextItem(i == MenuItems.size() - 1 ? 0 : i + 1);
+      MenuItems[nextItem].SetSelected(true);
+      if(!MenuItems[nextItem].IsSelectable())
+        NextMenuItem();
       break;
     }
   }
@@ -60,10 +60,10 @@ void Menu::PreviousMenuItem()
     if(MenuItems[i].IsSelected())
     {
       MenuItems[i].SetSelected(false);
-      if(i == 0)
-        MenuItems[MenuItems.size() - 1].SetSelected(true);
-      else
-        MenuItems[i - 1].SetSelected(true);
+      int lastItem(i == 0 ? MenuItems.size() - 1 : i - 1);
+      MenuItems[lastItem].SetSelected(true);
+      if(!MenuItems[lastItem].IsSelectable())
+        PreviousMenuItem();
       break;
     }
   }

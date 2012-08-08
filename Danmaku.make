@@ -29,7 +29,7 @@ ifeq ($(config),debug)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -g -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -lsfml-graphics -lsfml-window -lsfml-system -lboost_system -lboost_filesystem -lboost_serialization -Llib
-  LIBS      += lib/libBlackDragonEngine.a
+  LIBS      += -lBlackDragonEngine
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)
@@ -51,7 +51,7 @@ ifeq ($(config),release)
   CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -ffast-math -O2 -std=c++11
   CXXFLAGS  += $(CFLAGS) 
   LDFLAGS   += -s -lsfml-graphics -lsfml-window -lsfml-system -lboost_system -lboost_filesystem -lboost_serialization -Llib
-  LIBS      += lib/libBlackDragonEngine.a
+  LIBS      += -lBlackDragonEngine
   RESFLAGS  += $(DEFINES) $(INCLUDES) 
   LDDEPS    += lib/libBlackDragonEngine.a
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)

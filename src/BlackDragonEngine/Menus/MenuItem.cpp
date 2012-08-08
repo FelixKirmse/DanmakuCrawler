@@ -38,14 +38,16 @@ MenuItem::MenuItem(sf::String const& name,sf::String const& fontName,
 MenuItem::MenuItem(sf::String const& name, sf::Vector2f const& position,
                    bool isSelected, sf::Font const& font)
   : _text(name, font, 20), _isSelected(isSelected),
-    _selectedColor(sf::Color::Red), _unSelectedColor(sf::Color::White)
+    _selectedColor(sf::Color::Red), _unSelectedColor(sf::Color::White),
+    _selectable(true), _unselectableColor(sf::Color(128,128,128))
 {
   _text.setPosition(position);
 }
 
 void MenuItem::Update()
 {
-  _text.setColor((_isSelected) ? _selectedColor : _unSelectedColor);
+  _text.setColor(!_selectable ? _unselectableColor :
+                               _isSelected ? _selectedColor : _unSelectedColor);
 }
 
 void MenuItem::Draw(sf::RenderTarget& renderTarget)
@@ -78,6 +80,11 @@ sf::Color const& MenuItem::GetUnSelectedColor()
   return _unSelectedColor;
 }
 
+const sf::Color &MenuItem::GetUnselectableColor()
+{
+  return _unselectableColor;
+}
+
 void MenuItem::SetName(sf::String const& name)
 {
   _text.setString(name);
@@ -95,8 +102,8 @@ void MenuItem::SetPosition(float x, float y)
 }
 
 void MenuItem::SetSelected(bool selected)
-{
-  _isSelected = selected;
+{ 
+   _isSelected = selected;
 }
 
 void MenuItem::SetSelectedColor(sf::Color const& color)
@@ -114,6 +121,16 @@ void MenuItem::SetFontSize(unsigned int newSize)
   _text.setCharacterSize(newSize);
 }
 
+void MenuItem::SetSelectable(bool selectable)
+{
+  _selectable = selectable;
+}
+
+void MenuItem::SetUnselectableColor(sf::Color const& newColor)
+{
+  _unselectableColor = _unselectableColor;
+}
+
 sf::FloatRect MenuItem::GetLocalRectangle()
 {
   return _text.getLocalBounds();
@@ -121,7 +138,12 @@ sf::FloatRect MenuItem::GetLocalRectangle()
 
 sf::FloatRect MenuItem::GetWorldRectangle()
 {
-    return _text.getGlobalBounds();
+  return _text.getGlobalBounds();
+}
+
+bool MenuItem::IsSelectable()
+{
+  return _selectable;
 }
 
 }

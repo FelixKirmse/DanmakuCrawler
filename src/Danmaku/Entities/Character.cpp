@@ -1,5 +1,6 @@
 #include <ctime>
 #include <limits>
+#include <string>
 #include "Danmaku/Character.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
@@ -28,7 +29,9 @@ Character::Character(sf::String name)
   _spellList.push_back(Spells::GetSpell("Defend"));
   _spellList.push_back(Spells::GetSpell("Devil's Nuke"));
   _spellList.push_back(Spells::GetSpell("Strong Punch"));
-  _spellList.push_back(Spells::GetSpell("Roundhouse Kick"));
+  _spellList.push_back(Spells::GetSpell("Ultra Expensive Spell"));
+  _spellList.push_back(Spells::GetSpell("Concentrated Heal"));
+  _spellList.push_back(Spells::GetSpell("Healsplosion"));
 
   if(_displayName == _name)
     _stats = Stats::_baseStats[_name.toAnsiString()];
@@ -97,8 +100,20 @@ bool& Character::IsDead()
 
 void Character::TakeDamage(float value)
 {
+  IntGenerator evaRoll(0,99);
+  int evaChance = _stats.GetTotalBaseStat(EVA);
+  bool attackEvaded = evaRoll(_rng) < evaChance;
+  if(attackEvaded && _stats.EVAType == Stats::Dodge)
+  {
+    _graphics.SetDamageDone("Dodged!!", false);
+    return;
+  }
+  value /= attackEvaded ? 2.f : 1.f;
+  sf::String addendum(attackEvaded ? ", Blocked!!" : "");
+  _graphics.SetDamageDone(std::to_string((int) value) + addendum, false);
   _currentHP -= (value > 0.f) ? value : 0.f;
   _currentHP = (_currentHP < 0.f) ? 0.f : _currentHP;
+
   if(_currentHP >= 0.f)
     return;
   _graphics.UpdateHP();
@@ -114,6 +129,7 @@ void Character::UseMP(float value)
 
 void Character::Heal(float value)
 {
+  _graphics.SetDamageDone(std::to_string((int)value), true);
   _currentHP += value;
   _currentHP = (_currentHP > _stats.GetTotalBaseStat(HP)) ?
         _stats.GetTotalBaseStat(HP) : _currentHP;

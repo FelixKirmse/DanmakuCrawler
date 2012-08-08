@@ -43,6 +43,7 @@ void Stats::LvlUp(int currentLevel, int amount)
     BaseStats[DEF][6] += 0.02f;
     BaseStats[MR][6] += 0.02f;
     BaseStats[CHA][6] += 0.02f;
+    BaseStats[EVA][6] += 0.02f;
     BaseStats[SPD][6] += 0.000645f;
 
     BaseStats[HP][0] += BaseStats[HP][5];
@@ -52,6 +53,10 @@ void Stats::LvlUp(int currentLevel, int amount)
     BaseStats[DEF][0] += BaseStats[DEF][5];
     BaseStats[MR][0] += BaseStats[MR][5];
     BaseStats[CHA][0] += BaseStats[CHA][5];
+
+    BaseStats[EVA][0] += BaseStats[EVA][5];
+    if(EVAType == Dodge && BaseStats[EVA][0] >= 10.f)
+      BaseStats[EVA][0] = 10.f;
 
     BaseStats[SPD][0] = 100.f + BaseStats[SPD][6] * newLevel * BaseStats[SPD][5];
   }

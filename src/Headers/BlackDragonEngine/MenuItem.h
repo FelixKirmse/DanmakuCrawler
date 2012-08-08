@@ -27,8 +27,10 @@ public:
     bool IsSelected();
     sf::Color const& GetSelectedColor();
     sf::Color const& GetUnSelectedColor();
+    sf::Color const& GetUnselectableColor();
     sf::FloatRect GetLocalRectangle();
     sf::FloatRect GetWorldRectangle();
+    bool IsSelectable();
 
     void SetName(sf::String const& name);
     void SetPosition(sf::Vector2f const& position);
@@ -37,11 +39,15 @@ public:
     void SetSelectedColor(sf::Color const& color);
     void SetUnSelectedColor(sf::Color const& color);
     void SetFontSize(unsigned int newSize);
+    void SetSelectable(bool selectable);
+    void SetUnselectableColor(sf::Color const& newColor);
 
 private:
     sf::Text _text;
     bool _isSelected;
     sf::Color _selectedColor;
     sf::Color _unSelectedColor;
+    bool _selectable;
+    sf::Color _unselectableColor;
 };
 }
