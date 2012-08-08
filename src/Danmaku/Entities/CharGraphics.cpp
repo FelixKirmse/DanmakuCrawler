@@ -178,10 +178,10 @@ void CharGraphics::UpdateMP()
   _mpBar.setSize(size);
 }
 
-void CharGraphics::SetDamageDone(int damage)
+void CharGraphics::SetDamageDone(sf::String damage, bool heal)
 {
-  _damageDone.setColor(damage <= 0 ? sf::Color::Red : sf::Color::Green);
-  _damageDone.setString(std::to_string(damage < 0 ? -damage : damage));
+  _damageDone.setColor(heal ? sf::Color::Green : sf::Color::Red);
+  _damageDone.setString(damage);
   sf::Vector2f dmgPos = _enemySpdBar.getPosition();
   dmgPos.y -= 14.f;
   dmgPos.x = (int)dmgPos.x;

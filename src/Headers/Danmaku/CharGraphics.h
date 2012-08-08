@@ -14,7 +14,7 @@ public:
   void UpdateSPD(bool myTurn);
   void UpdateHP();
   void UpdateMP();
-  void SetDamageDone(int damage);
+  void SetDamageDone(sf::String damage, bool heal);
   void SetBattleSpritePosition(sf::Vector2f pos);
 
   void DrawBattleSprite(sf::RenderTarget& rTarget);

@@ -116,7 +116,7 @@ void TargetSelectMenu::SelectMenuItemHorizontal(Direction direction)
   bool phaseTwo(false);
   sf::Vector2f pos;
   int oldSelect(0);
-  for(int i = 0; i < MenuItems.size(); ++i)
+  for(int i = 0; i < (int)MenuItems.size(); ++i)
   {
     if(!MenuItems[i].IsSelected() && !phaseTwo)
       continue;

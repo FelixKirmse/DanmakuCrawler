@@ -20,7 +20,7 @@ public:
   TargetInfo::TargetType GetTargetType();
   sf::String const& GetName();
   sf::String const& GetDescription();
-  float GetMPCost();
+  float GetMPCost(Character& caster);
 
 private:
   sf::String _name;

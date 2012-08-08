@@ -61,7 +61,7 @@ private:
   template<class T>
   void SetInitialSPD(T& vec);
 
-  BattleState _battleState;
+  BattleState _battleState;  
 
   CharVec _enemies;
   Party::FrontRow& _playerRow;
@@ -87,6 +87,9 @@ private:
   FloatVec _charHPShouldHave;
 
   RandomSeed _rng; 
+
+  BattleState _queuedState;
+  bool _changeState;
 
   static int const ConsequenceFrames;
   static float const EnemyHPMod;

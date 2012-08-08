@@ -28,13 +28,16 @@ void SpellSelectMenu::ResetMenu(Character* currentAttacker)
   Character::SpellList& spells = currentAttacker->GetSpells();
   for(size_t i = 2; i < spells.size(); ++i)
   {
+    int mpCost = spells[i]->GetMPCost(*currentAttacker);
+    bool selectable(_currentAttacker->CurrentMP() >= mpCost);
+
     MenuItem newItem(spells[i]->GetName());
     newItem.SetFontSize(13u);
+    newItem.SetSelectable(selectable);
     MenuItems.push_back(newItem);
 
-    MenuLabel newLabel(std::to_string((int)spells[i]->GetMPCost()) + MP,
-                       FontName);
-    newLabel.SetColor(sf::Color::White);
+    MenuLabel newLabel(std::to_string(mpCost) + MP, FontName);
+    newLabel.SetColor(selectable ? sf::Color::White : sf::Color(128u,128u,128u));
     newLabel.SetFontSize(13u);
     MenuLabels.push_back(newLabel);
 
@@ -43,7 +46,14 @@ void SpellSelectMenu::ResetMenu(Character* currentAttacker)
   SetPositions(sf::Vector2f(SpellOriginX, OriginY), false, 0);
   SetLabelPositions(sf::Vector2f(MPCostOriginX, OriginY + 10.f), false, 0, true);
 
-  MenuItems[0].SetSelected(true);
+  for(auto& item : MenuItems)
+  {
+    if(!item.IsSelectable())
+      continue;
+    item.SetSelected(true);
+    break;
+  }
+
   AddStandardMenuLabels();
   MenuLabels.back().SetText(spells[2]->GetDescription());
 }
@@ -83,7 +93,7 @@ void SpellSelectMenu::SelectMenuItem()
 {
   sf::String const& selectedItem = SelectedItem();
   ISpell* selectedSpell = _nameSpellMap[selectedItem.toAnsiString()];
-  if(_currentAttacker->CurrentMP() >= selectedSpell->GetMPCost())
+  if(_currentAttacker->CurrentMP() >= selectedSpell->GetMPCost(*_currentAttacker))
   {
     _battleMenu.SetSpell(selectedSpell);
   }

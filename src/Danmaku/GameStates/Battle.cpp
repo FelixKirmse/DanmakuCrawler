@@ -21,7 +21,7 @@ Battle::Battle()
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
     _battleMenu(*this), _threeLayout(), _fourLayout(), _charHPStep(),
-    _charHPShouldHave(), _rng(time(0))
+    _charHPShouldHave(), _rng(time(0)), _queuedState(Idle), _changeState(false)
 {
   _currentInstance = this;
   _threeLayout.push_back(sf::Vector2f(260.f, 305.f));
@@ -32,6 +32,7 @@ Battle::Battle()
   _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
   _fourLayout.push_back(sf::Vector2f(480.f, 275.f));
   _fourLayout.push_back(sf::Vector2f(650.f, 340.f));
+
 }
 
 bool Battle::UpdateCondition()
@@ -41,6 +42,11 @@ bool Battle::UpdateCondition()
 
 bool Battle::Update()
 {
+  if(_changeState)
+  {
+    _battleState = _queuedState;
+    _changeState = false;
+  }
   switch(_battleState)
   {
   case Idle:
@@ -49,7 +55,7 @@ bool Battle::Update()
   case BattleMenu:
     _battleMenu.Update();
     break;
-  case Action:    
+  case Action:
     break;
   case Consequences:
     ConsequenceUpdate();
@@ -97,9 +103,10 @@ void Battle::SetTargetInfo(TargetInfo targetInfo)
 
 void Battle::SetBattleState(Battle::BattleState battleState)
 {
-  _battleState = battleState;
-  if(_battleState == Action)
-    _battleState = Consequences;
+  if(battleState == Action)
+    battleState = Consequences;
+  _queuedState = battleState;
+  _changeState = true;
 }
 
 Battle::CharVec& Battle::GetEnemies()
@@ -171,7 +178,7 @@ void Battle::ConsequenceUpdate()
   {
     _battleMenu.ResetMenu();
     _battleState = Idle;
-    _frameCounter = 0;    
+    _frameCounter = 0;
 
     for(size_t i = 0; i < _playerRow.size(); ++i)
     {
@@ -190,7 +197,7 @@ void Battle::ConsequenceUpdate()
     {
       // TODO Actual Game Over Code
       _battleState = Idle;
-      GameStateManager::SetState(GameStates::Ingame);
+      GameStateManager::SetState(GameStates::Titlescreen);
       _battleMenu.ResetMenu();
     }
 
@@ -207,7 +214,7 @@ void Battle::ConsequenceUpdate()
       _battleState = Idle;
       GameStateManager::SetState(GameStates::Ingame);
       _battleMenu.ResetMenu();
-    }    
+    }
     return;
   }
 
@@ -220,63 +227,49 @@ void Battle::ConsequenceUpdate()
     }
     return;
   }
-  _currentAttacker->UseMP(_targetInfo.Spell->GetMPCost());
+  _currentAttacker->UseMP(_targetInfo.Spell->GetMPCost(*_currentAttacker));
+  bool targetIsEnemy(TargetIsEnemy());
 
   float charHPBefore[4];
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     charHPBefore[i] = _playerRow[i].CurrentHP();
-  }  
+  }
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::Single)
-  {
-    int hpBefore = _targetInfo.Target->CurrentHP();
-    Character* target = _targetInfo.Target;
-    _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target);
-    target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
-  }
+    _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
+
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::All)
-  {
     for(size_t i = 0; i < (_enemyTurn ? _playerRow.size() : _enemies.size());
         ++i)
-    {
-      Character* target = (_enemyTurn ? &_playerRow[i] : &_enemies[i]);
-      int hpBefore = target->CurrentHP();
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target);
-      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
-    }
-  }
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                           _enemyTurn ? _enemies[i] :
+                                                        _playerRow[i]);
+
 
   if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
   {
-    int currentHP(_targetInfo.Target->CurrentHP());
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
-    _targetInfo.Target->Graphics().SetDamageDone(_targetInfo.Target->CurrentHP()
-                                                 - currentHP);
+
     size_t attackerIndex = 0;
-    for(;attackerIndex < (TargetIsEnemy() ? _enemies.size() : _playerRow.size()) &&
+    for(;attackerIndex < (targetIsEnemy ? _enemies.size() :
+                          _playerRow.size()) &&
         (_enemyTurn ?
          &_playerRow[attackerIndex] :
          &_enemies[attackerIndex]) != _targetInfo.Target;
         ++attackerIndex); //This loop has no body intentionally!!!!
     for(int i = attackerIndex - 1, mod = 2; i >= 0; --i, ++mod)
-    {
-      Character* target = (TargetIsEnemy() ? &_enemies[i] : &_playerRow[i]);
-      int hpBefore = target->CurrentHP();
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target, mod);
-      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
-    }
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                           targetIsEnemy ? _enemies[i] :
+                                                           _playerRow[i], mod);
 
     for(size_t i = attackerIndex + 1, mod = 2;
-        i < (TargetIsEnemy() ? _enemies.size() : _playerRow.size());
+        i < (targetIsEnemy ? _enemies.size() : _playerRow.size());
         ++i, ++mod)
-    {
-      Character* target = (TargetIsEnemy() ? &_enemies[i] : &_playerRow[i]);
-      int hpBefore = target->CurrentHP();
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker, *target, mod);
-      target->Graphics().SetDamageDone(target->CurrentHP() - hpBefore);
-    }
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                           targetIsEnemy ? _enemies[i] :
+                                                           _playerRow[i], mod);
   }
   _enemyTurn = false;
   if(TargetIsEnemy())
@@ -391,11 +384,12 @@ void Battle::GenerateEnemies(int level, int bossID)
 
     // Lets boost the base stats, since enemy should be STRONK!
     enemy.CurrentMP() = std::numeric_limits<float>::max();
+    level = 100; // TODO DELETE
+    enemy.GetStats().LvlUp(0, level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;
     for(int j = 1; j < 9; ++j)
       bs[(BaseStat)j][0] *= EnemyBaseMod;
-    enemy.GetStats().LvlUp(0, 100); // TODO DELETE
     enemy.CurrentHP() = enemy.GetStats().GetTotalBaseStat(HP);
     enemy.InitializeCharGraphics();
     enemy.Graphics().UpdateHP();

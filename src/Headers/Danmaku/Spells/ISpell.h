@@ -14,6 +14,6 @@ public:
   virtual TargetInfo::TargetType GetTargetType() = 0;
   virtual sf::String const& GetName() = 0;
   virtual sf::String const& GetDescription() = 0;
-  virtual float GetMPCost() = 0;
+  virtual float GetMPCost(Character& caster) = 0;
 };
 }

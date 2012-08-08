@@ -30,8 +30,8 @@ sf::String const& Spell::GetDescription()
 {
   return _description;
 }
-float Spell::GetMPCost()
+float Spell::GetMPCost(Character& caster)
 {
-  return _mpCost;
+  return _mpCost * caster.GetStats().BaseStats[MP][0];
 }
 }
