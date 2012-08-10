@@ -57,6 +57,7 @@ private:
   void SetupBossBattle(int level, int bossID);
 
   bool TargetIsEnemy();
+  bool AttackerIsEnemy();
 
   template<class T>
   void SetInitialSPD(T& vec);

@@ -1,8 +1,11 @@
 #include "Danmaku/Stats.h"
+#include <ctime>
 
 namespace Danmaku
 {
 Stats::StatsMap Stats::_baseStats;
+Stats::RandomSeed Stats::_rng(time(0));
+typedef boost::random::uniform_int_distribution<> IntGenerator;
 
 // Base Stats
 // General formula is (base + (base * items) + bonus) * buffs
@@ -85,6 +88,13 @@ void Stats::ReduceBuffEffectiveness()
       stat = stat < 1.f ? 1.f : stat;
     }
   }
+}
+
+bool Stats::TryToApplyDebuff(DebuffResistance type, int successChance)
+{
+  IntGenerator applyRoll(0,99);
+  int resistance(GetTotalResistance(type) * 3);
+  return applyRoll(_rng) < successChance - resistance;
 }
 
 

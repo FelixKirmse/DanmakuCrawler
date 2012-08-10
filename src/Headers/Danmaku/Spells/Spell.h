@@ -13,7 +13,7 @@ public:
 
   Spell(sf::String const& name, sf::String const& description,
         TargetInfo::TargetType targetType, DamageFuncType damageCalculation,
-        float mpCost);
+        float mpCost, float postUseGauge);
 
   void DamageCalculation(Character& attacker, Character& defender,
                          float mod);
@@ -28,5 +28,6 @@ private:
   TargetInfo::TargetType _targetType;
   DamageFuncType _damageCalculation;
   float _mpCost;
+  float _postUseTurnCount;
 };
 }

@@ -3,6 +3,7 @@
 #include <boost/unordered_map.hpp>
 #include <string>
 #include <SFML/System.hpp>
+#include <boost/random.hpp>
 
 
 #include <fstream>
@@ -67,6 +68,7 @@ struct Stats
   typedef boost::unordered::unordered_map<EleMastery, SingleStat> MasteryMap;
   typedef boost::unordered::unordered_map<DebuffResistance, SingleStat> ResiMap;
   typedef boost::unordered::unordered_map<std::string, Stats> StatsMap;
+  typedef boost::random::mt19937 RandomSeed;
 
   enum
   {
@@ -85,8 +87,10 @@ struct Stats
   void LvlUp(int currentLevel, int amount);
   void BuffBaseStat(BaseStat baseStat, float amount);
   void ReduceBuffEffectiveness();
+  bool TryToApplyDebuff(DebuffResistance type, int successChance);
 
   static StatsMap _baseStats;
+  static RandomSeed _rng;
 
   template<class Archive>
   void serialize(Archive& ar, unsigned int const /*version*/);

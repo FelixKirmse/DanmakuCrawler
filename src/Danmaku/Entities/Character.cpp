@@ -24,14 +24,8 @@ Character::Character(sf::String name)
                    _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
     _currentMP(0), _graphics(), _dead(false), _level(1)
-{
-  _spellList.push_back(Spells::GetSpell("Attack"));
-  _spellList.push_back(Spells::GetSpell("Defend"));
-  _spellList.push_back(Spells::GetSpell("Devil's Nuke"));
-  _spellList.push_back(Spells::GetSpell("Strong Punch"));
-  _spellList.push_back(Spells::GetSpell("Ultra Expensive Spell"));
-  _spellList.push_back(Spells::GetSpell("Concentrated Heal"));
-  _spellList.push_back(Spells::GetSpell("Healsplosion"));
+{  
+  AssignSpells();
 
   if(_displayName == _name)
     _stats = Stats::_baseStats[_name.toAnsiString()];
@@ -190,6 +184,16 @@ sf::String Character::GetRandomName()
   string stdName;
   getline(nameFile, stdName);
   return sf::String(stdName);
+}
+
+void Character::AssignSpells()
+{
+  _spellList.push_back(Spells::GetSpell("Attack"));
+  _spellList.push_back(Spells::GetSpell("Defend"));
+  #include "CharSpells.inc"
+  if(_name == _displayName)
+    return;
+  //TODO Enemy Spell Generation
 }
 
 void Character::GoToLine(std::fstream& file, size_t num)

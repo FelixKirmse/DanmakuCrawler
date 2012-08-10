@@ -20,7 +20,9 @@ struct TargetInfo
   enum TargetType
   {
     Single,
-    All,
+    Self,
+    Allies,
+    Enemies,
     Decaying
   };
 
@@ -61,6 +63,7 @@ public:
 
 private:
   sf::String GetRandomName();
+  void AssignSpells();
   void GoToLine(std::fstream& file, size_t num);
 
   sf::String _name;

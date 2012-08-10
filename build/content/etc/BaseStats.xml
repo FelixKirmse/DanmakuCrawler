@@ -383,6 +383,384 @@
 		</second>
 	</item>
 	<item>
+		<first>Yuuka</first>
+		<second>
+			<BaseStats>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>21</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>2</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>8</item>
+							<item>0.022500001</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>20</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>1</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>51</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>10</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>72</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>14</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>101</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>14</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>58</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>11</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>110</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>14</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>36</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>7</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</BaseStats>
+			<Masteries>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>131</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>134</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>254</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>142</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>176</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>76</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>78</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>76</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>120</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Masteries>
+			<Resistances>
+				<count>6</count>
+				<item_version>0</item_version>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>16</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>8</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>30</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>8</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>8</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>30</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Resistances>
+			<EVAType>1</EVAType>
+		</second>
+	</item>
+	<item>
 		<first>Udonge</first>
 		<second>
 			<BaseStats>
@@ -761,7 +1139,7 @@
 		</second>
 	</item>
 	<item>
-		<first>Yuuka</first>
+		<first>Yuugi</first>
 		<second>
 			<BaseStats>
 				<count>9</count>
@@ -771,7 +1149,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>21</item>
+							<item>25</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -791,7 +1169,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>8</item>
+							<item>7</item>
 							<item>0.022500001</item>
 						</elems>
 					</second>
@@ -801,12 +1179,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>20</item>
+							<item>2</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>1</item>
+							<item>0</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -816,12 +1194,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>51</item>
+							<item>61</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>10</item>
+							<item>12</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -831,12 +1209,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>72</item>
+							<item>7</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>14</item>
+							<item>1</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -846,12 +1224,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>101</item>
+							<item>100</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>14</item>
+							<item>7</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -861,12 +1239,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>58</item>
+							<item>88</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>11</item>
+							<item>17</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -876,12 +1254,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>110</item>
+							<item>124</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>14</item>
+							<item>16</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -891,12 +1269,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>36</item>
+							<item>16</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>7</item>
+							<item>3</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -940,7 +1318,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>254</item>
+							<item>75</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -955,7 +1333,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>142</item>
+							<item>136</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -970,7 +1348,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>176</item>
+							<item>137</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -985,7 +1363,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>76</item>
+							<item>72</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1000,7 +1378,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>78</item>
+							<item>72</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1015,7 +1393,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>76</item>
+							<item>138</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1030,7 +1408,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>120</item>
+							<item>73</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1049,7 +1427,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>16</item>
+							<item>20</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1079,7 +1457,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>30</item>
+							<item>20</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1124,7 +1502,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>30</item>
+							<item>20</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -1135,7 +1513,7 @@
 					</second>
 				</item>
 			</Resistances>
-			<EVAType>1</EVAType>
+			<EVAType>0</EVAType>
 		</second>
 	</item>
 	<item>
@@ -1892,384 +2270,6 @@
 				</item>
 			</Resistances>
 			<EVAType>1</EVAType>
-		</second>
-	</item>
-	<item>
-		<first>Yuugi</first>
-		<second>
-			<BaseStats>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>25</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>7</item>
-							<item>0.022500001</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>2</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>61</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>12</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>7</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>1</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>7</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>88</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>17</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>124</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>16</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>16</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>3</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</BaseStats>
-			<Masteries>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>131</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>134</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>75</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>136</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>137</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>72</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>72</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>138</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>73</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Masteries>
-			<Resistances>
-				<count>6</count>
-				<item_version>0</item_version>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>20</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>8</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>20</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>8</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>8</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>20</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Resistances>
-			<EVAType>0</EVAType>
 		</second>
 	</item>
 	<item>
@@ -4919,384 +4919,6 @@
 		</second>
 	</item>
 	<item>
-		<first>Rumia</first>
-		<second>
-			<BaseStats>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>20</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>3</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>6</item>
-							<item>0.022500001</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>2</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>7</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>26</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>5</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>47</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>9</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>102</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>16</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>23</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>4</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>75</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>9</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>47</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>9</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</BaseStats>
-			<Masteries>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>110</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>106</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>99</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>103</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>192</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>102</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>96</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>67</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Masteries>
-			<Resistances>
-				<count>6</count>
-				<item_version>0</item_version>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>16</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>16</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>16</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Resistances>
-			<EVAType>0</EVAType>
-		</second>
-	</item>
-	<item>
 		<first>Ran</first>
 		<second>
 			<BaseStats>
@@ -5661,6 +5283,384 @@
 						<elems>
 							<count>7</count>
 							<item>24</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Resistances>
+			<EVAType>0</EVAType>
+		</second>
+	</item>
+	<item>
+		<first>Rumia</first>
+		<second>
+			<BaseStats>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>20</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>3</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>6</item>
+							<item>0.022500001</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>2</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>7</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>26</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>5</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>47</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>9</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>102</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>16</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>23</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>4</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>75</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>9</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>47</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>9</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</BaseStats>
+			<Masteries>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>110</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>106</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>185</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>103</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>192</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>102</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>96</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>67</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Masteries>
+			<Resistances>
+				<count>6</count>
+				<item_version>0</item_version>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>16</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>16</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>16</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -7571,111 +7571,6 @@
 				<count>9</count>
 				<item_version>0</item_version>
 				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>26</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>5</item>
-							<item>0.022500001</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>2</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>1</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>11</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>82</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>16</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>103</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>30</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>13</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
 					<first>0</first>
 					<second>
 						<elems>
@@ -7705,81 +7600,17 @@
 						</elems>
 					</second>
 				</item>
-			</BaseStats>
-			<Masteries>
-				<count>9</count>
-				<item_version>0</item_version>
 				<item>
-					<first>8</first>
+					<first>2</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>146</item>
-							<item>0</item>
-							<item>0</item>
+							<item>13</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>142</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>120</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>138</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>173</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
+							<item>2</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -7789,31 +7620,95 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>135</item>
+							<item>103</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
-							<item>0</item>
-							<item>0</item>
+							<item>1</item>
+							<item>30</item>
 							<item>1</item>
 						</elems>
 					</second>
 				</item>
 				<item>
-					<first>2</first>
+					<first>3</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>136</item>
-							<item>0</item>
-							<item>0</item>
+							<item>82</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
+							<item>16</item>
+							<item>1</item>
 						</elems>
 					</second>
 				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>11</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>2</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>2</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>1</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>5</item>
+							<item>0.022500001</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>26</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>2</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</BaseStats>
+			<Masteries>
+				<count>9</count>
+				<item_version>0</item_version>
 				<item>
 					<first>0</first>
 					<second>
@@ -7844,16 +7739,27 @@
 						</elems>
 					</second>
 				</item>
-			</Masteries>
-			<Resistances>
-				<count>6</count>
-				<item_version>0</item_version>
 				<item>
-					<first>4</first>
+					<first>2</first>
 					<second>
 						<elems>
 							<count>7</count>
+							<item>136</item>
 							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>135</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -7868,7 +7774,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>30</item>
+							<item>173</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -7879,7 +7785,86 @@
 					</second>
 				</item>
 				<item>
-					<first>1</first>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>138</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>134</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>142</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>146</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Masteries>
+			<Resistances>
+				<count>6</count>
+				<item_version>0</item_version>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
 					<second>
 						<elems>
 							<count>7</count>
@@ -7909,7 +7894,7 @@
 					</second>
 				</item>
 				<item>
-					<first>5</first>
+					<first>1</first>
 					<second>
 						<elems>
 							<count>7</count>
@@ -7924,7 +7909,22 @@
 					</second>
 				</item>
 				<item>
-					<first>0</first>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>30</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
 					<second>
 						<elems>
 							<count>7</count>
@@ -9833,384 +9833,6 @@
 		</second>
 	</item>
 	<item>
-		<first>Nitori</first>
-		<second>
-			<BaseStats>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>18</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>1</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>8</item>
-							<item>0.022500001</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>2</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>26</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>5</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>22</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>4</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>101</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>15</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>53</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>10</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>89</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>11</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>36</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>7</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</BaseStats>
-			<Masteries>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>104</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>142</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>167</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>113</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>104</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>170</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>169</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>75</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>72</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Masteries>
-			<Resistances>
-				<count>6</count>
-				<item_version>0</item_version>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Resistances>
-			<EVAType>0</EVAType>
-		</second>
-	</item>
-	<item>
 		<first>Eiki</first>
 		<second>
 			<BaseStats>
@@ -10575,6 +10197,384 @@
 						<elems>
 							<count>7</count>
 							<item>8</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Resistances>
+			<EVAType>0</EVAType>
+		</second>
+	</item>
+	<item>
+		<first>Nitori</first>
+		<second>
+			<BaseStats>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>18</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>1</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>8</item>
+							<item>0.022500001</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>2</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>2</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>26</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>5</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>22</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>4</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>101</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>15</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>53</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>10</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>89</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>11</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>36</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>7</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</BaseStats>
+			<Masteries>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>104</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>142</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>167</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>113</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>104</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>170</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>169</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>75</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>72</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Masteries>
+			<Resistances>
+				<count>6</count>
+				<item_version>0</item_version>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>10</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -10967,7 +10967,7 @@
 		</second>
 	</item>
 	<item>
-		<first>Meirin</first>
+		<first>Rin</first>
 		<second>
 			<BaseStats>
 				<count>9</count>
@@ -10977,12 +10977,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>18</item>
+							<item>27</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>1</item>
+							<item>2</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -10997,7 +10997,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>7</item>
+							<item>11</item>
 							<item>0.022500001</item>
 						</elems>
 					</second>
@@ -11007,12 +11007,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>0</item>
+							<item>2</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>2</item>
+							<item>5</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -11022,7 +11022,22 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>46</item>
+							<item>26</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>5</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>47</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11033,56 +11048,11 @@
 					</second>
 				</item>
 				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>22</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>4</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
 					<first>1</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>6</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>38</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>7</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>131</item>
+							<item>102</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11093,16 +11063,46 @@
 					</second>
 				</item>
 				<item>
-					<first>5</first>
+					<first>2</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>31</item>
+							<item>58</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>6</item>
+							<item>11</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>82</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>10</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>51</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>10</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -11116,7 +11116,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>120</item>
+							<item>110</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11131,7 +11131,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>150</item>
+							<item>106</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11146,7 +11146,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>101</item>
+							<item>60</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11161,7 +11161,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>138</item>
+							<item>102</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11176,7 +11176,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>105</item>
+							<item>99</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11191,7 +11191,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>140</item>
+							<item>50</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11206,7 +11206,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>144</item>
+							<item>52</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11221,7 +11221,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>136</item>
+							<item>180</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11236,7 +11236,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>103</item>
+							<item>160</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11255,7 +11255,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>24</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11270,7 +11270,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>0</item>
+							<item>12</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11285,7 +11285,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>18</item>
+							<item>8</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11300,7 +11300,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>0</item>
+							<item>12</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11315,7 +11315,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>8</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11330,7 +11330,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>18</item>
+							<item>8</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11341,7 +11341,7 @@
 					</second>
 				</item>
 			</Resistances>
-			<EVAType>1</EVAType>
+			<EVAType>0</EVAType>
 		</second>
 	</item>
 	<item>
@@ -11723,7 +11723,7 @@
 		</second>
 	</item>
 	<item>
-		<first>Rin</first>
+		<first>Meirin</first>
 		<second>
 			<BaseStats>
 				<count>9</count>
@@ -11733,12 +11733,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>27</item>
+							<item>18</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>2</item>
+							<item>1</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -11753,7 +11753,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>11</item>
+							<item>7</item>
 							<item>0.022500001</item>
 						</elems>
 					</second>
@@ -11763,12 +11763,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>2</item>
+							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>5</item>
+							<item>2</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -11778,22 +11778,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>26</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>5</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>47</item>
+							<item>46</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11804,11 +11789,56 @@
 					</second>
 				</item>
 				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>22</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>4</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
 					<first>1</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>102</item>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>6</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>38</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>7</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>131</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11819,46 +11849,16 @@
 					</second>
 				</item>
 				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>58</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>11</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>82</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>10</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
 					<first>5</first>
 					<second>
 						<elems>
 							<count>7</count>
-							<item>51</item>
+							<item>31</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>10</item>
+							<item>6</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -11872,7 +11872,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>110</item>
+							<item>120</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11887,7 +11887,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>106</item>
+							<item>150</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11902,7 +11902,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>60</item>
+							<item>101</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11917,7 +11917,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>102</item>
+							<item>138</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11932,7 +11932,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>99</item>
+							<item>105</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11947,7 +11947,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>50</item>
+							<item>140</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11962,7 +11962,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>52</item>
+							<item>144</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11977,7 +11977,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>180</item>
+							<item>136</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -11992,7 +11992,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>160</item>
+							<item>103</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12011,7 +12011,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>24</item>
+							<item>12</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12026,7 +12026,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12041,7 +12041,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>8</item>
+							<item>18</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12056,7 +12056,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12071,7 +12071,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>8</item>
+							<item>12</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12086,7 +12086,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>8</item>
+							<item>18</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -12097,7 +12097,7 @@
 					</second>
 				</item>
 			</Resistances>
-			<EVAType>0</EVAType>
+			<EVAType>1</EVAType>
 		</second>
 	</item>
 	<item>
@@ -12465,6 +12465,384 @@
 						<elems>
 							<count>7</count>
 							<item>12</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Resistances>
+			<EVAType>0</EVAType>
+		</second>
+	</item>
+	<item>
+		<first>Suwako</first>
+		<second>
+			<BaseStats>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>14</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>1</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>100</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>9</item>
+							<item>0.022500001</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>2</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>6</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>31</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>6</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>72</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>14</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>101</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>11</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>73</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>14</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>75</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>9</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>31</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+							<item>6</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</BaseStats>
+			<Masteries>
+				<count>9</count>
+				<item_version>0</item_version>
+				<item>
+					<first>8</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>137</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>7</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>140</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>6</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>142</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>68</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>102</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>140</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>141</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>71</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>98</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+			</Masteries>
+			<Resistances>
+				<count>6</count>
+				<item_version>0</item_version>
+				<item>
+					<first>4</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>12</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>3</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>12</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>1</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>12</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>2</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>12</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>5</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>20</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>0</item>
+							<item>1</item>
+						</elems>
+					</second>
+				</item>
+				<item>
+					<first>0</first>
+					<second>
+						<elems>
+							<count>7</count>
+							<item>24</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13235,7 +13613,7 @@
 		</second>
 	</item>
 	<item>
-		<first>Suwako</first>
+		<first>Mystia</first>
 		<second>
 			<BaseStats>
 				<count>9</count>
@@ -13245,12 +13623,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>14</item>
+							<item>24</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>1</item>
+							<item>3</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13265,7 +13643,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>9</item>
+							<item>10</item>
 							<item>0.022500001</item>
 						</elems>
 					</second>
@@ -13280,7 +13658,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>6</item>
+							<item>2</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13305,12 +13683,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>72</item>
+							<item>22</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>14</item>
+							<item>4</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13325,7 +13703,7 @@
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>11</item>
+							<item>14</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13335,12 +13713,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>73</item>
+							<item>53</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>14</item>
+							<item>10</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13350,12 +13728,12 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>75</item>
+							<item>96</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
 							<item>1</item>
-							<item>9</item>
+							<item>12</item>
 							<item>1</item>
 						</elems>
 					</second>
@@ -13384,7 +13762,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>137</item>
+							<item>20</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13399,7 +13777,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>140</item>
+							<item>240</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13414,7 +13792,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>142</item>
+							<item>127</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13429,7 +13807,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>68</item>
+							<item>362</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13444,7 +13822,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>102</item>
+							<item>76</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13459,7 +13837,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>140</item>
+							<item>90</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13474,7 +13852,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>141</item>
+							<item>91</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13489,7 +13867,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>71</item>
+							<item>90</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13504,7 +13882,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>98</item>
+							<item>88</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13523,7 +13901,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>30</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13538,7 +13916,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>10</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13553,7 +13931,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>30</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13568,7 +13946,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>12</item>
+							<item>10</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13583,7 +13961,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>20</item>
+							<item>30</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13598,7 +13976,7 @@
 					<second>
 						<elems>
 							<count>7</count>
-							<item>24</item>
+							<item>30</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
@@ -13977,384 +14355,6 @@
 						<elems>
 							<count>7</count>
 							<item>16</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Resistances>
-			<EVAType>0</EVAType>
-		</second>
-	</item>
-	<item>
-		<first>Mystia</first>
-		<second>
-			<BaseStats>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>24</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>3</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>100</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>10</item>
-							<item>0.022500001</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>2</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>2</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>31</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>6</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>22</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>4</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>101</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>14</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>53</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>10</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>96</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>12</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>31</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-							<item>6</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</BaseStats>
-			<Masteries>
-				<count>9</count>
-				<item_version>0</item_version>
-				<item>
-					<first>8</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>20</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>7</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>240</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>6</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>127</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>362</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>76</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>90</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>91</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>90</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>88</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-			</Masteries>
-			<Resistances>
-				<count>6</count>
-				<item_version>0</item_version>
-				<item>
-					<first>4</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>30</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>3</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>1</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>30</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>2</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>10</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>5</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>30</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>0</item>
-							<item>1</item>
-						</elems>
-					</second>
-				</item>
-				<item>
-					<first>0</first>
-					<second>
-						<elems>
-							<count>7</count>
-							<item>30</item>
 							<item>0</item>
 							<item>0</item>
 							<item>0</item>
