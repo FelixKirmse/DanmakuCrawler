@@ -236,19 +236,23 @@ void Battle::ConsequenceUpdate()
     charHPBefore[i] = _playerRow[i].CurrentHP();
   }
 
-  if(_targetInfo.Spell->GetTargetType() == TargetInfo::Single)
+  TargetInfo::TargetType targetType(_targetInfo.Spell->GetTargetType());
+  if(targetType == TargetInfo::Single)
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
-
-
-  if(_targetInfo.Spell->GetTargetType() == TargetInfo::All)
-    for(size_t i = 0; i < (_enemyTurn ? _playerRow.size() : _enemies.size());
-        ++i)
-      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                           _enemyTurn ? _enemies[i] :
-                                                        _playerRow[i]);
-
-
-  if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
+  else if(targetType == TargetInfo::Self)
+    _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_currentAttacker);
+  else if(targetType == TargetInfo::Allies || targetType == TargetInfo::Enemies)
+  {
+    bool attackerIsEnemy(AttackerIsEnemy());
+    bool targetIsPlayer((attackerIsEnemy && targetType != TargetInfo::Allies) ||
+                        (!attackerIsEnemy && targetType == TargetInfo::Allies))
+        for(size_t i = 0; i < (targetIsPlayer ? _playerRow.size() :
+                                                _enemies.size()); ++i)
+        _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                             targetIsPlayer ? _playerRow[i] :
+                                                          _enemies[i]);
+  }
+  else if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
   {
     _targetInfo.Spell->DamageCalculation(*_currentAttacker, *_targetInfo.Target);
 
@@ -323,7 +327,8 @@ void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
   Draw(renderTarget);
   bool targetIsEnemy(TargetIsEnemy());
   TargetInfo::TargetType targetType(_targetInfo.Spell->GetTargetType());
-  if(targetIsEnemy && targetType == TargetInfo::Single)
+  if((targetIsEnemy && targetType == TargetInfo::Single) ||
+     (AttackerIsEnemy() && targetType == TargetInfo::Self))
   {
     _targetInfo.Target->Graphics().DrawDamageDone(renderTarget);
   }
@@ -407,6 +412,16 @@ bool Battle::TargetIsEnemy()
   for(auto& enemy : _enemies)
   {
     if(&enemy == _targetInfo.Target)
+      return true;
+  }
+  return false;
+}
+
+bool Battle::AttackerIsEnemy()
+{
+  for(auto& enemy : _enemies)
+  {
+    if(&enemy == _currentAttacker)
       return true;
   }
   return false;
