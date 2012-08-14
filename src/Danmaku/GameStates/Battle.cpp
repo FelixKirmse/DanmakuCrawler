@@ -409,9 +409,9 @@ void Battle::SetupBossBattle(int level, int bossID)
 
 bool Battle::TargetIsEnemy()
 {
-  for(auto& enemy : _enemies)
+  for(auto& enemy : _currentInstance->_enemies)
   {
-    if(&enemy == _targetInfo.Target)
+    if(&enemy == _currentInstance->_targetInfo.Target)
       return true;
   }
   return false;
@@ -419,11 +419,16 @@ bool Battle::TargetIsEnemy()
 
 bool Battle::AttackerIsEnemy()
 {
-  for(auto& enemy : _enemies)
+  for(auto& enemy : _currentInstance->_enemies)
   {
-    if(&enemy == _currentAttacker)
+    if(&enemy == _currentInstance->_currentAttacker)
       return true;
   }
   return false;
+}
+
+Battle* Battle::GetInstance()
+{
+  return _currentInstance;
 }
 }

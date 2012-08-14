@@ -43,6 +43,9 @@ public:
 
   static void StartBattle(int level, int bossID = 0);
   static size_t MaxEnemyID;
+  static bool TargetIsEnemy();
+  static bool AttackerIsEnemy();
+  static Battle* GetInstance();
 
 private:  
   void IdleUpdate();
@@ -54,10 +57,7 @@ private:
   void ArrangeCharFrames(int bossID);
 
   void GenerateEnemies(int level, int bossID);
-  void SetupBossBattle(int level, int bossID);
-
-  bool TargetIsEnemy();
-  bool AttackerIsEnemy();
+  void SetupBossBattle(int level, int bossID);  
 
   template<class T>
   void SetInitialSPD(T& vec);

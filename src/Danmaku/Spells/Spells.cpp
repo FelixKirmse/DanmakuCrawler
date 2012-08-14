@@ -1,11 +1,17 @@
+#include <ctime>
 #include "Danmaku/Spells/Spells.h"
 #include "Danmaku/Character.h"
 #include "Danmaku/Stats.h"
+#include "Danmaku/Party.h"
+#include "Danmaku/Battle.h"
 
 namespace Danmaku
 {
 std::vector<Spell> Spells::_spells;
 boost::unordered::unordered_map<std::string, int> Spells::_nameIndexMap;
+Spells::RandomSeed Spells::_rng(time(0));
+
+typedef boost::random::uniform_int_distribution<> IntGenerator;
 
 void Spells::InitializeSpells()
 {
