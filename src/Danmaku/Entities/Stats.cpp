@@ -90,6 +90,39 @@ void Stats::ReduceBuffEffectiveness()
   }
 }
 
+
+
+void Stats::RemoveDebuffs()
+{
+  RemoveStatusDebuffs();
+  RemoveStatDebuffs();
+}
+
+void Stats::RemoveStatDebuffs()
+{
+  for(int i = 0; i < 9; ++i)
+  {
+    float& stat = BaseStats[(BaseStat)i][4];
+    if(stat < 1.f)
+      stat = 1.f;
+  }
+}
+
+void Stats::RemoveStatusDebuffs()
+{
+  // TODO Remove Debuffs
+}
+
+void Stats::RemoveBuffs()
+{
+  for(int i = 0; i < 9; ++i)
+  {
+    float& stat = BaseStats[(BaseStat)i][4];
+    if(stat > 1.f)
+      stat = 1.f;
+  }
+}
+
 bool Stats::TryToApplyDebuff(DebuffResistance type, int successChance)
 {
   IntGenerator applyRoll(0,99);
