@@ -103,7 +103,7 @@ Spell
 Spell
 (
   "Blessed Ground",
-  "The ground below you becomes filled with holy energy.\nThe healing is not much, but it's the thought counts.\nYou are pretty tired after this spell.",
+  "The ground below you becomes filled with holy energy.\nThe healing is not much, but the thought counts.\nYou are pretty tired after this spell.",
   TargetInfo::Allies,
   [] (Character& a, Character& d, int mod)
   {
@@ -122,7 +122,7 @@ Spell
 Spell
 (
   "Barrier of Faith",
-  "Holy power flows through everyone in your party, increasing DEF and MR.",
+  "Holy power flows through everyone in your party.\nIncreases DEF and MR.",
   TargetInfo::Allies,
   [] (Character& a, Character& d, int mod)
   {
@@ -211,9 +211,8 @@ Spell
     float dMR = ds.GetTotalBaseStat(MR);
     float dARC = ds.GetTotalMastery(ARC);
     float& currentMP = a.CurrentMP();
-    currentMP -= as.BaseStats[MP][0] * 1.6f;
 
-    float damage = ((7.f + currentMP/1000.f) * aMD * (aARC/100.f) - 0.5f * dMR) * (100.f/dARC);
+    float damage = ((7.f + currentMP/100.f) * aMD * (aARC/100.f) - 0.5f * dMR) * (100.f/dARC);
     d.TakeDamage(damage);
     currentMP = 0.f;
   },
@@ -224,7 +223,7 @@ Spell
 (
   "Mastery of Mind",
   "You gain complete mastery over your mind, doubling your MD.",
-  TargetInfo::Single,
+  TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
@@ -236,7 +235,7 @@ Spell
 Spell
 (
   "Demonic Strike",
-  "A medium strong physical attack. It's pretty cheap, but also the only\noffense you have. Get used to it!",
+  "A medium strong physical attack. It's cheap, but also the only\noffense you have. Get used to it!",
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
@@ -254,7 +253,7 @@ Spell
 Spell
 (
   "Curse of the Han'yō",
-  "Unleash your full demonic potential, vastly increasing your offensive and\ndefensive capabilities. This power comes with a price.",
+  "Unleash your full demonic potential.\nIncreases AD, MD, DEF & MR.\nInflicts PSN & PAR.",
   TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
   {
@@ -295,7 +294,7 @@ Spell
 Spell
 (
   "Tickling Needles",
-  "Throw magic infused needles at your enemies. Weak but cheap.",
+  "Throw magic infused needles at your enemies.\nWeak but cheap.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)
   {
@@ -834,7 +833,7 @@ Spell
 Spell
 (
   "Supersonic Slash",
-  "Strike faster than sound, striking all enemies with immense force.\nDeals physical WND damage.",
+  "Strike faster than sound, hits all enemies with immense force.\nDeals physical WND damage.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)
   {
@@ -1370,7 +1369,7 @@ Spell
 ),
 Spell
 (
-  "Freeze them to Death!",
+  "Freeze Them To Death!",
   "Absorb all heat from your enemies bodies.\nChance to instantly kill targets.\nDeals physical ICE damage.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)
@@ -1500,7 +1499,7 @@ Spell
 (
   "Jumping Jacks",
   "Throw jumping jacks at an enemy.\nDeals high physical DRK damage.",
-  TargetInfo::Enemies,
+  TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
@@ -1603,6 +1602,20 @@ Spell
     float healing = aMD * (aHOL/dHOL);
     d.Heal(healing);
     ds.RemoveDebuffs();
+  },
+  .48f,
+  .25f
+),
+Spell
+(
+  "Miracle Poke",
+  "Poke an ally, increasing all their stats.",
+  TargetInfo::Single,
+  [] (Character& a, Character& d, int mod)
+  {
+    Stats& ds = d.GetStats();
+    for(int i = 0; i < 9; ++i)
+      ds.BuffBaseStat((BaseStat)i, .35f);
   },
   .48f,
   .25f
@@ -1937,7 +1950,7 @@ Spell
 Spell
 (
   "Acidic Sea",
-  "A sea of acid surrounds the enemy and corrodes their weapons.\nLowers enemies AD.\nDeals WAT damage.",
+  "A sea of acid surrounds the enemy.\nLowers enemies AD.\nDeals WAT damage.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)
   {
@@ -2064,7 +2077,7 @@ Spell
 (
   "Secret Technique #76",
   "A vicious strike that attempts to weaken the enemy.\nChance to steal stat buffs from target.\nDeals physical ARC damage.",
-  TargetInfo::Enemies,
+  TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
@@ -2176,7 +2189,7 @@ Spell
 
     float dMR = ds.GetTotalBaseStat(MR);
 
-    float damage = 4.375f * aMD * (aFIR + aWND + aDRK/100.f) - 1.75f * dMR;
+    float damage = 4.375f * aMD * ((aFIR + aWND + aDRK)/100.f) - 1.75f * dMR;
     d.TakeDamage(damage);
   },
   1.6f,
@@ -2495,7 +2508,7 @@ Spell
 ),
 Spell
 (
-  "Ghostly Strike",
+  "Haunt",
   "Haunt the enemy, dealing damage and healing you.\nChance to instantly kill target.\nDeals DRK damage.",
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
@@ -3114,7 +3127,7 @@ Spell
     float aMD = as.GetTotalBaseStat(MD);
     float aFIR = as.GetTotalMastery(FIR);
 
-    if(Battle::AttackerIsEnemy())
+    if(!Battle::AttackerIsEnemy())
     {
       for(auto& chara : Battle::GetInstance()->GetEnemies())
       {
@@ -3381,9 +3394,8 @@ Spell
     float dMR = ds.GetTotalBaseStat(MR);
     float dARC = ds.GetTotalMastery(ARC);
     float& currentMP = a.CurrentMP();
-    currentMP -= as.BaseStats[MP][0] * 1.6f;
 
-    float damage = ((5.5f + currentMP/1000.f) * aMD * (aARC/100.f) - 1.f * dMR) * (100.f/dARC);
+    float damage = ((10.f + currentMP/100.f) * aMD * (aARC/100.f) - .5f * dMR) * (100.f/dARC);
     d.TakeDamage(damage);
     currentMP = 0.f;
   },

@@ -50,10 +50,16 @@ public:
   sf::String const& GetDisplayName() const;
   bool& IsDead();
   void TakeDamage(float value);
+  void TakeTrueDamage(float value);
   void UseMP(float value);
   void Heal(float value);
   SpellList& GetSpells();
   void CheckIfDead();
+
+  // Status Ailments-Related
+  void ApplyPoison(int damage);
+  void ApplyPAR(int strength);
+  void ApplySIL(int strength);
 
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 
@@ -76,6 +82,15 @@ private:
   CharGraphics _graphics;
   bool _dead;
   size_t _level;
+
+  // Status Ailments-Related
+  bool _poisoned;
+  int _poisonDamage;
+  bool _paralyzed;
+  int _paralyzeStrength;
+  int _paralyzeCounter;
+  bool _silenced;
+  int _silenceStrength;
 
   static RandomSeed _rng;
 };

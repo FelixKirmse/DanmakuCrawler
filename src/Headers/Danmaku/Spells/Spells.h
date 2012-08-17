@@ -15,6 +15,7 @@ public:
   static void InitializeSpells();
   static Spell* GetSpell(int id);
   static Spell* GetSpell(sf::String name);
+  static int GetSpellCount();
 
 private:
   static std::vector<Spell> _spells;

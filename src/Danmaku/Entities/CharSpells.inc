@@ -9,7 +9,7 @@ if(_name == "Reimu")
 else if(_name == "Marisa")
 {
   _spellList.push_back(Spells::GetSpell("Magic Missile"));
-  _spellList.push_back(Spells::GetSpell("Arcane Barrage"));
+  _spellList.push_back(Spells::GetSpell("Blind Knowledge"));
   _spellList.push_back(Spells::GetSpell("Distortion Field"));
   _spellList.push_back(Spells::GetSpell("Ravaging Flow"));
   _spellList.push_back(Spells::GetSpell("Mastery of Mind"));
@@ -25,7 +25,7 @@ else if(_name == "Sakuya")
   _spellList.push_back(Spells::GetSpell("Tickling Needles"));
   _spellList.push_back(Spells::GetSpell("Stabby Stab!"));
   _spellList.push_back(Spells::GetSpell("Sharp Assault"));
-  _spellList.push_back(Spells::GetSpell("Accelerate Time"));
+  _spellList.push_back(Spells::GetSpell("Blitzkrieg"));
   _spellList.push_back(Spells::GetSpell("Time Bubble"));
 }
 else if(_name == "Patchouli")
@@ -94,7 +94,7 @@ else if(_name == "Yuugi")
 {
   _spellList.push_back(Spells::GetSpell("Beastly Smash"));
   _spellList.push_back(Spells::GetSpell("Shadow Trap"));
-  _spellList.push_back(Spells::GetSpell("Sumon Storm"));
+  _spellList.push_back(Spells::GetSpell("Summon Storm"));
   _spellList.push_back(Spells::GetSpell("Fiery Fury Fist"));
 }
 else if(_name == "Aya")
@@ -113,7 +113,7 @@ else if(_name == "Iku")
 }
 else if(_name == "Komachi")
 {
-  _spellList.push_back(Spells::GetSpell("Slash Him Dead!"));
+  _spellList.push_back(Spells::GetSpell("Scythe of the Doomed"));
   _spellList.push_back(Spells::GetSpell("Freeze Them To Death!"));
   _spellList.push_back(Spells::GetSpell("Fuck Them Up!"));
   _spellList.push_back(Spells::GetSpell("Omae Wa Mo Shindeiru"));

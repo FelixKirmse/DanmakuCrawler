@@ -55,8 +55,8 @@ enum DebuffResistance
 {
   PSN = 0,    // Poison
   PAR = 1,    // Paralyze
-  SLW = 2,    // Slow
-  STD = 3,    // Statdrop
+  SLW = 2,    // Slow -- OBSOLETE
+  STD = 3,    // Statdrop -- OBSOLETE
   DTH = 4,    // Instant-Death
   SIL = 5     // Silence
 };
