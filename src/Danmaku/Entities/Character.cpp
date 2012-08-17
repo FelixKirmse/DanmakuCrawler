@@ -23,7 +23,9 @@ Character::Character(sf::String name)
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
                    _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
-    _currentMP(0), _graphics(), _dead(false), _level(1)
+    _currentMP(0), _graphics(), _dead(false), _level(1),
+    _poisoned(false), _poisonDamage(0), _paralyzed(false), _paralyzeStrength(0),
+    _paralyzeCounter(0), _silenced(false), _silenceStrength(0)
 {  
   AssignSpells();
 
@@ -53,6 +55,9 @@ bool Character::UpdateTurnCounter()
     _stats.ReduceBuffEffectiveness();
   }
   _graphics.UpdateSPD(result);
+
+  if(_poisoned)
+    TakeTrueDamage(_poisonDamage);
 
   return result;
 }
@@ -105,6 +110,11 @@ void Character::TakeDamage(float value)
   value /= attackEvaded ? 2.f : 1.f;
   sf::String addendum(attackEvaded ? ", Blocked!!" : "");
   _graphics.SetDamageDone(std::to_string((int) value) + addendum, false);
+  TakeTrueDamage(value);
+}
+
+void Character::TakeTrueDamage(float value)
+{
   _currentHP -= (value > 0.f) ? value : 0.f;
   _currentHP = (_currentHP < 0.f) ? 0.f : _currentHP;
 
@@ -143,6 +153,25 @@ void Character::CheckIfDead()
   _graphics.SetDeadSprites();
 }
 
+void Character::ApplyPoison(int damage)
+{
+  _poisoned = true;
+  _poisonDamage = damage;
+}
+
+void Character::ApplyPAR(int strength)
+{
+  _paralyzed = true;
+  _paralyzeStrength = strength;
+  _paralyzeCounter = TimeToAction;
+}
+
+void Character::ApplySIL(int strength)
+{
+  _silenced = true;
+  _silenceStrength = strength;
+}
+
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 {  
   TargetInfo targetInfo;
@@ -151,7 +180,8 @@ TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
   targetInfo.Spell = _spellList[spellSelect(_rng)];
   targetInfo.Target = NULL;
 
-  if(targetInfo.Spell->GetTargetType() == TargetInfo::All)
+  TargetInfo::TargetType targetType = targetInfo.Spell->GetTargetType();
+  if(targetType != TargetInfo::Single && targetType != TargetInfo::Decaying)
     return targetInfo;
 
 

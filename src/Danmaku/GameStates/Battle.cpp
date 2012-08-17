@@ -12,7 +12,7 @@ namespace Danmaku
 {
 Battle* Battle::_currentInstance;
 size_t Battle::MaxEnemyID;
-float const Battle::EnemyHPMod = 2.f;
+float const Battle::EnemyHPMod = 20.f;
 float const Battle::EnemyBaseMod = .75f;
 int const Battle::ConsequenceFrames = 90;
 
@@ -139,7 +139,7 @@ void Battle::IdleUpdate()
     if(_playerRow[i].UpdateTurnCounter())
     {
       _battleState = BattleMenu;
-      _playerLeftOff = i;
+      _playerLeftOff = i + 1;
       _currentAttacker = &_playerRow[i];
       _battleMenu.SetCurrentAttacker(_currentAttacker);
       _enemyTurn = false;
@@ -160,7 +160,7 @@ void Battle::IdleUpdate()
       _battleState = Consequences;
 
       //_battleState = Action;
-      _enemyLeftOff = i;
+      _enemyLeftOff = i + 1;
       _currentAttacker = &_enemies[i];
       _enemyTurn = true;
       return;
@@ -245,12 +245,12 @@ void Battle::ConsequenceUpdate()
   {
     bool attackerIsEnemy(AttackerIsEnemy());
     bool targetIsPlayer((attackerIsEnemy && targetType != TargetInfo::Allies) ||
-                        (!attackerIsEnemy && targetType == TargetInfo::Allies))
-        for(size_t i = 0; i < (targetIsPlayer ? _playerRow.size() :
-                                                _enemies.size()); ++i)
-        _targetInfo.Spell->DamageCalculation(*_currentAttacker,
-                                             targetIsPlayer ? _playerRow[i] :
-                                                          _enemies[i]);
+                        (!attackerIsEnemy && targetType == TargetInfo::Allies));
+    for(size_t i = 0; i < (targetIsPlayer ? _playerRow.size() :
+                           _enemies.size()); ++i)
+      _targetInfo.Spell->DamageCalculation(*_currentAttacker,
+                                           targetIsPlayer ? _playerRow[i] :
+                                                            _enemies[i]);
   }
   else if(_targetInfo.Spell->GetTargetType() == TargetInfo::Decaying)
   {
@@ -289,6 +289,7 @@ void Battle::ConsequenceUpdate()
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
   }
+  _currentAttacker->Graphics().UpdateSPD(false);
 }
 
 
@@ -332,7 +333,7 @@ void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
   {
     _targetInfo.Target->Graphics().DrawDamageDone(renderTarget);
   }
-  else if(targetIsEnemy || targetType == TargetInfo::All)
+  else if(targetIsEnemy || targetType == TargetInfo::Enemies)
   {
     for(auto& enemy : _enemies)
     {
@@ -389,7 +390,7 @@ void Battle::GenerateEnemies(int level, int bossID)
 
     // Lets boost the base stats, since enemy should be STRONK!
     enemy.CurrentMP() = std::numeric_limits<float>::max();
-    level = 100; // TODO DELETE
+    level = 1000; // TODO DELETE
     enemy.GetStats().LvlUp(0, level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;

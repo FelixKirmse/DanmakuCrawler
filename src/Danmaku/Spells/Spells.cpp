@@ -34,4 +34,9 @@ Spell* Spells::GetSpell(sf::String name)
 {
   return &_spells[_nameIndexMap[name.toAnsiString()]];
 }
+
+int Spells::GetSpellCount()
+{
+  return _spells.size();
+}
 }

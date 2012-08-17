@@ -122,15 +122,16 @@ void BattleMenu::SetTarget(Character* target)
 void BattleMenu::SetSpell(ISpell* spell)
 {
   _targetInfo.Spell = spell;
-  if(spell->GetTargetType() == TargetInfo::All)
-  {
-    _battle.SetTargetInfo(_targetInfo);
-    _battle.SetBattleState(Battle::Action);
-  }
-  else
+  TargetInfo::TargetType targetType = spell->GetTargetType();
+  if(targetType == TargetInfo::Single || targetType == TargetInfo::Decaying)
   {
     _menuState = TargetSelection;
     _targetSelectMenu.ResetMenu();
+  }
+  else
+  {    
+    _battle.SetTargetInfo(_targetInfo);
+    _battle.SetBattleState(Battle::Action);
   }
 }
 
