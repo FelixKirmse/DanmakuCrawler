@@ -65,6 +65,8 @@ bool Battle::Update()
   case BattleWon:
     break;
   }
+  for(auto& chara : _playerRow)
+    chara.Graphics().UpdateHP();
   return false;
 }
 
@@ -138,7 +140,7 @@ void Battle::IdleUpdate()
   {
     if(_playerRow[i].UpdateTurnCounter())
     {
-      _battleState = BattleMenu;
+      SetBattleState(BattleMenu);
       _playerLeftOff = i + 1;
       _currentAttacker = &_playerRow[i];
       _battleMenu.SetCurrentAttacker(_currentAttacker);
@@ -157,7 +159,7 @@ void Battle::IdleUpdate()
       _targetInfo = _enemies[i].AIBattleMenu(_playerRow);
 
       //TODO Delete this line after testing
-      _battleState = Consequences;
+      SetBattleState(Consequences);
 
       //_battleState = Action;
       _enemyLeftOff = i + 1;
@@ -177,7 +179,7 @@ void Battle::ConsequenceUpdate()
   if(_frameCounter == ConsequenceFrames)
   {
     _battleMenu.ResetMenu();
-    _battleState = Idle;
+    SetBattleState(Idle);
     _frameCounter = 0;
 
     for(size_t i = 0; i < _playerRow.size(); ++i)
@@ -185,6 +187,7 @@ void Battle::ConsequenceUpdate()
       _playerRow[i].CurrentHP() = _charHPShouldHave[i];
       _playerRow[i].Graphics().UpdateHP();
       _playerRow[i].CheckIfDead();
+      _playerRow[i].ResetDamageDisplay();
     }
 
     bool someoneAlive(false); // Pretend every player is dead...
@@ -196,7 +199,7 @@ void Battle::ConsequenceUpdate()
     if(!someoneAlive) // whoops, everyone is dead, Game Over!
     {
       // TODO Actual Game Over Code
-      _battleState = Idle;
+      SetBattleState(Idle);
       GameStateManager::SetState(GameStates::Titlescreen);
       _battleMenu.ResetMenu();
     }
@@ -204,6 +207,7 @@ void Battle::ConsequenceUpdate()
     bool enemyAlive(false); // Pretend every enemy is dead...
     for(auto& enemy : _enemies)
     {
+      enemy.ResetDamageDisplay();
       enemy.CheckIfDead();
       enemyAlive |= !enemy.IsDead(); // ...until proven otherwise.
     }
@@ -211,7 +215,7 @@ void Battle::ConsequenceUpdate()
     if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!
     {
       // TODO Actual winning code
-      _battleState = Idle;
+      SetBattleState(Idle);
       GameStateManager::SetState(GameStates::Ingame);
       _battleMenu.ResetMenu();
     }
@@ -326,20 +330,9 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
 {
   Draw(renderTarget);
-  bool targetIsEnemy(TargetIsEnemy());
-  TargetInfo::TargetType targetType(_targetInfo.Spell->GetTargetType());
-  if((targetIsEnemy && targetType == TargetInfo::Single) ||
-     (AttackerIsEnemy() && targetType == TargetInfo::Self))
-  {
-    _targetInfo.Target->Graphics().DrawDamageDone(renderTarget);
-  }
-  else if(targetIsEnemy || targetType == TargetInfo::Enemies)
-  {
-    for(auto& enemy : _enemies)
-    {
-      enemy.Graphics().DrawDamageDone(renderTarget);
-    }
-  }
+
+  for(auto& enemy : _enemies)
+    enemy.Graphics().DrawDamageDone(renderTarget);
 }
 
 
@@ -390,8 +383,8 @@ void Battle::GenerateEnemies(int level, int bossID)
 
     // Lets boost the base stats, since enemy should be STRONK!
     enemy.CurrentMP() = std::numeric_limits<float>::max();
-    level = 1000; // TODO DELETE
-    enemy.GetStats().LvlUp(0, level);
+    level = 100; // TODO DELETE
+    enemy.LvlUp(level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;
     for(int j = 1; j < 9; ++j)

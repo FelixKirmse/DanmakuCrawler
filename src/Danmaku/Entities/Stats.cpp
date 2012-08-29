@@ -58,8 +58,6 @@ void Stats::LvlUp(int currentLevel, int amount)
     BaseStats[CHA][0] += BaseStats[CHA][5];
 
     BaseStats[EVA][0] += BaseStats[EVA][5];
-    if(EVAType == Dodge && BaseStats[EVA][0] >= 10.f)
-      BaseStats[EVA][0] = 10.f;
 
     BaseStats[SPD][0] = 100.f + BaseStats[SPD][6] * newLevel * BaseStats[SPD][5];
   }
@@ -90,14 +88,6 @@ void Stats::ReduceBuffEffectiveness()
   }
 }
 
-
-
-void Stats::RemoveDebuffs()
-{
-  RemoveStatusDebuffs();
-  RemoveStatDebuffs();
-}
-
 void Stats::RemoveStatDebuffs()
 {
   for(int i = 0; i < 9; ++i)
@@ -106,11 +96,6 @@ void Stats::RemoveStatDebuffs()
     if(stat < 1.f)
       stat = 1.f;
   }
-}
-
-void Stats::RemoveStatusDebuffs()
-{
-  // TODO Remove Debuffs
 }
 
 void Stats::RemoveBuffs()

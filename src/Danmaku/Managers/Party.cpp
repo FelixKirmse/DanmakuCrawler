@@ -41,13 +41,13 @@ void Party::ResetInternal()
   // TODO Delete all the test stuff
   _frontRow[0] = Character("Tenko");
   _frontRow[1] = Character("Komachi");
-  _frontRow[2] = Character("Mokou");
-  _frontRow[3] = Character("Flandre");
+  _frontRow[2] = Character("Remilia");
+  _frontRow[3] = Character("Wriggle");
 
   for(auto& c : _frontRow)
   {
     c.InitializeCharGraphics();    
-    c.GetStats().LvlUp(0,1000);
+    c.LvlUp(100);
     c.CurrentHP() = c.GetStats().GetTotalBaseStat(HP);
     c.CurrentMP() = c.GetStats().GetTotalBaseStat(MP);
     c.Graphics().UpdateHP();

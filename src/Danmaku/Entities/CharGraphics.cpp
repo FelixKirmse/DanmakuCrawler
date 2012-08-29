@@ -40,7 +40,7 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _enemySpdBackgrnd(sf::Vector2f(70.f,6.f)),
     _enemyName(owner->GetDisplayName(), FontProvider::Get("Vera"), 12u),
     _damageDone("0", FontProvider::Get("Vera"), 10u),
-    _myTurn(false)
+    _myTurn(false), _tookDamage(false)
 {
   using namespace sf;
   if(DeadFrame == NULL)
@@ -122,6 +122,11 @@ void CharGraphics::SetDeadSprites()
   _battleSprite.setTexture(*DeadFrame);
 }
 
+void CharGraphics::ResetDamage()
+{
+  _tookDamage = false;
+}
+
 void CharGraphics::Reposition(sf::Vector2f newOffset)
 {
   // Revert to base position, then move to new one.
@@ -187,6 +192,7 @@ void CharGraphics::SetDamageDone(sf::String damage, bool heal)
   dmgPos.x = (int)dmgPos.x;
   dmgPos.y = (int)dmgPos.y;
   _damageDone.setPosition(dmgPos);
+  _tookDamage = true;
 }
 
 void CharGraphics::DrawCharSprite(sf::RenderTarget& rTarget)
@@ -216,7 +222,7 @@ void CharGraphics::Draw(sf::RenderTarget& rTarget)
 
 void CharGraphics::DrawDamageDone(sf::RenderTarget& rTarget)
 {
-  if(!_owner->IsDead())
+  if(!_owner->IsDead() && _tookDamage)
     rTarget.draw(_damageDone);
 }
 

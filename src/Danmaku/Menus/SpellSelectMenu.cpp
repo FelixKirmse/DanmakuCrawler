@@ -29,7 +29,8 @@ void SpellSelectMenu::ResetMenu(Character* currentAttacker)
   for(size_t i = 2; i < spells.size(); ++i)
   {
     int mpCost = spells[i]->GetMPCost(*currentAttacker);
-    bool selectable(_currentAttacker->CurrentMP() >= mpCost);
+    bool selectable(_currentAttacker->CurrentMP() + 1.f >= mpCost &&
+                    !_currentAttacker->IsSilenced());
 
     MenuItem newItem(spells[i]->GetName());
     newItem.SetFontSize(13u);
@@ -92,11 +93,8 @@ void SpellSelectMenu::Draw(sf::RenderTarget& renderTarget)
 void SpellSelectMenu::SelectMenuItem()
 {
   sf::String const& selectedItem = SelectedItem();
-  ISpell* selectedSpell = _nameSpellMap[selectedItem.toAnsiString()];
-  if(_currentAttacker->CurrentMP() >= selectedSpell->GetMPCost(*_currentAttacker))
-  {
-    _battleMenu.SetSpell(selectedSpell);
-  }
+  ISpell* selectedSpell = _nameSpellMap[selectedItem.toAnsiString()];  
+  _battleMenu.SetSpell(selectedSpell);
 }
 
 }

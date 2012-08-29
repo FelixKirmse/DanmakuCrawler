@@ -30,6 +30,8 @@ void OverworldPlayer::Update()
   switch(_moveState)
   {
   case Idle:
+    if(Input::Action(true))
+     _encounterRate.SetChance(500);
     if(Input::Up() && ValidMovement(sf::Vector2i(targetTile.x,
                                                  targetTile.y - 1),
                                     MapCell::Up))
@@ -63,7 +65,7 @@ void OverworldPlayer::Update()
     {
       _moveState = Idle;
       _stepsTaken = 0;
-      _mapGen.GenerateStep(targetTile);
+      _mapGen.GenerateStep(targetTile);      
       _encounterRate.Step();
       Update(); //For smooth movement
     }

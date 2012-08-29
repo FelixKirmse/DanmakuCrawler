@@ -25,6 +25,8 @@ public:
   void Reposition(float x, float y);
   void SetDeadSprites();
 
+  void ResetDamage();
+
 private:
   Character* _owner;
   sf::Vector2f _offset;
@@ -51,6 +53,7 @@ private:
   sf::Text _damageDone;
 
   bool _myTurn;
+  bool _tookDamage;
 
   static sf::Color const FullSPDBar;
   static sf::Color const NormalSPDBar;

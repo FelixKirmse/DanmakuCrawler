@@ -55,11 +55,15 @@ public:
   void Heal(float value);
   SpellList& GetSpells();
   void CheckIfDead();
+  bool IsSilenced();
+  void ResetDamageDisplay();
+  void LvlUp(int amount);
 
   // Status Ailments-Related
   void ApplyPoison(int damage);
   void ApplyPAR(int strength);
   void ApplySIL(int strength);
+  void RemoveDebuffs();
 
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 
