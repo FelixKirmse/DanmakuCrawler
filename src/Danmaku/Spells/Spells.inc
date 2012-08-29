@@ -610,11 +610,11 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
-    Stats& ds = d.GetStats();
+
     float aAD = as.GetTotalBaseStat(AD);
     float aMD = as.GetTotalBaseStat(MD);
 
-    ds.RemoveDebuffs();
+    d.RemoveDebuffs();
 
     float healing = 1.5f * aAD + 1.5f * aMD;
     d.Heal(healing);
@@ -1021,7 +1021,7 @@ Spell
     float healing = .25f * aMD * (aDRK/100);
     d.Heal(healing);
 
-    // TODO Remove all Debuffs
+    d.RemoveDebuffs();
   },
   .36f,
   .3f
@@ -1045,7 +1045,10 @@ Spell
     float damage = (3.f * aAD * (aDRK/100.f) - dDEF) * (100.f/dDRK);
     d.TakeDamage(damage);
 
-    // TODO Apply Poison(120)
+    if(!ds.TryToApplyDebuff(PSN, 120))
+      return;
+
+    d.ApplyPoison(120);
   },
   .28f,
   .45f
@@ -1069,7 +1072,10 @@ Spell
     float damage = (2.5f * aAD * (aDRK/100.f) - dDEF) * (100.f/dDRK);
     d.TakeDamage(damage);
 
-    // TODO Apply Poison(90)
+    if(!ds.TryToApplyDebuff(PSN, 90))
+      return;
+
+    d.ApplyPoison(90);
   },
   .5f,
   .35f
@@ -1134,7 +1140,14 @@ Spell
     float damage = 1.5f * aAD - .5f * dDEF;
     d.TakeDamage(damage);
 
-    // TODO Apply debuffs PSN(60), PAR(30)
+    if(ds.TryToApplyDebuff(PSN, 60))
+    {
+      d.ApplyPoison(60);
+    }
+    if(ds.TryToApplyDebuff(PAR, 30))
+    {
+      d.ApplyPAR(30);
+    }
   },
   .32f,
   .65f
@@ -1311,14 +1324,18 @@ Spell
 Spell
 (
   "Surge of Lightning",
-  "Infuse your target with the power of lightning.\nIncreases AD & MD greatly.\nExtremely high chance to inflict PAR.",
+  "Infuse your target with the power of lightning.\nIncreases AD & MD greatly.\nInflicts PAR.",
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
     Stats& ds = d.GetStats();
     ds.BuffBaseStat(AD, .72f);
     ds.BuffBaseStat(MD, .72f);
-    // TODO inflict PAR(300)
+
+    if(ds.TryToApplyDebuff(PAR, 300))
+    {
+      d.ApplyPAR(300);
+    }
   },
   .4f,
   .6f
@@ -1412,7 +1429,14 @@ Spell
       d.CurrentHP() = 0.f;
     d.TakeDamage(damage);
 
-    // TODO inflict PAR(30), PSN(45)
+    if(ds.TryToApplyDebuff(PSN, 45))
+    {
+      d.ApplyPoison(45);
+    }
+    if(ds.TryToApplyDebuff(PAR, 30))
+    {
+      d.ApplyPAR(30);
+    }
 
     ds.BuffBaseStat(EVA, -1.5f);
     ds.BuffBaseStat(DEF, -.25f);
@@ -1466,7 +1490,10 @@ Spell
     float damage = (5.f * aAD * (aARC/100.f) - 1.25f * dDEF) * (100.f/dARC);
     d.TakeDamage(damage);
 
-    // TODO inflict PAR(80)
+    if(ds.TryToApplyDebuff(PAR, 80))
+    {
+      d.ApplyPAR(80);
+    }
   },
   .3f,
   .45f
@@ -1601,7 +1628,7 @@ Spell
 
     float healing = aMD * (aHOL/dHOL);
     d.Heal(healing);
-    ds.RemoveDebuffs();
+    d.RemoveDebuffs();
   },
   .48f,
   .25f
@@ -1907,7 +1934,10 @@ Spell
 
     float damage = (2.f * aMD * (aDRK/100.f) - dMR) * (100.f/dDRK);
     d.TakeDamage(damage);
-    // TODO Apply PSN(60)
+    if(ds.TryToApplyDebuff(PSN, 60))
+    {
+      d.ApplyPoison(60);
+    }
   },
   .48f,
   .3f
@@ -2119,7 +2149,16 @@ Spell
     as.BuffBaseStat(MR, 1.f);
     as.BuffBaseStat(EVA, 1.f);
     as.BuffBaseStat(SPD, -1.f);
-    // TODO Inflict PAR(200), SIL(200)
+
+    if(as.TryToApplyDebuff(PAR, 200))
+    {
+      a.ApplyPAR(200);
+    }
+
+    if(as.TryToApplyDebuff(SIL, 200))
+    {
+      a.ApplySIL(200);
+    }
   },
   1.28f,
   0.f
@@ -2463,7 +2502,7 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     Stats& ds = d.GetStats();
-    ds.RemoveDebuffs();
+    d.RemoveDebuffs();
     ds.RemoveBuffs();
   },
   .48f,
@@ -2673,7 +2712,7 @@ Spell
     float aMD = as.GetTotalBaseStat(MD);
     float aDRK = as.GetTotalMastery(DRK);
 
-    as.RemoveDebuffs();
+    a.RemoveDebuffs();
 
     float damage = 3.125f * aMD * (aDRK/100.f);
     d.TakeDamage(damage);
@@ -2693,7 +2732,7 @@ Spell
     float aMD = as.GetTotalBaseStat(MD);
     float aHOL = as.GetTotalMastery(HOL);
 
-    as.RemoveDebuffs();
+    a.RemoveDebuffs();
 
     float damage = 6.25f * aMD * (aHOL/100.f);
     d.TakeDamage(damage);
@@ -2723,7 +2762,11 @@ Spell
     d.TakeDamage(damage);
 
     ds.BuffBaseStat(SPD, -.15);
-    // TODO Inflict PAR(35)
+
+    if(ds.TryToApplyDebuff(PAR, 35))
+    {
+      d.ApplyPAR(35);
+    }
   },
   .64f,
   .4f
@@ -2930,7 +2973,11 @@ Spell
     d.TakeDamage(damage);
 
     ds.BuffBaseStat(SPD, -1.f);
-    // TODO: Inflict PAR(120)
+
+    if(ds.TryToApplyDebuff(PAR, 120))
+    {
+      d.ApplyPAR(120);
+    }
   },
   .6f,
   0.f
@@ -3439,6 +3486,14 @@ Spell
     float damage = (4.f * aAD * (aDRK/100.f) - dDEF) * (100.f/dDRK);
     d.TakeDamage(damage);
     // TODO inflict PAR(70), PSN(70)
+    if(ds.TryToApplyDebuff(PAR, 70))
+    {
+      d.ApplyPAR(70);
+    }
+    if(ds.TryToApplyDebuff(PSN, 70))
+    {
+      d.ApplyPoison(70);
+    }
   },
   .8f,
   .25f
@@ -3458,7 +3513,11 @@ Spell
 
     float damage = 6.f * aAD - 1.5f * dDEF;
     d.TakeDamage(damage);
-    // TODO inflict PAR(20)
+
+    if(ds.TryToApplyDebuff(PAR, 20))
+    {
+      d.ApplyPAR(20);
+    }
   },
   .8f,
   .35f
@@ -3471,7 +3530,7 @@ Spell
   [] (Character& a, Character& d, int mod)
   {
     Stats& ds = d.GetStats();
-    ds.RemoveStatusDebuffs();
+    d.RemoveDebuffs();
     for(int i = 0; i < 9; ++i)
     {
       float stat = ds.BaseStats[(BaseStat)i][4];

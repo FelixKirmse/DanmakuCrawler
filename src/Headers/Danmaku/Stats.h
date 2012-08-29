@@ -87,9 +87,7 @@ struct Stats
   void LvlUp(int currentLevel, int amount);
   void BuffBaseStat(BaseStat baseStat, float amount);
   void ReduceBuffEffectiveness();
-  void RemoveDebuffs();
   void RemoveStatDebuffs();
-  void RemoveStatusDebuffs();
   void RemoveBuffs();
   bool TryToApplyDebuff(DebuffResistance type, int successChance);
 

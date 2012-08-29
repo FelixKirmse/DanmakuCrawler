@@ -12,6 +12,7 @@ public:
 
   EncounterRate(sf::Font const& font);
 
+  void SetChance(int newChance);
   void Step();
   void Draw(sf::RenderTarget& renderTarget);
 private:

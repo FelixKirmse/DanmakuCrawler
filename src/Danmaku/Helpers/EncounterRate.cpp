@@ -17,8 +17,15 @@ EncounterRate::EncounterRate(sf::Font const& font)
   _rateDisplay.setColor(sf::Color::Red);
 }
 
-void EncounterRate::Step()
+void EncounterRate::SetChance(int newChance)
 {
+  _currentChance = newChance;
+  _rateDisplay.setString("EncounterRate: " +
+                         std::to_string(_currentChance) + "%");
+}
+
+void EncounterRate::Step()
+{  
   if(_roll(_rng) < (_currentChance - 50.f))
   {
     _currentChance = 0.f;

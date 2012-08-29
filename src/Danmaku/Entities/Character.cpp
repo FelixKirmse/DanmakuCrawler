@@ -46,13 +46,30 @@ bool Character::UpdateTurnCounter()
   if(_dead)
     return false;
 
+  int timeStep = _stats.BaseStats[SPD][0] / 30.f;
+  if(_paralyzed)
+  {
+    _paralyzeCounter -= timeStep;
+    if(_paralyzeCounter <= 0)
+    {
+      _paralyzeStrength *= .66f;
+      _paralyzed = _stats.TryToApplyDebuff(PAR, _paralyzeStrength);
+    }
+    return false;
+  }
+
   bool result(false);
-  _turnCounter += _stats.BaseStats[SPD][0] / 30.f;
+  _turnCounter += timeStep;
   if(_turnCounter >= TimeToAction)
   {
     _turnCounter -= TimeToAction;
     result = true;
     _stats.ReduceBuffEffectiveness();
+    if(_silenced)
+    {
+      _silenceStrength *= .66f;
+      _silenced = _stats.TryToApplyDebuff(SIL, _silenceStrength);
+    }
   }
   _graphics.UpdateSPD(result);
 
@@ -100,7 +117,9 @@ bool& Character::IsDead()
 void Character::TakeDamage(float value)
 {
   IntGenerator evaRoll(0,99);
-  int evaChance = _stats.GetTotalBaseStat(EVA);
+  int evaChance =  _stats.EVAType == Stats::Dodge ?
+        _stats.GetTotalBaseStat(EVA)/_level :
+        _stats.GetTotalBaseStat(EVA);
   bool attackEvaded = evaRoll(_rng) < evaChance;
   if(attackEvaded && _stats.EVAType == Stats::Dodge)
   {
@@ -153,6 +172,22 @@ void Character::CheckIfDead()
   _graphics.SetDeadSprites();
 }
 
+bool Character::IsSilenced()
+{
+  return _silenced;
+}
+
+void Character::ResetDamageDisplay()
+{
+  _graphics.ResetDamage();
+}
+
+void Character::LvlUp(int amount)
+{
+  _stats.LvlUp(_level, amount);
+  _level += amount;
+}
+
 void Character::ApplyPoison(int damage)
 {
   _poisoned = true;
@@ -172,6 +207,13 @@ void Character::ApplySIL(int strength)
   _silenceStrength = strength;
 }
 
+void Character::RemoveDebuffs()
+{
+  _silenced = false;
+  _paralyzed = false;
+  _poisoned = false;
+}
+
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 {  
   TargetInfo targetInfo;
@@ -181,10 +223,15 @@ TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
   targetInfo.Target = NULL;
 
   TargetInfo::TargetType targetType = targetInfo.Spell->GetTargetType();
-  if(targetType != TargetInfo::Single && targetType != TargetInfo::Decaying)
+  if(targetType == TargetInfo::Allies || targetType == TargetInfo::Enemies)
     return targetInfo;
 
 
+  if(targetType == TargetInfo::Self)
+  {
+    targetInfo.Target = this;
+    return targetInfo;
+  }
   IntGenerator targetSelect(0,99);
   do
   {
@@ -223,7 +270,14 @@ void Character::AssignSpells()
   #include "CharSpells.inc"
   if(_name == _displayName)
     return;
-  //TODO Enemy Spell Generation
+  //TODO Proper Enemy Spell Generation
+  //return;
+
+  _spellList.push_back(Spells::GetSpell("Tickling Needles"));
+  _spellList.push_back(Spells::GetSpell("Stabby Stab!"));
+  _spellList.push_back(Spells::GetSpell("Sharp Assault"));
+  _spellList.push_back(Spells::GetSpell("Blitzkrieg"));
+  _spellList.push_back(Spells::GetSpell("Time Bubble"));
 }
 
 void Character::GoToLine(std::fstream& file, size_t num)
