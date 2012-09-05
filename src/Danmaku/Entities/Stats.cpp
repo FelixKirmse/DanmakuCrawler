@@ -70,20 +70,23 @@ void Stats::BuffBaseStat(BaseStat baseStat, float amount)
   stat[4] = (stat[4] > 2.f) ? 2.f : stat[4] < 0.5f ? 0.5f : stat[4];
 }
 
-void Stats::ReduceBuffEffectiveness()
+void Stats::ReduceBuffEffectiveness(int times)
 {
-  for(int i = 0; i < 8; ++i)
+  for(int k = 0; k < times; ++k)
   {
-    float& stat = BaseStats[(BaseStat)i][4];
-    if(stat < 1.f)
+    for(int i = 0; i < 8; ++i)
     {
-      stat += .1f;
-      stat = stat > 1.f ? 1.f : stat;
-    }
-    if(stat > 1.f)
-    {
-      stat -= .1f;
-      stat = stat < 1.f ? 1.f : stat;
+      float& stat = BaseStats[(BaseStat)i][4];
+      if(stat < 1.f)
+      {
+        stat += .1f;
+        stat = stat > 1.f ? 1.f : stat;
+      }
+      if(stat > 1.f)
+      {
+        stat -= .1f;
+        stat = stat < 1.f ? 1.f : stat;
+      }
     }
   }
 }

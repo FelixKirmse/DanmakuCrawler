@@ -4,11 +4,14 @@
 #include "Danmaku/Character.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
+#include "Danmaku/Party.h"
 
 namespace Danmaku
 {
 
 Character::RandomSeed Character::_rng(time(0));
+int const Character::XPRequiredForLvlUp(2000);
+int const Character::TimeToAction(3000);
 typedef boost::random::uniform_int_distribution<> IntGenerator;
 
 using namespace BlackDragonEngine;
@@ -23,14 +26,18 @@ Character::Character(sf::String name)
     _displayName((name.find("Enemy") == sf::String::InvalidPos) ?
                    _name : GetRandomName()),
     _stats(), _turnCounter(0), _spellList(), _currentHP(0),
-    _currentMP(0), _graphics(), _dead(false), _level(1),
+    _currentMP(0), _graphics(), _dead(false), _level(0), _xpRequired(0),
     _poisoned(false), _poisonDamage(0), _paralyzed(false), _paralyzeStrength(0),
-    _paralyzeCounter(0), _silenced(false), _silenceStrength(0)
+    _paralyzeCounter(0), _silenced(false), _silenceStrength(0),
+    _convinced(false)
 {  
   AssignSpells();
 
   if(_displayName == _name)
+  {
     _stats = Stats::_baseStats[_name.toAnsiString()];
+    _xpRequired = (float)XPRequiredForLvlUp * _stats.XPMultiplier;
+  }
   _currentHP = _stats.GetTotalBaseStat(HP);
   _currentMP = _stats.GetTotalBaseStat(MP);
 }
@@ -109,7 +116,7 @@ sf::String const& Character::GetDisplayName() const
   return _displayName;
 }
 
-bool& Character::IsDead()
+bool Character::IsDead()
 {
   return _dead;
 }
@@ -156,6 +163,7 @@ void Character::Heal(float value)
   _currentHP += value;
   _currentHP = (_currentHP > _stats.GetTotalBaseStat(HP)) ?
         _stats.GetTotalBaseStat(HP) : _currentHP;
+  _graphics.UpdateHP();
 }
 
 Character::SpellList& Character::GetSpells()
@@ -182,10 +190,37 @@ void Character::ResetDamageDisplay()
   _graphics.ResetDamage();
 }
 
+void Character::LvlUp()
+{
+  if(_displayName == "Dead")
+    return;
+
+  unsigned long totalXP = Party::GetExperience();
+  unsigned long currentLevelXP = _level * _xpRequired;
+  unsigned long difference = totalXP - currentLevelXP;
+
+  while(difference > _xpRequired)
+  {
+    _stats.LvlUp(_level, 1);
+    ++_level;
+    difference -= _xpRequired;
+  }
+
+  Heal(_stats.GetTotalBaseStat(HP));
+  // TODO Delete
+  _currentMP = _stats.GetTotalBaseStat(MP);
+  _graphics.UpdateMP();
+}
+
 void Character::LvlUp(int amount)
 {
   _stats.LvlUp(_level, amount);
   _level += amount;
+}
+
+int Character::GetLvl()
+{
+  return _level;
 }
 
 void Character::ApplyPoison(int damage)
@@ -212,6 +247,11 @@ void Character::RemoveDebuffs()
   _silenced = false;
   _paralyzed = false;
   _poisoned = false;
+}
+
+bool Character::IsConvinced()
+{
+  return _convinced;
 }
 
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
@@ -300,6 +340,7 @@ Character& Character::operator=(Character const& source)
   _currentMP = source._currentMP;
   _dead = source._dead;
   _level = source._level;
+  _xpRequired = source._xpRequired;
   _graphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
   return *this;
 }

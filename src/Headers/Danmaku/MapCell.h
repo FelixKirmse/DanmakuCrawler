@@ -7,6 +7,7 @@ public:
   MapCell();
   MapCell(int tileID);
   MapCell(MapCell const& source);
+  MapCell(int tileID, int level);
 
   enum Direction
   {
@@ -25,5 +26,7 @@ public:
   bool RightConnector;
   bool TopConnector;
   bool BottomConnector;
+
+  int EnemyLvl;
 };
 }

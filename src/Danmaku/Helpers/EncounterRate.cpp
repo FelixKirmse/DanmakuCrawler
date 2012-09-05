@@ -24,15 +24,14 @@ void EncounterRate::SetChance(int newChance)
                          std::to_string(_currentChance) + "%");
 }
 
-void EncounterRate::Step()
+void EncounterRate::Step(MapCell& targetCell)
 {  
   if(_roll(_rng) < (_currentChance - 50.f))
   {
     _currentChance = 0.f;
     _rateDisplay.setString("EncounterRate: " +
-                           std::to_string(_currentChance) + "%");
-    // TODO actual level logic
-    Battle::StartBattle(1);
+                           std::to_string(_currentChance) + "%");    
+    Battle::StartBattle(targetCell.EnemyLvl);
     return;
   }
   _currentChance += _increaseChance(_rng);
