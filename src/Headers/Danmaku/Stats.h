@@ -79,6 +79,7 @@ struct Stats
   BaseStatMap BaseStats;
   MasteryMap Masteries;
   ResiMap Resistances;
+  float XPMultiplier;
 
   float GetTotalBaseStat(BaseStat baseStat);
   float GetTotalMastery(EleMastery mastery);
@@ -86,7 +87,7 @@ struct Stats
 
   void LvlUp(int currentLevel, int amount);
   void BuffBaseStat(BaseStat baseStat, float amount);
-  void ReduceBuffEffectiveness();
+  void ReduceBuffEffectiveness(int times = 1);
   void RemoveStatDebuffs();
   void RemoveBuffs();
   bool TryToApplyDebuff(DebuffResistance type, int successChance);

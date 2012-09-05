@@ -12,9 +12,14 @@ namespace Danmaku
 {
 Battle* Battle::_currentInstance;
 size_t Battle::MaxEnemyID;
-float const Battle::EnemyHPMod = 20.f;
-float const Battle::EnemyBaseMod = .75f;
-int const Battle::ConsequenceFrames = 90;
+float const Battle::EnemyHPMod(5.f);
+float const Battle::EnemyBaseMod(.4f);
+int const Battle::ConsequenceFrames(90);
+
+int const Battle::XPPerEnemy(250000);
+int const Battle::XPPerConvincedEnemy(50);
+int const Battle::XPFromBoss(2000);
+int const Battle::XPFromConvincedBoss(4000);
 
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
@@ -32,7 +37,6 @@ Battle::Battle()
   _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
   _fourLayout.push_back(sf::Vector2f(480.f, 275.f));
   _fourLayout.push_back(sf::Vector2f(650.f, 340.f));
-
 }
 
 bool Battle::UpdateCondition()
@@ -123,6 +127,7 @@ Party::FrontRow& Battle::GetFrontRow()
 
 void Battle::StartBattle(int level, int bossID)
 {
+  _currentInstance->_isBossfight = bossID != 0;
   GameStateManager::SetState(GameStates::Battle);
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
@@ -181,6 +186,7 @@ void Battle::ConsequenceUpdate()
     _battleMenu.ResetMenu();
     SetBattleState(Idle);
     _frameCounter = 0;
+    _currentAttacker->Graphics().UpdateSPD(false);
 
     for(size_t i = 0; i < _playerRow.size(); ++i)
     {
@@ -212,13 +218,9 @@ void Battle::ConsequenceUpdate()
       enemyAlive |= !enemy.IsDead(); // ...until proven otherwise.
     }
 
-    if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!
-    {
-      // TODO Actual winning code
-      SetBattleState(Idle);
-      GameStateManager::SetState(GameStates::Ingame);
-      _battleMenu.ResetMenu();
-    }
+    if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!    
+      EndBattle();
+
     return;
   }
 
@@ -292,8 +294,7 @@ void Battle::ConsequenceUpdate()
     _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
-  }
-  _currentAttacker->Graphics().UpdateSPD(false);
+  }  
 }
 
 
@@ -382,8 +383,7 @@ void Battle::GenerateEnemies(int level, int bossID)
     enemy.GetStats() = Stats::_baseStats["Sakuya"];
 
     // Lets boost the base stats, since enemy should be STRONK!
-    enemy.CurrentMP() = std::numeric_limits<float>::max();
-    level = 100; // TODO DELETE
+    enemy.CurrentMP() = std::numeric_limits<float>::max();    
     enemy.LvlUp(level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;
@@ -399,6 +399,28 @@ void Battle::GenerateEnemies(int level, int bossID)
 void Battle::SetupBossBattle(int level, int bossID)
 {
   // TODO Boss Stat Generation
+}
+
+void Battle::EndBattle()
+{
+  SetBattleState(Idle);
+  GameStateManager::SetState(GameStates::Ingame);
+  _battleMenu.ResetMenu();
+  int xpAwarded(0);
+  for(auto& enemy : _enemies)
+  {
+    xpAwarded += enemy.IsConvinced() ? XPPerConvincedEnemy : XPPerEnemy;
+  }
+
+  if(_isBossfight)
+    xpAwarded += _enemies[0].IsConvinced() ? XPFromConvincedBoss : XPFromBoss;
+
+  for(auto& chara : _playerRow)
+  {
+    chara.GetStats().ReduceBuffEffectiveness(10);
+  }
+
+  Party::AddExperience(xpAwarded);
 }
 
 bool Battle::TargetIsEnemy()

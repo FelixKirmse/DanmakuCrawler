@@ -5,4 +5,5 @@ void Stats::serialize(Archive& ar, unsigned int const /*version*/)
   ar & BOOST_SERIALIZATION_NVP(Masteries);
   ar & BOOST_SERIALIZATION_NVP(Resistances);
   ar & BOOST_SERIALIZATION_NVP(EVAType);
+  ar & BOOST_SERIALIZATION_NVP(XPMultiplier);
 }

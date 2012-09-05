@@ -71,6 +71,7 @@ void DanmakuGame::LoadContent()
 
 void DanmakuGame::Update()
 {
+  Party::ResetCache();
   _stateManager.Update();
 }
 

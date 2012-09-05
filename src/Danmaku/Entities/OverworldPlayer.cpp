@@ -66,7 +66,8 @@ void OverworldPlayer::Update()
       _moveState = Idle;
       _stepsTaken = 0;
       _mapGen.GenerateStep(targetTile);      
-      _encounterRate.Step();
+      _encounterRate.Step(DanmakuMap::GetInstance()
+                          .GetMapSquareAtCell(_currentTile));
       Update(); //For smooth movement
     }
     break;

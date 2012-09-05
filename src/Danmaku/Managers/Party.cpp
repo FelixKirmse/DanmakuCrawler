@@ -6,7 +6,7 @@ namespace Danmaku
 Party* Party::_instance;
 
 Party::Party()
-  : _frontRow(), _battleBackSeat(), _availableCharacters()
+  : _frontRow(), _battleBackSeat(), _availableCharacters(), _experience(0)
 {
   _instance = this;
 }
@@ -31,6 +31,60 @@ void Party::Reset()
   _instance->ResetInternal();
 }
 
+void Party::AddExperience(unsigned long amount)
+{
+  _instance->_experience += amount;
+  for(auto& chara : _instance->_frontRow)
+    chara.LvlUp();
+  for(auto& chara : _instance->_battleBackSeat)
+    chara.LvlUp();
+  for(auto& chara : _instance->_availableCharacters)
+    chara.LvlUp();
+}
+
+int Party::GetAveragePartyLvl()
+{
+  if(_instance->_cached)
+    return _instance->_averagePartyLvl;
+
+  FrontRow& fr = _instance->_frontRow;
+  BackSeat& bs = _instance->_battleBackSeat;
+
+  int i(0);
+  int lvlSum(0);
+  for(auto& chara : fr)
+  {
+    if(chara.IsDead())
+      continue;
+    ++i;
+    lvlSum += chara.GetLvl();
+  }
+  for(auto& chara : bs)
+  {
+    if(chara.IsDead())
+      continue;
+    ++i;
+    lvlSum += chara.GetLvl();
+  }
+
+  _instance->_cached = true;
+  if(i == 0)
+    return 0;
+  _instance->_averagePartyLvl = lvlSum / i;
+
+  return _instance->_averagePartyLvl;
+}
+
+unsigned long Party::GetExperience()
+{
+  return _instance->_experience;
+}
+
+void Party::ResetCache()
+{
+  _instance->_cached = false;
+}
+
 void Party::ResetInternal()
 {
   _frontRow.fill(Character());
@@ -39,15 +93,15 @@ void Party::ResetInternal()
 
 
   // TODO Delete all the test stuff
-  _frontRow[0] = Character("Tenko");
-  _frontRow[1] = Character("Komachi");
-  _frontRow[2] = Character("Remilia");
-  _frontRow[3] = Character("Wriggle");
+  _frontRow[0] = Character("Komachi");
+  _frontRow[1] = Character("Nitori");
+  _frontRow[2] = Character("Flandre");
+  _frontRow[3] = Character("Patchouli");
 
   for(auto& c : _frontRow)
   {
-    c.InitializeCharGraphics();    
-    c.LvlUp(100);
+    c.InitializeCharGraphics();
+    c.LvlUp(1);
     c.CurrentHP() = c.GetStats().GetTotalBaseStat(HP);
     c.CurrentMP() = c.GetStats().GetTotalBaseStat(MP);
     c.Graphics().UpdateHP();

@@ -57,7 +57,9 @@ private:
   void ArrangeCharFrames(int bossID);
 
   void GenerateEnemies(int level, int bossID);
-  void SetupBossBattle(int level, int bossID);  
+  void SetupBossBattle(int level, int bossID);
+
+  void EndBattle();
 
   template<class T>
   void SetInitialSPD(T& vec);
@@ -92,9 +94,15 @@ private:
   BattleState _queuedState;
   bool _changeState;
 
+  bool _isBossfight;
+
   static int const ConsequenceFrames;
   static float const EnemyHPMod;
   static float const EnemyBaseMod;
+  static int const XPPerEnemy;
+  static int const XPPerConvincedEnemy;
+  static int const XPFromBoss;
+  static int const XPFromConvincedBoss;
 
   static Battle* _currentInstance;  
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include <boost/random.hpp>
 #include <SFML/Graphics.hpp>
+#include "Danmaku/MapCell.h"
 
 namespace Danmaku
 {
@@ -13,7 +14,7 @@ public:
   EncounterRate(sf::Font const& font);
 
   void SetChance(int newChance);
-  void Step();
+  void Step(MapCell& targetCell);
   void Draw(sf::RenderTarget& renderTarget);
 private:
   sf::Text _rateDisplay;

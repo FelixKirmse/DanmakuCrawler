@@ -18,6 +18,10 @@ public:
   static BackSeat& GetBackSeat();
   static CharVec& GetAvailableCharacters();
   static void Reset();
+  static void AddExperience(unsigned long amount);
+  static int GetAveragePartyLvl();
+  static unsigned long GetExperience();
+  static void ResetCache();
 
 private:
   void ResetInternal();
@@ -25,6 +29,11 @@ private:
   FrontRow _frontRow;
   BackSeat _battleBackSeat;
   CharVec _availableCharacters;
+
+  unsigned long long _experience;
+  int _averagePartyLvl;
+
+  bool _cached;
 
   static Party* _instance;
 };

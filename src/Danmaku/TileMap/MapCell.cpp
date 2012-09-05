@@ -1,11 +1,12 @@
 #include "Danmaku/TileList.h"
 #include "Danmaku/MapCell.h"
+#include "Danmaku/Party.h"
 
 namespace Danmaku
 {
 MapCell::MapCell()
   : TileID(0), InvalidCell(true), LeftConnector(false), RightConnector(false),
-    TopConnector(false), BottomConnector(false)
+    TopConnector(false), BottomConnector(false), EnemyLvl(0)
 {
 }
 
@@ -14,8 +15,15 @@ MapCell::MapCell(MapCell const& source)
     LeftConnector(source.LeftConnector),
     RightConnector(source.RightConnector),
     TopConnector(source.TopConnector),
-    BottomConnector(source.BottomConnector)
+    BottomConnector(source.BottomConnector),
+    EnemyLvl(source.EnemyLvl)
 {
+}
+
+MapCell::MapCell(int tileID, int level)
+  : MapCell(tileID)
+{
+  EnemyLvl = level;
 }
 
 MapCell::MapCell(int tileID)
@@ -38,7 +46,8 @@ MapCell::MapCell(int tileID)
                      tileID == TileList::SVRight || tileID == TileList::SV ||
                      tileID == TileList::SVLeft || tileID == TileList::SHDown ||
                      tileID == TileList::CDownRight ||
-                     tileID == TileList::CLeftDown)
+                     tileID == TileList::CLeftDown),
+    EnemyLvl(Party::GetAveragePartyLvl())
 {
 }
 

@@ -48,7 +48,7 @@ public:
   CharGraphics& Graphics();
   int& TurnCounter();
   sf::String const& GetDisplayName() const;
-  bool& IsDead();
+  bool IsDead();
   void TakeDamage(float value);
   void TakeTrueDamage(float value);
   void UseMP(float value);
@@ -57,7 +57,9 @@ public:
   void CheckIfDead();
   bool IsSilenced();
   void ResetDamageDisplay();
-  void LvlUp(int amount);
+  void LvlUp(); // For PCs
+  void LvlUp(int amount); // For NPCs
+  int GetLvl();
 
   // Status Ailments-Related
   void ApplyPoison(int damage);
@@ -65,11 +67,14 @@ public:
   void ApplySIL(int strength);
   void RemoveDebuffs();
 
+  bool IsConvinced();
+
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 
   Character& operator=(Character const& source);
 
-  int const TimeToAction = 300;
+  static int const TimeToAction;
+  static int const XPRequiredForLvlUp;
 
 private:
   sf::String GetRandomName();
@@ -86,6 +91,7 @@ private:
   CharGraphics _graphics;
   bool _dead;
   size_t _level;
+  size_t _xpRequired;
 
   // Status Ailments-Related
   bool _poisoned;
@@ -95,6 +101,8 @@ private:
   int _paralyzeCounter;
   bool _silenced;
   int _silenceStrength;
+
+  bool _convinced;
 
   static RandomSeed _rng;
 };
