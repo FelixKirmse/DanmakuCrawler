@@ -83,6 +83,7 @@ OBJECTS := \
 	$(OBJDIR)/Ingame.o \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/Battle.o \
+	$(OBJDIR)/StatOverview.o \
 	$(OBJDIR)/CharGraphics.o \
 	$(OBJDIR)/Character.o \
 	$(OBJDIR)/OverworldPlayer.o \
@@ -202,6 +203,9 @@ $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Battle.o: src/Danmaku/GameStates/Battle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/StatOverview.o: src/Danmaku/Entities/StatOverview.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/CharGraphics.o: src/Danmaku/Entities/CharGraphics.cpp

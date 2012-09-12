@@ -8,12 +8,12 @@ namespace Danmaku
 {
 
 SpellSelectMenu::SpellSelectMenu(BattleMenu& battleMenu)
-  : Description("Description:"), MP(" MP"), DescriptionOrigin(250.f, 205.f),
+  : Description("Description:"), MP(" MP"), DescriptionOrigin(250.f, 35.f),
     OriginY(260.f), SpellOriginX(250.f), MPCostOriginX(615.f), YOffset(15.f),
-    _backDrop(sf::Vector2f(390.f, 170.f)), _battleMenu(battleMenu)
+    _backDrop(sf::Vector2f(390.f, 340.f)), _battleMenu(battleMenu)
 {
   ItemOffset.y = YOffset;
-  _backDrop.setPosition(240.f, 185.f);
+  _backDrop.setPosition(240.f, 16.f);
   _backDrop.setFillColor(sf::Color::Black);
   _backDrop.setOutlineColor(sf::Color::White);
 }
@@ -76,7 +76,7 @@ void SpellSelectMenu::AddStandardMenuLabels()
   MenuLabels.push_back(MenuLabel(Description, FontName));
   MenuLabels.push_back(MenuLabel("This should never appear.", FontName));
   size_t size = MenuLabels.size();
-  MenuLabels[size - 2].SetPosition(250.f, 190.f);
+  MenuLabels[size - 2].SetPosition(250.f, 20.f);
   MenuLabels[size - 1].SetPosition(DescriptionOrigin);
   MenuLabels[size - 2].SetColor(sf::Color::White);
   MenuLabels[size - 1].SetColor(sf::Color::White);

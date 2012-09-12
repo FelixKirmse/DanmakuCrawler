@@ -11,7 +11,7 @@ namespace Danmaku
 
 Character::RandomSeed Character::_rng(time(0));
 int const Character::XPRequiredForLvlUp(2000);
-int const Character::TimeToAction(3000);
+unsigned long long Character::TimeToAction(300);
 typedef boost::random::uniform_int_distribution<> IntGenerator;
 
 using namespace BlackDragonEngine;
@@ -53,7 +53,7 @@ bool Character::UpdateTurnCounter()
   if(_dead)
     return false;
 
-  int timeStep = _stats.BaseStats[SPD][0] / 30.f;
+  int timeStep = _stats.GetTotalBaseStat(SPD);
   if(_paralyzed)
   {
     _paralyzeCounter -= timeStep;
@@ -106,7 +106,7 @@ CharGraphics& Character::Graphics()
   return _graphics;
 }
 
-int& Character::TurnCounter()
+size_t& Character::TurnCounter()
 {
   return _turnCounter;
 }
@@ -183,6 +183,11 @@ void Character::CheckIfDead()
 bool Character::IsSilenced()
 {
   return _silenced;
+}
+
+bool Character::IsPoisoned()
+{
+  return _poisoned;
 }
 
 void Character::ResetDamageDisplay()
