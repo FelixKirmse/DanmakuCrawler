@@ -46,7 +46,7 @@ public:
   float& CurrentMP();
   Stats& GetStats();
   CharGraphics& Graphics();
-  int& TurnCounter();
+  size_t &TurnCounter();
   sf::String const& GetDisplayName() const;
   bool IsDead();
   void TakeDamage(float value);
@@ -56,6 +56,7 @@ public:
   SpellList& GetSpells();
   void CheckIfDead();
   bool IsSilenced();
+  bool IsPoisoned();
   void ResetDamageDisplay();
   void LvlUp(); // For PCs
   void LvlUp(int amount); // For NPCs
@@ -73,7 +74,7 @@ public:
 
   Character& operator=(Character const& source);
 
-  static int const TimeToAction;
+  static unsigned long long TimeToAction;
   static int const XPRequiredForLvlUp;
 
 private:
@@ -84,7 +85,7 @@ private:
   sf::String _name;
   sf::String _displayName;
   Stats _stats;
-  int _turnCounter;
+  size_t _turnCounter;
   SpellList _spellList;
   float _currentHP;
   float _currentMP;

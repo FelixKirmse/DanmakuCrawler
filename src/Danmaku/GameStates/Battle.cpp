@@ -7,6 +7,8 @@
 #include "Danmaku/Spells/ISpell.h"
 #include "boost/format.hpp"
 #include "Danmaku/Stats.h"
+#include "Danmaku/StatOverview.h"
+
 
 namespace Danmaku
 {
@@ -127,6 +129,9 @@ Party::FrontRow& Battle::GetFrontRow()
 
 void Battle::StartBattle(int level, int bossID)
 {
+  Character::TimeToAction = 100.f + (100.f + 0.000645f * level) * level * 5 * 0.0225f * 3;
+
+
   _currentInstance->_isBossfight = bossID != 0;
   GameStateManager::SetState(GameStates::Battle);
   // TODO enemy generation code
@@ -150,6 +155,7 @@ void Battle::IdleUpdate()
       _currentAttacker = &_playerRow[i];
       _battleMenu.SetCurrentAttacker(_currentAttacker);
       _enemyTurn = false;
+      StatOverview::GetInstance().Update(_playerRow[i]);
       return;
     }
   }
@@ -314,6 +320,8 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
     _enemies[2].Graphics().DrawBattleSprite(renderTarget);
   }
 
+
+
   // CharSprite infront of enemies, but behind CharFrames
   for(size_t i = 0; i < _playerRow.size() && _battleState == BattleMenu
       && _battleMenu.GetMenuState() != BattleMenu::TargetSelection; ++i)
@@ -321,11 +329,17 @@ void Battle::Draw(sf::RenderTarget& renderTarget)
     _playerRow[i].Graphics().DrawCharSprite(renderTarget);
   }
 
+  // StatScreen infront of Charsprite
+  if(_battleState == BattleMenu &&
+     _battleMenu.GetMenuState() == BattleMenu::ActionSelect)
+    StatOverview::GetInstance().Draw(renderTarget);
+
   // CharFrames ontop
   for(size_t i = 0; i < _playerRow.size(); ++i)
   {
     _playerRow[i].Graphics().Draw(renderTarget);
   }
+
 }
 
 void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
@@ -387,7 +401,7 @@ void Battle::GenerateEnemies(int level, int bossID)
     enemy.LvlUp(level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;
-    for(int j = 1; j < 9; ++j)
+    for(int j = 1; j < 7; ++j)
       bs[(BaseStat)j][0] *= EnemyBaseMod;
     enemy.CurrentHP() = enemy.GetStats().GetTotalBaseStat(HP);
     enemy.InitializeCharGraphics();
@@ -414,6 +428,10 @@ void Battle::EndBattle()
 
   if(_isBossfight)
     xpAwarded += _enemies[0].IsConvinced() ? XPFromConvincedBoss : XPFromBoss;
+
+  xpAwarded /= Party::GetAveragePartyLvl() - _enemies[0].GetLvl() == 0 ?
+        1 :
+        Party::GetAveragePartyLvl() - _enemies[0].GetLvl();
 
   for(auto& chara : _playerRow)
   {

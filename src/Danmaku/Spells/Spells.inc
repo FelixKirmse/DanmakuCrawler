@@ -252,7 +252,7 @@ Spell
 ),
 Spell
 (
-  "Curse of the Han'yō",
+  "Curse of the Han'yo",
   "Unleash your full demonic potential.\nIncreases AD, MD, DEF & MR.\nInflicts PSN & PAR.",
   TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
@@ -263,7 +263,10 @@ Spell
     as.BuffBaseStat(DEF, .7f);
     as.BuffBaseStat(MR, .7f);
 
-    // TODO Inflict PSN and PAR Debuff
+    if(as.TryToApplyDebuff(PSN, 2000))
+    {
+      a.ApplyPoison(200);
+    }
   },
   .66f,
   .5f
@@ -2310,7 +2313,7 @@ Spell
 Spell
 (
   "Ultimate Taboo",
-  "Drain energy from your allies to empower your strike.\nUses 5% of current HP per target hit from each ally.\nDeals composite FIR damage.",
+  "Drain energy from your allies to empower your strike.\nUses 10% of max HP per target hit from each ally.\nDeals composite FIR damage.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)
   {
@@ -2331,9 +2334,9 @@ Spell
       for(auto& chara : Battle::GetInstance()->GetEnemies())
       {
         chara.TurnCounter() = 0.f;
-        float extraValue = chara.CurrentHP() * .05f;
+        float extraValue = chara.GetStats().GetTotalBaseStat(HP) * .1f;
         extraDamage += extraValue;
-        chara.TakeDamage(extraValue);
+        chara.TakeTrueDamage(extraValue);
       }
     }
     else
@@ -2341,14 +2344,15 @@ Spell
       for(auto& chara : Party::GetFrontRow())
       {
         chara.TurnCounter() = 0.f;
-        float extraValue = chara.CurrentHP() * .05f;
+        float totalHP = chara.GetStats().GetTotalBaseStat(HP);
+        float extraValue = totalHP * .1f;
         extraDamage += extraValue;
-        chara.TakeDamage(extraValue);
+        chara.TakeTrueDamage(extraValue);
       }
     }
 
     float damage = ((4.5f * aAD + 4.5f * aMD) * (aFIR/100.f) - (.75f * dDEF + .75f * dMR))
-                    * (100.f/dFIR) + extraDamage * (aFIR/200.f);
+                    * (100.f/dFIR) + extraDamage;
     d.TakeDamage(damage);
   },
   2.66f,

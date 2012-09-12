@@ -39,7 +39,7 @@ MenuItem::MenuItem(sf::String const& name, sf::Vector2f const& position,
                    bool isSelected, sf::Font const& font)
   : _text(name, font, 20), _isSelected(isSelected),
     _selectedColor(sf::Color::Red), _unSelectedColor(sf::Color::White),
-    _selectable(true), _unselectableColor(sf::Color(128,128,128))
+    _selectable(true), _unselectableColor(sf::Color(128u,128u,128u))
 {
   _text.setPosition(position);
 }

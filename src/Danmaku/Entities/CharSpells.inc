@@ -17,7 +17,7 @@ else if(_name == "Marisa")
 else if(_name == "Remilia")
 {
   _spellList.push_back(Spells::GetSpell("Demonic Strike"));
-  _spellList.push_back(Spells::GetSpell("Curse of the Han'yō"));
+  _spellList.push_back(Spells::GetSpell("Curse of the Han'yo"));
   _spellList.push_back(Spells::GetSpell("Embrace of the Demon"));
 }
 else if(_name == "Sakuya")
