@@ -5,7 +5,9 @@ Spell
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
-    float damage = a.GetStats().GetTotalBaseStat(AD) - d.GetStats().GetTotalBaseStat(DEF);
+    float aAD = a.GetStats().GetTotalBaseStat(AD);
+    float dDEF = d.GetStats().GetTotalBaseStat(DEF);
+    float damage =  aAD - dDEF;
     d.TakeDamage(damage);
   },
   0.f,
@@ -15,13 +17,28 @@ Spell
 (
   "Defend",
   "Aquire a defensive stance, increasing DEF & MR by 20% and recovering 20% of MP",
-  TargetInfo::Single,
+  TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
     as.BuffBaseStat(DEF, 0.2f);
     as.BuffBaseStat(MR, 0.2f);
     a.UseMP(-(a.GetStats().GetTotalBaseStat(MP) * 0.2f));
+  },
+  0.f,
+  .5f
+),
+Spell
+(
+  "Meditation",
+  "Youmus defensive stance recovers double the HP",
+  TargetInfo::Self,
+  [] (Character& a, Character& d, int mod)
+  {
+    Stats& as = a.GetStats();
+    as.BuffBaseStat(DEF, 0.2f);
+    as.BuffBaseStat(MR, 0.2f);
+    a.UseMP(-(a.GetStats().GetTotalBaseStat(MP) * 0.4f));
   },
   0.f,
   .5f
@@ -212,11 +229,11 @@ Spell
     float dARC = ds.GetTotalMastery(ARC);
     float& currentMP = a.CurrentMP();
 
-    float damage = ((7.f + currentMP/100.f) * aMD * (aARC/100.f) - 0.5f * dMR) * (100.f/dARC);
+    float damage = ((7.f + currentMP/10.f) * aMD * (aARC/100.f) - 0.5f * dMR) * (100.f/dARC);
     d.TakeDamage(damage);
     currentMP = 0.f;
   },
-  1.6f,
+  0.7f,
   0.f
 ),
 Spell
@@ -265,7 +282,7 @@ Spell
 
     if(as.TryToApplyDebuff(PSN, 2000))
     {
-      a.ApplyPoison(200);
+      a.ApplyPoison(200, a.GetLvl());
     }
   },
   .66f,
@@ -466,20 +483,22 @@ Spell
 ),
 Spell
 (
-  "Forbidden Spell #19",
-  "Cast a spell of unknown element that pierces target's MR.",
+  "Forbidden Spell #98",
+  "Focuses all your arcane power into\nannihilating your target.\nIgnores most of target's MR.\nDeals ARC damage.\nThis spell can not be dodged/blocked.",
   TargetInfo::Single,
   [] (Character& a, Character& d, int mod)
   {
     Stats& as = a.GetStats();
     Stats& ds = d.GetStats();
     float aMD = as.GetTotalBaseStat(MD);
+    float aARC = as.GetTotalMastery(ARC);
+
     float dMR = ds.GetTotalBaseStat(MR);
 
-    float damage = 5.f * aMD - .5f * dMR;
-    d.TakeDamage(damage);
+    float damage = 10.f * aMD * (aARC/100.f) - .3f * dMR;
+    d.TakeTrueDamage(damage);
   },
-  .52f,
+  6.f,
   .40f
 ),
 Spell
@@ -806,7 +825,7 @@ Spell
 
     float dDEF = ds.GetTotalBaseStat(DEF);
 
-    float damage = 4.f * aAD - dDEF;
+    float damage = 6.f * aAD - dDEF;
     d.TakeDamage(damage);
   },
   .40f,
@@ -826,7 +845,7 @@ Spell
 
     float dDEF = ds.GetTotalBaseStat(DEF);
 
-    float damage = (7.5f * aAD - 1.5f * dDEF)
+    float damage = (11.25f * aAD - 1.5f * dDEF)
                     * (d.CurrentHP() / ds.GetTotalBaseStat(HP) < .25f ? 3.f : 1.f);
     d.TakeDamage(damage);
   },
@@ -849,7 +868,7 @@ Spell
     float dDEF = ds.GetTotalBaseStat(DEF);
     float dWND = ds.GetTotalMastery(WND);
 
-    float damage = (6.25f * aAD * (aWND/100.f) - 1.25f * dDEF) * (100.f/dWND);
+    float damage = (8.325f * aAD * (aWND/100.f) - 1.25f * dDEF) * (100.f/dWND);
     d.TakeDamage(damage);
   },
   1.1f,
@@ -871,7 +890,7 @@ Spell
     float dDEF = ds.GetTotalBaseStat(DEF);
     float dDRK = ds.GetTotalMastery(DRK);
 
-    float damage = (4.f * aAD * (aDRK/100.f) - .5f * dDEF) * (100.f/dDRK);
+    float damage = (6.f * aAD * (aDRK/100.f) - .5f * dDEF) * (100.f/dDRK);
     d.TakeDamage(damage);
   },
   .88f,
@@ -1051,7 +1070,7 @@ Spell
     if(!ds.TryToApplyDebuff(PSN, 120))
       return;
 
-    d.ApplyPoison(120);
+    d.ApplyPoison(120, a.GetLvl());
   },
   .28f,
   .45f
@@ -1078,7 +1097,7 @@ Spell
     if(!ds.TryToApplyDebuff(PSN, 90))
       return;
 
-    d.ApplyPoison(90);
+    d.ApplyPoison(90, a.GetLvl());
   },
   .5f,
   .35f
@@ -1145,7 +1164,7 @@ Spell
 
     if(ds.TryToApplyDebuff(PSN, 60))
     {
-      d.ApplyPoison(60);
+      d.ApplyPoison(60, a.GetLvl());
     }
     if(ds.TryToApplyDebuff(PAR, 30))
     {
@@ -1434,7 +1453,7 @@ Spell
 
     if(ds.TryToApplyDebuff(PSN, 45))
     {
-      d.ApplyPoison(45);
+      d.ApplyPoison(45, a.GetLvl());
     }
     if(ds.TryToApplyDebuff(PAR, 30))
     {
@@ -1939,7 +1958,7 @@ Spell
     d.TakeDamage(damage);
     if(ds.TryToApplyDebuff(PSN, 60))
     {
-      d.ApplyPoison(60);
+      d.ApplyPoison(60, a.GetLvl());
     }
   },
   .48f,
@@ -2206,7 +2225,7 @@ Spell
     float dFIR = ds.GetTotalMastery(FIR);
     float dWND = ds.GetTotalMastery(WND);
 
-    float damage = (3.375f * aMD * (aFIR + aWND/200.f) - 1.25f * dMR) * (200.f/dFIR + dWND);
+    float damage = (3.375f * aMD * ((aFIR + aWND)/200.f) - 1.25f * dMR) * (200.f/(dFIR + dWND));
     d.TakeDamage(damage);
     ds.BuffBaseStat(AD, -.12f);
     ds.BuffBaseStat(MD, -.12f);
@@ -2217,7 +2236,7 @@ Spell
 Spell
 (
   "Forbidden Spell #64",
-  "Summons an explosion of unfathomable energy at target's location.\nEnemies in proximity of target also take reduced damage.\nDamage greatly increased by FIR,WND & DRK but unresistable.",
+  "Summons an explosion of unfathomable energy\nat target's location. Enemies in proximity\nof target also take reduced damage.\nDamage greatly increased by FIR,WND & DRK.\nDamage unresistable and can't be evaded.",
   TargetInfo::Decaying,
   [] (Character& a, Character& d, int mod)
   {
@@ -2231,8 +2250,8 @@ Spell
 
     float dMR = ds.GetTotalBaseStat(MR);
 
-    float damage = 4.375f * aMD * ((aFIR + aWND + aDRK)/100.f) - 1.75f * dMR;
-    d.TakeDamage(damage);
+    float damage = (4.375f * aMD * ((aFIR + aWND + aDRK)/100.f) - 1.75f * dMR)/mod;
+    d.TakeTrueDamage(damage);
   },
   1.6f,
   0.f
@@ -2240,12 +2259,12 @@ Spell
 Spell
 (
   "Rise of the Phoenix",
-  "Rise up from the ashes, healing you to full.\nVastly increases all stats.\nEffect only works if current HP < 10%, else has no effect.",
+  "Rise up from the ashes, healing you to full.\nVastly increases all stats.\nThis effect is passive and activated on death.\nUsing it does nothing.\nOnly works once per battle.",
   TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
-  {
+  {    
     Stats& as = a.GetStats();
-    if(a.CurrentHP() / as.GetTotalBaseStat(HP) > .1f)
+    if(a.CurrentHP() / as.GetTotalBaseStat(HP) > .01f)
       return;
     a.Heal(as.GetTotalBaseStat(HP));
     for(int i = 0; i < 9; ++i)
@@ -2355,7 +2374,7 @@ Spell
                     * (100.f/dFIR) + extraDamage;
     d.TakeDamage(damage);
   },
-  2.66f,
+  2.f,
   0.f
 ),
 Spell
@@ -2762,7 +2781,7 @@ Spell
     float dHOL = ds.GetTotalMastery(HOL);
     float dDRK = ds.GetTotalMastery(DRK);
 
-    float damage = (3.75f * aMD * (aHOL + aDRK / 200.f) - 1.5f * dMR) * (200.f / dHOL + dDRK);
+    float damage = (3.75f * aMD * ((aHOL + aDRK) / 200.f) - 1.5f * dMR) * (200.f / (dHOL + dDRK));
     d.TakeDamage(damage);
 
     ds.BuffBaseStat(SPD, -.15);
@@ -2838,7 +2857,7 @@ Spell
     if(&a != &d)
       a.TurnCounter() = a.TimeToAction;
   },
-  2.44f,
+  2.f,
   0.f
 ),
 Spell
@@ -3101,8 +3120,8 @@ Spell
     float dHOL = ds.GetTotalMastery(HOL);
     float dDRK = ds.GetTotalMastery(DRK);
 
-    float damage = ((3.f * aAD + 3.f * aMD) * (aDRK + aHOL/200.f) - (.75f * dDEF + .75f * dMR))
-                     * (200.f/dDRK + dHOL);
+    float damage = ((3.f * aAD + 3.f * aMD) * ((aDRK + aHOL)/200.f) - (.75f * dDEF + .75f * dMR))
+                     * (200.f/(dDRK + dHOL));
     d.TakeDamage(damage);
   },
   .92f,
@@ -3496,7 +3515,7 @@ Spell
     }
     if(ds.TryToApplyDebuff(PSN, 70))
     {
-      d.ApplyPoison(70);
+      d.ApplyPoison(70, a.GetLvl());
     }
   },
   .8f,

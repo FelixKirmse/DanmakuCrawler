@@ -40,7 +40,8 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
     _enemySpdBackgrnd(sf::Vector2f(70.f,6.f)),
     _enemyName(owner->GetDisplayName(), FontProvider::Get("Vera"), 12u),
     _damageDone("0", FontProvider::Get("Vera"), 10u),
-    _myTurn(false), _tookDamage(false)
+    _myTurn(false), _tookDamage(false), _damageSum(0.f), _blocked(false),
+    _dodged(false), _healed(false)
 {
   using namespace sf;
   if(DeadFrame == NULL)
@@ -82,8 +83,8 @@ CharGraphics::CharGraphics(sf::Vector2f offset, sf::String charName,
   _mpBackgrnd.setOutlineColor(Color(190u, 190u, 190u));
   _mpBackgrnd.setOutlineThickness(1.f);
 
-  _mpBar.setFillColor(Color(0u, 148u, 255u));
-  _mpBar.setOutlineColor(Color(0u, 90u, 255u));
+  _mpBar.setFillColor(Color(255u, 255u, 0u));
+  _mpBar.setOutlineColor(Color(255u, 255u, 0u));
   _mpBar.setOutlineThickness(1.f);
 
   _portrait.setPosition(0.f, 0.f);
@@ -122,9 +123,20 @@ void CharGraphics::SetDeadSprites()
   _battleSprite.setTexture(*DeadFrame);
 }
 
+void CharGraphics::RestoreSprites()
+{
+  using namespace BlackDragonEngine;
+  _portrait.setTexture(TextureProvider::Get(_owner->GetInternalName() + "Portrait"));
+  _battleSprite.setTexture(TextureProvider::Get(_owner->GetInternalName() + "BattleSprite"));
+}
+
 void CharGraphics::ResetDamage()
 {
   _tookDamage = false;
+  _damageSum = 0.f;
+  _healed = false;
+  _blocked = false;
+  _dodged = false;
 }
 
 void CharGraphics::Reposition(sf::Vector2f newOffset)
@@ -168,7 +180,7 @@ void CharGraphics::UpdateHP()
   }
   hpColor.r = red;
   hpColor.g = green;
-  _hpBar.setFillColor(hpColor);  
+  _hpBar.setFillColor(hpColor);
 }
 
 void CharGraphics::UpdateMP()
@@ -183,15 +195,12 @@ void CharGraphics::UpdateMP()
   _mpBar.setSize(size);
 }
 
-void CharGraphics::SetDamageDone(sf::String damage, bool heal)
+void CharGraphics::SetDamageDone(float damage, bool heal, bool block, bool dodge)
 {
-  _damageDone.setColor(heal ? sf::Color::Green : sf::Color::Red);
-  _damageDone.setString(damage);
-  sf::Vector2f dmgPos = _enemySpdBar.getPosition();
-  dmgPos.y -= 14.f;
-  dmgPos.x = (int)dmgPos.x;
-  dmgPos.y = (int)dmgPos.y;
-  _damageDone.setPosition(dmgPos);
+  _damageSum += damage;
+  _healed = heal;
+  _blocked = block;
+  _dodged = dodge;
   _tookDamage = true;
 }
 
@@ -222,8 +231,33 @@ void CharGraphics::Draw(sf::RenderTarget& rTarget)
 
 void CharGraphics::DrawDamageDone(sf::RenderTarget& rTarget)
 {
-  if(!_owner->IsDead() && _tookDamage)
-    rTarget.draw(_damageDone);
+  if(_owner->IsDead() || !_tookDamage)
+    return;
+
+  std::string damageLetter(_damageSum > 1000000 ? "M" : _damageSum > 1000 ? "k" : "");
+  int displayValue(_damageSum > 1000000 ? _damageSum/1000000 : _damageSum > 1000 ? _damageSum/1000 : _damageSum);
+
+  _damageDone.setColor(_healed ? sf::Color::Green : sf::Color::Red);
+  _damageDone.setString(_dodged ? "Dodged!!" :
+                                  std::to_string(displayValue) + damageLetter + (_blocked ?
+                                                                   ", Blocked!" :
+                                                                   ""));
+  sf::Vector2f dmgPos;
+  if(_owner->IsEnemy())
+  {
+    dmgPos = _enemySpdBar.getPosition();
+    dmgPos.y -= 14.f;
+    dmgPos.x = (int)dmgPos.x;
+    dmgPos.y = (int)dmgPos.y;
+  }
+  else
+  {
+    dmgPos = _portrait.getPosition();
+    dmgPos.y -= 15.f;
+  }
+  _damageDone.setPosition(dmgPos);
+
+  rTarget.draw(_damageDone);
 }
 
 void CharGraphics::UpdateSPD(bool myTurn)

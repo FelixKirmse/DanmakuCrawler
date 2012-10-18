@@ -35,8 +35,8 @@ Spell* Spells::GetSpell(sf::String name)
   return &_spells[_nameIndexMap[name.toAnsiString()]];
 }
 
-int Spells::GetSpellCount()
+Spell* Spells::GetRandomSpell()
 {
-  return _spells.size();
+  return &_spells[IntGenerator(3, _spells.size() - 1)(_rng)];
 }
 }

@@ -8,6 +8,7 @@
 #include "boost/format.hpp"
 #include "Danmaku/Stats.h"
 #include "Danmaku/StatOverview.h"
+#include "BlackDragonEngine/Provider.h"
 
 
 namespace Danmaku
@@ -18,17 +19,24 @@ float const Battle::EnemyHPMod(5.f);
 float const Battle::EnemyBaseMod(.4f);
 int const Battle::ConsequenceFrames(90);
 
-int const Battle::XPPerEnemy(250000);
+int const Battle::XPPerEnemy(10000000);
 int const Battle::XPPerConvincedEnemy(50);
 int const Battle::XPFromBoss(2000);
 int const Battle::XPFromConvincedBoss(4000);
+
+std::string const Battle::CastTextFormatString = "%s uses %s on %s!";
+std::string const Battle::Allies("all allies");
+std::string const Battle::Enemies("all enemies");
+std::string const Battle::Decaying("%s's allies");
+std::string const Battle::Self("self");
 
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
     _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
     _battleMenu(*this), _threeLayout(), _fourLayout(), _charHPStep(),
-    _charHPShouldHave(), _rng(time(0)), _queuedState(Idle), _changeState(false)
+    _charHPShouldHave(), _rng(time(0)), _queuedState(Idle), _changeState(false),
+    _castDisplay(sf::Vector2f(640.f, 25.f)), _castText()
 {
   _currentInstance = this;
   _threeLayout.push_back(sf::Vector2f(260.f, 305.f));
@@ -39,6 +47,11 @@ Battle::Battle()
   _fourLayout.push_back(sf::Vector2f(380.f, 340.f));
   _fourLayout.push_back(sf::Vector2f(480.f, 275.f));
   _fourLayout.push_back(sf::Vector2f(650.f, 340.f));
+
+  _castDisplay.setFillColor(sf::Color::Black);
+  _castText.setCharacterSize(13u);
+  _castText.setColor(sf::Color::White);
+  _castText.setFont(BlackDragonEngine::Provider<sf::Font>::Get("Vera"));
 }
 
 bool Battle::UpdateCondition()
@@ -62,6 +75,8 @@ bool Battle::Update()
     _battleMenu.Update();
     break;
   case Action:
+    // TODO Actual Effect System
+    ActionUpdate();
     break;
   case Consequences:
     ConsequenceUpdate();
@@ -93,6 +108,7 @@ void Battle::Draw(float interpolation, sf::RenderTarget& renderTarget)
     _battleMenu.Draw(renderTarget);
     break;
   case Action:
+    ActionDraw(renderTarget);
     break;
   case Consequences:
     ConsequenceDraw(renderTarget);
@@ -111,8 +127,6 @@ void Battle::SetTargetInfo(TargetInfo targetInfo)
 
 void Battle::SetBattleState(Battle::BattleState battleState)
 {
-  if(battleState == Action)
-    battleState = Consequences;
   _queuedState = battleState;
   _changeState = true;
 }
@@ -129,7 +143,7 @@ Party::FrontRow& Battle::GetFrontRow()
 
 void Battle::StartBattle(int level, int bossID)
 {
-  Character::TimeToAction = 100.f + (100.f + 0.000645f * level) * level * 5 * 0.0225f * 3;
+  Character::TimeToAction = _currentInstance->GetAvgSPD();
 
 
   _currentInstance->_isBossfight = bossID != 0;
@@ -142,6 +156,32 @@ void Battle::StartBattle(int level, int bossID)
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
   _currentInstance->ArrangeCharFrames(bossID);
+}
+
+unsigned long long Battle::GetAvgSPD()
+{
+  unsigned long long spdTotal(0);
+  int charCount(0);
+  for(auto& chara : _enemies)
+  {
+    spdTotal += chara.GetStats().GetTotalBaseStat(SPD);
+    ++charCount;
+  }
+  for(auto& chara : _playerRow)
+  {
+    if(chara.IsDead())
+      continue;
+    spdTotal += chara.GetStats().GetTotalBaseStat(SPD);
+    ++charCount;
+  }
+  for(auto& chara : _playerBattleParty)
+  {
+    if(chara.IsDead())
+      continue;
+    spdTotal += chara.GetStats().GetTotalBaseStat(SPD);
+    ++charCount;
+  }
+  return (float)spdTotal / charCount * 90.f;
 }
 
 void Battle::IdleUpdate()
@@ -168,11 +208,7 @@ void Battle::IdleUpdate()
     if(_enemies[i].UpdateTurnCounter())
     {
       _targetInfo = _enemies[i].AIBattleMenu(_playerRow);
-
-      //TODO Delete this line after testing
-      SetBattleState(Consequences);
-
-      //_battleState = Action;
+      SetBattleState(Action);
       _enemyLeftOff = i + 1;
       _currentAttacker = &_enemies[i];
       _enemyTurn = true;
@@ -211,6 +247,7 @@ void Battle::ConsequenceUpdate()
     if(!someoneAlive) // whoops, everyone is dead, Game Over!
     {
       // TODO Actual Game Over Code
+      EndBattle();
       SetBattleState(Idle);
       GameStateManager::SetState(GameStates::Titlescreen);
       _battleMenu.ResetMenu();
@@ -224,7 +261,7 @@ void Battle::ConsequenceUpdate()
       enemyAlive |= !enemy.IsDead(); // ...until proven otherwise.
     }
 
-    if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!    
+    if(!enemyAlive) // FUCK YEAH, WE KILLED THEM FUCKERS!
       EndBattle();
 
     return;
@@ -300,7 +337,60 @@ void Battle::ConsequenceUpdate()
     _playerRow[i].CurrentHP() = charHPBefore[i] - _charHPStep[i];
     _playerRow[i].Graphics().UpdateHP();
     _playerRow[i].Graphics().UpdateMP();
-  }  
+  }
+}
+
+void Battle::ActionUpdate()
+{
+  ++_frameCounter;
+  if(_frameCounter == 90)
+  {
+    _frameCounter = 0;
+    SetBattleState(Consequences);
+    return;
+  }
+  if(_frameCounter == 1)
+  {
+    using namespace boost;
+    std::string targetString;
+    switch(_targetInfo.Spell->GetTargetType())
+    {
+    case TargetInfo::Allies:
+      targetString = Allies;
+      break;
+
+    case TargetInfo::Enemies:
+      targetString = Enemies;
+      break;
+
+    case TargetInfo::Self:
+      targetString = Self;
+      break;
+
+    case TargetInfo::Single:
+      targetString = _targetInfo.Target->GetDisplayName().toAnsiString();
+      break;
+
+    case TargetInfo::Decaying:
+      format decayString(Decaying);
+      decayString
+          % _targetInfo.Target->GetDisplayName().toAnsiString();
+      targetString = decayString.str();
+      break;
+    }
+
+
+    format formatString(CastTextFormatString);
+    formatString
+        % _currentAttacker->GetDisplayName().toAnsiString()
+        % _targetInfo.Spell->GetName().toAnsiString()
+        % targetString;
+
+    _castText.setString(formatString.str());
+    _castText.setPosition(sf::Vector2f(
+                            (int)(320.f - _castText.getLocalBounds().width * .5f),
+                            5.f));
+  }
 }
 
 
@@ -348,6 +438,16 @@ void Battle::ConsequenceDraw(sf::RenderTarget& renderTarget)
 
   for(auto& enemy : _enemies)
     enemy.Graphics().DrawDamageDone(renderTarget);
+
+  for(auto& player : _playerRow)
+    player.Graphics().DrawDamageDone(renderTarget);
+}
+
+void Battle::ActionDraw(sf::RenderTarget& rTarget)
+{
+  Draw(rTarget);
+  rTarget.draw(_castDisplay);
+  rTarget.draw(_castText);
 }
 
 
@@ -358,6 +458,7 @@ void Battle::ArrangeCharFrames(int bossID)
     _playerRow[i].Graphics().Reposition(FrameContainerStart.x
                                         + i * FrameContainerOffset,
                                         FrameContainerStart.y);
+    _playerRow[i].StartBattle();
   }
 
   if(bossID != 0)
@@ -369,8 +470,10 @@ void Battle::ArrangeCharFrames(int bossID)
   VecVec& positions = (_enemies.size() == 3) ? _threeLayout : _fourLayout;
   for(size_t i = 0; i < _enemies.size(); ++i)
   {
+    _enemies[i].IsEnemy() = true;
     _enemies[i].InitializeCharGraphics();
     _enemies[i].Graphics().SetBattleSpritePosition(positions[i]);
+    _enemies[i].StartBattle();
   }
 }
 
@@ -397,7 +500,7 @@ void Battle::GenerateEnemies(int level, int bossID)
     enemy.GetStats() = Stats::_baseStats["Sakuya"];
 
     // Lets boost the base stats, since enemy should be STRONK!
-    enemy.CurrentMP() = std::numeric_limits<float>::max();    
+    enemy.CurrentMP() = std::numeric_limits<float>::max();
     enemy.LvlUp(level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
     bs[HP][0] *= EnemyHPMod;
@@ -424,11 +527,14 @@ void Battle::EndBattle()
   for(auto& enemy : _enemies)
   {
     xpAwarded += enemy.IsConvinced() ? XPPerConvincedEnemy : XPPerEnemy;
+    enemy.EndBattle();
   }
 
   if(_isBossfight)
     xpAwarded += _enemies[0].IsConvinced() ? XPFromConvincedBoss : XPFromBoss;
 
+  if(Party::GetAveragePartyLvl() == 0)
+    return;
   xpAwarded /= Party::GetAveragePartyLvl() - _enemies[0].GetLvl() == 0 ?
         1 :
         Party::GetAveragePartyLvl() - _enemies[0].GetLvl();
@@ -436,6 +542,7 @@ void Battle::EndBattle()
   for(auto& chara : _playerRow)
   {
     chara.GetStats().ReduceBuffEffectiveness(10);
+    chara.EndBattle();
   }
 
   Party::AddExperience(xpAwarded);

@@ -92,6 +92,8 @@ struct Stats
   void RemoveBuffs();
   bool TryToApplyDebuff(DebuffResistance type, int successChance);
 
+  float GetEVAChance(int level);
+
   static StatsMap _baseStats;
   static RandomSeed _rng;
 

@@ -39,18 +39,18 @@ void Stats::LvlUp(int currentLevel, int amount)
   int newLevel(currentLevel + amount);
   for(int i = 0; i < amount; ++i)
   {
-    BaseStats[HP][6] += 0.03f;
-    BaseStats[MP][6] += 0.02f;
-    BaseStats[AD][6] += 0.02f;
-    BaseStats[MD][6] += 0.02f;
-    BaseStats[DEF][6] += 0.02f;
-    BaseStats[MR][6] += 0.02f;
-    BaseStats[CHA][6] += 0.02f;
-    BaseStats[EVA][6] += 0.02f;
+    BaseStats[HP][6] += BaseStats[HP][6] < 6.66f ? 0.03f : 0.f;
+    //BaseStats[MP][6] += BaseStats[MP][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[AD][6] += BaseStats[AD][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[MD][6] += BaseStats[MD][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[DEF][6] += BaseStats[DEF][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[MR][6] += BaseStats[MR][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[CHA][6] += BaseStats[CHA][6] < 5.f ? 0.02f : 0.f;
+    BaseStats[EVA][6] += BaseStats[EVA][6] < 5.f ? 0.02f : 0.f;
     BaseStats[SPD][6] += 0.000645f;
 
     BaseStats[HP][0] += BaseStats[HP][5];
-    BaseStats[MP][0] += BaseStats[MP][5];
+    //BaseStats[MP][0] += BaseStats[MP][5];
     BaseStats[AD][0] += BaseStats[AD][5];
     BaseStats[MD][0] += BaseStats[MD][5];
     BaseStats[DEF][0] += BaseStats[DEF][5];
@@ -61,6 +61,8 @@ void Stats::LvlUp(int currentLevel, int amount)
 
     BaseStats[SPD][0] = 100.f + BaseStats[SPD][6] * newLevel * BaseStats[SPD][5];
   }
+  BaseStats[MP][0] = 200.f;
+  BaseStats[MP][6] = 1.f;
 }
 
 void Stats::BuffBaseStat(BaseStat baseStat, float amount)
@@ -116,6 +118,15 @@ bool Stats::TryToApplyDebuff(DebuffResistance type, int successChance)
   IntGenerator applyRoll(0,99);
   int resistance(GetTotalResistance(type) * 3);
   return applyRoll(_rng) < successChance - resistance;
+}
+
+float Stats::GetEVAChance(int level)
+{
+  float stat = GetTotalBaseStat(EVA);
+  if(EVAType == Block)
+    return stat;
+
+  return stat / level;
 }
 
 

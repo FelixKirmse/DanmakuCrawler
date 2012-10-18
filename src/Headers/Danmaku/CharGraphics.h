@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 
 namespace Danmaku
 {
@@ -14,7 +15,7 @@ public:
   void UpdateSPD(bool myTurn);
   void UpdateHP();
   void UpdateMP();
-  void SetDamageDone(sf::String damage, bool heal);
+  void SetDamageDone(float damage, bool heal, bool block = false, bool dodge = false);
   void SetBattleSpritePosition(sf::Vector2f pos);
 
   void DrawBattleSprite(sf::RenderTarget& rTarget);
@@ -24,6 +25,7 @@ public:
   void Reposition(sf::Vector2f newOffset);
   void Reposition(float x, float y);
   void SetDeadSprites();
+  void RestoreSprites();
 
   void ResetDamage();
 
@@ -54,6 +56,12 @@ private:
 
   bool _myTurn;
   bool _tookDamage;
+
+
+  float _damageSum;
+  bool _blocked;
+  bool _dodged;
+  bool _healed;
 
   static sf::Color const FullSPDBar;
   static sf::Color const NormalSPDBar;

@@ -29,7 +29,7 @@ Character::Character(sf::String name)
     _currentMP(0), _graphics(), _dead(false), _level(0), _xpRequired(0),
     _poisoned(false), _poisonDamage(0), _paralyzed(false), _paralyzeStrength(0),
     _paralyzeCounter(0), _silenced(false), _silenceStrength(0),
-    _convinced(false)
+    _convinced(false), _isEnemy(false)
 {  
   AssignSpells();
 
@@ -39,7 +39,7 @@ Character::Character(sf::String name)
     _xpRequired = (float)XPRequiredForLvlUp * _stats.XPMultiplier;
   }
   _currentHP = _stats.GetTotalBaseStat(HP);
-  _currentMP = _stats.GetTotalBaseStat(MP);
+  _currentMP = _stats.GetTotalBaseStat(MP);  
 }
 
 
@@ -69,6 +69,7 @@ bool Character::UpdateTurnCounter()
   _turnCounter += timeStep;
   if(_turnCounter >= TimeToAction)
   {
+    UseMP(-10.f);
     _turnCounter -= TimeToAction;
     result = true;
     _stats.ReduceBuffEffectiveness();
@@ -106,7 +107,7 @@ CharGraphics& Character::Graphics()
   return _graphics;
 }
 
-size_t& Character::TurnCounter()
+unsigned long long &Character::TurnCounter()
 {
   return _turnCounter;
 }
@@ -116,31 +117,41 @@ sf::String const& Character::GetDisplayName() const
   return _displayName;
 }
 
+const sf::String &Character::GetInternalName() const
+{
+  return _name;
+}
+
 bool Character::IsDead()
 {
   return _dead;
 }
 
+void Character::SetDead(bool dead)
+{
+  _dead = dead;
+}
+
 void Character::TakeDamage(float value)
 {
+  if(value < 0.f)
+    value = 0.f;
   IntGenerator evaRoll(0,99);
-  int evaChance =  _stats.EVAType == Stats::Dodge ?
-        _stats.GetTotalBaseStat(EVA)/_level :
-        _stats.GetTotalBaseStat(EVA);
+  int evaChance =  _stats.GetEVAChance(_level);
   bool attackEvaded = evaRoll(_rng) < evaChance;
   if(attackEvaded && _stats.EVAType == Stats::Dodge)
   {
-    _graphics.SetDamageDone("Dodged!!", false);
+    _graphics.SetDamageDone(0.f, false, false, true);
     return;
   }
   value /= attackEvaded ? 2.f : 1.f;
-  sf::String addendum(attackEvaded ? ", Blocked!!" : "");
-  _graphics.SetDamageDone(std::to_string((int) value) + addendum, false);
-  TakeTrueDamage(value);
+  TakeTrueDamage(value, attackEvaded);
 }
 
-void Character::TakeTrueDamage(float value)
-{
+void Character::TakeTrueDamage(float value, bool blocked)
+{  
+  _graphics.SetDamageDone(value, false, blocked);
+
   _currentHP -= (value > 0.f) ? value : 0.f;
   _currentHP = (_currentHP < 0.f) ? 0.f : _currentHP;
 
@@ -155,11 +166,12 @@ void Character::UseMP(float value)
   _currentMP = (_currentMP < 0.f) ?
         0.f : _currentMP > _stats.GetTotalBaseStat(MP) ?
           _stats.GetTotalBaseStat(MP) : _currentMP;
+  _graphics.UpdateMP();
 }
 
 void Character::Heal(float value)
 {
-  _graphics.SetDamageDone(std::to_string((int)value), true);
+  _graphics.SetDamageDone(value, true);
   _currentHP += value;
   _currentHP = (_currentHP > _stats.GetTotalBaseStat(HP)) ?
         _stats.GetTotalBaseStat(HP) : _currentHP;
@@ -176,8 +188,8 @@ void Character::CheckIfDead()
   if((int)_currentHP > 0)
     return;
 
-  _dead = true;
-  _graphics.SetDeadSprites();
+  _dead = true;  
+  _graphics.SetDeadSprites(); 
 }
 
 bool Character::IsSilenced()
@@ -228,10 +240,14 @@ int Character::GetLvl()
   return _level;
 }
 
-void Character::ApplyPoison(int damage)
+void Character::StartBattle()
+{
+}
+
+void Character::ApplyPoison(int damage, int level)
 {
   _poisoned = true;
-  _poisonDamage = damage;
+  _poisonDamage = (damage/100) * level;
 }
 
 void Character::ApplyPAR(int strength)
@@ -259,11 +275,16 @@ bool Character::IsConvinced()
   return _convinced;
 }
 
+bool &Character::IsEnemy()
+{
+  return _isEnemy;
+}
+
 TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 {  
   TargetInfo targetInfo;
 
-  IntGenerator spellSelect(0, _spellList.size() - 1);
+  IntGenerator spellSelect(2, _spellList.size() - 1); // TODO Change to 0
   targetInfo.Spell = _spellList[spellSelect(_rng)];
   targetInfo.Target = NULL;
 
@@ -295,8 +316,7 @@ TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
 }
 
 sf::String Character::GetRandomName()
-{
-  typedef boost::random::uniform_int_distribution<> IntGenerator;
+{  
   using namespace std;
   IntGenerator generator(1,13874);
 
@@ -312,17 +332,17 @@ void Character::AssignSpells()
 {
   _spellList.push_back(Spells::GetSpell("Attack"));
   _spellList.push_back(Spells::GetSpell("Defend"));
-  #include "CharSpells.inc"
+#include "CharSpells.inc"
   if(_name == _displayName)
     return;
   //TODO Proper Enemy Spell Generation
-  //return;
+  IntGenerator spellCountRoll(3,5);
+  int spellCount = spellCountRoll(_rng);
 
-  _spellList.push_back(Spells::GetSpell("Tickling Needles"));
-  _spellList.push_back(Spells::GetSpell("Stabby Stab!"));
-  _spellList.push_back(Spells::GetSpell("Sharp Assault"));
-  _spellList.push_back(Spells::GetSpell("Blitzkrieg"));
-  _spellList.push_back(Spells::GetSpell("Time Bubble"));
+  for(int i = 0; i < spellCount; ++i)
+  {
+    _spellList.push_back(Spells::GetRandomSpell());
+  }
 }
 
 void Character::GoToLine(std::fstream& file, size_t num)
@@ -348,6 +368,10 @@ Character& Character::operator=(Character const& source)
   _xpRequired = source._xpRequired;
   _graphics = CharGraphics(sf::Vector2f(0.f, 0.f), _name, this);
   return *this;
+}
+
+void Character::EndBattle()
+{
 }
 }
 
