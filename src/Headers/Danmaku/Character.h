@@ -9,6 +9,7 @@
 #include "Danmaku/Stats.h"
 #include "Danmaku/CharGraphics.h"
 
+
 namespace Danmaku
 {
 class Character;
@@ -30,7 +31,7 @@ struct TargetInfo
   ISpell* Spell;
 };
 
-class Character
+class Character   
 {
 public:  
   typedef std::vector<ISpell*> SpellList;
@@ -46,11 +47,13 @@ public:
   float& CurrentMP();
   Stats& GetStats();
   CharGraphics& Graphics();
-  size_t &TurnCounter();
+  unsigned long long& TurnCounter();
   sf::String const& GetDisplayName() const;
+  sf::String const& GetInternalName() const;
   bool IsDead();
+  void SetDead(bool dead);
   void TakeDamage(float value);
-  void TakeTrueDamage(float value);
+  void TakeTrueDamage(float value, bool blocked = false);
   void UseMP(float value);
   void Heal(float value);
   SpellList& GetSpells();
@@ -61,14 +64,17 @@ public:
   void LvlUp(); // For PCs
   void LvlUp(int amount); // For NPCs
   int GetLvl();
+  void StartBattle();
+  void EndBattle();
 
   // Status Ailments-Related
-  void ApplyPoison(int damage);
+  void ApplyPoison(int damage, int level);
   void ApplyPAR(int strength);
   void ApplySIL(int strength);
   void RemoveDebuffs();
 
   bool IsConvinced();
+  bool& IsEnemy();
 
   TargetInfo AIBattleMenu(FrontRow& targetRow);
 
@@ -85,7 +91,7 @@ private:
   sf::String _name;
   sf::String _displayName;
   Stats _stats;
-  size_t _turnCounter;
+  unsigned long long _turnCounter;
   SpellList _spellList;
   float _currentHP;
   float _currentMP;
@@ -104,6 +110,7 @@ private:
   int _silenceStrength;
 
   bool _convinced;
+  bool _isEnemy;
 
   static RandomSeed _rng;
 };

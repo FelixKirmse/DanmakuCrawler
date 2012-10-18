@@ -34,7 +34,7 @@ else if(_name == "Patchouli")
   _spellList.push_back(Spells::GetSpell("Icicle Barrage"));
   _spellList.push_back(Spells::GetSpell("Tornado"));
   _spellList.push_back(Spells::GetSpell("Fear of the Dark"));
-  _spellList.push_back(Spells::GetSpell("Forbidden Spell #19"));
+  _spellList.push_back(Spells::GetSpell("Forbidden Spell #98"));
 }
 else if(_name == "Chen")
 {
@@ -66,6 +66,7 @@ else if(_name == "Minoriko")
 }
 else if(_name == "Youmu")
 {
+  _spellList[1] = Spells::GetSpell("Meditation");
   _spellList.push_back(Spells::GetSpell("Alpha Slash"));
   _spellList.push_back(Spells::GetSpell("Omega Slash"));
   _spellList.push_back(Spells::GetSpell("Supersonic Slash"));
@@ -117,6 +118,7 @@ else if(_name == "Komachi")
   _spellList.push_back(Spells::GetSpell("Freeze Them To Death!"));
   _spellList.push_back(Spells::GetSpell("Fuck Them Up!"));
   _spellList.push_back(Spells::GetSpell("Omae Wa Mo Shindeiru"));
+  _spellList.push_back(Spells::GetSpell("Ghost Nova"));
 }
 else if(_name == "Suwako")
 {

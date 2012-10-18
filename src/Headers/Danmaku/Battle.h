@@ -50,9 +50,11 @@ public:
 private:  
   void IdleUpdate();
   void ConsequenceUpdate();
+  void ActionUpdate();
 
   void Draw(sf::RenderTarget& renderTarget);
   void ConsequenceDraw(sf::RenderTarget& renderTarget);
+  void ActionDraw(sf::RenderTarget& rTarget);
 
   void ArrangeCharFrames(int bossID);
 
@@ -60,6 +62,8 @@ private:
   void SetupBossBattle(int level, int bossID);
 
   void EndBattle();
+
+  unsigned long long GetAvgSPD();
 
   template<class T>
   void SetInitialSPD(T& vec);
@@ -80,7 +84,7 @@ private:
 
   Danmaku::BattleMenu _battleMenu;
 
-  sf::Vector2f const FrameContainerStart = sf::Vector2f(200.f, 370.f);
+  sf::Vector2f const FrameContainerStart = sf::Vector2f(200.f, 380.f);
   size_t FrameContainerOffset = 110;
 
   VecVec _threeLayout;
@@ -96,6 +100,9 @@ private:
 
   bool _isBossfight;
 
+  sf::RectangleShape _castDisplay;
+  sf::Text _castText;
+
   static int const ConsequenceFrames;
   static float const EnemyHPMod;
   static float const EnemyBaseMod;
@@ -103,6 +110,11 @@ private:
   static int const XPPerConvincedEnemy;
   static int const XPFromBoss;
   static int const XPFromConvincedBoss;
+  static std::string const CastTextFormatString;
+  static std::string const Allies;
+  static std::string const Enemies;
+  static std::string const Decaying;
+  static std::string const Self;
 
   static Battle* _currentInstance;  
 };
