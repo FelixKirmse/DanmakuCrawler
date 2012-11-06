@@ -1832,7 +1832,7 @@ Spell
         ++aliveCount;
 
     float amount = .2f / aliveCount;
-    for(auto& chara : Party::GetBackSeat())
+    for(auto& chara : Party::GetAvailableCharacters())
     {
       chara.GetStats().BuffBaseStat(DEF, amount);
       chara.GetStats().BuffBaseStat(MR, amount);
@@ -1859,7 +1859,7 @@ Spell
         ++aliveCount;
 
     float amount = .2f / aliveCount;
-    for(auto& chara : Party::GetBackSeat())
+    for(auto& chara : Party::GetAvailableCharacters())
     {
       chara.GetStats().BuffBaseStat(AD, amount);
       chara.GetStats().BuffBaseStat(MD, amount);

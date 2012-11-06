@@ -3,6 +3,7 @@
 #include "Danmaku/GameStateManager.h"
 #include "Danmaku/Character.h"
 #include "Danmaku/Spells/ISpell.h"
+#include "BlackDragonEngine/MenuItem.h"
 
 namespace Danmaku
 {
@@ -10,14 +11,14 @@ namespace Danmaku
 BattleMenu::BattleMenu(Battle& battle)
   : Attack("Attack"), Spell("Spell"), Defend("Defend"), Switch("Switch"),
     Convince("Convince"), _menuState(ActionSelect), _battle(battle),
-    _targetSelectMenu(battle, *this), _spellSelectMenu(*this)
+    _targetSelectMenu(battle, *this), _spellSelectMenu(this)
 {
   using namespace BlackDragonEngine;
-  MenuItems.push_back(MenuItem(Attack, FontName, true));
-  MenuItems.push_back(MenuItem(Spell));
-  MenuItems.push_back(MenuItem(Defend));
-  MenuItems.push_back(MenuItem(Switch));
-  MenuItems.push_back(MenuItem(Convince));
+  AddMenuItem(new MenuItem(Attack, FontName, true));
+  AddMenuItem(new MenuItem(Spell));
+  AddMenuItem(new MenuItem(Defend));
+  AddMenuItem(new MenuItem(Switch));
+  AddMenuItem(new MenuItem(Convince));
   EnableMouseSelection = false;
   SetPositions(sf::Vector2f(10.f, 408.f), false);
 }

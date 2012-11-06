@@ -15,11 +15,13 @@ class ISpell;
 class SpellSelectMenu : public BlackDragonEngine::Menu
 {
 public:
-  SpellSelectMenu(BattleMenu& battleMenu);
+  SpellSelectMenu();
+  SpellSelectMenu(BattleMenu* battleMenu);
   void ResetMenu(Character* currentAttacker);
   void Update();
   void Draw(sf::RenderTarget& renderTarget);
   void SelectMenuItem();
+  void SetDescription(sf::String const& description);
 
 private:
   void AddStandardMenuLabels();
@@ -34,7 +36,7 @@ private:
 
   sf::RectangleShape _backDrop;
 
-  BattleMenu& _battleMenu;
+  BattleMenu* _battleMenu;
   Character* _currentAttacker;
 
   boost::unordered::unordered_map<std::string, ISpell*> _nameSpellMap;

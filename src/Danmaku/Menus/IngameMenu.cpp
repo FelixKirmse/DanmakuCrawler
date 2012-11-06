@@ -4,6 +4,7 @@
 #include "Danmaku/States.h"
 #include "Danmaku/Menu.h"
 #include "Danmaku/IngameMenu.h"
+#include "BlackDragonEngine/MenuItem.h"
 
 namespace Danmaku
 {
@@ -11,8 +12,8 @@ IngameMenu::IngameMenu()
   : Resume("Resume"), BackToMenu("Back to Main Menu")
 {
   using namespace BlackDragonEngine;
-  MenuItems.push_back(MenuItem(Resume, FontName, true));
-  MenuItems.push_back(MenuItem(BackToMenu, FontName));
+  AddMenuItem(new MenuItem(Resume, FontName, true));
+  AddMenuItem(new MenuItem(BackToMenu, FontName));
   SetPositions();
   EnableMouseSelection = false;
 }

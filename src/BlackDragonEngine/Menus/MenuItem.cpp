@@ -3,6 +3,11 @@
 
 namespace BlackDragonEngine
 {
+MenuItem::MenuItem()
+  : MenuItem("")
+{
+}
+
 MenuItem::MenuItem(sf::String const& name)
   : MenuItem(name, sf::Vector2f(), false, Provider<sf::Font>::Get("Vera"))
 {

@@ -6,7 +6,7 @@ namespace Danmaku
 Party* Party::_instance;
 
 Party::Party()
-  : _frontRow(), _battleBackSeat(), _availableCharacters(), _experience(0)
+  : _frontRow(), _availableCharacters(), _experience(0)
 {
   _instance = this;
 }
@@ -14,11 +14,6 @@ Party::Party()
 Party::FrontRow& Party::GetFrontRow()
 {
   return _instance->_frontRow;
-}
-
-Party::BackSeat& Party::GetBackSeat()
-{
-  return _instance->_battleBackSeat;
 }
 
 Party::CharVec& Party::GetAvailableCharacters()
@@ -36,8 +31,6 @@ void Party::AddExperience(unsigned long amount)
   _instance->_experience += amount;
   for(auto& chara : _instance->_frontRow)
     chara.LvlUp();
-  for(auto& chara : _instance->_battleBackSeat)
-    chara.LvlUp();
   for(auto& chara : _instance->_availableCharacters)
     chara.LvlUp();
 }
@@ -48,7 +41,7 @@ int Party::GetAveragePartyLvl()
     return _instance->_averagePartyLvl;
 
   FrontRow& fr = _instance->_frontRow;
-  BackSeat& bs = _instance->_battleBackSeat;
+  CharVec& bs = _instance->_availableCharacters;
 
   int i(0);
   int lvlSum(0);
@@ -75,7 +68,7 @@ int Party::GetAveragePartyLvl()
   return _instance->_averagePartyLvl;
 }
 
-unsigned long Party::GetExperience()
+long long Party::GetExperience()
 {
   return _instance->_experience;
 }
@@ -88,15 +81,14 @@ void Party::ResetCache()
 void Party::ResetInternal()
 {
   _frontRow.fill(Character());
-  _battleBackSeat.fill(Character());
   _availableCharacters.clear();
 
 
   // TODO Delete all the test stuff
-  _frontRow[0] = Character("Mokou");
-  _frontRow[1] = Character("Mokou");
-  _frontRow[2] = Character("Mokou");
-  _frontRow[3] = Character("Mokou");
+  _frontRow[0] = Character("Komachi");
+  _frontRow[1] = Character("Youmu");
+  _frontRow[2] = Character("Cirno");
+  _frontRow[3] = Character("Minoriko");
 
   for(auto& c : _frontRow)
   {
@@ -106,11 +98,6 @@ void Party::ResetInternal()
     c.CurrentMP() = c.GetStats().GetTotalBaseStat(MP);
     c.Graphics().UpdateHP();
     c.Graphics().UpdateMP();
-  }
-
-  for(auto& c : _battleBackSeat)
-  {
-    c.InitializeCharGraphics();
   }
 
   for(auto& c : _availableCharacters)

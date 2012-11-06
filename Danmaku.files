@@ -90,3 +90,7 @@ src/Danmaku/Menus/SpellSelectMenu.cpp
 src/Danmaku/Entities/CharSpells.inc
 src/Headers/Danmaku/StatOverview.h
 src/Danmaku/Entities/StatOverview.cpp
+src/Headers/Danmaku/CharSwitch.h
+src/Headers/Danmaku/CharGraphicsMenuItem.h
+src/Danmaku/Menus/CharGraphicsMenuItem.cpp
+src/Danmaku/Menus/CharSwitch.cpp

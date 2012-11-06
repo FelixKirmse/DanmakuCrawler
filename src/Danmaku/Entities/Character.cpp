@@ -212,9 +212,9 @@ void Character::LvlUp()
   if(_displayName == "Dead")
     return;
 
-  unsigned long totalXP = Party::GetExperience();
-  unsigned long currentLevelXP = _level * _xpRequired;
-  unsigned long difference = totalXP - currentLevelXP;
+  long totalXP = Party::GetExperience();
+  long currentLevelXP = _level * _xpRequired;
+  long difference = totalXP - currentLevelXP;
 
   while(difference > _xpRequired)
   {
@@ -224,8 +224,7 @@ void Character::LvlUp()
   }
 
   Heal(_stats.GetTotalBaseStat(HP));
-  // TODO Delete
-  _currentMP = _stats.GetTotalBaseStat(MP);
+  _graphics.ResetDamage();
   _graphics.UpdateMP();
 }
 
@@ -372,6 +371,7 @@ Character& Character::operator=(Character const& source)
 
 void Character::EndBattle()
 {
+  UseMP(-50.f);
 }
 }
 

@@ -72,7 +72,6 @@ private:
 
   CharVec _enemies;
   Party::FrontRow& _playerRow;
-  Party::BackSeat& _playerBattleParty;
   Character* _currentAttacker;
 
   TargetInfo _targetInfo;
@@ -82,10 +81,7 @@ private:
   int _frameCounter;
   bool _enemyTurn;
 
-  Danmaku::BattleMenu _battleMenu;
-
-  sf::Vector2f const FrameContainerStart = sf::Vector2f(200.f, 380.f);
-  size_t FrameContainerOffset = 110;
+  Danmaku::BattleMenu _battleMenu;  
 
   VecVec _threeLayout;
   VecVec _fourLayout;
@@ -103,6 +99,8 @@ private:
   sf::RectangleShape _castDisplay;
   sf::Text _castText;
 
+  static sf::Vector2f const FrameContainerStart;
+  static int const FrameContainerOffset;
   static int const ConsequenceFrames;
   static float const EnemyHPMod;
   static float const EnemyBaseMod;

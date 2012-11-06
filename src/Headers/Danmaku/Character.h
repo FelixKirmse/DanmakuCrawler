@@ -98,7 +98,7 @@ private:
   CharGraphics _graphics;
   bool _dead;
   size_t _level;
-  size_t _xpRequired;
+  long long _xpRequired;
 
   // Status Ailments-Related
   bool _poisoned;

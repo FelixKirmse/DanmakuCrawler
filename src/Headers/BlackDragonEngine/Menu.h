@@ -3,18 +3,20 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "BlackDragonEngine/Game.h"
-#include "BlackDragonEngine/MenuItem.h"
-#include "BlackDragonEngine/MenuLabel.h"
 
 namespace BlackDragonEngine
 {
+class MenuItem;
+class MenuLabel;
+
 class Menu
 {
 public:
-  typedef std::vector<MenuItem> MenuItemList;
-  typedef std::vector<MenuLabel> MenuLabelList;
+  typedef std::vector<MenuItem*> MenuItemList;
+  typedef std::vector<MenuLabel*> MenuLabelList;
 
   Menu();
+  virtual ~Menu();
 
   virtual void Update();
   virtual void Draw(sf::RenderTarget& renderTarget);
@@ -24,6 +26,11 @@ public:
   virtual void ResetMenu();
 
   virtual void SelectMenuItem() = 0;
+
+  void AddMenuItem(MenuItem* item);
+  void AddMenuLabel(MenuLabel* label);
+  void ClearMenuItems();
+  void ClearLabels();
 
 protected:
   sf::String const& SelectedItem();
