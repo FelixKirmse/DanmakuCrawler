@@ -15,11 +15,14 @@ namespace Danmaku
 {
 Battle* Battle::_currentInstance;
 size_t Battle::MaxEnemyID;
+
+sf::Vector2f const Battle::FrameContainerStart(200.f, 380.f);
+int const Battle::FrameContainerOffset(110);
 float const Battle::EnemyHPMod(5.f);
 float const Battle::EnemyBaseMod(.4f);
 int const Battle::ConsequenceFrames(90);
 
-int const Battle::XPPerEnemy(10000000);
+int const Battle::XPPerEnemy(50000); // 25
 int const Battle::XPPerConvincedEnemy(50);
 int const Battle::XPFromBoss(2000);
 int const Battle::XPFromConvincedBoss(4000);
@@ -32,7 +35,7 @@ std::string const Battle::Self("self");
 
 Battle::Battle()
   : _battleState(Idle), _enemies(), _playerRow(Party::GetFrontRow()),
-    _playerBattleParty(Party::GetBackSeat()), _currentAttacker(0),
+    _currentAttacker(0),
     _enemyLeftOff(0), _playerLeftOff(0), _frameCounter(0), _enemyTurn(false),
     _battleMenu(*this), _threeLayout(), _fourLayout(), _charHPStep(),
     _charHPShouldHave(), _rng(time(0)), _queuedState(Idle), _changeState(false),
@@ -174,7 +177,7 @@ unsigned long long Battle::GetAvgSPD()
     spdTotal += chara.GetStats().GetTotalBaseStat(SPD);
     ++charCount;
   }
-  for(auto& chara : _playerBattleParty)
+  for(auto& chara : Party::GetAvailableCharacters())
   {
     if(chara.IsDead())
       continue;

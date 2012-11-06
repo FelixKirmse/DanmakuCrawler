@@ -75,8 +75,10 @@ OBJECTS := \
 	$(OBJDIR)/MainMenu.o \
 	$(OBJDIR)/TargetSelectMenu.o \
 	$(OBJDIR)/BattleMenu.o \
+	$(OBJDIR)/CharSwitch.o \
 	$(OBJDIR)/IngameMenu.o \
 	$(OBJDIR)/SpellSelectMenu.o \
+	$(OBJDIR)/CharGraphicsMenuItem.o \
 	$(OBJDIR)/MapGen.o \
 	$(OBJDIR)/MapCell.o \
 	$(OBJDIR)/TitleScreen.o \
@@ -181,10 +183,16 @@ $(OBJDIR)/TargetSelectMenu.o: src/Danmaku/Menus/TargetSelectMenu.cpp
 $(OBJDIR)/BattleMenu.o: src/Danmaku/Menus/BattleMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/CharSwitch.o: src/Danmaku/Menus/CharSwitch.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/IngameMenu.o: src/Danmaku/Menus/IngameMenu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/SpellSelectMenu.o: src/Danmaku/Menus/SpellSelectMenu.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/CharGraphicsMenuItem.o: src/Danmaku/Menus/CharGraphicsMenuItem.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/MapGen.o: src/Danmaku/TileMap/MapGen.cpp
