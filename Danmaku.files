@@ -94,3 +94,4 @@ src/Headers/Danmaku/CharSwitch.h
 src/Headers/Danmaku/CharGraphicsMenuItem.h
 src/Danmaku/Menus/CharGraphicsMenuItem.cpp
 src/Danmaku/Menus/CharSwitch.cpp
+src/Headers/Danmaku/IFinishedNotifier.h

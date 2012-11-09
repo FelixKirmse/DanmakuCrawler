@@ -4,6 +4,8 @@
 #include "Danmaku/Character.h"
 #include "Danmaku/Spells/ISpell.h"
 #include "BlackDragonEngine/MenuItem.h"
+#include "Danmaku/CharSwitch.h"
+#include "Danmaku/Spells/Spells.h"
 
 namespace Danmaku
 {
@@ -11,7 +13,8 @@ namespace Danmaku
 BattleMenu::BattleMenu(Battle& battle)
   : Attack("Attack"), Spell("Spell"), Defend("Defend"), Switch("Switch"),
     Convince("Convince"), _menuState(ActionSelect), _battle(battle),
-    _targetSelectMenu(battle, *this), _spellSelectMenu(this)
+    _targetSelectMenu(battle, *this), _spellSelectMenu(this),
+    _charSwitch(CharSwitch::GetInstance())
 {
   using namespace BlackDragonEngine;
   AddMenuItem(new MenuItem(Attack, FontName, true));
@@ -21,6 +24,7 @@ BattleMenu::BattleMenu(Battle& battle)
   AddMenuItem(new MenuItem(Convince));
   EnableMouseSelection = false;
   SetPositions(sf::Vector2f(10.f, 408.f), false);
+  _charSwitch.SetNotifier(this);
 }
 
 void BattleMenu::Update()
@@ -39,11 +43,9 @@ void BattleMenu::Update()
     _spellSelectMenu.Update();
     break;
 
-  case SelectCharToSwitch:
-    break;
-
-  case SelectCharToSwitchWith:
-    break;
+  case SwitchCharacter:
+    _charSwitch.Update();
+    break;  
   }
 }
 
@@ -64,10 +66,8 @@ void BattleMenu::Draw(sf::RenderTarget& renderTarget)
     _spellSelectMenu.Draw(renderTarget);
     break;
 
-  case SelectCharToSwitch:
-    break;
-
-  case SelectCharToSwitchWith:
+  case SwitchCharacter:
+    _charSwitch.Draw(renderTarget);
     break;
   }
 }
@@ -94,6 +94,12 @@ void BattleMenu::SelectMenuItem()
     _targetInfo.Target = _currentAttacker;
     _battle.SetTargetInfo(_targetInfo);
     _battle.SetBattleState(Battle::Action);
+  }
+
+  if(selectedItem == Switch)
+  {
+    _menuState = SwitchCharacter;
+    _charSwitch.ResetMenu();
   }
 
   if(selectedItem == Convince)
@@ -150,6 +156,18 @@ void BattleMenu::ResetMenu()
 {
   BlackDragonEngine::Menu::ResetMenu();
   _menuState = ActionSelect;
+}
+
+void BattleMenu::WorkFinished()
+{
+  _targetInfo.Spell = Spells::GetSpell("Switch");
+  _battle.SetBattleState(Battle::Action);
+  _battle.SetTargetInfo(_targetInfo);
+}
+
+void BattleMenu::WorkCancelled()
+{
+  ResetMenu();
 }
 
 }

@@ -4,14 +4,18 @@
 #include "Danmaku/Character.h"
 #include "Danmaku/TargetSelectMenu.h"
 #include "Danmaku/SpellSelectMenu.h"
+#include "Danmaku/IFinishedNotifier.h"
 
 namespace Danmaku
 {
 class Battle;
 class Character;
 class ISpell;
+class CharSwitch;
 
-class BattleMenu : public BlackDragonEngine::Menu
+class BattleMenu
+    : public BlackDragonEngine::Menu,
+      public IFinishedNotifier
 {
 public:
   enum BMenuState
@@ -19,8 +23,7 @@ public:
     ActionSelect,
     TargetSelection,
     SpellSelect,
-    SelectCharToSwitch,
-    SelectCharToSwitchWith
+    SwitchCharacter
   };
 
   BattleMenu(Battle& battle);
@@ -34,6 +37,8 @@ public:
   BMenuState GetMenuState();
   void SetMenuState(BMenuState newState);
   void ResetMenu();
+  void WorkFinished();
+  void WorkCancelled();
 
 private:
   sf::String const Attack;
@@ -49,5 +54,6 @@ private:
   SpellSelectMenu _spellSelectMenu;
   Character* _currentAttacker;
   TargetInfo _targetInfo;
+  CharSwitch& _charSwitch;
 };
 }

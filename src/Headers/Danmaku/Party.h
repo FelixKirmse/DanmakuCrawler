@@ -20,6 +20,7 @@ public:
   static int GetAveragePartyLvl();
   static long long GetExperience();
   static void ResetCache();
+  static void SwitchChars(size_t availableIndex, size_t frontRowIndex);
 
 private:
   void ResetInternal();

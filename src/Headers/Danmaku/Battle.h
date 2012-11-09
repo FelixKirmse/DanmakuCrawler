@@ -41,6 +41,8 @@ public:
   CharVec& GetEnemies();
   Party::FrontRow& GetFrontRow();
 
+  void WorkFinished();
+
   static void StartBattle(int level, int bossID = 0);
   static size_t MaxEnemyID;
   static bool TargetIsEnemy();
@@ -98,6 +100,7 @@ private:
 
   sf::RectangleShape _castDisplay;
   sf::Text _castText;
+
 
   static sf::Vector2f const FrameContainerStart;
   static int const FrameContainerOffset;

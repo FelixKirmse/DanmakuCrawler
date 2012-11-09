@@ -139,6 +139,11 @@ void CharGraphics::ResetDamage()
   _dodged = false;
 }
 
+sf::Vector2f const& CharGraphics::GetPosition()
+{
+  return _offset;
+}
+
 void CharGraphics::Reposition(sf::Vector2f newOffset)
 {
   // Revert to base position, then move to new one.

@@ -37,6 +37,6 @@ Spell* Spells::GetSpell(sf::String name)
 
 Spell* Spells::GetRandomSpell()
 {
-  return &_spells[IntGenerator(3, _spells.size() - 1)(_rng)];
+  return &_spells[IntGenerator(4, _spells.size() - 1)(_rng)];
 }
 }
