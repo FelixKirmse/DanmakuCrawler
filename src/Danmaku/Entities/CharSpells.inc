@@ -286,3 +286,8 @@ else if(_name == "Utsuho")
   _spellList.push_back(Spells::GetSpell("Nuclear Meltdown"));
   _spellList.push_back(Spells::GetSpell("Hell's Inferno"));
 }
+else if(_name == "Eiki")
+{
+  for(int i = 0; i < 5; ++i)
+    _spellList.push_back(Spells::GetRandomSpell());
+}

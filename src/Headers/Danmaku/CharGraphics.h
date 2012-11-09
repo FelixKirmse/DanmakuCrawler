@@ -29,6 +29,8 @@ public:
 
   void ResetDamage();
 
+  sf::Vector2f const& GetPosition();
+
 private:
   Character* _owner;
   sf::Vector2f _offset;

@@ -30,8 +30,19 @@ Spell
 ),
 Spell
 (
+  "Switch",
+  "Two Characters have been switched",
+  TargetInfo::Self,
+  [] (Character& a, Character& d, int mod)
+  {
+  },
+  0.f,
+  .5f
+),
+Spell
+(
   "Meditation",
-  "Youmus defensive stance recovers double the HP",
+  "Youmus defensive stance recovers double the MP",
   TargetInfo::Self,
   [] (Character& a, Character& d, int mod)
   {

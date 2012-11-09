@@ -9,6 +9,7 @@
 #include "Danmaku/Stats.h"
 #include "Danmaku/StatOverview.h"
 #include "BlackDragonEngine/Provider.h"
+#include "Danmaku/CharSwitch.h"
 
 
 namespace Danmaku
@@ -158,6 +159,7 @@ void Battle::StartBattle(int level, int bossID)
 
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
+  _currentInstance->SetInitialSPD(Party::GetAvailableCharacters());
   _currentInstance->ArrangeCharFrames(bossID);
 }
 

@@ -34,8 +34,8 @@ public:
 
 protected:
   sf::String const& SelectedItem();
-  void SetPositions(sf::Vector2f position = Game::GetScreenCenter(),
-                    bool centered = true, int offset = -2);
+  virtual void SetPositions(sf::Vector2f position = Game::GetScreenCenter(),
+                            bool centered = true, int offset = -2);
   void SetLabelPositions(sf::Vector2f position = Game::GetScreenCenter(),
                          bool centered = true, int offset = -2,
                          bool originBottomRight = false);
