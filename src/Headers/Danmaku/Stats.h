@@ -94,6 +94,8 @@ struct Stats
 
   float GetEVAChance(int level);
 
+  static Stats GetRandomStats();
+
   static StatsMap _baseStats;
   static RandomSeed _rng;
 

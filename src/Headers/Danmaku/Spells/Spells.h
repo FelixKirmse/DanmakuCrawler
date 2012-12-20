@@ -7,6 +7,8 @@
 
 namespace Danmaku
 {
+class Party;
+
 class Spells
 {
 public:
@@ -18,6 +20,7 @@ public:
   static Spell* GetRandomSpell();
 
 private:
+  static Party& _party;
   static std::vector<Spell> _spells;
   static boost::unordered::unordered_map<std::string, int> _nameIndexMap;
   static RandomSeed _rng;

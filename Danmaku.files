@@ -95,3 +95,14 @@ src/Headers/Danmaku/CharGraphicsMenuItem.h
 src/Danmaku/Menus/CharGraphicsMenuItem.cpp
 src/Danmaku/Menus/CharSwitch.cpp
 src/Headers/Danmaku/IFinishedNotifier.h
+src/Headers/Danmaku/IBattleState.h
+src/Headers/Danmaku/IdleBattleState.h
+src/Danmaku/GameStates/IdleBattleState.cpp
+src/Headers/Danmaku/ActionBattleState.h
+src/Headers/Danmaku/ConsequenceBattleState.h
+src/Headers/Danmaku/GameOverBattleState.h
+src/Headers/Danmaku/BattleWonBattleState.h
+src/Danmaku/GameStates/ActionBattleState.cpp
+src/Danmaku/GameStates/ConsequenceBattleState.cpp
+src/Danmaku/GameStates/GameOverBattleState.cpp
+src/Danmaku/GameStates/BattleWonBattleState.cpp

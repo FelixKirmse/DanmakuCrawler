@@ -34,6 +34,6 @@ private:
 
   GameStateManager _stateManager;
   MapPtr _tileMap;
-  Party _party;
+  Party& _party;
 };
 }

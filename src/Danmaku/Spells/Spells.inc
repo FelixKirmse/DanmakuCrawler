@@ -1838,15 +1838,15 @@ Spell
     ds.BuffBaseStat(MR, .2f);
 
     int aliveCount = 0;
-    for(auto& chara : Party::GetFrontRow())
-      if(!chara.IsDead())
+    for(auto* chara : _party.GetFrontRow())
+      if(!chara->IsDead())
         ++aliveCount;
 
     float amount = .2f / aliveCount;
-    for(auto& chara : Party::GetAvailableCharacters())
+    for(auto* chara : _party.GetAvailableCharacters())
     {
-      chara.GetStats().BuffBaseStat(DEF, amount);
-      chara.GetStats().BuffBaseStat(MR, amount);
+      chara->GetStats().BuffBaseStat(DEF, amount);
+      chara->GetStats().BuffBaseStat(MR, amount);
     }
   },
   1.12f,
@@ -1865,15 +1865,15 @@ Spell
     ds.BuffBaseStat(MD, .2f);
 
     int aliveCount = 0;
-    for(auto& chara : Party::GetFrontRow())
-      if(!chara.IsDead())
+    for(auto* chara : _party.GetFrontRow())
+      if(!chara->IsDead())
         ++aliveCount;
 
     float amount = .2f / aliveCount;
-    for(auto& chara : Party::GetAvailableCharacters())
+    for(auto* chara : _party.GetAvailableCharacters())
     {
-      chara.GetStats().BuffBaseStat(AD, amount);
-      chara.GetStats().BuffBaseStat(MD, amount);
+      chara->GetStats().BuffBaseStat(AD, amount);
+      chara->GetStats().BuffBaseStat(MD, amount);
     }
   },
   1.12f,
@@ -2331,11 +2331,11 @@ Spell
     d.TakeDamage(damage);
 
     if(Battle::AttackerIsEnemy())
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
-        chara.TurnCounter() *= .85f;
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
+        chara->TurnCounter() *= .85f;
     else
-      for(auto& chara : Party::GetFrontRow())
-        chara.TurnCounter() *= .85f;
+      for(auto* chara : _party.GetFrontRow())
+        chara->TurnCounter() *= .85f;
   },
   1.f,
   .5f
@@ -2361,23 +2361,23 @@ Spell
     float extraDamage(0.f);
     if(Battle::AttackerIsEnemy())
     {
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
       {
-        chara.TurnCounter() = 0.f;
-        float extraValue = chara.GetStats().GetTotalBaseStat(HP) * .1f;
+        chara->TurnCounter() = 0.f;
+        float extraValue = chara->GetStats().GetTotalBaseStat(HP) * .1f;
         extraDamage += extraValue;
-        chara.TakeTrueDamage(extraValue);
+        chara->TakeTrueDamage(extraValue);
       }
     }
     else
     {
-      for(auto& chara : Party::GetFrontRow())
+      for(auto* chara : _party.GetFrontRow())
       {
-        chara.TurnCounter() = 0.f;
-        float totalHP = chara.GetStats().GetTotalBaseStat(HP);
+        chara->TurnCounter() = 0.f;
+        float totalHP = chara->GetStats().GetTotalBaseStat(HP);
         float extraValue = totalHP * .1f;
         extraDamage += extraValue;
-        chara.TakeTrueDamage(extraValue);
+        chara->TakeTrueDamage(extraValue);
       }
     }
 
@@ -2843,12 +2843,12 @@ Spell
 
     float deadCount(0.f);
     if(Battle::AttackerIsEnemy())
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
-        if(chara.IsDead())
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
+        if(chara->IsDead())
           ++deadCount;
     else
-      for(auto& chara : Party::GetFrontRow())
-        if(chara.IsDead())
+      for(auto* chara : _party.GetFrontRow())
+        if(chara->IsDead())
           ++deadCount;
 
 
@@ -3210,26 +3210,26 @@ Spell
 
     if(!Battle::AttackerIsEnemy())
     {
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
       {
-        Stats& ds = chara.GetStats();
+        Stats& ds = chara->GetStats();
         float dMR = ds.GetTotalBaseStat(MR);
         float dFIR = ds.GetTotalMastery(FIR);
 
         float damage = (2.25f * aMD * (aFIR/100.f) - .75f * dMR) * (100.f/dFIR);
-        chara.TakeDamage(damage);
+        chara->TakeDamage(damage);
       }
     }
     else
     {
-      for(auto& chara : Party::GetFrontRow())
+      for(auto* chara : _party.GetFrontRow())
       {
-        Stats& ds = chara.GetStats();
+        Stats& ds = chara->GetStats();
         float dMR = ds.GetTotalBaseStat(MR);
         float dFIR = ds.GetTotalMastery(FIR);
 
         float damage = (2.25f * aMD * (aFIR/100.f) - .75f * dMR) * (100.f/dFIR);
-        chara.TakeDamage(damage);
+        chara->TakeDamage(damage);
       }
     }
   },
@@ -3399,17 +3399,17 @@ Spell
 
     if(Battle::AttackerIsEnemy())
     {
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
-        healFunc(chara);
-      for(auto& chara : Party::GetFrontRow())
-        damageFunc(a, chara);
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
+        healFunc(*chara);
+      for(auto* chara : _party.GetFrontRow())
+        damageFunc(a, *chara);
     }
     else
     {
-      for(auto& chara : Party::GetFrontRow())
-        healFunc(chara);
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
-        damageFunc(a, chara);
+      for(auto& chara : _party.GetFrontRow())
+        healFunc(*chara);
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
+        damageFunc(a, *chara);
     }
   },
   1.44f,
@@ -3444,17 +3444,17 @@ Spell
 
     if(Battle::AttackerIsEnemy())
     {
-      for(auto& chara : Battle::GetInstance()->GetEnemies())
-        healFunc(chara);
-      for(auto& chara : Party::GetFrontRow())
-        damageFunc(a, chara);
+      for(auto* chara : Battle::GetInstance()->GetEnemies())
+        healFunc(*chara);
+      for(auto* chara : _party.GetFrontRow())
+        damageFunc(a, *chara);
     }
     else
     {
-      for(auto& chara : Party::GetFrontRow())
-        healFunc(chara);
+      for(auto* chara : _party.GetFrontRow())
+        healFunc(*chara);
       for(auto& chara : Battle::GetInstance()->GetEnemies())
-        damageFunc(a, chara);
+        damageFunc(a, *chara);
     }
   },
   .96f,
@@ -3462,7 +3462,7 @@ Spell
 ),
 Spell
 (
-  "Ragnarǫk",
+  u8"Ragnarǫk",
   "Fires a concentrated laser of pure arcane energy at your enemies.\nUses up all of your MP, making the spell stronger.\nYou are completely exhausted after using this.",
   TargetInfo::Enemies,
   [] (Character& a, Character& d, int mod)

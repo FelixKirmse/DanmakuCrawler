@@ -6,6 +6,7 @@
 #include "BlackDragonEngine/Input.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/IFinishedNotifier.h"
+#include "Danmaku/Character.h"
 
 namespace Danmaku
 {
@@ -25,7 +26,8 @@ CharSwitch& CharSwitch::GetInstance()
 }
 
 CharSwitch::CharSwitch()
-  : _spellSelectMenu(), _statOverview(StatOverview::GetInstance()),
+  : _party(Party::GetInstance()),
+    _spellSelectMenu(), _statOverview(StatOverview::GetInstance()),
     _showStats(true), _currentPage(1), _changedCharacter(true),
     _backDrop(sf::Vector2f(XLength, 480.f)),
     _switchString(PressSpaceBarString, BlackDragonEngine::Provider<sf::Font>::Get("Vera"), 13),
@@ -97,24 +99,26 @@ void CharSwitch::SelectMenuItem()
     return;
   }
 
-  Party::SwitchChars(_selectedCharacter, GetSelectedIndex());
+  _party.SwitchChars(_selectedCharacter, GetSelectedIndex());
   _notifier->WorkFinished();
   ChangePage(1);
 }
 
 int CharSwitch::GetMaxPage()
 {
-  return Party::GetAvailableCharacters().size() / 4;
+  return _party.GetAvailableCharacters().size() / 4;
 }
 
 void CharSwitch::ChangePage(int newPage)
 {
   ClearMenuItems();
-  Party::CharVec& characters(Party::GetAvailableCharacters());
+  Party::CharVec& characters(_party.GetAvailableCharacters());
   size_t index = (newPage - 1) * 4;
-  for(size_t i(index); i < (index) + 4; ++i)
+  for(size_t i(index); i < (index) + 4 && i < characters.size(); ++i)
   {
-    CharGraphicsMenuItem* newItem = new CharGraphicsMenuItem(characters[i].Graphics(),
+    if(characters[i]->IsDead())
+      continue;
+    CharGraphicsMenuItem* newItem = new CharGraphicsMenuItem(characters[i]->Graphics(),
                                                              i);
     newItem->SetSelected(false);
     AddMenuItem(newItem);
@@ -135,10 +139,10 @@ void CharSwitch::ChangePage(int newPage)
 void CharSwitch::ShowBattleParty()
 {
   ClearMenuItems();
-  Party::FrontRow& characters(Party::GetFrontRow());
+  Party::FrontRow& characters(_party.GetFrontRow());
   for(size_t i(0); i < 4; ++i)
   {   
-    CharGraphicsMenuItem* newItem = new CharGraphicsMenuItem(characters[i].Graphics(),
+    CharGraphicsMenuItem* newItem = new CharGraphicsMenuItem(characters[i]->Graphics(),
                                                              i);
     newItem->SetSelected(false);
     AddMenuItem(newItem);
@@ -165,8 +169,8 @@ Character* CharSwitch::GetSelectedCharacter()
       selectedItem = dynamic_cast<CharGraphicsMenuItem*>(MenuItems[i]);
   }
   return (!_selectBattleParty) ?
-            &Party::GetAvailableCharacters()[selectedItem->GetIndex()]
-          : &Party::GetFrontRow()[selectedItem->GetIndex()];
+            _party.GetAvailableCharacters()[selectedItem->GetIndex()]
+          : _party.GetFrontRow()[selectedItem->GetIndex()];
 }
 
 int CharSwitch::GetSelectedIndex()

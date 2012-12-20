@@ -41,12 +41,12 @@ void TargetSelectMenu::ResetMenu()
   int ic(0);
   for(size_t i = 0; i < 2u; ++i)
   {
-    if(enemies[i].IsDead())
+    if(enemies[i]->IsDead())
       continue;
-    MenuItem* newItem = new MenuItem(enemies[i].GetDisplayName());
+    MenuItem* newItem = new MenuItem(enemies[i]->GetDisplayName());
     newItem->SetFontSize(13u);
     AddMenuItem(newItem);
-    _nameCharMap[enemies[i].GetDisplayName().toAnsiString()] = &enemies[i];
+    _nameCharMap[enemies[i]->GetDisplayName().toAnsiString()] = enemies[i];
 
     if(i == 0)
       MenuItems[ic++]->SetPosition(12.f, 388.f);
@@ -56,12 +56,12 @@ void TargetSelectMenu::ResetMenu()
 
   for(size_t i = 0; i < 2u; ++i)
   {
-    if(players[i].IsDead())
+    if(players[i]->IsDead())
       continue;
-    MenuItem* newItem = new MenuItem(players[i].GetDisplayName());
+    MenuItem* newItem = new MenuItem(players[i]->GetDisplayName());
     newItem->SetFontSize(13u);
     AddMenuItem(newItem);
-    _nameCharMap[players[i].GetDisplayName().toAnsiString()] = &players[i];
+    _nameCharMap[players[i]->GetDisplayName().toAnsiString()] = players[i];
 
     if(i == 0)
       MenuItems[ic++]->SetPosition(12.f, 440.f);
@@ -71,12 +71,12 @@ void TargetSelectMenu::ResetMenu()
 
   for(size_t i = 2; i < enemies.size(); ++i)
   {
-    if(enemies[i].IsDead())
+    if(enemies[i]->IsDead())
       continue;
-    MenuItem* newItem = new MenuItem(enemies[i].GetDisplayName());
+    MenuItem* newItem = new MenuItem(enemies[i]->GetDisplayName());
     newItem->SetFontSize(13u);
     AddMenuItem(newItem);
-    _nameCharMap[enemies[i].GetDisplayName().toAnsiString()] = &enemies[i];
+    _nameCharMap[enemies[i]->GetDisplayName().toAnsiString()] = enemies[i];
 
     if(i == 2u)
       MenuItems[ic++]->SetPosition(113.f, 388.f);
@@ -86,12 +86,12 @@ void TargetSelectMenu::ResetMenu()
 
   for(size_t i = 2; i < players.size(); ++i)
   {
-    if(players[i].IsDead())
+    if(players[i]->IsDead())
       continue;
-    MenuItem* newItem = new MenuItem(players[i].GetDisplayName());
+    MenuItem* newItem = new MenuItem(players[i]->GetDisplayName());
     newItem->SetFontSize(13u);
     AddMenuItem(newItem);
-    _nameCharMap[players[i].GetDisplayName().toAnsiString()] = &players[i];
+    _nameCharMap[players[i]->GetDisplayName().toAnsiString()] = players[i];
 
     if(i == 2)
       MenuItems[ic++]->SetPosition(113.f, 440.f);
