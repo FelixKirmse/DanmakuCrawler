@@ -5,6 +5,7 @@
 #include "Danmaku/TargetSelectMenu.h"
 #include "Danmaku/SpellSelectMenu.h"
 #include "Danmaku/IFinishedNotifier.h"
+#include "Danmaku/IBattleState.h"
 
 namespace Danmaku
 {
@@ -15,7 +16,8 @@ class CharSwitch;
 
 class BattleMenu
     : public BlackDragonEngine::Menu,
-      public IFinishedNotifier
+      public IFinishedNotifier,
+      public IBattleState
 {
 public:
   enum BMenuState
@@ -27,8 +29,8 @@ public:
   };
 
   BattleMenu(Battle& battle);
-  void Update();
-  void Draw(sf::RenderTarget& renderTarget);
+  void Update(Battle& battle);
+  void Draw(Battle& battle, sf::RenderTarget& renderTarget);
   void SelectMenuItem();
   void SetCurrentAttacker(Character* currentAttacker);
   Character* GetCurrentAttacker();

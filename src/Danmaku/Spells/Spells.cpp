@@ -7,6 +7,7 @@
 
 namespace Danmaku
 {
+Party& Spells::_party(Party::GetInstance());
 std::vector<Spell> Spells::_spells;
 boost::unordered::unordered_map<std::string, int> Spells::_nameIndexMap;
 Spells::RandomSeed Spells::_rng(time(0));

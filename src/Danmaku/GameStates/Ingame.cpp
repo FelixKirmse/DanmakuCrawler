@@ -56,7 +56,7 @@ Ingame* Ingame::_instance;
 
 void Ingame::NewGame()
 {
-  Party::Reset();
+  Party::GetInstance().Reset();
   _instance->Reset();
 }
 

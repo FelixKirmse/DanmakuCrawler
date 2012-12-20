@@ -6,6 +6,7 @@ namespace Danmaku
 {
 class StatOverview;
 class IFinishedNotifier;
+class Party;
 
 class CharSwitch : public BlackDragonEngine::Menu
 {
@@ -34,6 +35,8 @@ private:
   Character* GetSelectedCharacter();
   int GetSelectedIndex();
   int GetSelectedMenuItemIndex();
+
+  Party& _party;
 
   SpellSelectMenu _spellSelectMenu;
   StatOverview& _statOverview;

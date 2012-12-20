@@ -1,30 +1,32 @@
 #pragma once
 #include <array>
 #include <vector>
-#include "Danmaku/Character.h"
+#include <memory>
 
 namespace Danmaku
 {
+class Character;
+
 class Party
 {
 public:
-  typedef std::array<Character, 4> FrontRow;
-  typedef std::vector<Character> CharVec;
+  typedef std::array<Character*, 4> FrontRow;
+  typedef std::vector<Character*> CharVec;
 
-  Party();
+  static Party& GetInstance();
 
-  static FrontRow& GetFrontRow();
-  static CharVec& GetAvailableCharacters();
-  static void Reset();
-  static void AddExperience(unsigned long amount);
-  static int GetAveragePartyLvl();
-  static long long GetExperience();
-  static void ResetCache();
-  static void SwitchChars(size_t availableIndex, size_t frontRowIndex);
+  FrontRow& GetFrontRow();
+  CharVec& GetAvailableCharacters();
+  void Reset();
+  void AddExperience(unsigned long amount);
+  int GetAveragePartyLvl();
+  long long GetExperience();
+  void ResetCache();
+  void SwitchChars(size_t availableIndex, size_t frontRowIndex);
 
 private:
-  void ResetInternal();
-
+  Party();
+  ~Party();
   FrontRow _frontRow;
   CharVec _availableCharacters;
 
@@ -32,7 +34,5 @@ private:
   int _averagePartyLvl;
 
   bool _cached;
-
-  static Party* _instance;
 };
 }

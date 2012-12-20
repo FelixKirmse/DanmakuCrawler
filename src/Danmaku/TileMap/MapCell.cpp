@@ -47,7 +47,7 @@ MapCell::MapCell(int tileID)
                      tileID == TileList::SVLeft || tileID == TileList::SHDown ||
                      tileID == TileList::CDownRight ||
                      tileID == TileList::CLeftDown),
-    EnemyLvl(Party::GetAveragePartyLvl())
+    EnemyLvl(Party::GetInstance().GetAveragePartyLvl())
 {
 }
 

@@ -8,6 +8,7 @@
 #include "SFML/Graphics.hpp"
 #include "Danmaku/Stats.h"
 #include "Danmaku/CharGraphics.h"
+#include "Danmaku/Party.h"
 
 
 namespace Danmaku
@@ -35,13 +36,11 @@ class Character
 {
 public:  
   typedef std::vector<ISpell*> SpellList;
-  typedef std::array<Character, 4> FrontRow;
   typedef boost::random::mt19937 RandomSeed;
 
   Character();
   Character(sf::String name);
 
-  void InitializeCharGraphics();
   bool UpdateTurnCounter();
   float& CurrentHP();
   float& CurrentMP();
@@ -76,7 +75,7 @@ public:
   bool IsConvinced();
   bool& IsEnemy();
 
-  TargetInfo AIBattleMenu(FrontRow& targetRow);
+  TargetInfo AIBattleMenu(Party::FrontRow& targetRow);
 
   Character& operator=(Character const& source);
 
@@ -84,6 +83,8 @@ public:
   static int const XPRequiredForLvlUp;
 
 private:
+  void InitializeCharGraphics();
+
   sf::String GetRandomName();
   void AssignSpells();
   void GoToLine(std::fstream& file, size_t num);

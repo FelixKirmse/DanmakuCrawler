@@ -27,8 +27,9 @@ BattleMenu::BattleMenu(Battle& battle)
   _charSwitch.SetNotifier(this);
 }
 
-void BattleMenu::Update()
+void BattleMenu::Update(Battle &battle)
 {  
+  _currentAttacker = battle.GetCurrentAttacker();
   switch(_menuState)
   {
   case ActionSelect:
@@ -49,7 +50,7 @@ void BattleMenu::Update()
   }
 }
 
-void BattleMenu::Draw(sf::RenderTarget& renderTarget)
+void BattleMenu::Draw(Battle &battle, sf::RenderTarget& renderTarget)
 {
   switch(_menuState)
   {
@@ -93,7 +94,7 @@ void BattleMenu::SelectMenuItem()
     _targetInfo.Spell = _currentAttacker->GetSpells()[1];
     _targetInfo.Target = _currentAttacker;
     _battle.SetTargetInfo(_targetInfo);
-    _battle.SetBattleState(Battle::Action);
+    _battle.PerformAction();
   }
 
   if(selectedItem == Switch)
@@ -104,7 +105,7 @@ void BattleMenu::SelectMenuItem()
 
   if(selectedItem == Convince)
   {
-    _battle.SetBattleState(Battle::Idle);
+    _battle.BattleWon();
     GameStateManager::SetState(GameStates::Ingame);
   }
 }
@@ -122,7 +123,7 @@ Character* BattleMenu::GetCurrentAttacker()
 void BattleMenu::SetTarget(Character* target)
 {
   _targetInfo.Target = target;
-  _battle.SetBattleState(Battle::Action);
+  _battle.PerformAction();
   _battle.SetTargetInfo(_targetInfo);
 }
 
@@ -138,7 +139,7 @@ void BattleMenu::SetSpell(ISpell* spell)
   else
   {    
     _battle.SetTargetInfo(_targetInfo);
-    _battle.SetBattleState(Battle::Action);
+    _battle.PerformAction();
   }
 }
 
@@ -161,7 +162,7 @@ void BattleMenu::ResetMenu()
 void BattleMenu::WorkFinished()
 {
   _targetInfo.Spell = Spells::GetSpell("Switch");
-  _battle.SetBattleState(Battle::Action);
+  _battle.PerformAction();
   _battle.SetTargetInfo(_targetInfo);
 }
 

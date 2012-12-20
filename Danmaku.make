@@ -83,8 +83,13 @@ OBJECTS := \
 	$(OBJDIR)/MapCell.o \
 	$(OBJDIR)/TitleScreen.o \
 	$(OBJDIR)/Ingame.o \
+	$(OBJDIR)/ConsequenceBattleState.o \
+	$(OBJDIR)/IdleBattleState.o \
 	$(OBJDIR)/Menu.o \
 	$(OBJDIR)/Battle.o \
+	$(OBJDIR)/ActionBattleState.o \
+	$(OBJDIR)/GameOverBattleState.o \
+	$(OBJDIR)/BattleWonBattleState.o \
 	$(OBJDIR)/StatOverview.o \
 	$(OBJDIR)/CharGraphics.o \
 	$(OBJDIR)/Character.o \
@@ -207,10 +212,25 @@ $(OBJDIR)/TitleScreen.o: src/Danmaku/GameStates/TitleScreen.cpp
 $(OBJDIR)/Ingame.o: src/Danmaku/GameStates/Ingame.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ConsequenceBattleState.o: src/Danmaku/GameStates/ConsequenceBattleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/IdleBattleState.o: src/Danmaku/GameStates/IdleBattleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Menu.o: src/Danmaku/GameStates/Menu.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/Battle.o: src/Danmaku/GameStates/Battle.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/ActionBattleState.o: src/Danmaku/GameStates/ActionBattleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/GameOverBattleState.o: src/Danmaku/GameStates/GameOverBattleState.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/BattleWonBattleState.o: src/Danmaku/GameStates/BattleWonBattleState.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/StatOverview.o: src/Danmaku/Entities/StatOverview.cpp

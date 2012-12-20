@@ -129,5 +129,28 @@ float Stats::GetEVAChance(int level)
   return stat / level;
 }
 
+Stats Stats::GetRandomStats()
+{
+  Stats stats;
+
+  IntGenerator hpBaseRoll(75, 200);
+  IntGenerator hpBonusRoll(5, 25);
+
+  stats.BaseStats[HP][0] = hpBaseRoll(_rng);
+  stats.BaseStats[HP][5] = hpBonusRoll(_rng);
+
+  stats.BaseStats[MP][0] = 200.f;
+  stats.BaseStats[MP][5] = 0.f;
+  stats.BaseStats[MP][6] = 1.f;
+
+  IntGenerator
+  for(int i = 2; i <= 5; ++i)
+  {
+
+  }
+
+  return stats;
+}
+
 
 }

@@ -4,7 +4,7 @@
 #include "Danmaku/Character.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
-#include "Danmaku/Party.h"
+
 
 namespace Danmaku
 {
@@ -31,6 +31,7 @@ Character::Character(sf::String name)
     _paralyzeCounter(0), _silenced(false), _silenceStrength(0),
     _convinced(false), _isEnemy(false)
 {  
+  InitializeCharGraphics();
   AssignSpells();
 
   if(_displayName == _name)
@@ -39,7 +40,7 @@ Character::Character(sf::String name)
     _xpRequired = (float)XPRequiredForLvlUp * _stats.XPMultiplier;
   }
   _currentHP = _stats.GetTotalBaseStat(HP);
-  _currentMP = _stats.GetTotalBaseStat(MP);  
+  _currentMP = _stats.GetTotalBaseStat(MP);
 }
 
 
@@ -188,8 +189,8 @@ void Character::CheckIfDead()
   if((int)_currentHP > 0)
     return;
 
-  _dead = true;  
-  _graphics.SetDeadSprites(); 
+  _dead = true;
+  _graphics.SetDeadSprites();
 }
 
 bool Character::IsSilenced()
@@ -212,7 +213,7 @@ void Character::LvlUp()
   if(_displayName == "Dead")
     return;
 
-  long totalXP = Party::GetExperience();
+  long totalXP = Party::GetInstance().GetExperience();
   long currentLevelXP = _level * _xpRequired;
   long difference = totalXP - currentLevelXP;
 
@@ -279,7 +280,7 @@ bool &Character::IsEnemy()
   return _isEnemy;
 }
 
-TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
+TargetInfo Character::AIBattleMenu(Party::FrontRow& targetRow)
 {  
   TargetInfo targetInfo;
 
@@ -305,7 +306,7 @@ TargetInfo Character::AIBattleMenu(FrontRow& targetRow)
      * 30% to attack secondary tank
      * 5% each to attack back row
      */
-    targetInfo.Target = &targetRow[(target < 60) ?
+    targetInfo.Target = targetRow[(target < 60) ?
           0 : (target < 90) ?
             1 : (target < 95) ?
               2 : 3];

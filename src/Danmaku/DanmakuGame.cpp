@@ -21,7 +21,7 @@ DanmakuGame::DanmakuGame()
   : Game("Danmaku",
          sf::VideoMode(ResolutionWidth, ResolutionHeight),
          sf::Style::Titlebar | sf::Style::Close),
-    _party()
+    _party(Party::GetInstance())
 {
 }
 
@@ -71,7 +71,7 @@ void DanmakuGame::LoadContent()
 
 void DanmakuGame::Update()
 {
-  Party::ResetCache();
+  Party::GetInstance().ResetCache();
   _stateManager.Update();
 }
 
