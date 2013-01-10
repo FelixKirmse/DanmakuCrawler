@@ -258,11 +258,15 @@ void TileMap<TMap, TCell, TCodes>::SaveMap(sf::String location)
 
 template<class TMap, class TCell, class TCodes>
 void TileMap<TMap, TCell, TCodes>::SaveToFile(sf::String const& path)
-{  using namespace sf;
+{
+  using namespace sf;
   RenderTexture texture;
   Context context;
-  int mapWidth(GetMapWidth());
-  int mapHeight(GetMapHeight());
+  int const mapWidth(GetMapWidth());
+  int const mapHeight(GetMapHeight());
+  int const lowestX(_map.LowestX());
+  int const lowestY(_map.LowestY());
+  Coords const offset(lowestX, lowestY);
 
   texture.create(mapWidth * _tileWidth, mapHeight * _tileHeight);
   texture.clear(Color::Black);
@@ -276,7 +280,7 @@ void TileMap<TMap, TCell, TCodes>::SaveToFile(sf::String const& path)
     Coords const cell = it->first;
     int const tileID = _map[cell].TileID;
     Rectangle const sourceRect = TileSourceRectangle(tileID);
-    Rectangle const worldRect = CellWorldRectangle(cell);
+    Rectangle const worldRect = CellWorldRectangle(cell - offset);
     vMap[i + 0].position = Vector2(worldRect.left,
                                     worldRect.top);
     vMap[i + 1].position = Vector2(worldRect.left,

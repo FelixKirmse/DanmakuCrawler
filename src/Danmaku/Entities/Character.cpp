@@ -4,6 +4,7 @@
 #include "Danmaku/Character.h"
 #include "BlackDragonEngine/Provider.h"
 #include "Danmaku/Spells/Spells.h"
+#include "Danmaku/Battle.h"
 
 
 namespace Danmaku
@@ -12,6 +13,7 @@ namespace Danmaku
 Character::RandomSeed Character::_rng(time(0));
 int const Character::XPRequiredForLvlUp(2000);
 unsigned long long Character::TimeToAction(300);
+float const Character::PlayerDamageTakenMod(.4f);
 typedef boost::random::uniform_int_distribution<> IntGenerator;
 
 using namespace BlackDragonEngine;
@@ -34,11 +36,11 @@ Character::Character(sf::String name)
   InitializeCharGraphics();
   AssignSpells();
 
-  if(_displayName == _name)
-  {
+  if(_displayName == _name)  
     _stats = Stats::_baseStats[_name.toAnsiString()];
-    _xpRequired = (float)XPRequiredForLvlUp * _stats.XPMultiplier;
-  }
+
+  _xpRequired = (float)XPRequiredForLvlUp * _stats.XPMultiplier;
+
   _currentHP = _stats.GetTotalBaseStat(HP);
   _currentMP = _stats.GetTotalBaseStat(MP);
 }
@@ -151,6 +153,7 @@ void Character::TakeDamage(float value)
 
 void Character::TakeTrueDamage(float value, bool blocked)
 {  
+  value *= _isEnemy ? 1.f : PlayerDamageTakenMod;
   _graphics.SetDamageDone(value, false, blocked);
 
   _currentHP -= (value > 0.f) ? value : 0.f;
@@ -275,7 +278,7 @@ bool Character::IsConvinced()
   return _convinced;
 }
 
-bool &Character::IsEnemy()
+bool& Character::IsEnemy()
 {
   return _isEnemy;
 }
@@ -335,7 +338,6 @@ void Character::AssignSpells()
 #include "CharSpells.inc"
   if(_name == _displayName)
     return;
-  //TODO Proper Enemy Spell Generation
   IntGenerator spellCountRoll(3,5);
   int spellCount = spellCountRoll(_rng);
 
@@ -373,6 +375,21 @@ Character& Character::operator=(Character const& source)
 void Character::EndBattle()
 {
   UseMP(-50.f);
+}
+
+Character* Character::GenerateCharacter(sf::String const& name)
+{
+  Character* newChar = 0;
+  if(name == "_")
+  {
+    IntGenerator selectEnemy(0, Battle::MaxEnemyID);
+    newChar = new Character("Enemy" + std::to_string(selectEnemy(_rng)));
+  }
+  else
+    newChar = new Character(name);
+
+  newChar->GetStats() = Stats::GetRandomStats();
+  return newChar;
 }
 }
 

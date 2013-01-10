@@ -112,6 +112,11 @@ void Battle::SetTargetInfo(TargetInfo targetInfo)
   _targetInfo = targetInfo;
 }
 
+TargetInfo& Battle::GetTargetInfo()
+{
+  return _targetInfo;
+}
+
 Battle::CharVec& Battle::GetEnemies()
 {
   return _enemies;
@@ -120,6 +125,11 @@ Battle::CharVec& Battle::GetEnemies()
 Party::FrontRow& Battle::GetFrontRow()
 {
   return _playerRow;
+}
+
+void Battle::SetCurrentAttacker(Character *chara)
+{
+  _currentAttacker = chara;
 }
 
 void Battle::SetIdle()
@@ -161,15 +171,14 @@ void Battle::BattleWon()
 
 void Battle::StartBattle(int level, int bossID)
 {
-  Character::TimeToAction = _currentInstance->GetAvgSPD();
-
-
   _currentInstance->_isBossfight = bossID != 0;
   GameStateManager::SetState(GameStates::Battle);
   // TODO enemy generation code
   _currentInstance->_enemies.clear();
 
   _currentInstance->GenerateEnemies(level, bossID);
+
+  Character::TimeToAction = _currentInstance->GetAvgSPD();
 
   _currentInstance->SetInitialSPD(_currentInstance->_enemies);
   _currentInstance->SetInitialSPD(_currentInstance->_playerRow);
@@ -193,13 +202,13 @@ unsigned long long Battle::GetAvgSPD()
     spdTotal += chara->GetStats().GetTotalBaseStat(SPD);
     ++charCount;
   }
-  for(auto* chara : _party.GetAvailableCharacters())
+  /*for(auto* chara : _party.GetAvailableCharacters())
   {
     if(chara->IsDead())
       continue;
     spdTotal += chara->GetStats().GetTotalBaseStat(SPD);
     ++charCount;
-  }
+  }*/
   return (float)spdTotal / charCount * 90.f;
 }
 
@@ -240,24 +249,19 @@ void Battle::GenerateEnemies(int level, int bossID)
 
   IntGenerator selectEnemyCount(3, 4);
   int enemyCount(selectEnemyCount(_rng));
-  _enemies.clear();
-  IntGenerator selectEnemy(0, MaxEnemyID);
+  _enemies.clear();  
   for(int i = 0; i < enemyCount; ++i)
-  {
-    sf::String enemyName("Enemy" + std::to_string(selectEnemy(_rng)));
-    _enemies.push_back(new Character(enemyName));
+  {    
+    _enemies.push_back(Character::GenerateCharacter());
     Character& enemy = *_enemies[i];
-    /* TODO Actual enemy stat generation,
-     * taking Sakuya for now since she's pretty balanced */
-    enemy.GetStats() = Stats::_baseStats["Sakuya"];
 
-    // Lets boost the base stats, since enemy should be STRONK!
+    enemy.GetStats() = Stats::GetRandomStats();
+
+    // Boost HP of Enemy and give him infinite energy
     enemy.CurrentMP() = std::numeric_limits<float>::max();
     enemy.LvlUp(level);
     Stats::BaseStatMap& bs = enemy.GetStats().BaseStats;
-    bs[HP][0] *= EnemyHPMod;
-    for(int j = 1; j < 7; ++j)
-      bs[(BaseStat)j][0] *= EnemyBaseMod;
+    bs[HP][0] *= EnemyHPMod;    
     enemy.CurrentHP() = enemy.GetStats().GetTotalBaseStat(HP);
     enemy.Graphics().UpdateHP();
     enemy.Graphics().UpdateMP();
@@ -298,6 +302,21 @@ Battle* Battle::GetInstance()
 bool Battle::IsBossFight()
 {
   return _isBossfight;
+}
+
+Character* Battle::GetCurrentAttacker()
+{
+  return _currentAttacker;
+}
+
+bool Battle::IsEnemyTurn()
+{
+  return _enemyTurn;
+}
+
+void Battle::IsEnemyTurn(bool turn)
+{
+  _enemyTurn = turn;
 }
 
 }

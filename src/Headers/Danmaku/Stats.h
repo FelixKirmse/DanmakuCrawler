@@ -70,6 +70,8 @@ struct Stats
   typedef boost::unordered::unordered_map<std::string, Stats> StatsMap;
   typedef boost::random::mt19937 RandomSeed;
 
+  Stats();
+
   enum
   {
     Dodge = 0,

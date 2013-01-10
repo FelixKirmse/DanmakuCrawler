@@ -25,7 +25,7 @@ void EncounterRate::SetChance(int newChance)
 }
 
 void EncounterRate::Step(MapCell& targetCell)
-{  
+{
   if(_roll(_rng) < (_currentChance - 50.f))
   {
     _currentChance = 0.f;

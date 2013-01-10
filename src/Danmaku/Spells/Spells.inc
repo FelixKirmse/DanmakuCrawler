@@ -509,7 +509,7 @@ Spell
     float damage = 10.f * aMD * (aARC/100.f) - .3f * dMR;
     d.TakeTrueDamage(damage);
   },
-  6.f,
+  2.f,
   .40f
 ),
 Spell

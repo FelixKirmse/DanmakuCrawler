@@ -7,6 +7,11 @@ Stats::StatsMap Stats::_baseStats;
 Stats::RandomSeed Stats::_rng(time(0));
 typedef boost::random::uniform_int_distribution<> IntGenerator;
 
+Stats::Stats()
+  : BaseStats(), Masteries(), Resistances(), XPMultiplier(1.0f)
+{
+}
+
 // Base Stats
 // General formula is (base + (base * items) + bonus) * buffs
 float Stats::GetTotalBaseStat(BaseStat baseStat)
@@ -138,16 +143,59 @@ Stats Stats::GetRandomStats()
 
   stats.BaseStats[HP][0] = hpBaseRoll(_rng);
   stats.BaseStats[HP][5] = hpBonusRoll(_rng);
+  stats.BaseStats[HP][4] = 1.f;
+  stats.BaseStats[HP][6] = 1.f;
 
   stats.BaseStats[MP][0] = 200.f;
   stats.BaseStats[MP][5] = 0.f;
   stats.BaseStats[MP][6] = 1.f;
 
-  IntGenerator
+  IntGenerator baseStatRoll(20, 80);
+  IntGenerator baseStatBonusRoll(1, 20);
   for(int i = 2; i <= 5; ++i)
   {
-
+    stats.BaseStats[(BaseStat)i][0] = baseStatRoll(_rng);
+    stats.BaseStats[(BaseStat)i][5] = baseStatBonusRoll(_rng);    
+    stats.BaseStats[(BaseStat)i][4] = 1.f;
+    stats.BaseStats[(BaseStat)i][6] = 1.f;
   }
+
+  IntGenerator evaTypeRoll(0, 99);
+  stats.EVAType = evaTypeRoll(_rng) < 10 ? Block : Dodge;
+
+  if(stats.EVAType == Dodge)
+  {
+    IntGenerator evaBonusRoll(1, 8);
+    stats.BaseStats[EVA][0] = 2;
+    stats.BaseStats[EVA][5] = evaBonusRoll(_rng);    
+  }
+  else
+  {
+    IntGenerator blockRoll(20, 80);
+    IntGenerator blockBonusRoll(0, 1);
+    stats.BaseStats[EVA][0] = blockRoll(_rng);
+    stats.BaseStats[EVA][5] = blockBonusRoll(_rng);
+  }
+  stats.BaseStats[EVA][4] = 1.f;
+  stats.BaseStats[EVA][6] = 1.f;
+
+  IntGenerator spdBonusRoll(5, 15);
+  stats.BaseStats[SPD][0] = 100.f;
+  stats.BaseStats[SPD][5] = spdBonusRoll(_rng);
+  stats.BaseStats[SPD][6] = 0.0225f;
+  stats.BaseStats[SPD][4] = 1.f;
+
+  IntGenerator masteryRoll(50, 200);
+  IntGenerator resiRoll(0, 30);
+  for(int i = 0; i <= 8; ++i)
+  {
+    stats.Masteries[(EleMastery)i][0] = masteryRoll(_rng);    
+    if(i < 6)
+      stats.Resistances[(DebuffResistance)i][0] = resiRoll(_rng);
+  }
+
+  IntGenerator xpMultiplier(70, 140);
+  stats.XPMultiplier = (float)xpMultiplier(_rng) / 100.f;
 
   return stats;
 }

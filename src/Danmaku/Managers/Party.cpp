@@ -41,13 +41,19 @@ void Party::Reset()
   for(auto* chara : _availableCharacters)
     delete chara;
 
+  _availableCharacters.clear();
+
 
   // TODO Delete all the test stuff
-  _frontRow[0] = new Character("Komachi");
-  _frontRow[1] = new Character("Youmu");
-  _frontRow[2] = new Character("Kaguya");
-  _frontRow[3] = new Character("Minoriko");
+  _frontRow[0] = Character::GenerateCharacter();
+  _frontRow[1] = Character::GenerateCharacter();
+  _frontRow[2] = Character::GenerateCharacter();
+  _frontRow[3] = Character::GenerateCharacter();
 
+  _availableCharacters.push_back(new Character("Komachi"));
+  _availableCharacters.push_back(new Character("Youmu"));
+  _availableCharacters.push_back(new Character("Kaguya"));
+  _availableCharacters.push_back(new Character("Minoriko"));
   _availableCharacters.push_back(new Character("Alice"));
   _availableCharacters.push_back(new Character("Chen"));
   _availableCharacters.push_back(new Character("Cirno"));
@@ -85,8 +91,10 @@ void Party::Reset()
   _availableCharacters.push_back(new Character("Yuuka"));
   _availableCharacters.push_back(new Character("Yuyuko"));
 
-  for(auto* c : _frontRow)
+  for(Character* c : _frontRow)
   {   
+    // TODO TEMP DELETE
+    c->GetStats() = Stats::GetRandomStats();
     c->LvlUp(1);
     c->CurrentHP() = c->GetStats().GetTotalBaseStat(HP);
     c->CurrentMP() = c->GetStats().GetTotalBaseStat(MP);
