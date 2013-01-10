@@ -12,7 +12,7 @@ std::string const ActionBattleState::Decaying("%s's allies");
 std::string const ActionBattleState::Self("self");
 
 ActionBattleState::ActionBattleState()
-  : _castText(), _castDisplay(sf::Vector2f(640.f, 25.f))
+  : _frameCounter(0), _castText(), _castDisplay(sf::Vector2f(640.f, 25.f))
 {
   _castDisplay.setFillColor(sf::Color::Black);
   _castText.setCharacterSize(13u);

@@ -106,3 +106,4 @@ src/Danmaku/GameStates/ActionBattleState.cpp
 src/Danmaku/GameStates/ConsequenceBattleState.cpp
 src/Danmaku/GameStates/GameOverBattleState.cpp
 src/Danmaku/GameStates/BattleWonBattleState.cpp
+premake4.lua

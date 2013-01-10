@@ -37,11 +37,12 @@ void Game::Run(int ups)
   int drawCounter = 0;
   int updateCounter = 0;
   sf::Clock clock;
-  sf::Text fpsText;
+  /*sf::Text fpsText;
   fpsText.setFont(sf::Font::getDefaultFont());
   fpsText.setColor(sf::Color::Red);
   fpsText.setCharacterSize(30);
   fpsText.setPosition(sf::Vector2f(10,0));
+  */
   while(_gameRunning)
   {
     HandleEvents();
@@ -62,8 +63,8 @@ void Game::Run(int ups)
     //_graphics.draw(fpsText);
     if(clock.getElapsedTime().asMilliseconds() > 1000)
     {
-      fpsText.setString("UpdateRate: " + std::to_string(updateCounter)
-                        + "\nDrawRate: " + std::to_string(drawCounter));
+      /*fpsText.setString("UpdateRate: " + std::to_string(updateCounter)
+                        + "\nDrawRate: " + std::to_string(drawCounter));*/
       drawCounter = 0;
       updateCounter = 0;
       clock.restart();

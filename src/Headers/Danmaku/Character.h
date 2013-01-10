@@ -79,6 +79,8 @@ public:
 
   Character& operator=(Character const& source);
 
+  static Character* GenerateCharacter(sf::String const& name = "_");
+
   static unsigned long long TimeToAction;
   static int const XPRequiredForLvlUp;
 
@@ -114,5 +116,6 @@ private:
   bool _isEnemy;
 
   static RandomSeed _rng;
+  static float const PlayerDamageTakenMod;
 };
 }

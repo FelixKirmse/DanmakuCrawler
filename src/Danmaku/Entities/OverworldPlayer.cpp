@@ -97,9 +97,12 @@ void OverworldPlayer::Draw(sf::RenderTarget& renderTarget)
   renderTarget.draw(_sprite);
   _sprite.setPosition(position);
   _encounterRate.Draw(renderTarget);
+#if DEBUG
   sf::Text gridPos("Pos: (" + std::to_string(_currentTile.x) + "|"
-                   + std::to_string(_currentTile.y) + ")");
+                   + std::to_string(_currentTile.y) + ")",
+                   BlackDragonEngine::Provider<sf::Font>::Get("Vera"));
   gridPos.setColor(sf::Color::Black);
+#endif
   renderTarget.draw(gridPos);
 }
 

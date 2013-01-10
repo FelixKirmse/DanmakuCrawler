@@ -1,4 +1,5 @@
 local SFML_LIBRARIES = "-lsfml-graphics -lsfml-window -lsfml-system" 
+local SFML_LIBRARIES_DEBUG = "-lsfml-graphics-d -lsfml-window-d -lsfml-system-d"
 local BOOST_LIBRARIES = "-lboost_system -lboost_filesystem -lboost_serialization"
 
 solution "Danmaku"
